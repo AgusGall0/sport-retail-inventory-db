@@ -52,8 +52,11 @@ ALTER TABLE Movimientos
     ADD CONSTRAINT fk_movimiento_origen FOREIGN KEY (id_sucursal_origen) REFERENCES Sucursales(id_sucursal) ON DELETE RESTRICT ON UPDATE CASCADE,
     ADD CONSTRAINT fk_movimiento_destino FOREIGN KEY (id_sucursal_destino) REFERENCES Sucursales(id_sucursal) ON DELETE RESTRICT ON UPDATE CASCADE,
     ADD CONSTRAINT fk_movimiento_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado) ON DELETE RESTRICT ON UPDATE CASCADE;
+	ADD CONSTRAINT fk_movimiento_proveedor FOREIGN KEY (id_proveedor) REFERENCES Proveedores(id_proveedor) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- Relaciones de Detalle de Movimientos
 ALTER TABLE Detalle_Movimientos 
     ADD CONSTRAINT fk_detalle_movimiento FOREIGN KEY (id_movimiento) REFERENCES Movimientos(id_movimiento) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT fk_detalle_variante FOREIGN KEY (id_variante) REFERENCES Producto_Variante(id_variante) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+    
