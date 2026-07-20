@@ -81,6 +81,7 @@ CREATE TABLE Movimientos (
     id_sucursal_origen INT,
     id_sucursal_destino INT,
     id_empleado INT NOT NULL
+	id_proveedor INT
 );
 
 CREATE TABLE Detalle_Movimientos (
