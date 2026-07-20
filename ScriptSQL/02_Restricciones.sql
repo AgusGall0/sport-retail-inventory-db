@@ -38,13 +38,13 @@ ALTER TABLE Productos
 
 -- Relaciones de Producto_Variante
 ALTER TABLE Producto_Variante 
-    ADD CONSTRAINT fk_variante_producto FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_variante_producto FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE RESTRICT ON UPDATE CASCADE,
     ADD CONSTRAINT fk_variante_talle FOREIGN KEY (id_talle) REFERENCES Talles(id_talle) ON DELETE RESTRICT ON UPDATE CASCADE,
     ADD CONSTRAINT fk_variante_color FOREIGN KEY (id_color) REFERENCES Colores(id_color) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- Relaciones de Inventario
 ALTER TABLE Inventario 
-    ADD CONSTRAINT fk_inventario_sucursal FOREIGN KEY (id_sucursal) REFERENCES Sucursales(id_sucursal) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT fk_inventario_sucursal FOREIGN KEY (id_sucursal) REFERENCES Sucursales(id_sucursal) ON DELETE RESTRICT ON UPDATE CASCADE,
     ADD CONSTRAINT fk_inventario_variante FOREIGN KEY (id_variante) REFERENCES Producto_Variante(id_variante) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Relaciones de Movimientos
