@@ -36,4 +36,5 @@ La última capa del proyecto traslada la inteligencia del negocio directamente a
 ## Equipo de Desarrollo
 *   **Juan Agustin Gallo** (MU: 01731)
 *   **Escalante Judith Griselda** (MU: 01862)
+*   **Bravo Nicolass** (MU: 01805)
 *   **Pongan sus nombres aca** (MU: sus matriculas aca)
