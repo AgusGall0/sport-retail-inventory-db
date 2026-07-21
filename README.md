@@ -35,3 +35,4 @@ La última capa del proyecto traslada la inteligencia del negocio directamente a
 
 ## Equipo de Desarrollo
 *   **Juan Agustin Gallo** (MU: 01731)
+*   **Pongan sus nombres aca** (MU: sus matriculas aca)
