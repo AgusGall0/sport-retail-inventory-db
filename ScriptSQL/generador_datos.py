@@ -3,9 +3,6 @@ import numpy as np
 from datetime import datetime, timedelta
 import random
 
-# ==========================================
-# 1. GENERACIÓN DE DATAFRAMES (NIVEL 0 Y 1)
-# ==========================================
 
 # Nivel 0: Catálogos
 df_marcas = pd.DataFrame({
@@ -28,7 +25,7 @@ df_colores = pd.DataFrame({
     'nombre_color': ['Negro', 'Blanco', 'Gris', 'Azul']
 })
 
-# Nivel 1: Semidependientes
+# Nivel 1: Semidependientes 
 df_sucursales = pd.DataFrame({
     'id_sucursal': [1, 2], 
     'nombre': ['Central CABA', 'Sucursal NOA'],
@@ -52,7 +49,7 @@ df_empleados = pd.DataFrame({
     'perfil_acceso': ['Administrador', 'Operativo']
 })
 
-# Productos Base (Cabecera)
+
 df_productos = pd.DataFrame({
     'id_producto': [1, 2],
     'nombre': ['Pegasus 40', 'Ultraboost'],
@@ -63,17 +60,14 @@ df_productos = pd.DataFrame({
 })
 
 
-# ==========================================
-# 2. GENERACIÓN DE VARIANTES (NIVEL 2)
-# ==========================================
+#En este modulo se generan los datos de la tabla producto_variante y movimientos
 print("Generando Producto_Variante (Cross Join)...")
 
-# Realizamos un producto cartesiano (Cross Join) nativo de Pandas 
-# cruzando productos, talles y colores.
+#Aca se hace un cross join entre productos, talles y colores para generar todas las combinaciones posibles // Esto crea la tabla Producto_Variante
 df_temp1 = df_productos[['id_producto']].merge(df_talles[['id_talle']], how='cross')
 df_variantes = df_temp1.merge(df_colores[['id_color']], how='cross')
 
-# Agregamos IDs autoincrementales y generamos un código de barras (EAN simulado)
+# Aca se genera el codigo de barras, vasado en id_variante
 df_variantes['id_variante'] = range(1, len(df_variantes) + 1)
 df_variantes['codigo_barras'] = df_variantes['id_variante'].apply(lambda x: f"779{x:09d}")
 
@@ -81,9 +75,10 @@ df_variantes['codigo_barras'] = df_variantes['id_variante'].apply(lambda x: f"77
 df_variantes = df_variantes[['id_variante', 'id_producto', 'id_talle', 'id_color', 'codigo_barras']]
 
 
-# ==========================================
-# 3. GENERACIÓN DE MOVIMIENTOS (NIVEL 3)
-# ==========================================
+#Aca se generan los movimientos transaccionales y sus detalles
+#Unicamente moviendo la cantidad de movimientos podemos generar un archivo SQL masivo para poblar la base de datos
+#Obviamente debemos tener en cuenta que al inicio de la base de datos debemos tener cargados los catalogos y semidependientes
+#para que los movimientos tengan sentido
 print("Generando Movimientos transaccionales...")
 CANTIDAD_MOVIMIENTOS = 1000
 
@@ -91,7 +86,7 @@ movimientos_list = []
 detalle_list = []
 id_detalle = 1
 
-# Generador de fechas aleatorias
+# Aca se generan fechas aleatorias entre el 1 de enero de 2025 y la fecha actual
 def random_date(start_date, end_date):
     delta = end_date - start_date
     random_seconds = random.randrange(int(delta.total_seconds()))
@@ -115,7 +110,7 @@ for i in range(1, CANTIDAD_MOVIMIENTOS + 1):
     
     movimientos_list.append([i, fecha, tipo, 'Generado por script Pandas', id_empleado, id_sucursal_origen, id_sucursal_destino])
     
-    # Crear entre 1 y 5 detalles para cada movimiento
+    # Aca se generar los detalles de cada movimiento
     cant_detalles = random.randint(1, 5)
     for _ in range(cant_detalles):
         variante = random.choice(df_variantes['id_variante'].tolist())
@@ -127,20 +122,18 @@ for i in range(1, CANTIDAD_MOVIMIENTOS + 1):
 df_movimientos = pd.DataFrame(movimientos_list, columns=['id_movimiento', 'fecha_hora', 'tipo_movimiento', 'observaciones', 'id_empleado', 'id_sucursal_origen', 'id_sucursal_destino'])
 df_detalle = pd.DataFrame(detalle_list, columns=['id_movimiento', 'id_variante', 'cantidad', 'precio_unitario'])
 
-# --- AGREGA ESTAS TRES LÍNEAS ACÁ ---
+
 df_detalle['id_movimiento'] = df_detalle['id_movimiento'].astype(int)
 df_detalle['id_variante'] = df_detalle['id_variante'].astype(int)
 df_detalle['cantidad'] = df_detalle['cantidad'].astype(int)
-# ------------------------------------
 
 
-# ==========================================
-# 4. EXPORTACIÓN A ARCHIVO SQL
-# ==========================================
+
+#Aca se exportan los dataframes a un archivo SQL
 print("Exportando a Carga_Masiva.sql...")
 
 def df_to_sql_insert(df, table_name):
-    """Convierte un DataFrame de Pandas en sentencias INSERT de SQL"""
+    #Convierte un DataFrame de Pandas en sentencias INSERT de SQL
     sql_statements = f"\n-- Inserciones para {table_name}\n"
     for index, row in df.iterrows():
         values = []
@@ -150,7 +143,7 @@ def df_to_sql_insert(df, table_name):
             elif isinstance(val, (int, np.integer, float, np.floating)):
                 values.append(str(val))
             else:
-                # Escapar comillas simples para SQL
+                
                 escaped_val = str(val).replace("'", "''")
                 values.append(f"'{escaped_val}'")
         
