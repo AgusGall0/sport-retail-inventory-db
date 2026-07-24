@@ -1,4141 +1,3745 @@
--- SCRIPT GENERADO AUTOMÁTICAMENTE
+-- CARGA COMPLETA - STOCK DEPORTIVO
+-- Compatible con PostgreSQL / pgAdmin 4
+-- ATENCION: elimina datos previos de las tablas antes de cargar.
+BEGIN;
+TRUNCATE TABLE
+detalle_movimientos, movimientos, inventario, producto_variante,
+productos, empleados, proveedores, sucursales, colores, talles,
+categorias, marcas
+RESTART IDENTITY CASCADE;
 
--- Inserciones para Marcas
-INSERT INTO Marcas (id_marca, nombre) VALUES (1, 'Nike');
-INSERT INTO Marcas (id_marca, nombre) VALUES (2, 'Adidas');
-INSERT INTO Marcas (id_marca, nombre) VALUES (3, 'Puma');
-INSERT INTO Marcas (id_marca, nombre) VALUES (4, 'Under Armour');
+-- marcas
+INSERT INTO marcas (id_marca, nombre) VALUES
+  (1, 'Nike'),
+  (2, 'Adidas'),
+  (3, 'Puma'),
+  (4, 'Under Armour');
 
--- Inserciones para Categorias
-INSERT INTO Categorias (id_categoria, nombre) VALUES (1, 'Calzado Running');
-INSERT INTO Categorias (id_categoria, nombre) VALUES (2, 'Remeras Técnicas');
-INSERT INTO Categorias (id_categoria, nombre) VALUES (3, 'Pantalones');
+-- categorias
+INSERT INTO categorias (id_categoria, nombre) VALUES
+  (1, 'Calzado Running'),
+  (2, 'Remeras Técnicas'),
+  (3, 'Pantalones Deportivos');
 
--- Inserciones para Talles
-INSERT INTO Talles (id_talle, nomenclatura) VALUES (1, 'S');
-INSERT INTO Talles (id_talle, nomenclatura) VALUES (2, 'M');
-INSERT INTO Talles (id_talle, nomenclatura) VALUES (3, 'L');
-INSERT INTO Talles (id_talle, nomenclatura) VALUES (4, '40');
-INSERT INTO Talles (id_talle, nomenclatura) VALUES (5, '41');
-INSERT INTO Talles (id_talle, nomenclatura) VALUES (6, '42');
+-- talles
+INSERT INTO talles (id_talle, nomenclatura) VALUES
+  (1, 'S'),
+  (2, 'M'),
+  (3, 'L'),
+  (4, 40),
+  (5, 41),
+  (6, 42);
 
--- Inserciones para Colores
-INSERT INTO Colores (id_color, nombre_color) VALUES (1, 'Negro');
-INSERT INTO Colores (id_color, nombre_color) VALUES (2, 'Blanco');
-INSERT INTO Colores (id_color, nombre_color) VALUES (3, 'Gris');
-INSERT INTO Colores (id_color, nombre_color) VALUES (4, 'Azul');
+-- colores
+INSERT INTO colores (id_color, nombre_color) VALUES
+  (1, 'Negro'),
+  (2, 'Blanco'),
+  (3, 'Gris'),
+  (4, 'Azul');
 
--- Inserciones para Sucursales
-INSERT INTO Sucursales (id_sucursal, nombre, direccion, ciudad) VALUES (1, 'Central CABA', 'Av. Corrientes 3200', 'Buenos Aires');
-INSERT INTO Sucursales (id_sucursal, nombre, direccion, ciudad) VALUES (2, 'Sucursal NOA', 'Rivadavia 550', 'Catamarca');
+-- sucursales
+INSERT INTO sucursales (id_sucursal, nombre, direccion, ciudad) VALUES
+  (1, 'Central CABA', 'Av. Corrientes 3200', 'Buenos Aires'),
+  (2, 'Sucursal NOA', 'Rivadavia 550', 'Catamarca');
 
--- Inserciones para Proveedores
-INSERT INTO Proveedores (id_proveedor, razon_social, cuit, telefono, email) VALUES (1, 'Nike Argentina', '30-12345678-9', '11-1234-5678', 'ventas@nike.com');
-INSERT INTO Proveedores (id_proveedor, razon_social, cuit, telefono, email) VALUES (2, 'Adidas Latam', '30-98765432-1', '11-8765-4321', 'ventas@adidas.com');
+-- proveedores
+INSERT INTO proveedores (id_proveedor, razon_social, cuit, telefono, email) VALUES
+  (1, 'Nike Argentina S.A.', '30-71000001-1', '11-4321-1001', 'ventas@nike.com.ar'),
+  (2, 'Adidas Argentina S.A.', '30-71000002-2', '11-4321-1002', 'ventas@adidas.com.ar'),
+  (3, 'Puma Sports Argentina S.A.', '30-71000003-3', '11-4321-1003', 'ventas@puma.com.ar'),
+  (4, 'Under Armour Argentina S.A.', '30-71000004-4', '11-4321-1004', 'ventas@underarmour.com.ar');
 
--- Inserciones para Empleados
-INSERT INTO Empleados (id_empleado, documento, nombre, apellido, perfil_acceso) VALUES (1, '35111222', 'Carlos', 'Gómez', 'Administrador');
-INSERT INTO Empleados (id_empleado, documento, nombre, apellido, perfil_acceso) VALUES (2, '38444555', 'Laura', 'Díaz', 'Operativo');
+-- empleados
+INSERT INTO empleados (id_empleado, documento, nombre, apellido, perfil_acceso) VALUES
+  (1, 35111222, 'Carlos', 'Gómez', 'Administrador'),
+  (2, 38444555, 'Laura', 'Díaz', 'Operativo'),
+  (3, 40222333, 'Martín', 'Pérez', 'Operativo');
 
--- Inserciones para Productos
-INSERT INTO Productos (id_producto, nombre, descripcion, precio_venta_actual, id_marca, id_categoria) VALUES (1, 'Pegasus 40', 'Running neutra', 150000.0, 1, 1);
-INSERT INTO Productos (id_producto, nombre, descripcion, precio_venta_actual, id_marca, id_categoria) VALUES (2, 'Ultraboost', 'Running retorno energia', 175000.0, 2, 1);
+-- productos
+INSERT INTO productos (id_producto, nombre, descripcion, precio_venta_actual, id_marca, id_categoria) VALUES
+  (1, 'Pegasus 40', 'Zapatilla de running neutra para entrenamiento diario', 150000.0, 1, 1),
+  (2, 'Ultraboost Light', 'Zapatilla de running con retorno de energía', 175000.0, 2, 1),
+  (3, 'Remera Dry-Fit Academy', 'Remera técnica respirable de secado rápido', 52000.0, 1, 2),
+  (4, 'Pantalón Challenger', 'Pantalón deportivo liviano con ajuste regulable', 78000.0, 4, 3);
 
--- Inserciones para Producto_Variante
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (1, 1, 1, 1, '779000000001');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (2, 1, 1, 2, '779000000002');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (3, 1, 1, 3, '779000000003');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (4, 1, 1, 4, '779000000004');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (5, 1, 2, 1, '779000000005');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (6, 1, 2, 2, '779000000006');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (7, 1, 2, 3, '779000000007');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (8, 1, 2, 4, '779000000008');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (9, 1, 3, 1, '779000000009');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (10, 1, 3, 2, '779000000010');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (11, 1, 3, 3, '779000000011');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (12, 1, 3, 4, '779000000012');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (13, 1, 4, 1, '779000000013');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (14, 1, 4, 2, '779000000014');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (15, 1, 4, 3, '779000000015');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (16, 1, 4, 4, '779000000016');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (17, 1, 5, 1, '779000000017');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (18, 1, 5, 2, '779000000018');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (19, 1, 5, 3, '779000000019');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (20, 1, 5, 4, '779000000020');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (21, 1, 6, 1, '779000000021');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (22, 1, 6, 2, '779000000022');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (23, 1, 6, 3, '779000000023');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (24, 1, 6, 4, '779000000024');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (25, 2, 1, 1, '779000000025');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (26, 2, 1, 2, '779000000026');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (27, 2, 1, 3, '779000000027');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (28, 2, 1, 4, '779000000028');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (29, 2, 2, 1, '779000000029');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (30, 2, 2, 2, '779000000030');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (31, 2, 2, 3, '779000000031');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (32, 2, 2, 4, '779000000032');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (33, 2, 3, 1, '779000000033');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (34, 2, 3, 2, '779000000034');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (35, 2, 3, 3, '779000000035');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (36, 2, 3, 4, '779000000036');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (37, 2, 4, 1, '779000000037');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (38, 2, 4, 2, '779000000038');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (39, 2, 4, 3, '779000000039');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (40, 2, 4, 4, '779000000040');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (41, 2, 5, 1, '779000000041');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (42, 2, 5, 2, '779000000042');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (43, 2, 5, 3, '779000000043');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (44, 2, 5, 4, '779000000044');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (45, 2, 6, 1, '779000000045');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (46, 2, 6, 2, '779000000046');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (47, 2, 6, 3, '779000000047');
-INSERT INTO Producto_Variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES (48, 2, 6, 4, '779000000048');
+-- producto_variante
+INSERT INTO producto_variante (id_variante, id_producto, id_talle, id_color, codigo_barras) VALUES
+  (1, 1, 4, 1, 779000000001),
+  (2, 1, 4, 2, 779000000002),
+  (3, 1, 4, 3, 779000000003),
+  (4, 1, 4, 4, 779000000004),
+  (5, 1, 5, 1, 779000000005),
+  (6, 1, 5, 2, 779000000006),
+  (7, 1, 5, 3, 779000000007),
+  (8, 1, 5, 4, 779000000008),
+  (9, 1, 6, 1, 779000000009),
+  (10, 1, 6, 2, 779000000010),
+  (11, 1, 6, 3, 779000000011),
+  (12, 1, 6, 4, 779000000012),
+  (13, 2, 4, 1, 779000000013),
+  (14, 2, 4, 2, 779000000014),
+  (15, 2, 4, 3, 779000000015),
+  (16, 2, 4, 4, 779000000016),
+  (17, 2, 5, 1, 779000000017),
+  (18, 2, 5, 2, 779000000018),
+  (19, 2, 5, 3, 779000000019),
+  (20, 2, 5, 4, 779000000020),
+  (21, 2, 6, 1, 779000000021),
+  (22, 2, 6, 2, 779000000022),
+  (23, 2, 6, 3, 779000000023),
+  (24, 2, 6, 4, 779000000024),
+  (25, 3, 1, 1, 779000000025),
+  (26, 3, 1, 2, 779000000026),
+  (27, 3, 1, 3, 779000000027),
+  (28, 3, 1, 4, 779000000028),
+  (29, 3, 2, 1, 779000000029),
+  (30, 3, 2, 2, 779000000030),
+  (31, 3, 2, 3, 779000000031),
+  (32, 3, 2, 4, 779000000032),
+  (33, 3, 3, 1, 779000000033),
+  (34, 3, 3, 2, 779000000034),
+  (35, 3, 3, 3, 779000000035),
+  (36, 3, 3, 4, 779000000036),
+  (37, 4, 1, 1, 779000000037),
+  (38, 4, 1, 2, 779000000038),
+  (39, 4, 1, 3, 779000000039),
+  (40, 4, 1, 4, 779000000040),
+  (41, 4, 2, 1, 779000000041),
+  (42, 4, 2, 2, 779000000042),
+  (43, 4, 2, 3, 779000000043),
+  (44, 4, 2, 4, 779000000044),
+  (45, 4, 3, 1, 779000000045),
+  (46, 4, 3, 2, 779000000046),
+  (47, 4, 3, 3, 779000000047),
+  (48, 4, 3, 4, 779000000048);
 
--- Inserciones para Movimientos
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (1, '2026-05-24 01:54:13', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (2, '2025-05-13 22:31:47', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (3, '2025-09-25 00:52:30', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (4, '2026-07-06 16:56:06', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (5, '2025-09-10 06:10:58', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (6, '2025-04-06 17:57:57', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (7, '2025-11-22 03:39:48', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (8, '2025-04-25 08:00:01', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (9, '2025-11-30 03:20:59', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (10, '2026-03-06 17:46:09', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (11, '2025-08-22 09:24:16', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (12, '2026-07-15 18:30:00', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (13, '2025-12-07 00:07:50', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (14, '2026-05-09 06:40:02', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (15, '2026-04-15 19:54:39', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (16, '2025-11-18 20:49:34', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (17, '2025-11-22 13:27:44', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (18, '2026-04-07 18:18:56', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (19, '2025-03-11 09:51:12', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (20, '2026-05-08 16:09:51', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (21, '2025-07-30 17:55:51', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (22, '2026-01-28 17:33:58', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (23, '2025-09-01 06:57:12', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (24, '2025-11-01 04:57:08', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (25, '2025-11-21 16:43:01', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (26, '2025-04-06 08:14:28', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (27, '2025-11-29 01:25:09', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (28, '2025-01-13 01:02:38', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (29, '2026-02-16 06:57:59', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (30, '2025-09-13 14:53:30', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (31, '2025-03-16 12:48:31', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (32, '2026-02-09 18:10:46', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (33, '2026-01-02 13:16:52', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (34, '2025-09-01 01:44:25', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (35, '2026-06-17 21:07:11', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (36, '2026-05-09 13:50:38', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (37, '2025-01-31 03:02:24', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (38, '2025-10-20 13:45:41', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (39, '2026-02-09 18:18:57', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (40, '2025-06-16 11:56:41', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (41, '2025-03-06 01:09:11', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (42, '2025-10-07 04:06:32', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (43, '2025-07-07 18:10:30', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (44, '2025-12-20 09:43:31', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (45, '2025-08-16 03:22:33', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (46, '2025-08-12 15:48:57', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (47, '2026-04-14 09:13:34', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (48, '2026-05-09 22:28:28', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (49, '2025-11-25 15:27:47', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (50, '2026-05-10 08:51:58', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (51, '2025-05-10 04:54:43', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (52, '2025-08-19 15:10:53', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (53, '2025-11-16 21:03:24', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (54, '2025-05-20 08:08:13', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (55, '2026-04-19 19:51:40', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (56, '2025-04-18 04:27:25', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (57, '2026-06-22 13:01:42', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (58, '2025-11-29 15:48:13', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (59, '2025-08-01 18:38:35', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (60, '2025-11-16 16:10:39', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (61, '2025-08-05 14:43:10', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (62, '2026-01-27 00:26:49', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (63, '2025-10-13 17:42:32', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (64, '2025-06-11 14:59:43', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (65, '2025-07-12 11:29:46', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (66, '2025-08-24 03:48:09', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (67, '2025-01-16 22:34:31', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (68, '2026-02-23 17:25:58', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (69, '2025-02-10 17:12:07', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (70, '2025-03-06 18:45:52', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (71, '2025-11-29 23:13:59', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (72, '2026-02-01 08:21:12', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (73, '2025-09-25 05:51:48', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (74, '2025-11-13 10:08:33', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (75, '2025-03-01 11:11:23', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (76, '2025-08-29 08:28:06', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (77, '2026-06-24 21:01:41', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (78, '2025-06-01 03:25:32', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (79, '2025-02-08 02:58:02', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (80, '2025-08-05 13:47:37', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (81, '2026-04-11 13:56:45', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (82, '2025-01-25 04:54:18', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (83, '2025-02-21 00:46:15', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (84, '2025-03-05 02:48:58', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (85, '2026-03-31 03:01:09', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (86, '2025-09-27 11:10:10', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (87, '2026-05-16 03:22:45', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (88, '2025-07-24 13:45:45', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (89, '2025-08-18 20:00:44', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (90, '2026-02-01 22:28:09', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (91, '2026-02-26 04:21:55', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (92, '2025-04-12 22:45:51', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (93, '2025-10-09 18:55:42', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (94, '2025-07-26 05:01:40', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (95, '2025-09-23 09:23:08', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (96, '2025-01-17 19:05:37', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (97, '2025-07-06 22:21:28', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (98, '2025-04-09 07:43:43', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (99, '2025-05-12 18:32:11', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (100, '2025-03-06 15:49:57', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (101, '2026-04-07 23:10:13', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (102, '2026-03-05 18:22:21', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (103, '2026-05-24 05:18:59', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (104, '2025-11-13 16:13:34', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (105, '2026-05-02 06:13:31', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (106, '2025-02-05 06:46:30', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (107, '2025-01-25 18:42:39', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (108, '2025-01-13 04:45:14', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (109, '2026-01-01 06:13:32', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (110, '2025-04-17 13:04:27', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (111, '2026-04-12 12:31:34', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (112, '2026-02-23 20:12:14', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (113, '2025-06-16 01:29:24', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (114, '2026-05-06 12:29:50', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (115, '2025-02-24 15:31:53', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (116, '2025-09-12 09:07:15', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (117, '2026-01-20 13:51:39', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (118, '2026-01-30 05:01:00', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (119, '2025-05-18 22:07:40', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (120, '2025-01-03 05:24:28', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (121, '2025-01-11 04:59:51', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (122, '2026-04-23 09:35:41', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (123, '2025-11-01 23:29:38', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (124, '2026-07-18 21:39:11', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (125, '2025-09-30 02:13:49', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (126, '2025-06-28 10:50:41', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (127, '2025-01-07 04:43:15', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (128, '2025-02-02 12:55:14', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (129, '2025-10-10 15:19:11', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (130, '2025-09-23 03:25:31', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (131, '2025-03-28 22:39:36', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (132, '2026-01-10 07:02:15', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (133, '2025-05-08 16:52:54', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (134, '2025-06-15 13:08:57', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (135, '2025-03-30 08:38:25', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (136, '2026-01-26 11:32:14', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (137, '2025-03-08 07:39:03', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (138, '2025-07-08 20:59:49', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (139, '2025-10-28 12:11:59', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (140, '2025-02-15 17:23:57', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (141, '2026-01-07 18:58:47', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (142, '2025-09-24 15:20:24', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (143, '2026-07-18 02:34:47', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (144, '2026-01-26 04:43:32', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (145, '2025-05-29 18:33:41', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (146, '2025-12-09 10:01:55', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (147, '2026-05-17 22:02:16', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (148, '2026-07-13 11:06:34', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (149, '2025-03-23 07:21:22', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (150, '2025-05-03 21:08:31', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (151, '2026-04-26 11:30:40', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (152, '2026-01-10 00:26:03', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (153, '2026-07-14 17:28:13', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (154, '2025-01-04 04:11:20', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (155, '2026-07-04 14:22:14', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (156, '2025-09-19 06:12:49', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (157, '2025-10-07 08:46:12', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (158, '2026-04-04 00:32:00', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (159, '2025-02-07 07:23:20', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (160, '2025-01-14 09:53:06', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (161, '2026-06-19 11:34:15', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (162, '2025-11-24 09:32:49', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (163, '2026-03-16 02:28:15', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (164, '2026-03-17 23:39:01', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (165, '2026-04-15 14:29:47', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (166, '2025-12-03 18:50:31', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (167, '2025-08-24 17:58:14', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (168, '2025-03-15 02:37:42', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (169, '2025-02-21 20:55:09', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (170, '2025-12-21 06:15:51', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (171, '2026-06-02 12:31:15', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (172, '2025-02-02 02:58:49', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (173, '2025-12-20 14:02:27', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (174, '2025-02-03 01:46:26', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (175, '2025-10-07 09:32:38', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (176, '2025-04-10 21:44:30', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (177, '2025-01-19 20:11:44', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (178, '2025-05-28 08:29:57', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (179, '2025-11-11 23:33:08', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (180, '2025-08-26 09:43:04', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (181, '2026-02-26 20:32:36', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (182, '2025-02-01 04:59:56', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (183, '2025-03-04 04:06:53', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (184, '2026-02-10 19:00:33', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (185, '2025-01-28 12:09:02', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (186, '2025-05-09 00:16:18', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (187, '2025-12-23 11:35:38', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (188, '2026-01-29 21:04:41', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (189, '2026-07-13 01:55:36', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (190, '2026-03-10 13:57:57', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (191, '2026-04-21 04:46:09', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (192, '2026-04-25 01:19:49', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (193, '2025-06-18 12:47:01', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (194, '2025-12-20 17:16:04', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (195, '2025-10-16 21:39:49', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (196, '2025-11-10 11:10:50', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (197, '2025-06-14 16:33:49', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (198, '2025-07-03 00:31:04', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (199, '2025-04-15 02:08:18', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (200, '2026-04-21 10:46:21', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (201, '2025-12-12 18:51:11', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (202, '2025-09-12 04:08:40', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (203, '2026-01-05 01:35:15', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (204, '2025-08-21 21:02:02', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (205, '2025-04-01 07:59:56', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (206, '2025-04-10 02:03:27', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (207, '2025-12-21 10:20:53', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (208, '2025-10-07 00:46:52', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (209, '2025-09-12 01:51:42', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (210, '2025-03-04 11:44:49', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (211, '2025-07-04 13:25:15', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (212, '2026-07-19 17:24:13', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (213, '2026-01-31 05:02:11', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (214, '2025-02-12 21:46:58', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (215, '2026-07-04 23:55:26', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (216, '2025-03-27 09:48:01', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (217, '2026-05-17 22:12:41', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (218, '2025-07-04 23:03:50', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (219, '2025-02-25 15:42:02', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (220, '2025-09-20 14:47:56', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (221, '2025-04-15 09:59:12', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (222, '2025-12-27 23:01:27', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (223, '2025-10-17 19:38:06', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (224, '2025-01-17 08:26:05', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (225, '2025-05-15 00:35:36', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (226, '2025-09-25 11:09:12', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (227, '2025-05-22 10:49:43', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (228, '2026-06-01 13:59:08', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (229, '2025-04-07 18:27:20', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (230, '2025-11-04 21:41:24', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (231, '2025-06-25 07:08:12', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (232, '2025-09-06 23:41:13', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (233, '2026-03-04 07:53:36', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (234, '2025-03-30 06:41:32', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (235, '2025-03-15 04:56:41', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (236, '2026-03-29 13:41:59', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (237, '2026-01-31 00:23:30', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (238, '2025-12-06 01:00:00', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (239, '2025-04-23 00:25:27', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (240, '2026-02-03 00:20:33', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (241, '2025-06-16 00:00:07', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (242, '2026-07-17 18:12:24', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (243, '2025-10-05 05:20:10', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (244, '2026-05-12 23:53:56', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (245, '2026-01-30 01:51:14', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (246, '2025-08-11 07:14:06', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (247, '2026-03-11 09:09:30', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (248, '2025-05-01 00:01:52', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (249, '2026-07-18 23:14:33', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (250, '2025-12-07 12:15:40', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (251, '2025-12-05 15:55:11', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (252, '2026-06-23 17:54:17', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (253, '2025-01-16 18:21:39', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (254, '2025-12-22 06:50:20', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (255, '2025-10-11 16:07:41', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (256, '2026-05-21 09:11:55', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (257, '2026-02-22 13:17:31', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (258, '2025-10-21 01:48:18', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (259, '2026-02-14 05:23:30', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (260, '2026-01-23 10:25:06', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (261, '2026-05-02 13:42:21', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (262, '2026-07-15 14:27:34', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (263, '2025-06-02 16:02:30', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (264, '2026-02-28 19:13:00', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (265, '2026-03-02 15:22:50', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (266, '2026-05-13 02:55:56', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (267, '2025-09-26 14:17:45', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (268, '2025-01-27 02:15:10', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (269, '2025-05-29 21:57:31', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (270, '2026-06-15 06:41:27', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (271, '2025-03-19 14:27:32', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (272, '2025-03-30 16:27:00', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (273, '2025-01-12 22:26:56', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (274, '2025-01-29 15:40:20', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (275, '2025-05-04 05:53:24', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (276, '2025-06-21 05:53:43', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (277, '2026-03-15 02:24:26', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (278, '2025-06-07 17:43:44', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (279, '2025-10-01 20:54:02', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (280, '2025-02-06 15:04:31', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (281, '2025-02-24 20:20:30', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (282, '2026-03-31 19:14:36', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (283, '2025-03-14 09:33:21', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (284, '2026-01-04 05:39:21', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (285, '2026-06-02 17:53:47', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (286, '2026-03-27 03:06:03', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (287, '2026-03-26 18:33:41', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (288, '2025-10-03 09:54:53', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (289, '2025-01-28 02:45:42', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (290, '2026-04-06 11:15:47', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (291, '2025-01-27 16:23:33', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (292, '2025-04-18 13:04:31', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (293, '2025-08-09 17:39:17', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (294, '2026-03-16 08:38:53', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (295, '2025-11-29 00:43:36', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (296, '2026-03-02 15:40:23', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (297, '2026-01-02 13:04:01', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (298, '2026-04-14 08:50:53', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (299, '2026-04-15 06:57:42', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (300, '2026-04-27 03:25:17', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (301, '2025-09-20 03:19:59', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (302, '2025-06-16 01:10:28', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (303, '2025-01-22 14:02:42', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (304, '2026-07-10 07:04:00', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (305, '2025-10-03 07:59:18', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (306, '2025-11-29 01:29:10', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (307, '2025-08-22 14:57:29', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (308, '2025-01-14 16:01:59', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (309, '2026-01-13 23:26:29', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (310, '2025-08-30 08:54:26', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (311, '2026-04-13 18:41:52', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (312, '2026-04-16 04:00:40', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (313, '2026-06-04 00:25:22', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (314, '2026-05-29 12:15:05', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (315, '2025-06-09 20:25:40', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (316, '2025-08-17 06:47:17', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (317, '2025-07-01 21:53:21', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (318, '2025-05-06 15:26:25', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (319, '2025-11-16 22:22:39', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (320, '2026-01-30 01:51:42', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (321, '2025-04-21 01:54:21', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (322, '2026-06-01 01:46:39', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (323, '2025-03-19 20:26:03', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (324, '2025-09-16 13:27:33', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (325, '2025-12-02 18:06:58', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (326, '2026-01-03 11:25:22', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (327, '2025-01-05 21:22:56', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (328, '2025-04-09 02:09:54', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (329, '2025-09-17 13:52:09', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (330, '2025-06-19 02:46:19', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (331, '2025-06-26 04:48:35', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (332, '2025-12-31 21:19:18', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (333, '2025-07-07 14:08:03', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (334, '2025-10-05 11:34:57', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (335, '2025-11-04 20:36:47', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (336, '2025-08-09 01:01:28', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (337, '2026-03-06 13:06:34', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (338, '2025-03-18 18:08:53', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (339, '2025-10-28 06:38:18', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (340, '2026-04-25 03:00:55', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (341, '2025-07-04 21:26:18', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (342, '2025-09-18 02:37:46', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (343, '2025-12-06 22:42:12', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (344, '2026-02-25 18:07:45', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (345, '2025-11-08 21:50:04', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (346, '2025-02-01 11:02:20', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (347, '2026-05-11 17:52:33', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (348, '2025-12-20 18:33:50', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (349, '2026-03-19 15:24:17', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (350, '2026-01-12 18:20:06', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (351, '2025-02-11 14:21:01', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (352, '2026-01-25 17:57:55', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (353, '2025-01-02 11:59:04', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (354, '2026-05-29 17:37:04', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (355, '2025-10-09 09:23:58', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (356, '2025-02-21 08:40:39', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (357, '2025-10-03 17:12:37', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (358, '2026-06-24 10:53:22', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (359, '2026-01-21 07:04:34', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (360, '2025-02-15 08:47:47', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (361, '2025-08-06 23:08:46', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (362, '2025-12-02 04:48:17', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (363, '2025-07-08 14:20:09', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (364, '2025-12-08 23:37:38', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (365, '2025-05-15 21:17:14', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (366, '2025-05-24 23:55:53', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (367, '2025-01-12 17:12:33', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (368, '2025-01-11 06:02:31', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (369, '2026-01-20 08:31:45', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (370, '2025-10-15 13:20:36', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (371, '2025-11-03 05:32:36', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (372, '2025-08-07 17:54:01', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (373, '2025-10-19 21:51:57', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (374, '2025-03-30 15:39:57', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (375, '2026-03-21 17:34:46', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (376, '2025-10-06 06:57:28', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (377, '2025-10-03 03:32:51', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (378, '2026-01-23 23:27:31', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (379, '2025-11-08 14:13:40', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (380, '2025-02-02 21:26:06', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (381, '2026-03-01 17:33:32', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (382, '2025-12-25 08:39:32', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (383, '2025-02-06 21:22:42', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (384, '2025-07-14 03:59:16', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (385, '2025-12-16 23:33:33', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (386, '2025-07-26 02:27:08', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (387, '2026-02-24 12:28:29', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (388, '2026-03-11 12:11:44', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (389, '2026-02-16 18:03:01', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (390, '2025-07-14 07:54:53', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (391, '2025-03-13 05:47:03', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (392, '2025-02-05 04:35:58', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (393, '2025-08-15 18:58:27', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (394, '2025-05-07 18:27:37', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (395, '2025-11-12 23:00:48', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (396, '2026-05-02 11:13:10', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (397, '2025-08-10 15:58:28', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (398, '2025-05-22 17:38:14', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (399, '2026-02-13 15:47:34', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (400, '2025-01-26 11:07:37', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (401, '2025-03-02 12:41:00', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (402, '2026-04-29 23:09:39', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (403, '2026-01-12 18:44:14', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (404, '2025-04-10 21:20:32', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (405, '2025-08-25 21:37:39', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (406, '2025-06-11 22:13:23', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (407, '2026-05-14 03:46:20', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (408, '2025-05-30 14:22:59', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (409, '2026-02-27 11:47:48', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (410, '2025-06-16 16:21:15', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (411, '2025-12-24 23:50:03', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (412, '2026-03-30 19:47:01', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (413, '2025-08-26 05:27:15', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (414, '2026-05-29 13:07:30', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (415, '2026-02-10 18:08:15', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (416, '2025-03-23 06:38:35', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (417, '2025-08-01 04:31:38', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (418, '2025-12-30 10:53:24', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (419, '2025-11-25 22:50:25', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (420, '2025-02-28 17:50:05', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (421, '2026-06-03 09:09:51', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (422, '2025-10-25 06:33:47', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (423, '2026-06-16 18:55:52', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (424, '2025-03-22 10:47:05', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (425, '2025-08-05 04:08:24', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (426, '2026-03-04 05:27:43', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (427, '2026-05-18 18:59:17', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (428, '2026-04-04 10:05:55', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (429, '2025-10-03 20:53:14', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (430, '2025-12-23 02:10:01', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (431, '2025-01-21 06:23:25', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (432, '2025-06-28 19:17:52', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (433, '2025-07-12 16:55:55', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (434, '2026-05-07 14:42:10', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (435, '2025-05-02 07:02:10', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (436, '2025-08-10 19:03:18', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (437, '2025-11-01 06:03:25', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (438, '2026-04-02 23:14:01', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (439, '2026-05-03 18:42:41', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (440, '2026-01-05 19:47:03', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (441, '2026-06-27 12:41:07', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (442, '2026-06-30 12:53:58', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (443, '2025-09-19 17:34:16', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (444, '2025-03-06 23:29:56', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (445, '2026-02-18 21:47:45', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (446, '2025-05-07 22:40:33', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (447, '2025-08-20 18:49:43', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (448, '2025-04-06 21:26:03', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (449, '2026-07-06 16:42:10', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (450, '2025-12-04 11:53:57', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (451, '2026-04-14 10:45:49', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (452, '2025-01-17 14:18:04', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (453, '2025-04-10 11:44:54', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (454, '2025-08-14 13:20:28', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (455, '2026-04-14 23:48:19', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (456, '2026-04-15 12:49:58', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (457, '2026-07-03 22:30:55', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (458, '2026-04-25 20:02:55', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (459, '2026-05-19 13:09:17', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (460, '2025-10-27 12:53:25', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (461, '2026-01-04 03:42:13', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (462, '2026-06-04 16:22:51', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (463, '2026-05-17 06:51:02', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (464, '2025-08-31 04:37:13', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (465, '2025-10-15 23:20:15', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (466, '2026-01-10 11:48:57', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (467, '2026-06-09 05:19:36', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (468, '2026-06-02 07:17:21', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (469, '2026-03-23 03:20:00', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (470, '2026-07-09 04:22:36', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (471, '2025-09-29 18:20:58', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (472, '2025-06-24 02:03:19', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (473, '2025-09-19 00:50:27', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (474, '2025-10-25 00:34:56', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (475, '2026-05-27 02:27:02', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (476, '2026-05-11 20:08:02', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (477, '2025-06-18 10:05:46', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (478, '2025-12-28 22:03:58', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (479, '2026-07-10 20:46:22', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (480, '2026-04-13 18:28:52', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (481, '2025-02-01 05:31:26', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (482, '2026-01-27 21:01:34', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (483, '2025-11-08 09:51:25', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (484, '2026-06-13 15:20:21', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (485, '2026-06-10 16:27:44', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (486, '2025-06-26 20:49:13', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (487, '2025-08-15 07:04:36', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (488, '2026-01-12 02:31:15', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (489, '2025-03-20 16:30:33', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (490, '2025-01-08 00:40:41', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (491, '2025-02-24 09:29:45', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (492, '2025-10-18 18:54:37', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (493, '2025-08-08 21:06:53', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (494, '2026-05-08 01:12:42', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (495, '2025-07-30 16:30:01', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (496, '2026-03-22 00:09:16', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (497, '2025-11-03 16:15:35', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (498, '2025-02-01 14:51:35', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (499, '2025-02-20 11:33:41', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (500, '2025-01-30 22:20:36', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (501, '2026-07-14 04:15:56', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (502, '2026-06-16 23:59:37', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (503, '2025-05-27 15:17:48', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (504, '2025-11-04 05:31:28', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (505, '2025-04-16 08:36:15', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (506, '2026-02-19 20:25:33', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (507, '2025-06-27 05:28:09', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (508, '2025-11-27 15:04:32', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (509, '2025-12-22 21:52:21', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (510, '2025-05-19 16:10:28', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (511, '2025-09-26 11:39:27', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (512, '2026-06-02 00:31:46', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (513, '2025-10-09 06:37:38', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (514, '2026-06-10 08:17:29', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (515, '2025-01-24 01:39:05', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (516, '2026-06-18 21:42:11', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (517, '2026-01-22 05:39:08', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (518, '2025-09-19 20:19:33', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (519, '2025-02-04 03:55:54', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (520, '2025-05-04 08:11:27', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (521, '2025-11-11 14:55:11', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (522, '2025-09-05 03:50:58', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (523, '2025-09-20 06:35:36', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (524, '2025-06-25 06:26:47', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (525, '2025-11-14 15:48:00', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (526, '2025-07-29 06:06:50', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (527, '2025-05-21 03:43:52', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (528, '2026-07-19 19:18:15', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (529, '2026-05-19 03:51:02', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (530, '2025-05-16 02:50:09', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (531, '2026-05-30 06:03:08', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (532, '2025-02-10 15:52:19', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (533, '2025-03-30 11:09:30', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (534, '2026-05-24 01:41:10', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (535, '2025-06-01 18:37:26', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (536, '2025-03-19 20:24:08', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (537, '2025-03-09 09:06:28', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (538, '2025-02-27 19:52:06', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (539, '2026-04-03 11:56:54', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (540, '2025-03-19 17:26:25', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (541, '2025-02-06 09:05:52', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (542, '2026-05-27 16:47:20', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (543, '2025-10-31 01:58:48', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (544, '2026-05-03 19:08:18', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (545, '2025-12-10 05:21:31', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (546, '2026-02-20 18:56:14', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (547, '2025-04-02 04:23:03', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (548, '2026-02-23 06:23:44', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (549, '2025-01-13 07:21:48', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (550, '2026-03-15 04:32:07', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (551, '2025-01-05 01:27:33', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (552, '2025-06-11 02:11:51', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (553, '2025-03-09 05:17:33', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (554, '2025-05-08 21:11:20', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (555, '2025-06-26 08:53:06', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (556, '2026-05-04 04:44:36', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (557, '2026-03-20 09:28:43', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (558, '2026-03-10 14:50:00', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (559, '2025-12-31 17:01:13', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (560, '2025-04-18 04:25:22', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (561, '2025-08-05 11:34:48', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (562, '2025-11-22 06:49:52', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (563, '2026-02-01 08:24:45', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (564, '2025-11-14 23:54:00', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (565, '2025-05-12 18:49:35', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (566, '2026-06-16 02:21:31', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (567, '2026-05-31 23:09:47', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (568, '2025-12-13 18:07:39', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (569, '2025-11-16 03:48:06', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (570, '2025-01-05 20:20:24', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (571, '2025-04-19 23:58:38', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (572, '2026-02-13 12:14:37', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (573, '2026-06-16 19:08:41', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (574, '2026-06-17 13:01:36', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (575, '2026-05-07 12:39:48', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (576, '2025-04-13 06:11:39', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (577, '2025-05-29 16:09:02', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (578, '2025-01-19 22:21:30', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (579, '2026-01-21 10:14:14', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (580, '2026-05-28 06:42:17', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (581, '2025-11-18 21:37:49', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (582, '2025-10-29 16:16:58', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (583, '2025-04-25 16:14:31', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (584, '2025-05-09 13:16:58', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (585, '2025-10-05 21:52:44', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (586, '2026-06-05 19:39:57', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (587, '2026-02-10 23:28:31', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (588, '2026-05-04 23:54:32', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (589, '2025-07-18 02:09:39', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (590, '2026-03-13 02:05:23', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (591, '2025-06-23 17:07:59', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (592, '2025-10-03 10:11:12', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (593, '2025-09-20 17:54:28', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (594, '2026-03-09 17:31:25', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (595, '2025-08-05 19:47:10', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (596, '2026-03-02 09:53:06', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (597, '2025-03-03 00:22:39', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (598, '2025-01-04 13:04:52', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (599, '2025-04-30 08:55:58', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (600, '2025-09-14 15:34:40', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (601, '2025-03-31 17:14:43', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (602, '2025-01-24 01:54:50', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (603, '2026-02-22 02:24:21', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (604, '2025-08-21 18:31:18', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (605, '2025-12-24 11:56:18', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (606, '2025-09-05 15:13:57', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (607, '2025-08-04 01:46:40', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (608, '2026-04-03 17:10:05', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (609, '2025-12-29 18:31:38', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (610, '2026-01-15 17:28:23', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (611, '2025-09-21 15:53:26', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (612, '2025-03-05 14:03:36', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (613, '2025-08-06 12:10:39', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (614, '2025-06-12 19:07:10', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (615, '2025-02-06 21:42:18', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (616, '2026-02-10 05:16:48', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (617, '2025-11-26 02:52:06', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (618, '2026-03-02 20:33:45', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (619, '2025-12-09 21:42:41', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (620, '2025-12-07 20:31:05', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (621, '2026-06-10 03:59:30', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (622, '2026-03-16 01:06:32', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (623, '2025-01-10 11:45:21', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (624, '2025-06-22 22:09:18', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (625, '2026-02-12 01:46:13', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (626, '2025-04-12 19:37:34', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (627, '2026-01-23 18:12:10', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (628, '2026-05-08 15:15:45', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (629, '2025-07-31 04:26:40', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (630, '2025-02-04 15:27:42', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (631, '2025-09-06 05:07:42', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (632, '2026-05-14 17:09:53', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (633, '2026-03-10 13:20:13', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (634, '2026-01-02 09:30:25', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (635, '2025-08-28 05:49:59', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (636, '2026-02-28 05:51:59', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (637, '2025-12-18 22:39:55', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (638, '2026-05-23 09:07:39', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (639, '2026-07-21 07:02:28', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (640, '2025-08-04 01:06:07', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (641, '2026-05-30 21:28:36', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (642, '2025-12-09 16:03:41', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (643, '2025-05-28 23:26:49', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (644, '2026-07-17 14:11:10', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (645, '2025-02-01 01:48:13', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (646, '2026-03-26 19:58:38', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (647, '2025-05-06 22:02:53', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (648, '2025-04-09 06:48:00', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (649, '2026-03-23 23:04:33', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (650, '2025-05-30 23:00:55', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (651, '2025-02-25 16:11:05', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (652, '2026-05-24 23:26:07', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (653, '2026-06-11 00:56:41', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (654, '2026-01-10 13:31:56', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (655, '2026-04-03 04:42:16', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (656, '2025-05-19 03:18:03', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (657, '2026-02-08 19:26:27', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (658, '2025-10-02 09:28:43', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (659, '2025-08-22 01:10:35', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (660, '2026-04-02 09:57:25', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (661, '2025-04-05 05:01:37', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (662, '2025-06-20 18:19:44', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (663, '2025-07-04 08:01:16', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (664, '2025-06-23 23:55:12', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (665, '2025-04-06 14:29:12', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (666, '2025-10-27 00:49:51', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (667, '2026-01-31 11:17:30', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (668, '2025-09-11 18:13:55', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (669, '2025-03-20 07:59:24', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (670, '2025-01-21 17:15:12', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (671, '2025-11-12 07:00:59', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (672, '2026-07-18 23:40:26', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (673, '2025-01-12 22:22:38', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (674, '2025-08-19 18:38:18', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (675, '2026-03-16 01:26:23', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (676, '2025-05-07 14:05:31', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (677, '2025-04-09 08:40:13', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (678, '2025-02-12 17:24:52', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (679, '2025-08-08 05:15:49', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (680, '2026-04-08 21:59:24', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (681, '2025-05-15 07:42:31', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (682, '2025-07-26 15:35:50', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (683, '2026-04-06 00:36:03', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (684, '2025-05-02 11:10:44', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (685, '2026-01-31 16:18:23', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (686, '2025-01-17 13:31:59', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (687, '2026-01-31 20:08:14', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (688, '2025-10-27 14:55:14', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (689, '2025-07-03 16:03:00', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (690, '2026-06-03 21:07:32', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (691, '2025-03-11 02:26:21', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (692, '2025-02-05 01:48:03', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (693, '2025-07-31 08:04:59', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (694, '2025-08-23 22:04:08', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (695, '2025-02-10 21:14:06', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (696, '2025-04-16 23:36:53', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (697, '2026-06-01 07:50:54', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (698, '2026-02-26 04:26:40', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (699, '2025-05-14 00:32:56', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (700, '2026-04-10 18:57:14', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (701, '2025-03-18 10:40:58', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (702, '2026-05-07 14:42:55', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (703, '2026-01-24 07:09:03', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (704, '2025-07-22 16:30:43', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (705, '2025-09-20 21:32:42', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (706, '2025-04-30 01:46:17', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (707, '2025-11-27 10:39:39', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (708, '2026-05-29 21:26:15', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (709, '2025-04-12 17:13:34', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (710, '2025-10-16 04:04:04', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (711, '2025-11-12 04:28:23', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (712, '2026-05-08 08:53:46', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (713, '2025-04-07 05:04:21', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (714, '2025-12-28 00:50:42', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (715, '2025-09-13 19:50:42', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (716, '2026-02-02 21:06:03', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (717, '2025-07-27 10:39:12', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (718, '2025-07-25 10:24:08', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (719, '2025-07-09 09:38:36', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (720, '2025-12-04 05:03:03', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (721, '2026-01-10 07:10:56', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (722, '2025-10-02 15:58:37', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (723, '2025-05-27 03:31:42', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (724, '2025-06-01 20:12:10', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (725, '2025-12-22 21:52:11', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (726, '2025-09-22 15:11:02', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (727, '2025-10-09 16:42:49', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (728, '2025-07-21 01:26:42', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (729, '2026-05-31 23:42:18', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (730, '2025-07-15 16:16:06', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (731, '2025-04-03 00:50:02', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (732, '2026-06-23 18:09:42', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (733, '2025-01-23 17:00:41', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (734, '2025-06-02 02:59:22', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (735, '2026-07-09 04:26:04', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (736, '2025-07-11 02:13:29', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (737, '2025-02-12 19:55:07', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (738, '2025-08-31 09:08:32', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (739, '2025-04-26 02:12:17', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (740, '2025-12-02 00:39:24', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (741, '2026-03-22 23:49:43', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (742, '2025-12-16 03:21:32', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (743, '2025-03-27 22:29:37', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (744, '2026-04-14 05:06:37', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (745, '2025-01-13 19:31:19', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (746, '2026-02-18 19:30:45', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (747, '2026-07-03 20:58:12', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (748, '2025-05-19 12:51:53', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (749, '2025-03-06 06:27:07', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (750, '2026-01-23 08:33:11', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (751, '2025-02-07 22:47:44', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (752, '2025-10-28 02:06:25', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (753, '2025-09-10 19:58:17', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (754, '2026-05-13 16:56:31', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (755, '2026-05-26 19:55:25', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (756, '2026-04-05 15:31:48', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (757, '2025-03-26 16:21:48', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (758, '2026-04-21 12:45:37', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (759, '2025-05-18 05:22:56', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (760, '2026-01-27 06:28:04', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (761, '2025-05-15 04:10:03', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (762, '2025-02-27 10:54:20', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (763, '2025-12-16 14:37:47', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (764, '2025-08-05 23:23:50', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (765, '2026-03-27 04:26:12', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (766, '2026-04-13 01:43:19', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (767, '2025-11-14 02:12:56', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (768, '2025-01-27 18:57:16', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (769, '2025-03-10 05:10:17', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (770, '2026-01-31 12:52:11', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (771, '2025-11-08 01:33:27', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (772, '2025-05-11 14:08:01', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (773, '2025-09-01 19:51:10', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (774, '2026-03-23 23:21:08', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (775, '2025-09-20 12:07:14', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (776, '2026-02-06 06:05:29', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (777, '2026-05-21 11:28:09', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (778, '2025-03-02 06:28:35', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (779, '2026-04-18 18:58:41', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (780, '2026-05-16 11:09:22', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (781, '2025-03-01 02:16:06', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (782, '2025-06-12 15:17:22', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (783, '2025-01-14 11:26:22', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (784, '2025-12-02 13:31:23', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (785, '2026-05-31 15:33:38', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (786, '2026-06-15 08:47:22', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (787, '2026-06-23 05:22:45', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (788, '2025-07-22 05:33:22', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (789, '2025-08-23 19:08:12', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (790, '2025-11-29 11:16:22', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (791, '2026-01-18 18:12:43', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (792, '2025-04-18 07:57:50', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (793, '2025-05-11 02:04:23', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (794, '2025-08-16 05:02:14', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (795, '2025-05-25 19:01:17', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (796, '2025-03-02 21:27:23', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (797, '2025-09-22 07:10:08', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (798, '2025-09-16 00:55:44', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (799, '2026-05-27 21:36:15', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (800, '2025-03-12 11:28:17', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (801, '2025-11-05 10:35:28', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (802, '2025-08-31 11:30:36', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (803, '2025-10-04 09:00:49', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (804, '2025-11-14 09:49:50', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (805, '2025-11-08 17:31:03', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (806, '2025-06-27 19:34:43', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (807, '2025-12-06 20:20:18', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (808, '2025-03-24 11:20:29', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (809, '2025-12-22 10:43:26', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (810, '2025-12-30 00:31:44', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (811, '2026-05-03 02:13:52', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (812, '2025-01-19 01:53:33', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (813, '2025-05-18 03:09:08', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (814, '2026-05-07 23:31:55', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (815, '2025-01-28 16:35:23', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (816, '2025-08-19 16:05:52', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (817, '2026-06-30 10:18:13', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (818, '2025-03-28 16:39:00', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (819, '2025-02-14 21:48:01', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (820, '2025-06-04 22:12:39', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (821, '2025-01-06 15:01:39', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (822, '2025-08-19 22:47:19', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (823, '2025-10-04 13:05:42', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (824, '2025-08-05 23:02:23', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (825, '2026-02-10 03:35:36', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (826, '2026-04-18 14:39:29', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (827, '2026-03-20 00:24:20', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (828, '2026-05-14 10:42:46', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (829, '2025-04-12 05:11:03', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (830, '2025-08-27 01:02:17', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (831, '2025-06-05 12:13:07', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (832, '2025-11-11 03:03:15', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (833, '2026-03-29 01:29:23', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (834, '2025-02-22 02:24:39', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (835, '2026-07-10 01:33:52', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (836, '2025-07-24 13:44:10', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (837, '2026-04-12 11:05:58', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (838, '2025-01-21 05:31:58', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (839, '2026-04-29 21:08:36', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (840, '2025-09-14 23:36:46', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (841, '2025-12-01 01:23:25', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (842, '2025-07-06 09:31:19', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (843, '2025-11-20 03:03:17', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (844, '2026-05-05 11:39:08', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (845, '2025-06-12 10:17:04', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (846, '2025-02-13 08:56:00', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (847, '2026-07-21 01:26:50', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (848, '2025-05-02 20:15:06', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (849, '2025-06-20 14:38:13', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (850, '2025-05-17 15:24:49', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (851, '2026-02-05 11:32:19', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (852, '2025-02-15 23:55:13', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (853, '2025-05-16 05:12:16', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (854, '2026-07-03 18:22:00', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (855, '2026-06-21 03:15:22', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (856, '2025-12-04 10:07:13', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (857, '2025-04-15 19:51:16', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (858, '2026-01-31 20:51:33', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (859, '2025-01-08 18:18:25', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (860, '2025-02-24 13:14:17', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (861, '2025-10-20 13:57:40', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (862, '2026-04-17 20:55:40', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (863, '2026-01-13 16:42:59', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (864, '2026-01-20 06:29:35', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (865, '2026-01-24 13:10:52', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (866, '2025-04-30 17:31:35', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (867, '2025-08-30 09:29:33', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (868, '2025-01-03 15:43:28', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (869, '2026-02-13 11:35:18', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (870, '2025-03-14 12:25:24', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (871, '2025-08-18 23:06:49', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (872, '2026-04-23 10:23:30', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (873, '2025-07-15 13:47:34', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (874, '2025-11-12 21:22:05', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (875, '2026-06-08 05:03:24', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (876, '2025-11-14 12:34:02', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (877, '2026-05-09 02:15:35', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (878, '2026-03-19 11:25:30', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (879, '2026-06-26 07:56:03', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (880, '2026-07-17 19:39:54', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (881, '2025-01-03 19:36:22', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (882, '2025-01-19 19:51:17', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (883, '2025-04-05 20:14:23', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (884, '2025-08-11 09:09:15', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (885, '2026-02-23 19:27:37', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (886, '2026-03-23 11:07:18', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (887, '2025-05-28 10:11:41', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (888, '2026-07-19 06:33:27', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (889, '2026-04-06 06:11:31', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (890, '2025-04-06 10:25:31', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (891, '2025-08-02 17:57:42', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (892, '2026-04-22 01:29:39', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (893, '2026-03-19 09:23:39', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (894, '2026-01-26 17:00:24', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (895, '2026-06-03 22:13:00', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (896, '2025-02-24 19:26:38', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (897, '2025-12-11 22:55:04', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (898, '2025-02-21 02:49:05', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (899, '2026-05-03 17:37:29', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (900, '2025-11-26 05:25:56', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (901, '2025-07-03 17:34:00', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (902, '2025-04-14 05:17:50', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (903, '2025-08-09 23:52:37', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (904, '2026-05-03 01:16:27', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (905, '2026-03-06 21:04:31', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (906, '2026-06-20 18:32:55', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (907, '2026-04-05 08:52:13', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (908, '2025-10-03 12:20:32', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (909, '2025-12-27 02:10:34', 'Salida', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (910, '2025-04-19 05:52:17', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (911, '2025-04-11 18:57:41', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (912, '2025-09-27 05:21:20', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (913, '2025-01-22 00:07:11', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (914, '2025-02-09 07:58:13', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (915, '2026-06-23 09:55:58', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (916, '2025-12-17 18:06:58', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (917, '2025-02-11 11:39:25', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (918, '2025-10-10 02:20:57', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (919, '2025-05-31 20:47:25', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (920, '2025-01-24 09:32:13', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (921, '2026-02-06 01:45:53', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (922, '2025-04-04 22:56:21', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (923, '2025-03-25 08:27:10', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (924, '2026-04-10 21:58:33', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (925, '2026-01-01 20:19:23', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (926, '2026-01-22 16:55:15', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (927, '2026-07-02 18:37:25', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (928, '2026-06-03 08:36:51', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (929, '2025-06-30 00:19:40', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (930, '2025-07-31 07:57:59', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (931, '2025-05-04 02:51:12', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (932, '2026-06-18 12:49:22', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (933, '2025-10-07 17:43:09', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (934, '2025-08-11 14:07:31', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (935, '2025-02-15 19:46:36', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (936, '2025-06-18 23:41:06', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (937, '2025-07-22 09:20:54', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (938, '2025-04-16 22:02:32', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (939, '2025-07-03 15:46:16', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (940, '2025-12-19 03:10:09', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (941, '2025-12-11 09:34:15', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (942, '2025-07-26 02:57:36', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (943, '2025-10-25 02:38:00', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (944, '2026-02-10 01:57:28', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (945, '2026-04-29 12:32:04', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (946, '2025-09-04 03:51:08', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (947, '2026-06-20 08:41:39', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (948, '2025-08-04 09:10:02', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (949, '2025-11-20 10:32:42', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (950, '2025-02-24 05:46:33', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (951, '2026-02-01 07:53:01', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (952, '2025-09-20 03:50:12', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (953, '2025-03-19 01:47:29', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (954, '2025-10-31 17:54:10', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (955, '2025-02-09 22:10:28', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (956, '2025-09-06 04:42:52', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (957, '2026-06-03 21:56:11', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (958, '2025-05-05 23:46:52', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (959, '2025-01-14 21:09:48', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (960, '2026-06-10 08:33:45', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (961, '2025-05-27 17:21:17', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (962, '2026-06-03 11:15:45', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (963, '2025-03-16 20:52:24', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (964, '2025-09-10 15:48:21', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (965, '2026-04-21 02:27:12', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (966, '2025-09-13 12:33:51', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (967, '2025-10-09 08:12:25', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (968, '2025-07-27 06:28:03', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (969, '2025-10-28 15:15:35', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (970, '2026-03-01 07:28:38', 'Entrada', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (971, '2025-11-12 10:35:05', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (972, '2025-02-28 13:14:09', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (973, '2025-08-28 07:15:34', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (974, '2025-02-17 00:38:07', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (975, '2026-01-24 11:48:09', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (976, '2026-03-31 22:43:55', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (977, '2025-12-16 10:15:59', 'Traslado', 'Generado por script Pandas', 1, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (978, '2025-04-16 06:06:41', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (979, '2026-02-05 05:21:21', 'Entrada', 'Generado por script Pandas', 2, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (980, '2026-05-10 10:42:52', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (981, '2025-09-08 05:44:31', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (982, '2025-04-27 10:44:49', 'Salida', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (983, '2025-07-14 06:05:06', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (984, '2025-09-23 21:16:00', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (985, '2025-10-06 15:02:15', 'Traslado', 'Generado por script Pandas', 2, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (986, '2025-04-11 18:25:52', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (987, '2025-11-28 10:04:22', 'Traslado', 'Generado por script Pandas', 2, 1, 2);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (988, '2026-06-24 22:00:57', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (989, '2025-02-11 02:09:14', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (990, '2026-05-06 19:36:29', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (991, '2025-08-27 05:03:21', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (992, '2026-04-29 05:12:38', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (993, '2025-03-17 16:57:21', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (994, '2025-05-19 04:52:15', 'Traslado', 'Generado por script Pandas', 1, 2, 1);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (995, '2025-02-01 06:19:52', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (996, '2026-06-06 03:06:24', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (997, '2025-01-24 13:31:28', 'Salida', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (998, '2025-11-28 09:33:26', 'Entrada', 'Generado por script Pandas', 1, 2, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (999, '2025-12-06 16:36:37', 'Entrada', 'Generado por script Pandas', 1, 1, NULL);
-INSERT INTO Movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino) VALUES (1000, '2025-02-11 12:38:58', 'Salida', 'Generado por script Pandas', 2, 1, NULL);
+-- movimientos
+INSERT INTO movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino, id_proveedor) VALUES
+  (1, '2025-01-02 09:00:00', 'Entrada', 'Carga inicial de mercadería', 1, 1, NULL, 1),
+  (2, '2025-01-02 13:00:00', 'Entrada', 'Carga inicial de mercadería', 1, 1, NULL, 2),
+  (3, '2025-01-02 17:00:00', 'Entrada', 'Carga inicial de mercadería', 1, 1, NULL, 4),
+  (4, '2025-01-02 21:00:00', 'Entrada', 'Carga inicial de mercadería', 1, 2, NULL, 1),
+  (5, '2025-01-03 01:00:00', 'Entrada', 'Carga inicial de mercadería', 1, 2, NULL, 2),
+  (6, '2025-01-03 05:00:00', 'Entrada', 'Carga inicial de mercadería', 1, 2, NULL, 4),
+  (7, '2025-01-03 23:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (8, '2025-01-04 16:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (9, '2025-01-04 23:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (10, '2025-01-05 17:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (11, '2025-01-06 12:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (12, '2025-01-06 16:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (13, '2025-01-07 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (14, '2025-01-07 19:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (15, '2025-01-08 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (16, '2025-01-08 21:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (17, '2025-01-09 01:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (18, '2025-01-09 11:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (19, '2025-01-10 00:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (20, '2025-01-10 13:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (21, '2025-01-11 01:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (22, '2025-01-11 13:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (23, '2025-01-11 21:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (24, '2025-01-12 07:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (25, '2025-01-12 18:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (26, '2025-01-13 05:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (27, '2025-01-13 17:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (28, '2025-01-14 07:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (29, '2025-01-14 17:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (30, '2025-01-14 23:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (31, '2025-01-15 15:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (32, '2025-01-16 00:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (33, '2025-01-16 19:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (34, '2025-01-16 23:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (35, '2025-01-17 19:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (36, '2025-01-18 07:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (37, '2025-01-18 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (38, '2025-01-19 11:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (39, '2025-01-19 22:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (40, '2025-01-20 14:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (41, '2025-01-20 20:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (42, '2025-01-21 12:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (43, '2025-01-22 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (44, '2025-01-22 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (45, '2025-01-22 19:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (46, '2025-01-22 23:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (47, '2025-01-23 16:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (48, '2025-01-24 09:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (49, '2025-01-24 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (50, '2025-01-25 03:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (51, '2025-01-25 22:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (52, '2025-01-26 12:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (53, '2025-01-27 08:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (54, '2025-01-27 12:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (55, '2025-01-28 07:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (56, '2025-01-28 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (57, '2025-01-29 13:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (58, '2025-01-29 19:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (59, '2025-01-30 06:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (60, '2025-01-30 16:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (61, '2025-01-31 05:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (62, '2025-01-31 09:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (63, '2025-01-31 18:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (64, '2025-02-01 01:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (65, '2025-02-01 05:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (66, '2025-02-02 00:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (67, '2025-02-02 17:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (68, '2025-02-03 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (69, '2025-02-03 09:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (70, '2025-02-04 01:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (71, '2025-02-04 15:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (72, '2025-02-04 20:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (73, '2025-02-05 14:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (74, '2025-02-06 06:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (75, '2025-02-06 12:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (76, '2025-02-06 17:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (77, '2025-02-07 04:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (78, '2025-02-07 19:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (79, '2025-02-08 02:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (80, '2025-02-08 15:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (81, '2025-02-09 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (82, '2025-02-09 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (83, '2025-02-10 02:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (84, '2025-02-10 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (85, '2025-02-10 21:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (86, '2025-02-11 04:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (87, '2025-02-11 12:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (88, '2025-02-12 06:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (89, '2025-02-12 12:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (90, '2025-02-12 20:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (91, '2025-02-13 00:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (92, '2025-02-13 15:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (93, '2025-02-14 11:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (94, '2025-02-14 15:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (95, '2025-02-14 21:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (96, '2025-02-15 11:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (97, '2025-02-15 18:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (98, '2025-02-16 09:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (99, '2025-02-16 22:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (100, '2025-02-17 13:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (101, '2025-02-18 04:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (102, '2025-02-19 00:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (103, '2025-02-19 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (104, '2025-02-19 18:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (105, '2025-02-20 04:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (106, '2025-02-20 12:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (107, '2025-02-21 04:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (108, '2025-02-21 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (109, '2025-02-22 12:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (110, '2025-02-22 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (111, '2025-02-23 15:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (112, '2025-02-24 04:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (113, '2025-02-25 00:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (114, '2025-02-25 19:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (115, '2025-02-26 08:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (116, '2025-02-26 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (117, '2025-02-27 07:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (118, '2025-02-27 21:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (119, '2025-02-28 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (120, '2025-02-28 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (121, '2025-03-01 06:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (122, '2025-03-01 17:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (123, '2025-03-02 11:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (124, '2025-03-02 20:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (125, '2025-03-03 07:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (126, '2025-03-03 18:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (127, '2025-03-04 08:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (128, '2025-03-04 18:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (129, '2025-03-05 01:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (130, '2025-03-05 18:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (131, '2025-03-06 06:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (132, '2025-03-06 15:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (133, '2025-03-07 01:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (134, '2025-03-07 14:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (135, '2025-03-08 06:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (136, '2025-03-08 19:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (137, '2025-03-09 10:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (138, '2025-03-09 19:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (139, '2025-03-10 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (140, '2025-03-10 19:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (141, '2025-03-11 05:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (142, '2025-03-11 23:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (143, '2025-03-12 05:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (144, '2025-03-12 16:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (145, '2025-03-13 00:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (146, '2025-03-13 09:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (147, '2025-03-13 18:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (148, '2025-03-14 00:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (149, '2025-03-14 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (150, '2025-03-15 03:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (151, '2025-03-15 21:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (152, '2025-03-16 17:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (153, '2025-03-17 02:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (154, '2025-03-17 08:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (155, '2025-03-18 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (156, '2025-03-18 09:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (157, '2025-03-19 00:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (158, '2025-03-19 13:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (159, '2025-03-20 04:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (160, '2025-03-20 15:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (161, '2025-03-21 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (162, '2025-03-22 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (163, '2025-03-22 11:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (164, '2025-03-23 00:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (165, '2025-03-23 12:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (166, '2025-03-23 17:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (167, '2025-03-24 02:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (168, '2025-03-24 16:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (169, '2025-03-25 01:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (170, '2025-03-25 10:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (171, '2025-03-26 06:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (172, '2025-03-26 15:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (173, '2025-03-27 01:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (174, '2025-03-27 17:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (175, '2025-03-28 09:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (176, '2025-03-29 03:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (177, '2025-03-29 21:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (178, '2025-03-30 05:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (179, '2025-03-31 00:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (180, '2025-03-31 18:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (181, '2025-04-01 00:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (182, '2025-04-01 08:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (183, '2025-04-01 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (184, '2025-04-02 03:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (185, '2025-04-02 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (186, '2025-04-02 12:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (187, '2025-04-03 01:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (188, '2025-04-03 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (189, '2025-04-04 02:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (190, '2025-04-04 14:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (191, '2025-04-05 00:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (192, '2025-04-05 07:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (193, '2025-04-05 22:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (194, '2025-04-06 02:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (195, '2025-04-06 13:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (196, '2025-04-07 08:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (197, '2025-04-07 13:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (198, '2025-04-07 21:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (199, '2025-04-08 17:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (200, '2025-04-09 02:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (201, '2025-04-09 08:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (202, '2025-04-09 13:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (203, '2025-04-09 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (204, '2025-04-09 23:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (205, '2025-04-10 15:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (206, '2025-04-11 08:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (207, '2025-04-11 14:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (208, '2025-04-11 22:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (209, '2025-04-12 10:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (210, '2025-04-12 14:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (211, '2025-04-12 23:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (212, '2025-04-13 11:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (213, '2025-04-14 03:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (214, '2025-04-14 12:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (215, '2025-04-14 16:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (216, '2025-04-15 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (217, '2025-04-15 16:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (218, '2025-04-16 06:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (219, '2025-04-16 21:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (220, '2025-04-17 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (221, '2025-04-17 09:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (222, '2025-04-17 16:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (223, '2025-04-18 01:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (224, '2025-04-18 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (225, '2025-04-19 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (226, '2025-04-19 09:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (227, '2025-04-20 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (228, '2025-04-20 05:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (229, '2025-04-20 17:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (230, '2025-04-21 03:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (231, '2025-04-21 10:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (232, '2025-04-21 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (233, '2025-04-22 08:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (234, '2025-04-22 20:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (235, '2025-04-23 07:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (236, '2025-04-23 19:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (237, '2025-04-24 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (238, '2025-04-25 04:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (239, '2025-04-25 08:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (240, '2025-04-25 17:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (241, '2025-04-25 23:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (242, '2025-04-26 13:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (243, '2025-04-26 21:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (244, '2025-04-27 15:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (245, '2025-04-28 07:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (246, '2025-04-28 20:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (247, '2025-04-29 16:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (248, '2025-04-30 03:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (249, '2025-04-30 20:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (250, '2025-05-01 12:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL);
 
--- Inserciones para Detalle_Movimientos
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1.0, 16.0, 1.0, 139270.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1.0, 5.0, 7.0, 143901.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1.0, 38.0, 6.0, 121134.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1.0, 45.0, 7.0, 148473.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1.0, 38.0, 16.0, 143262.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (2.0, 13.0, 3.0, 139161.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (2.0, 33.0, 1.0, 134269.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (2.0, 30.0, 8.0, 119922.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (2.0, 35.0, 16.0, 145728.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (2.0, 10.0, 13.0, 126226.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (3.0, 15.0, 12.0, 112358.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (3.0, 43.0, 13.0, 119036.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (3.0, 12.0, 12.0, 163786.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (3.0, 37.0, 5.0, 138186.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (4.0, 41.0, 6.0, 164748.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (5.0, 9.0, 20.0, 150071.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (5.0, 7.0, 10.0, 130395.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (5.0, 9.0, 14.0, 159074.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (5.0, 14.0, 6.0, 158392.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (5.0, 38.0, 17.0, 155115.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (6.0, 20.0, 19.0, 172737.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (6.0, 7.0, 16.0, 132428.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (6.0, 29.0, 13.0, 156250.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (6.0, 46.0, 20.0, 159635.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (6.0, 29.0, 18.0, 134559.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (7.0, 30.0, 8.0, 156230.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (7.0, 22.0, 19.0, 118724.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (8.0, 15.0, 7.0, 134551.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (8.0, 19.0, 17.0, 161510.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (8.0, 11.0, 2.0, 130018.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (8.0, 45.0, 7.0, 134619.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (8.0, 23.0, 8.0, 146295.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (9.0, 4.0, 10.0, 136744.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (9.0, 46.0, 16.0, 146288.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (10.0, 6.0, 11.0, 114062.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (10.0, 37.0, 1.0, 118057.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (10.0, 27.0, 19.0, 139084.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (11.0, 32.0, 8.0, 106530.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (11.0, 12.0, 8.0, 127634.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (12.0, 9.0, 5.0, 116082.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (12.0, 19.0, 14.0, 147464.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (13.0, 13.0, 17.0, 129313.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (13.0, 26.0, 19.0, 155724.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (13.0, 25.0, 18.0, 136425.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (13.0, 43.0, 2.0, 138530.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (14.0, 7.0, 18.0, 135254.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (15.0, 14.0, 7.0, 165331.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (15.0, 44.0, 8.0, 133245.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (15.0, 3.0, 5.0, 118851.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (15.0, 39.0, 9.0, 120477.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (16.0, 32.0, 19.0, 108332.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (16.0, 15.0, 14.0, 146138.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (17.0, 38.0, 15.0, 143812.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (17.0, 23.0, 20.0, 131223.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (18.0, 41.0, 12.0, 116975.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (18.0, 36.0, 13.0, 123315.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (18.0, 9.0, 12.0, 109392.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (19.0, 12.0, 19.0, 139991.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (19.0, 43.0, 16.0, 146720.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (20.0, 47.0, 2.0, 123696.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (20.0, 29.0, 11.0, 130445.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (20.0, 19.0, 5.0, 131718.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (21.0, 48.0, 18.0, 136537.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (21.0, 7.0, 18.0, 171393.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (21.0, 4.0, 8.0, 105266.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (21.0, 27.0, 2.0, 115702.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (21.0, 2.0, 14.0, 114341.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (22.0, 38.0, 12.0, 148810.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (22.0, 42.0, 9.0, 140071.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (22.0, 25.0, 7.0, 136844.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (22.0, 28.0, 12.0, 142487.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (23.0, 37.0, 17.0, 141724.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (23.0, 14.0, 13.0, 116109.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (23.0, 38.0, 2.0, 145962.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (23.0, 5.0, 16.0, 124056.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (23.0, 17.0, 13.0, 138258.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (24.0, 38.0, 6.0, 137639.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (24.0, 18.0, 16.0, 122374.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (24.0, 44.0, 11.0, 108167.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (24.0, 46.0, 6.0, 112933.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (24.0, 39.0, 5.0, 131865.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (25.0, 1.0, 12.0, 139218.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (26.0, 19.0, 8.0, 105577.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (26.0, 1.0, 2.0, 141281.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (27.0, 6.0, 5.0, 159062.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (27.0, 42.0, 19.0, 113200.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (27.0, 5.0, 9.0, 115556.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (27.0, 41.0, 10.0, 124760.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (27.0, 39.0, 4.0, 130381.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (28.0, 48.0, 16.0, 136543.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (29.0, 23.0, 8.0, 130993.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (29.0, 46.0, 15.0, 122279.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (29.0, 33.0, 12.0, 161948.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (30.0, 48.0, 20.0, 172651.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (30.0, 35.0, 15.0, 123908.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (30.0, 31.0, 2.0, 138567.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (31.0, 36.0, 3.0, 134416.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (31.0, 38.0, 12.0, 153270.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (31.0, 39.0, 9.0, 122869.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (31.0, 39.0, 15.0, 161858.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (31.0, 13.0, 8.0, 174557.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (32.0, 8.0, 18.0, 153915.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (33.0, 13.0, 17.0, 140879.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (34.0, 3.0, 4.0, 128635.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (35.0, 2.0, 20.0, 131676.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (35.0, 8.0, 7.0, 131890.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (35.0, 26.0, 8.0, 137467.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (35.0, 12.0, 14.0, 138254.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (35.0, 48.0, 7.0, 127729.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (36.0, 36.0, 18.0, 142507.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (36.0, 48.0, 13.0, 128235.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (36.0, 37.0, 5.0, 133421.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (37.0, 47.0, 11.0, 146603.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (37.0, 31.0, 16.0, 121208.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (37.0, 6.0, 6.0, 117250.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (37.0, 15.0, 17.0, 144973.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (38.0, 26.0, 6.0, 168196.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (39.0, 13.0, 19.0, 106216.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (40.0, 19.0, 3.0, 167040.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (41.0, 31.0, 7.0, 147560.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (41.0, 21.0, 19.0, 163162.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (41.0, 23.0, 12.0, 128408.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (42.0, 11.0, 13.0, 132655.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (43.0, 24.0, 2.0, 145100.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (43.0, 19.0, 3.0, 136156.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (43.0, 37.0, 1.0, 132739.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (44.0, 25.0, 8.0, 136574.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (44.0, 3.0, 6.0, 125940.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (44.0, 27.0, 16.0, 130808.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (45.0, 21.0, 11.0, 127001.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (45.0, 30.0, 19.0, 140977.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (46.0, 25.0, 6.0, 149956.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (46.0, 27.0, 15.0, 109536.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (46.0, 17.0, 7.0, 148414.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (46.0, 19.0, 9.0, 145556.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (47.0, 34.0, 7.0, 129738.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (47.0, 38.0, 2.0, 167601.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (48.0, 23.0, 19.0, 158166.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (48.0, 26.0, 2.0, 133225.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (48.0, 6.0, 7.0, 143564.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (48.0, 13.0, 14.0, 133254.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (49.0, 28.0, 7.0, 128565.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (50.0, 8.0, 10.0, 154429.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (50.0, 5.0, 9.0, 157825.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (50.0, 38.0, 13.0, 155103.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (50.0, 3.0, 19.0, 137250.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (51.0, 16.0, 18.0, 137950.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (51.0, 8.0, 5.0, 129914.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (51.0, 15.0, 8.0, 138457.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (51.0, 31.0, 3.0, 141617.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (51.0, 5.0, 1.0, 144515.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (52.0, 39.0, 4.0, 152691.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (52.0, 30.0, 8.0, 123925.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (52.0, 38.0, 20.0, 140778.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (52.0, 19.0, 19.0, 153360.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (52.0, 18.0, 8.0, 146913.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (53.0, 30.0, 11.0, 117039.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (54.0, 37.0, 4.0, 155086.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (54.0, 6.0, 10.0, 117384.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (54.0, 7.0, 16.0, 148246.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (55.0, 12.0, 13.0, 140979.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (55.0, 37.0, 4.0, 147748.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (55.0, 21.0, 19.0, 136591.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (56.0, 43.0, 10.0, 125934.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (56.0, 40.0, 10.0, 133540.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (57.0, 15.0, 17.0, 139122.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (58.0, 2.0, 19.0, 144765.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (59.0, 35.0, 9.0, 133261.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (59.0, 10.0, 3.0, 156734.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (59.0, 15.0, 5.0, 137293.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (60.0, 4.0, 19.0, 135234.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (60.0, 37.0, 17.0, 163175.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (60.0, 17.0, 15.0, 107401.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (61.0, 17.0, 17.0, 156914.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (61.0, 32.0, 5.0, 112405.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (62.0, 16.0, 9.0, 123101.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (62.0, 25.0, 10.0, 160112.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (62.0, 25.0, 8.0, 147582.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (62.0, 42.0, 13.0, 150752.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (63.0, 35.0, 15.0, 115322.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (63.0, 34.0, 8.0, 129487.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (63.0, 47.0, 8.0, 146195.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (63.0, 32.0, 20.0, 119429.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (64.0, 45.0, 4.0, 135498.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (65.0, 38.0, 5.0, 147429.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (66.0, 36.0, 12.0, 124140.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (66.0, 27.0, 10.0, 126589.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (66.0, 4.0, 11.0, 137718.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (67.0, 25.0, 11.0, 151104.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (67.0, 20.0, 4.0, 135071.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (68.0, 32.0, 2.0, 148222.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (68.0, 15.0, 11.0, 159648.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (68.0, 7.0, 15.0, 124029.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (69.0, 22.0, 19.0, 149478.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (69.0, 38.0, 16.0, 165081.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (69.0, 30.0, 1.0, 166706.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (69.0, 5.0, 4.0, 143775.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (70.0, 25.0, 16.0, 171919.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (70.0, 45.0, 16.0, 136284.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (71.0, 7.0, 18.0, 110614.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (71.0, 10.0, 11.0, 142122.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (71.0, 15.0, 16.0, 147364.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (72.0, 4.0, 19.0, 148672.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (72.0, 42.0, 18.0, 116253.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (72.0, 5.0, 10.0, 146185.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (73.0, 18.0, 4.0, 140727.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (74.0, 36.0, 14.0, 156371.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (74.0, 14.0, 19.0, 142350.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (74.0, 8.0, 4.0, 147138.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (74.0, 4.0, 2.0, 137931.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (75.0, 42.0, 11.0, 170034.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (75.0, 23.0, 11.0, 139529.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (75.0, 23.0, 5.0, 150184.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (75.0, 46.0, 10.0, 173188.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (75.0, 18.0, 11.0, 119886.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (76.0, 47.0, 16.0, 130090.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (76.0, 32.0, 17.0, 145556.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (76.0, 34.0, 6.0, 142482.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (76.0, 14.0, 2.0, 129618.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (76.0, 5.0, 16.0, 145725.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (77.0, 8.0, 5.0, 140993.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (77.0, 48.0, 4.0, 163687.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (77.0, 30.0, 17.0, 132527.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (77.0, 7.0, 2.0, 170353.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (77.0, 27.0, 14.0, 142670.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (78.0, 46.0, 13.0, 125516.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (78.0, 22.0, 19.0, 156560.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (78.0, 27.0, 1.0, 144291.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (78.0, 22.0, 3.0, 171348.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (79.0, 5.0, 7.0, 117724.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (79.0, 29.0, 20.0, 159698.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (79.0, 47.0, 6.0, 117312.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (80.0, 17.0, 6.0, 135611.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (80.0, 24.0, 18.0, 170416.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (80.0, 12.0, 4.0, 124042.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (81.0, 28.0, 4.0, 130861.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (82.0, 6.0, 20.0, 112209.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (83.0, 8.0, 8.0, 168864.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (83.0, 2.0, 9.0, 160637.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (83.0, 14.0, 3.0, 138528.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (83.0, 8.0, 5.0, 140132.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (83.0, 48.0, 11.0, 108644.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (84.0, 42.0, 16.0, 145404.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (84.0, 41.0, 20.0, 171229.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (85.0, 23.0, 8.0, 166161.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (86.0, 45.0, 13.0, 136668.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (86.0, 25.0, 11.0, 162365.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (86.0, 43.0, 17.0, 144485.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (86.0, 22.0, 6.0, 128902.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (86.0, 27.0, 19.0, 142717.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (87.0, 18.0, 9.0, 126296.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (87.0, 26.0, 13.0, 110717.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (87.0, 31.0, 18.0, 137813.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (87.0, 34.0, 11.0, 143793.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (88.0, 46.0, 16.0, 127691.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (89.0, 13.0, 9.0, 107031.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (89.0, 23.0, 17.0, 149283.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (89.0, 37.0, 5.0, 155144.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (90.0, 3.0, 9.0, 121872.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (90.0, 18.0, 3.0, 172009.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (90.0, 19.0, 20.0, 164696.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (90.0, 40.0, 7.0, 130173.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (91.0, 12.0, 4.0, 137272.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (92.0, 33.0, 7.0, 146031.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (92.0, 3.0, 9.0, 108543.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (92.0, 19.0, 1.0, 135342.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (92.0, 2.0, 8.0, 156306.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (92.0, 44.0, 18.0, 132100.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (93.0, 35.0, 12.0, 156671.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (93.0, 33.0, 14.0, 127276.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (93.0, 15.0, 1.0, 141849.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (94.0, 47.0, 12.0, 127935.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (95.0, 9.0, 10.0, 133952.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (95.0, 24.0, 9.0, 129636.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (95.0, 20.0, 19.0, 142177.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (95.0, 42.0, 5.0, 108473.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (96.0, 3.0, 6.0, 146098.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (96.0, 6.0, 14.0, 124801.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (96.0, 34.0, 9.0, 143359.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (97.0, 45.0, 2.0, 145599.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (97.0, 34.0, 5.0, 126076.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (97.0, 45.0, 10.0, 170541.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (98.0, 34.0, 11.0, 148580.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (98.0, 14.0, 4.0, 126778.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (99.0, 7.0, 7.0, 148388.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (99.0, 30.0, 13.0, 160913.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (99.0, 36.0, 1.0, 173038.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (99.0, 38.0, 5.0, 129632.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (99.0, 17.0, 8.0, 164820.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (100.0, 46.0, 14.0, 145956.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (101.0, 1.0, 8.0, 122638.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (102.0, 21.0, 12.0, 138749.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (102.0, 28.0, 17.0, 132814.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (103.0, 19.0, 8.0, 153733.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (104.0, 19.0, 5.0, 135645.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (104.0, 23.0, 5.0, 161572.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (105.0, 9.0, 16.0, 106718.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (105.0, 16.0, 2.0, 169504.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (105.0, 45.0, 20.0, 154593.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (105.0, 15.0, 12.0, 153759.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (105.0, 19.0, 18.0, 111672.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (106.0, 43.0, 4.0, 165032.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (106.0, 26.0, 17.0, 141660.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (106.0, 33.0, 6.0, 134597.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (106.0, 48.0, 3.0, 142921.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (107.0, 44.0, 15.0, 105558.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (107.0, 44.0, 7.0, 146145.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (107.0, 22.0, 2.0, 138203.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (107.0, 28.0, 5.0, 136484.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (107.0, 2.0, 6.0, 139642.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (108.0, 45.0, 15.0, 131509.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (108.0, 47.0, 15.0, 161061.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (109.0, 48.0, 8.0, 127437.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (109.0, 33.0, 5.0, 146001.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (109.0, 35.0, 4.0, 165049.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (110.0, 11.0, 3.0, 159630.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (110.0, 14.0, 15.0, 128526.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (110.0, 31.0, 13.0, 106135.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (110.0, 23.0, 18.0, 133199.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (110.0, 41.0, 8.0, 116464.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (111.0, 3.0, 9.0, 138634.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (111.0, 10.0, 17.0, 128094.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (111.0, 34.0, 19.0, 130490.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (111.0, 10.0, 14.0, 144128.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (111.0, 15.0, 7.0, 168933.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (112.0, 44.0, 11.0, 109577.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (112.0, 15.0, 6.0, 131751.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (112.0, 47.0, 17.0, 143949.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (113.0, 36.0, 13.0, 146933.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (113.0, 19.0, 17.0, 112172.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (114.0, 8.0, 17.0, 131901.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (114.0, 27.0, 14.0, 109697.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (114.0, 11.0, 5.0, 122800.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (114.0, 32.0, 1.0, 109350.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (114.0, 18.0, 18.0, 150144.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (115.0, 5.0, 19.0, 121438.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (115.0, 38.0, 17.0, 141303.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (116.0, 13.0, 4.0, 131174.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (116.0, 32.0, 11.0, 131906.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (116.0, 15.0, 15.0, 133918.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (117.0, 1.0, 4.0, 112585.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (118.0, 46.0, 17.0, 135146.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (118.0, 33.0, 10.0, 135634.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (119.0, 22.0, 20.0, 107556.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (119.0, 33.0, 1.0, 170482.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (119.0, 36.0, 19.0, 159250.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (119.0, 25.0, 20.0, 131550.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (120.0, 16.0, 1.0, 108728.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (120.0, 14.0, 15.0, 134864.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (120.0, 22.0, 1.0, 141355.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (120.0, 1.0, 12.0, 132437.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (121.0, 36.0, 18.0, 155304.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (121.0, 42.0, 11.0, 111189.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (121.0, 22.0, 6.0, 138844.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (122.0, 46.0, 19.0, 106246.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (122.0, 23.0, 9.0, 117905.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (122.0, 42.0, 5.0, 129694.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (122.0, 9.0, 6.0, 138476.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (122.0, 35.0, 18.0, 144571.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (123.0, 39.0, 10.0, 145622.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (123.0, 36.0, 9.0, 107023.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (123.0, 42.0, 7.0, 140629.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (123.0, 45.0, 12.0, 149700.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (124.0, 1.0, 4.0, 174920.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (124.0, 27.0, 15.0, 140612.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (124.0, 33.0, 13.0, 134999.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (124.0, 41.0, 5.0, 172646.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (125.0, 6.0, 11.0, 136366.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (125.0, 27.0, 9.0, 162678.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (125.0, 42.0, 4.0, 156917.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (125.0, 31.0, 12.0, 139922.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (125.0, 25.0, 8.0, 141102.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (126.0, 29.0, 16.0, 123743.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (126.0, 1.0, 17.0, 163734.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (127.0, 18.0, 4.0, 153758.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (127.0, 17.0, 10.0, 132049.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (128.0, 41.0, 4.0, 164416.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (129.0, 20.0, 18.0, 111411.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (129.0, 43.0, 2.0, 136874.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (130.0, 5.0, 9.0, 106675.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (130.0, 26.0, 5.0, 149001.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (130.0, 8.0, 6.0, 130209.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (131.0, 48.0, 5.0, 116436.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (131.0, 8.0, 8.0, 166959.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (131.0, 48.0, 9.0, 137026.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (132.0, 6.0, 12.0, 133927.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (132.0, 7.0, 5.0, 114838.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (133.0, 27.0, 5.0, 123976.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (133.0, 30.0, 16.0, 148193.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (133.0, 13.0, 10.0, 130208.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (133.0, 4.0, 3.0, 174754.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (134.0, 2.0, 1.0, 125551.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (135.0, 47.0, 5.0, 142806.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (135.0, 42.0, 8.0, 156362.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (135.0, 36.0, 12.0, 131470.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (136.0, 25.0, 13.0, 127377.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (136.0, 47.0, 10.0, 135650.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (136.0, 39.0, 5.0, 127394.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (136.0, 19.0, 2.0, 109283.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (137.0, 12.0, 16.0, 157502.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (137.0, 36.0, 6.0, 137317.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (137.0, 21.0, 12.0, 133100.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (137.0, 18.0, 19.0, 130435.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (138.0, 6.0, 13.0, 145560.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (138.0, 46.0, 5.0, 147513.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (139.0, 27.0, 12.0, 113860.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (139.0, 27.0, 5.0, 106279.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (139.0, 28.0, 20.0, 131409.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (140.0, 3.0, 18.0, 135857.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (141.0, 39.0, 10.0, 122257.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (142.0, 11.0, 11.0, 155261.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (142.0, 24.0, 20.0, 116825.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (142.0, 28.0, 13.0, 153540.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (142.0, 31.0, 9.0, 160544.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (142.0, 9.0, 7.0, 148712.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (143.0, 26.0, 2.0, 138633.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (143.0, 43.0, 3.0, 146523.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (143.0, 42.0, 11.0, 152745.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (143.0, 30.0, 19.0, 128540.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (143.0, 40.0, 13.0, 171418.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (144.0, 6.0, 2.0, 169869.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (144.0, 14.0, 9.0, 171352.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (144.0, 15.0, 20.0, 107194.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (144.0, 28.0, 20.0, 117631.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (144.0, 3.0, 5.0, 110034.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (145.0, 2.0, 12.0, 123468.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (146.0, 35.0, 2.0, 141696.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (146.0, 1.0, 11.0, 154885.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (147.0, 37.0, 12.0, 150994.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (147.0, 37.0, 3.0, 123021.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (147.0, 8.0, 6.0, 132118.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (147.0, 22.0, 19.0, 112956.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (148.0, 36.0, 20.0, 167993.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (149.0, 7.0, 8.0, 123562.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (149.0, 39.0, 7.0, 119227.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (149.0, 38.0, 11.0, 165723.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (150.0, 40.0, 19.0, 140888.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (150.0, 6.0, 1.0, 160475.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (150.0, 18.0, 20.0, 113860.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (150.0, 2.0, 7.0, 157380.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (151.0, 38.0, 12.0, 130270.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (151.0, 26.0, 1.0, 110456.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (151.0, 43.0, 15.0, 145206.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (152.0, 16.0, 17.0, 127045.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (152.0, 35.0, 19.0, 161121.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (152.0, 8.0, 4.0, 133826.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (152.0, 6.0, 5.0, 153744.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (152.0, 5.0, 14.0, 116992.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (153.0, 3.0, 2.0, 144707.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (153.0, 20.0, 5.0, 132605.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (153.0, 30.0, 18.0, 144728.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (153.0, 19.0, 13.0, 148297.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (154.0, 15.0, 3.0, 122648.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (154.0, 31.0, 17.0, 141769.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (154.0, 36.0, 6.0, 124949.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (154.0, 21.0, 6.0, 161863.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (155.0, 12.0, 18.0, 155383.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (155.0, 16.0, 16.0, 127924.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (156.0, 19.0, 16.0, 166395.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (156.0, 46.0, 3.0, 158253.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (156.0, 39.0, 8.0, 135974.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (157.0, 29.0, 12.0, 135984.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (157.0, 43.0, 12.0, 131700.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (157.0, 40.0, 18.0, 158717.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (157.0, 39.0, 14.0, 128978.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (158.0, 45.0, 2.0, 133728.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (158.0, 14.0, 13.0, 130858.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (158.0, 41.0, 8.0, 134644.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (159.0, 3.0, 2.0, 108915.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (159.0, 48.0, 17.0, 123972.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (159.0, 14.0, 1.0, 132987.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (160.0, 25.0, 15.0, 120959.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (160.0, 43.0, 10.0, 106466.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (160.0, 24.0, 15.0, 139515.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (160.0, 9.0, 11.0, 107322.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (161.0, 9.0, 19.0, 129106.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (161.0, 4.0, 11.0, 110773.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (161.0, 22.0, 3.0, 165766.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (162.0, 9.0, 5.0, 149835.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (162.0, 12.0, 13.0, 146064.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (162.0, 19.0, 10.0, 147928.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (163.0, 16.0, 20.0, 164911.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (163.0, 10.0, 20.0, 151525.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (163.0, 23.0, 3.0, 149120.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (163.0, 20.0, 11.0, 154690.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (163.0, 19.0, 15.0, 117908.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (164.0, 42.0, 14.0, 140995.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (164.0, 42.0, 13.0, 169428.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (165.0, 14.0, 8.0, 120164.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (165.0, 33.0, 10.0, 138510.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (165.0, 3.0, 17.0, 105270.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (165.0, 30.0, 5.0, 167364.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (165.0, 28.0, 13.0, 131834.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (166.0, 36.0, 6.0, 167334.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (166.0, 32.0, 4.0, 142973.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (166.0, 37.0, 13.0, 165581.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (167.0, 30.0, 8.0, 107517.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (167.0, 21.0, 18.0, 145084.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (167.0, 28.0, 6.0, 135202.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (168.0, 27.0, 12.0, 131179.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (168.0, 14.0, 11.0, 125378.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (168.0, 21.0, 7.0, 148772.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (169.0, 17.0, 14.0, 151780.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (169.0, 39.0, 6.0, 170179.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (170.0, 39.0, 1.0, 125628.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (170.0, 33.0, 17.0, 144088.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (170.0, 2.0, 4.0, 164383.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (170.0, 22.0, 13.0, 116739.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (170.0, 1.0, 14.0, 152101.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (171.0, 29.0, 7.0, 168766.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (171.0, 40.0, 6.0, 114649.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (171.0, 23.0, 12.0, 166594.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (171.0, 28.0, 5.0, 116545.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (172.0, 38.0, 15.0, 140099.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (173.0, 32.0, 4.0, 108080.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (173.0, 46.0, 12.0, 169304.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (173.0, 27.0, 11.0, 165047.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (173.0, 29.0, 6.0, 170872.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (173.0, 7.0, 13.0, 145169.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (174.0, 17.0, 1.0, 131847.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (174.0, 4.0, 19.0, 129002.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (174.0, 8.0, 9.0, 139838.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (174.0, 5.0, 12.0, 116627.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (174.0, 19.0, 9.0, 130626.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (175.0, 47.0, 6.0, 159190.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (175.0, 27.0, 1.0, 150464.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (175.0, 36.0, 14.0, 125987.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (175.0, 1.0, 16.0, 107178.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (176.0, 20.0, 16.0, 135140.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (176.0, 38.0, 9.0, 174517.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (176.0, 31.0, 16.0, 139585.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (176.0, 47.0, 14.0, 168697.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (176.0, 2.0, 10.0, 148657.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (177.0, 25.0, 13.0, 152297.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (177.0, 7.0, 11.0, 134503.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (177.0, 28.0, 15.0, 126484.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (177.0, 4.0, 19.0, 132542.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (178.0, 27.0, 1.0, 123436.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (178.0, 40.0, 19.0, 132549.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (179.0, 46.0, 4.0, 127983.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (179.0, 32.0, 5.0, 139478.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (179.0, 7.0, 3.0, 110592.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (179.0, 7.0, 13.0, 123629.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (179.0, 30.0, 3.0, 124968.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (180.0, 14.0, 14.0, 124543.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (181.0, 4.0, 19.0, 116335.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (182.0, 7.0, 6.0, 124621.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (182.0, 25.0, 19.0, 173012.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (183.0, 22.0, 15.0, 107486.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (183.0, 42.0, 14.0, 144006.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (183.0, 31.0, 19.0, 123297.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (184.0, 19.0, 12.0, 126035.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (184.0, 25.0, 11.0, 121812.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (184.0, 11.0, 4.0, 167167.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (184.0, 33.0, 13.0, 106275.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (185.0, 8.0, 17.0, 160470.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (185.0, 39.0, 14.0, 130293.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (185.0, 29.0, 14.0, 162264.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (185.0, 31.0, 5.0, 121443.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (186.0, 8.0, 16.0, 133909.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (186.0, 33.0, 8.0, 148903.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (186.0, 12.0, 19.0, 141056.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (186.0, 36.0, 18.0, 169756.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (187.0, 41.0, 11.0, 123593.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (187.0, 21.0, 8.0, 137563.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (188.0, 12.0, 10.0, 164537.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (188.0, 27.0, 19.0, 137704.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (188.0, 9.0, 10.0, 150262.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (188.0, 42.0, 18.0, 133345.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (189.0, 29.0, 13.0, 159835.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (189.0, 36.0, 8.0, 159509.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (189.0, 20.0, 10.0, 123210.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (189.0, 44.0, 19.0, 169955.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (189.0, 33.0, 20.0, 121310.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (190.0, 48.0, 18.0, 146327.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (190.0, 14.0, 19.0, 131315.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (190.0, 4.0, 15.0, 143636.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (190.0, 27.0, 18.0, 144882.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (190.0, 18.0, 13.0, 150026.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (191.0, 15.0, 16.0, 120720.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (191.0, 48.0, 10.0, 139499.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (191.0, 47.0, 10.0, 149228.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (192.0, 14.0, 1.0, 120382.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (192.0, 24.0, 11.0, 134442.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (192.0, 20.0, 13.0, 140937.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (192.0, 16.0, 4.0, 165099.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (193.0, 12.0, 17.0, 130635.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (193.0, 47.0, 10.0, 153337.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (193.0, 10.0, 5.0, 168035.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (193.0, 20.0, 15.0, 127853.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (194.0, 48.0, 12.0, 173841.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (194.0, 25.0, 14.0, 161925.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (194.0, 44.0, 1.0, 143809.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (194.0, 23.0, 2.0, 153675.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (194.0, 24.0, 13.0, 130559.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (195.0, 20.0, 5.0, 146124.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (195.0, 11.0, 16.0, 137000.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (195.0, 5.0, 12.0, 147889.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (196.0, 7.0, 13.0, 144798.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (196.0, 47.0, 1.0, 134302.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (196.0, 23.0, 4.0, 135004.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (197.0, 38.0, 6.0, 107561.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (197.0, 35.0, 14.0, 147381.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (197.0, 3.0, 11.0, 160911.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (198.0, 30.0, 2.0, 150743.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (198.0, 1.0, 20.0, 135230.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (198.0, 12.0, 1.0, 137064.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (198.0, 44.0, 1.0, 158981.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (198.0, 28.0, 19.0, 139109.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (199.0, 30.0, 6.0, 139851.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (199.0, 13.0, 5.0, 126757.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (200.0, 42.0, 3.0, 154416.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (200.0, 20.0, 17.0, 119618.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (200.0, 45.0, 19.0, 156133.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (200.0, 19.0, 7.0, 152855.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (201.0, 27.0, 1.0, 169972.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (201.0, 41.0, 1.0, 133374.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (201.0, 36.0, 1.0, 131933.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (201.0, 10.0, 6.0, 141376.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (201.0, 39.0, 20.0, 127950.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (202.0, 14.0, 8.0, 145935.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (202.0, 35.0, 3.0, 142834.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (203.0, 17.0, 1.0, 138157.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (203.0, 41.0, 14.0, 133127.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (203.0, 27.0, 14.0, 112160.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (203.0, 2.0, 19.0, 134927.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (204.0, 35.0, 19.0, 174338.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (204.0, 13.0, 14.0, 109063.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (205.0, 11.0, 1.0, 142901.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (206.0, 28.0, 8.0, 135099.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (207.0, 44.0, 13.0, 129059.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (207.0, 43.0, 18.0, 146841.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (207.0, 16.0, 18.0, 109176.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (207.0, 36.0, 18.0, 133485.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (207.0, 35.0, 19.0, 143335.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (208.0, 10.0, 12.0, 120081.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (208.0, 26.0, 20.0, 159414.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (208.0, 4.0, 7.0, 118309.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (209.0, 5.0, 3.0, 157262.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (209.0, 18.0, 11.0, 149721.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (209.0, 16.0, 11.0, 130701.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (209.0, 34.0, 8.0, 158819.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (209.0, 37.0, 9.0, 164900.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (210.0, 9.0, 3.0, 128546.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (211.0, 25.0, 2.0, 167054.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (211.0, 48.0, 4.0, 145904.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (211.0, 38.0, 10.0, 131720.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (211.0, 36.0, 3.0, 155835.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (211.0, 13.0, 3.0, 144536.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (212.0, 46.0, 16.0, 128306.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (212.0, 30.0, 13.0, 136222.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (213.0, 20.0, 15.0, 143250.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (213.0, 5.0, 8.0, 126898.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (214.0, 2.0, 15.0, 173428.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (214.0, 43.0, 16.0, 154779.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (214.0, 15.0, 12.0, 137277.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (215.0, 19.0, 16.0, 135182.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (216.0, 30.0, 2.0, 172731.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (216.0, 6.0, 12.0, 123696.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (217.0, 20.0, 6.0, 136111.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (217.0, 26.0, 7.0, 118701.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (218.0, 1.0, 5.0, 130167.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (218.0, 29.0, 11.0, 134253.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (218.0, 31.0, 9.0, 122912.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (218.0, 24.0, 7.0, 130550.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (218.0, 15.0, 20.0, 146328.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (219.0, 44.0, 10.0, 130868.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (219.0, 7.0, 6.0, 147125.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (219.0, 16.0, 3.0, 124222.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (219.0, 10.0, 13.0, 149510.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (220.0, 25.0, 3.0, 105604.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (220.0, 8.0, 13.0, 148564.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (220.0, 43.0, 4.0, 127094.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (220.0, 8.0, 13.0, 152035.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (221.0, 46.0, 15.0, 133991.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (221.0, 41.0, 9.0, 134921.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (221.0, 20.0, 6.0, 117186.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (221.0, 43.0, 15.0, 108435.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (222.0, 9.0, 2.0, 122870.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (222.0, 48.0, 5.0, 168592.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (222.0, 36.0, 11.0, 129295.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (223.0, 27.0, 15.0, 145975.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (223.0, 38.0, 15.0, 169691.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (223.0, 38.0, 1.0, 140051.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (223.0, 33.0, 13.0, 139650.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (224.0, 44.0, 11.0, 168294.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (224.0, 38.0, 4.0, 120396.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (224.0, 15.0, 18.0, 145515.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (225.0, 2.0, 10.0, 133555.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (225.0, 1.0, 4.0, 158591.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (225.0, 22.0, 2.0, 149817.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (226.0, 20.0, 5.0, 137452.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (226.0, 32.0, 8.0, 126830.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (226.0, 9.0, 4.0, 136046.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (226.0, 45.0, 7.0, 134497.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (226.0, 46.0, 13.0, 119264.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (227.0, 2.0, 14.0, 107417.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (227.0, 36.0, 1.0, 162070.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (227.0, 32.0, 12.0, 144821.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (227.0, 28.0, 9.0, 126087.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (228.0, 37.0, 5.0, 167005.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (229.0, 40.0, 9.0, 174073.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (229.0, 17.0, 4.0, 163139.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (229.0, 20.0, 19.0, 167111.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (229.0, 19.0, 8.0, 158475.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (229.0, 48.0, 19.0, 110171.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (230.0, 44.0, 12.0, 143537.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (230.0, 15.0, 12.0, 135889.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (230.0, 23.0, 9.0, 108089.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (231.0, 45.0, 11.0, 156909.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (231.0, 28.0, 11.0, 128973.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (231.0, 3.0, 11.0, 131676.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (231.0, 6.0, 7.0, 106893.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (232.0, 8.0, 2.0, 129334.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (233.0, 12.0, 15.0, 133434.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (233.0, 19.0, 18.0, 144594.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (233.0, 31.0, 14.0, 163643.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (233.0, 20.0, 1.0, 126485.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (233.0, 14.0, 4.0, 108111.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (234.0, 41.0, 3.0, 110772.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (234.0, 38.0, 20.0, 151725.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (234.0, 41.0, 11.0, 139073.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (235.0, 2.0, 19.0, 141476.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (235.0, 37.0, 15.0, 157516.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (235.0, 15.0, 11.0, 136065.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (235.0, 30.0, 13.0, 158852.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (236.0, 42.0, 19.0, 148751.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (236.0, 28.0, 4.0, 170918.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (236.0, 5.0, 5.0, 148857.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (236.0, 44.0, 5.0, 126582.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (237.0, 6.0, 19.0, 116681.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (237.0, 47.0, 6.0, 119866.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (237.0, 11.0, 13.0, 111687.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (238.0, 27.0, 3.0, 107601.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (238.0, 25.0, 1.0, 107041.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (239.0, 15.0, 1.0, 115639.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (239.0, 3.0, 8.0, 160609.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (239.0, 5.0, 7.0, 157724.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (239.0, 47.0, 17.0, 112224.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (240.0, 13.0, 20.0, 158736.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (241.0, 23.0, 8.0, 132683.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (241.0, 9.0, 17.0, 110202.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (241.0, 25.0, 20.0, 153551.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (242.0, 7.0, 3.0, 127645.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (242.0, 19.0, 1.0, 120477.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (242.0, 2.0, 8.0, 149121.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (242.0, 22.0, 8.0, 134743.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (242.0, 32.0, 19.0, 143873.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (243.0, 28.0, 14.0, 159398.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (243.0, 5.0, 15.0, 155509.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (244.0, 37.0, 3.0, 123994.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (244.0, 21.0, 11.0, 128976.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (244.0, 1.0, 5.0, 106435.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (244.0, 18.0, 9.0, 165420.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (245.0, 26.0, 17.0, 153492.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (245.0, 44.0, 19.0, 115209.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (245.0, 48.0, 6.0, 174579.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (245.0, 25.0, 17.0, 139287.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (246.0, 21.0, 6.0, 138324.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (246.0, 22.0, 8.0, 159371.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (246.0, 35.0, 3.0, 106015.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (247.0, 42.0, 19.0, 125502.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (248.0, 14.0, 3.0, 171773.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (248.0, 8.0, 16.0, 149615.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (249.0, 1.0, 15.0, 161653.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (249.0, 28.0, 1.0, 150629.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (250.0, 40.0, 4.0, 149112.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (250.0, 19.0, 10.0, 116114.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (250.0, 2.0, 3.0, 125317.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (251.0, 2.0, 7.0, 110927.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (252.0, 35.0, 9.0, 162165.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (253.0, 28.0, 14.0, 137440.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (253.0, 20.0, 6.0, 154268.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (253.0, 35.0, 7.0, 159085.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (254.0, 37.0, 18.0, 147591.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (254.0, 43.0, 12.0, 132801.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (254.0, 28.0, 9.0, 171342.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (254.0, 48.0, 5.0, 128264.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (255.0, 28.0, 12.0, 171039.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (255.0, 44.0, 20.0, 144711.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (256.0, 12.0, 6.0, 124785.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (256.0, 10.0, 6.0, 170024.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (256.0, 4.0, 3.0, 132854.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (256.0, 48.0, 15.0, 147674.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (256.0, 19.0, 12.0, 172965.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (257.0, 35.0, 20.0, 156656.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (258.0, 1.0, 16.0, 147654.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (258.0, 33.0, 8.0, 135399.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (258.0, 40.0, 1.0, 132042.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (258.0, 19.0, 9.0, 145820.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (258.0, 42.0, 19.0, 107289.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (259.0, 2.0, 3.0, 135553.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (259.0, 21.0, 7.0, 174390.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (259.0, 32.0, 18.0, 133323.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (259.0, 18.0, 18.0, 121332.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (259.0, 29.0, 1.0, 128731.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (260.0, 46.0, 1.0, 112109.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (260.0, 7.0, 6.0, 139257.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (260.0, 38.0, 5.0, 134310.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (261.0, 38.0, 20.0, 160401.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (261.0, 18.0, 5.0, 145496.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (262.0, 48.0, 11.0, 118559.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (262.0, 34.0, 20.0, 147710.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (262.0, 10.0, 15.0, 107787.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (263.0, 19.0, 15.0, 127951.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (263.0, 25.0, 10.0, 164484.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (263.0, 22.0, 13.0, 109430.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (264.0, 23.0, 14.0, 133076.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (264.0, 47.0, 16.0, 140253.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (264.0, 28.0, 8.0, 159989.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (265.0, 28.0, 9.0, 172752.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (265.0, 9.0, 3.0, 123902.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (265.0, 47.0, 2.0, 120582.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (266.0, 38.0, 5.0, 124728.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (266.0, 20.0, 12.0, 152166.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (266.0, 23.0, 4.0, 167249.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (266.0, 35.0, 12.0, 115174.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (266.0, 46.0, 6.0, 169744.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (267.0, 10.0, 16.0, 136068.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (267.0, 38.0, 19.0, 174355.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (267.0, 16.0, 5.0, 144398.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (267.0, 45.0, 11.0, 118222.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (267.0, 8.0, 10.0, 124352.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (268.0, 38.0, 13.0, 129841.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (268.0, 27.0, 14.0, 138986.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (268.0, 8.0, 14.0, 140102.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (268.0, 47.0, 9.0, 172830.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (268.0, 22.0, 20.0, 136181.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (269.0, 28.0, 9.0, 168293.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (270.0, 47.0, 2.0, 174495.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (270.0, 18.0, 10.0, 166541.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (270.0, 5.0, 6.0, 120140.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (271.0, 31.0, 7.0, 125681.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (272.0, 24.0, 11.0, 117105.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (273.0, 38.0, 6.0, 129338.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (273.0, 24.0, 17.0, 134159.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (273.0, 40.0, 20.0, 108983.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (274.0, 41.0, 4.0, 130146.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (275.0, 2.0, 15.0, 124651.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (275.0, 3.0, 6.0, 111374.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (275.0, 37.0, 1.0, 140873.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (275.0, 10.0, 15.0, 134965.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (276.0, 29.0, 3.0, 161041.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (276.0, 14.0, 14.0, 109506.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (276.0, 14.0, 10.0, 120319.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (276.0, 14.0, 10.0, 127876.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (276.0, 25.0, 9.0, 128585.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (277.0, 33.0, 20.0, 132638.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (277.0, 20.0, 18.0, 139970.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (278.0, 35.0, 11.0, 144092.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (278.0, 24.0, 11.0, 128679.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (279.0, 37.0, 1.0, 161971.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (280.0, 22.0, 20.0, 144387.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (280.0, 10.0, 20.0, 152758.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (280.0, 18.0, 14.0, 117486.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (280.0, 23.0, 4.0, 129877.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (281.0, 41.0, 12.0, 126735.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (281.0, 21.0, 11.0, 151275.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (281.0, 16.0, 20.0, 162671.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (282.0, 18.0, 16.0, 142254.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (282.0, 16.0, 11.0, 125959.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (282.0, 34.0, 10.0, 128843.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (282.0, 36.0, 11.0, 108162.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (282.0, 11.0, 14.0, 114576.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (283.0, 43.0, 13.0, 170715.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (284.0, 33.0, 5.0, 109709.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (284.0, 32.0, 4.0, 152662.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (284.0, 47.0, 15.0, 128451.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (284.0, 47.0, 8.0, 112874.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (285.0, 43.0, 19.0, 142111.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (285.0, 10.0, 2.0, 146769.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (285.0, 47.0, 6.0, 160327.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (285.0, 35.0, 2.0, 134260.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (285.0, 13.0, 9.0, 140481.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (286.0, 16.0, 16.0, 146620.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (287.0, 43.0, 15.0, 124364.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (287.0, 23.0, 8.0, 135394.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (287.0, 8.0, 17.0, 160482.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (287.0, 6.0, 7.0, 139622.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (287.0, 17.0, 20.0, 140879.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (288.0, 33.0, 12.0, 165393.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (289.0, 30.0, 18.0, 108988.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (289.0, 42.0, 17.0, 119740.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (289.0, 7.0, 9.0, 147211.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (290.0, 36.0, 11.0, 122149.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (290.0, 8.0, 10.0, 140112.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (290.0, 45.0, 15.0, 129818.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (291.0, 15.0, 15.0, 170741.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (291.0, 3.0, 18.0, 132008.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (291.0, 24.0, 10.0, 105188.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (292.0, 11.0, 4.0, 128060.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (292.0, 47.0, 14.0, 114399.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (293.0, 16.0, 16.0, 119070.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (293.0, 18.0, 18.0, 147124.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (293.0, 37.0, 3.0, 141904.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (293.0, 13.0, 11.0, 116296.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (293.0, 2.0, 10.0, 170455.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (294.0, 44.0, 9.0, 131073.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (295.0, 45.0, 1.0, 146680.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (295.0, 2.0, 8.0, 173030.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (295.0, 31.0, 4.0, 143483.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (295.0, 28.0, 6.0, 141531.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (296.0, 1.0, 3.0, 127745.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (296.0, 31.0, 5.0, 138781.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (296.0, 8.0, 16.0, 113906.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (296.0, 13.0, 19.0, 142919.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (296.0, 37.0, 6.0, 169145.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (297.0, 6.0, 19.0, 153076.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (297.0, 29.0, 14.0, 172893.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (297.0, 20.0, 13.0, 126052.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (297.0, 8.0, 11.0, 151301.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (298.0, 33.0, 4.0, 142951.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (299.0, 40.0, 12.0, 159611.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (299.0, 35.0, 11.0, 168462.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (300.0, 1.0, 18.0, 148306.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (300.0, 11.0, 9.0, 114572.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (300.0, 43.0, 18.0, 133196.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (301.0, 48.0, 3.0, 141640.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (301.0, 31.0, 11.0, 114095.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (302.0, 32.0, 19.0, 142043.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (302.0, 21.0, 13.0, 145628.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (302.0, 30.0, 4.0, 128944.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (302.0, 9.0, 11.0, 145944.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (302.0, 15.0, 3.0, 144968.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (303.0, 28.0, 18.0, 171803.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (303.0, 45.0, 7.0, 122597.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (303.0, 6.0, 16.0, 143993.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (303.0, 44.0, 10.0, 147928.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (304.0, 34.0, 10.0, 140359.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (304.0, 11.0, 9.0, 126706.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (305.0, 41.0, 3.0, 105809.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (305.0, 28.0, 20.0, 147057.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (306.0, 21.0, 5.0, 169389.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (306.0, 34.0, 16.0, 107883.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (306.0, 7.0, 3.0, 143108.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (306.0, 17.0, 7.0, 137120.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (306.0, 26.0, 4.0, 141965.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (307.0, 1.0, 10.0, 138447.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (307.0, 10.0, 14.0, 117052.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (307.0, 21.0, 16.0, 157589.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (307.0, 40.0, 19.0, 131091.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (307.0, 6.0, 9.0, 172387.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (308.0, 44.0, 1.0, 148133.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (308.0, 41.0, 16.0, 111320.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (308.0, 46.0, 13.0, 160123.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (309.0, 39.0, 10.0, 128616.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (309.0, 21.0, 15.0, 164139.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (309.0, 40.0, 20.0, 110325.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (309.0, 23.0, 7.0, 115705.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (310.0, 27.0, 14.0, 164365.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (311.0, 9.0, 8.0, 130078.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (312.0, 17.0, 17.0, 133569.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (312.0, 2.0, 16.0, 165440.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (312.0, 25.0, 16.0, 120659.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (312.0, 1.0, 7.0, 165551.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (313.0, 35.0, 20.0, 117333.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (314.0, 31.0, 12.0, 145757.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (314.0, 1.0, 16.0, 130649.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (314.0, 42.0, 16.0, 148964.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (314.0, 45.0, 11.0, 152770.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (314.0, 12.0, 9.0, 120774.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (315.0, 13.0, 19.0, 165014.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (316.0, 14.0, 5.0, 116941.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (316.0, 31.0, 20.0, 141772.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (317.0, 3.0, 2.0, 170607.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (317.0, 38.0, 14.0, 129970.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (318.0, 46.0, 20.0, 144120.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (318.0, 28.0, 14.0, 168315.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (318.0, 47.0, 16.0, 134854.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (318.0, 46.0, 15.0, 168957.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (319.0, 30.0, 14.0, 110052.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (319.0, 2.0, 11.0, 144035.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (319.0, 33.0, 16.0, 108752.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (320.0, 47.0, 18.0, 142731.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (320.0, 33.0, 13.0, 166229.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (320.0, 27.0, 3.0, 132824.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (320.0, 15.0, 2.0, 135021.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (321.0, 19.0, 4.0, 113464.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (321.0, 19.0, 1.0, 133511.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (321.0, 6.0, 10.0, 130242.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (322.0, 43.0, 20.0, 117243.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (322.0, 22.0, 7.0, 149092.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (322.0, 43.0, 1.0, 154547.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (323.0, 36.0, 3.0, 146757.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (323.0, 35.0, 1.0, 134863.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (323.0, 12.0, 8.0, 145500.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (324.0, 47.0, 7.0, 143657.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (324.0, 20.0, 13.0, 117416.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (324.0, 11.0, 13.0, 149691.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (325.0, 36.0, 15.0, 143042.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (326.0, 4.0, 6.0, 118588.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (326.0, 46.0, 10.0, 143493.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (326.0, 22.0, 7.0, 149721.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (326.0, 26.0, 16.0, 126639.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (326.0, 42.0, 10.0, 112789.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (327.0, 17.0, 9.0, 135545.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (327.0, 21.0, 8.0, 125626.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (327.0, 17.0, 13.0, 125352.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (327.0, 34.0, 17.0, 127941.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (327.0, 13.0, 5.0, 105916.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (328.0, 19.0, 13.0, 133860.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (328.0, 5.0, 9.0, 125066.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (328.0, 37.0, 18.0, 107214.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (329.0, 46.0, 12.0, 168953.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (330.0, 13.0, 11.0, 123769.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (330.0, 45.0, 12.0, 108677.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (331.0, 14.0, 14.0, 144219.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (331.0, 33.0, 2.0, 147571.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (331.0, 23.0, 12.0, 126328.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (332.0, 8.0, 17.0, 114829.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (332.0, 8.0, 6.0, 142961.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (333.0, 31.0, 13.0, 119977.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (333.0, 39.0, 14.0, 112654.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (334.0, 30.0, 19.0, 159805.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (334.0, 48.0, 13.0, 151668.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (334.0, 31.0, 9.0, 145065.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (335.0, 3.0, 6.0, 149561.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (336.0, 4.0, 3.0, 163524.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (336.0, 39.0, 2.0, 149048.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (336.0, 20.0, 20.0, 149614.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (336.0, 34.0, 18.0, 127590.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (336.0, 29.0, 10.0, 144545.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (337.0, 38.0, 5.0, 139866.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (337.0, 26.0, 9.0, 171993.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (337.0, 4.0, 18.0, 141879.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (338.0, 36.0, 14.0, 163274.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (339.0, 38.0, 16.0, 130173.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (339.0, 17.0, 11.0, 127595.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (340.0, 38.0, 20.0, 131468.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (341.0, 25.0, 14.0, 156663.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (342.0, 43.0, 7.0, 154768.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (342.0, 28.0, 6.0, 161673.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (342.0, 26.0, 10.0, 143713.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (343.0, 30.0, 5.0, 126114.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (343.0, 14.0, 15.0, 149350.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (343.0, 28.0, 6.0, 123375.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (343.0, 5.0, 5.0, 140820.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (344.0, 33.0, 3.0, 130536.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (345.0, 4.0, 12.0, 127686.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (345.0, 25.0, 17.0, 166616.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (345.0, 48.0, 6.0, 132311.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (345.0, 40.0, 2.0, 145255.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (346.0, 1.0, 1.0, 167435.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (346.0, 23.0, 12.0, 170995.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (346.0, 44.0, 2.0, 142423.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (346.0, 48.0, 2.0, 126975.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (346.0, 9.0, 19.0, 171139.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (347.0, 6.0, 3.0, 158621.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (347.0, 29.0, 2.0, 127725.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (347.0, 12.0, 13.0, 139241.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (348.0, 38.0, 13.0, 163927.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (348.0, 42.0, 2.0, 117373.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (348.0, 21.0, 14.0, 118338.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (348.0, 6.0, 14.0, 153015.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (348.0, 3.0, 9.0, 139502.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (349.0, 10.0, 14.0, 161015.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (349.0, 41.0, 1.0, 112590.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (349.0, 4.0, 1.0, 143244.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (349.0, 10.0, 15.0, 119315.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (350.0, 26.0, 13.0, 174880.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (350.0, 14.0, 19.0, 126249.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (350.0, 45.0, 2.0, 171424.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (350.0, 18.0, 5.0, 142585.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (351.0, 15.0, 17.0, 126791.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (351.0, 42.0, 20.0, 164056.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (352.0, 34.0, 16.0, 140473.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (352.0, 37.0, 6.0, 141683.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (352.0, 19.0, 9.0, 137082.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (353.0, 29.0, 11.0, 144096.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (353.0, 8.0, 8.0, 130342.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (353.0, 45.0, 4.0, 142694.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (354.0, 42.0, 8.0, 129573.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (354.0, 21.0, 10.0, 113376.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (354.0, 12.0, 9.0, 114208.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (355.0, 46.0, 12.0, 136798.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (355.0, 15.0, 13.0, 129739.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (355.0, 32.0, 13.0, 115362.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (356.0, 7.0, 8.0, 141674.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (356.0, 42.0, 20.0, 168221.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (357.0, 25.0, 2.0, 118655.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (357.0, 30.0, 7.0, 153984.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (358.0, 37.0, 6.0, 159939.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (358.0, 21.0, 5.0, 145293.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (358.0, 1.0, 6.0, 168220.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (358.0, 17.0, 7.0, 159552.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (358.0, 43.0, 8.0, 149413.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (359.0, 19.0, 4.0, 138808.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (359.0, 44.0, 15.0, 127508.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (359.0, 6.0, 7.0, 113670.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (359.0, 21.0, 16.0, 164117.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (360.0, 37.0, 5.0, 113543.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (360.0, 39.0, 8.0, 160708.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (361.0, 18.0, 16.0, 134232.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (361.0, 8.0, 20.0, 174522.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (361.0, 14.0, 9.0, 137161.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (362.0, 37.0, 9.0, 169458.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (362.0, 39.0, 13.0, 122311.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (362.0, 34.0, 8.0, 108522.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (362.0, 29.0, 15.0, 143161.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (363.0, 7.0, 8.0, 130194.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (363.0, 15.0, 13.0, 107118.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (363.0, 15.0, 1.0, 134457.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (363.0, 22.0, 16.0, 135025.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (364.0, 45.0, 19.0, 161917.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (364.0, 27.0, 15.0, 137200.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (365.0, 48.0, 10.0, 160966.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (365.0, 44.0, 1.0, 150505.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (365.0, 11.0, 15.0, 137332.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (365.0, 22.0, 18.0, 136700.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (366.0, 33.0, 2.0, 160707.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (366.0, 20.0, 2.0, 121708.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (367.0, 12.0, 18.0, 123305.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (368.0, 18.0, 5.0, 108878.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (368.0, 15.0, 7.0, 117555.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (369.0, 13.0, 16.0, 150103.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (369.0, 43.0, 13.0, 152520.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (370.0, 28.0, 15.0, 149120.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (370.0, 15.0, 10.0, 113494.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (370.0, 34.0, 13.0, 133596.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (370.0, 7.0, 14.0, 107099.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (370.0, 23.0, 8.0, 148254.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (371.0, 10.0, 14.0, 146302.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (371.0, 40.0, 6.0, 126930.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (371.0, 9.0, 3.0, 142306.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (372.0, 8.0, 3.0, 148360.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (372.0, 28.0, 16.0, 154978.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (372.0, 42.0, 1.0, 147387.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (373.0, 11.0, 18.0, 140506.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (373.0, 23.0, 14.0, 166345.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (373.0, 21.0, 3.0, 146963.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (374.0, 42.0, 12.0, 168995.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (374.0, 37.0, 18.0, 110056.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (375.0, 48.0, 9.0, 137396.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (375.0, 23.0, 14.0, 142239.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (375.0, 7.0, 5.0, 141603.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (376.0, 23.0, 18.0, 135119.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (376.0, 5.0, 5.0, 170716.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (376.0, 45.0, 2.0, 118647.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (376.0, 36.0, 5.0, 111362.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (377.0, 45.0, 14.0, 138366.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (377.0, 34.0, 18.0, 119374.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (377.0, 24.0, 9.0, 113568.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (377.0, 25.0, 15.0, 173829.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (378.0, 40.0, 6.0, 125863.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (378.0, 25.0, 5.0, 136677.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (378.0, 23.0, 9.0, 143652.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (379.0, 35.0, 18.0, 147062.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (380.0, 16.0, 14.0, 120124.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (380.0, 1.0, 1.0, 122500.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (381.0, 25.0, 12.0, 139433.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (381.0, 29.0, 20.0, 162465.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (382.0, 3.0, 12.0, 142898.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (382.0, 17.0, 10.0, 171495.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (382.0, 15.0, 16.0, 113211.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (382.0, 22.0, 1.0, 153753.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (383.0, 11.0, 4.0, 124407.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (383.0, 12.0, 6.0, 156674.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (384.0, 15.0, 5.0, 123528.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (384.0, 1.0, 4.0, 147198.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (385.0, 2.0, 10.0, 140507.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (385.0, 22.0, 11.0, 126399.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (386.0, 27.0, 8.0, 137677.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (387.0, 43.0, 17.0, 144451.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (387.0, 2.0, 9.0, 174333.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (387.0, 39.0, 4.0, 143424.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (387.0, 31.0, 15.0, 156946.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (388.0, 47.0, 19.0, 160161.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (389.0, 22.0, 5.0, 164867.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (389.0, 17.0, 17.0, 173208.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (389.0, 22.0, 10.0, 172971.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (389.0, 15.0, 1.0, 146283.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (390.0, 32.0, 20.0, 136766.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (390.0, 12.0, 14.0, 173986.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (391.0, 13.0, 10.0, 117452.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (391.0, 5.0, 1.0, 162075.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (391.0, 45.0, 18.0, 145215.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (391.0, 31.0, 4.0, 161615.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (391.0, 41.0, 11.0, 169753.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (392.0, 22.0, 3.0, 145786.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (392.0, 13.0, 3.0, 129983.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (393.0, 25.0, 11.0, 145253.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (393.0, 1.0, 8.0, 149035.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (394.0, 11.0, 15.0, 161152.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (394.0, 37.0, 16.0, 156451.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (395.0, 12.0, 20.0, 111642.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (396.0, 42.0, 6.0, 164610.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (396.0, 48.0, 17.0, 131672.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (397.0, 37.0, 12.0, 128866.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (397.0, 27.0, 1.0, 141193.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (397.0, 28.0, 11.0, 137064.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (397.0, 25.0, 6.0, 105555.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (397.0, 12.0, 7.0, 168746.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (398.0, 35.0, 19.0, 144551.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (398.0, 8.0, 4.0, 127454.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (398.0, 37.0, 3.0, 105383.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (398.0, 11.0, 6.0, 141486.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (399.0, 15.0, 17.0, 109975.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (399.0, 16.0, 12.0, 141492.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (400.0, 16.0, 13.0, 155237.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (400.0, 40.0, 18.0, 157395.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (400.0, 31.0, 8.0, 142988.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (400.0, 42.0, 10.0, 154735.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (401.0, 22.0, 14.0, 172074.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (402.0, 38.0, 13.0, 134219.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (402.0, 39.0, 9.0, 118761.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (402.0, 13.0, 1.0, 116756.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (402.0, 45.0, 7.0, 143011.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (403.0, 43.0, 9.0, 127310.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (404.0, 30.0, 16.0, 129320.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (404.0, 44.0, 9.0, 108384.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (404.0, 18.0, 6.0, 170602.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (404.0, 38.0, 14.0, 109753.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (404.0, 22.0, 12.0, 124476.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (405.0, 14.0, 15.0, 152161.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (405.0, 2.0, 5.0, 112288.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (405.0, 45.0, 11.0, 134813.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (405.0, 33.0, 16.0, 150370.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (405.0, 48.0, 20.0, 155214.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (406.0, 14.0, 19.0, 122498.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (407.0, 35.0, 10.0, 153402.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (407.0, 27.0, 2.0, 124323.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (407.0, 6.0, 2.0, 117368.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (407.0, 19.0, 12.0, 141640.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (407.0, 23.0, 13.0, 151375.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (408.0, 37.0, 18.0, 165043.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (408.0, 47.0, 18.0, 138088.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (408.0, 14.0, 8.0, 157445.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (408.0, 30.0, 2.0, 149432.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (409.0, 2.0, 7.0, 174316.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (409.0, 44.0, 20.0, 136351.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (409.0, 12.0, 10.0, 146674.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (409.0, 43.0, 16.0, 122746.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (409.0, 11.0, 8.0, 166191.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (410.0, 43.0, 15.0, 126088.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (410.0, 23.0, 10.0, 121815.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (411.0, 48.0, 8.0, 155303.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (411.0, 20.0, 11.0, 135530.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (411.0, 26.0, 20.0, 114802.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (412.0, 5.0, 17.0, 123316.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (412.0, 16.0, 4.0, 138876.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (413.0, 32.0, 5.0, 123337.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (414.0, 2.0, 12.0, 116642.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (414.0, 46.0, 12.0, 134850.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (414.0, 4.0, 18.0, 125919.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (415.0, 29.0, 13.0, 155425.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (415.0, 23.0, 17.0, 111704.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (416.0, 45.0, 20.0, 150841.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (416.0, 18.0, 11.0, 138586.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (416.0, 48.0, 12.0, 128189.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (416.0, 24.0, 9.0, 107183.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (416.0, 6.0, 5.0, 141780.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (417.0, 21.0, 19.0, 153170.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (417.0, 41.0, 15.0, 122753.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (417.0, 23.0, 19.0, 125311.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (418.0, 29.0, 1.0, 151303.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (419.0, 5.0, 4.0, 146358.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (419.0, 4.0, 13.0, 131976.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (419.0, 43.0, 9.0, 129767.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (419.0, 1.0, 13.0, 134837.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (420.0, 46.0, 1.0, 135163.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (420.0, 24.0, 19.0, 106390.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (420.0, 35.0, 12.0, 120867.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (420.0, 33.0, 18.0, 105583.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (421.0, 26.0, 16.0, 170569.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (422.0, 31.0, 5.0, 127765.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (422.0, 33.0, 2.0, 141012.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (422.0, 21.0, 10.0, 141819.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (422.0, 22.0, 20.0, 117455.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (422.0, 12.0, 17.0, 121498.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (423.0, 20.0, 15.0, 166894.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (424.0, 47.0, 20.0, 118928.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (424.0, 19.0, 9.0, 110974.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (424.0, 5.0, 11.0, 139444.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (424.0, 5.0, 3.0, 136878.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (424.0, 5.0, 15.0, 139321.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (425.0, 7.0, 18.0, 153879.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (425.0, 4.0, 18.0, 116555.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (425.0, 19.0, 13.0, 170069.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (425.0, 2.0, 12.0, 146577.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (425.0, 47.0, 1.0, 107500.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (426.0, 23.0, 11.0, 123443.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (426.0, 16.0, 10.0, 135312.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (426.0, 18.0, 12.0, 148320.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (426.0, 20.0, 16.0, 126673.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (427.0, 29.0, 10.0, 169554.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (427.0, 22.0, 19.0, 107195.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (427.0, 22.0, 9.0, 163400.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (427.0, 28.0, 2.0, 166629.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (428.0, 25.0, 3.0, 134003.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (428.0, 36.0, 4.0, 119449.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (428.0, 46.0, 20.0, 119276.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (428.0, 42.0, 5.0, 130153.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (429.0, 25.0, 13.0, 154896.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (429.0, 15.0, 16.0, 115470.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (429.0, 36.0, 1.0, 138953.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (429.0, 36.0, 11.0, 138647.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (430.0, 10.0, 10.0, 139428.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (430.0, 3.0, 6.0, 148847.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (430.0, 19.0, 11.0, 129202.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (431.0, 27.0, 9.0, 129398.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (431.0, 24.0, 1.0, 173122.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (432.0, 34.0, 2.0, 117547.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (432.0, 29.0, 6.0, 116975.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (432.0, 8.0, 12.0, 145782.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (433.0, 33.0, 13.0, 174579.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (434.0, 44.0, 19.0, 130047.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (434.0, 39.0, 17.0, 140936.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (435.0, 10.0, 17.0, 114826.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (435.0, 8.0, 8.0, 166430.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (435.0, 14.0, 16.0, 116851.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (435.0, 12.0, 12.0, 167833.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (436.0, 24.0, 15.0, 137197.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (436.0, 13.0, 12.0, 120347.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (436.0, 41.0, 4.0, 130656.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (436.0, 34.0, 9.0, 124571.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (436.0, 34.0, 5.0, 125306.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (437.0, 18.0, 14.0, 135311.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (438.0, 25.0, 15.0, 112900.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (439.0, 17.0, 15.0, 135083.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (439.0, 33.0, 15.0, 125597.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (439.0, 16.0, 4.0, 141724.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (440.0, 5.0, 7.0, 119340.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (440.0, 16.0, 6.0, 153548.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (440.0, 32.0, 11.0, 174092.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (440.0, 45.0, 9.0, 125765.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (440.0, 31.0, 20.0, 149412.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (441.0, 4.0, 9.0, 173178.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (441.0, 22.0, 16.0, 120678.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (441.0, 30.0, 13.0, 142174.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (441.0, 11.0, 13.0, 133878.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (442.0, 1.0, 10.0, 143182.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (442.0, 18.0, 17.0, 132898.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (442.0, 30.0, 8.0, 169156.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (442.0, 25.0, 20.0, 139944.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (443.0, 39.0, 18.0, 144336.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (444.0, 38.0, 2.0, 130646.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (445.0, 40.0, 7.0, 121437.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (445.0, 2.0, 16.0, 118127.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (445.0, 23.0, 20.0, 154810.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (445.0, 38.0, 13.0, 135892.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (445.0, 40.0, 12.0, 142486.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (446.0, 32.0, 11.0, 117378.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (446.0, 43.0, 17.0, 157101.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (446.0, 46.0, 11.0, 130709.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (446.0, 40.0, 20.0, 134338.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (446.0, 39.0, 13.0, 167695.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (447.0, 30.0, 6.0, 111617.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (447.0, 9.0, 8.0, 174270.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (448.0, 1.0, 8.0, 124480.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (448.0, 32.0, 18.0, 125669.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (448.0, 46.0, 8.0, 140576.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (448.0, 13.0, 8.0, 132796.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (449.0, 9.0, 18.0, 162015.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (449.0, 29.0, 17.0, 144242.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (449.0, 14.0, 12.0, 141497.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (449.0, 42.0, 20.0, 146180.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (449.0, 17.0, 17.0, 163114.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (450.0, 19.0, 3.0, 113353.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (450.0, 32.0, 19.0, 137589.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (450.0, 43.0, 15.0, 105774.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (450.0, 1.0, 4.0, 125220.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (450.0, 8.0, 7.0, 157360.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (451.0, 3.0, 12.0, 128136.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (451.0, 17.0, 8.0, 129075.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (452.0, 8.0, 7.0, 113581.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (452.0, 1.0, 3.0, 124366.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (452.0, 19.0, 2.0, 142331.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (453.0, 18.0, 13.0, 148009.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (453.0, 2.0, 16.0, 145844.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (453.0, 39.0, 15.0, 143289.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (454.0, 26.0, 8.0, 172901.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (454.0, 29.0, 17.0, 133339.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (454.0, 13.0, 11.0, 142241.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (454.0, 42.0, 2.0, 114990.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (454.0, 23.0, 16.0, 144310.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (455.0, 20.0, 6.0, 171315.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (455.0, 20.0, 15.0, 134062.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (455.0, 15.0, 11.0, 133150.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (455.0, 37.0, 7.0, 133168.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (455.0, 37.0, 6.0, 141726.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (456.0, 2.0, 19.0, 147726.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (456.0, 44.0, 5.0, 134096.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (456.0, 20.0, 14.0, 163877.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (456.0, 17.0, 19.0, 139476.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (456.0, 8.0, 8.0, 154618.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (457.0, 30.0, 19.0, 165931.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (457.0, 12.0, 9.0, 130611.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (458.0, 27.0, 10.0, 173466.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (458.0, 41.0, 11.0, 112311.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (458.0, 32.0, 12.0, 138459.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (458.0, 34.0, 18.0, 120014.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (459.0, 13.0, 16.0, 116391.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (459.0, 20.0, 19.0, 132225.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (459.0, 37.0, 5.0, 144929.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (459.0, 3.0, 1.0, 147692.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (459.0, 21.0, 19.0, 116015.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (460.0, 33.0, 12.0, 166243.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (460.0, 3.0, 2.0, 158998.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (460.0, 8.0, 14.0, 156079.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (461.0, 20.0, 16.0, 158798.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (461.0, 45.0, 18.0, 144289.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (461.0, 23.0, 5.0, 113295.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (462.0, 16.0, 2.0, 106720.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (462.0, 17.0, 1.0, 110831.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (462.0, 39.0, 14.0, 149418.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (462.0, 10.0, 15.0, 127598.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (463.0, 28.0, 5.0, 145527.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (463.0, 36.0, 13.0, 173319.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (463.0, 45.0, 14.0, 133370.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (463.0, 3.0, 18.0, 143489.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (464.0, 6.0, 4.0, 114800.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (464.0, 32.0, 2.0, 133441.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (465.0, 8.0, 3.0, 124428.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (465.0, 41.0, 8.0, 164022.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (466.0, 32.0, 20.0, 139817.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (466.0, 40.0, 10.0, 110411.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (466.0, 27.0, 8.0, 155661.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (466.0, 47.0, 20.0, 172940.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (467.0, 26.0, 9.0, 125431.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (467.0, 26.0, 18.0, 171670.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (467.0, 44.0, 13.0, 108620.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (467.0, 4.0, 7.0, 108246.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (468.0, 22.0, 13.0, 139614.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (468.0, 32.0, 18.0, 117181.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (469.0, 20.0, 6.0, 121491.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (469.0, 36.0, 8.0, 125913.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (469.0, 35.0, 17.0, 147527.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (469.0, 35.0, 4.0, 148426.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (470.0, 22.0, 12.0, 126809.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (470.0, 46.0, 15.0, 106770.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (470.0, 30.0, 12.0, 167188.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (470.0, 2.0, 17.0, 133303.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (471.0, 45.0, 1.0, 142442.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (471.0, 13.0, 7.0, 149404.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (472.0, 43.0, 1.0, 149227.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (472.0, 1.0, 18.0, 122383.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (472.0, 38.0, 1.0, 133469.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (473.0, 14.0, 11.0, 113114.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (473.0, 31.0, 1.0, 149520.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (474.0, 35.0, 9.0, 124848.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (474.0, 29.0, 8.0, 107876.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (474.0, 32.0, 15.0, 137951.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (474.0, 2.0, 9.0, 167315.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (474.0, 14.0, 9.0, 147344.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (475.0, 9.0, 3.0, 128276.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (475.0, 27.0, 19.0, 134722.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (475.0, 41.0, 12.0, 118008.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (475.0, 16.0, 12.0, 146312.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (476.0, 17.0, 16.0, 106780.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (476.0, 6.0, 20.0, 122099.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (476.0, 8.0, 13.0, 131126.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (476.0, 14.0, 20.0, 148113.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (476.0, 3.0, 8.0, 127885.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (477.0, 17.0, 14.0, 174582.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (477.0, 15.0, 12.0, 165619.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (477.0, 22.0, 19.0, 172246.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (477.0, 27.0, 18.0, 147337.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (478.0, 29.0, 20.0, 144503.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (479.0, 1.0, 12.0, 143679.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (479.0, 25.0, 3.0, 148711.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (479.0, 47.0, 17.0, 128786.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (479.0, 25.0, 10.0, 107546.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (480.0, 47.0, 18.0, 109859.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (480.0, 25.0, 1.0, 162525.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (480.0, 35.0, 20.0, 107003.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (481.0, 26.0, 15.0, 171003.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (481.0, 32.0, 11.0, 142656.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (482.0, 20.0, 8.0, 164239.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (482.0, 3.0, 17.0, 118832.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (482.0, 27.0, 14.0, 126855.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (483.0, 47.0, 12.0, 130321.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (483.0, 28.0, 12.0, 124425.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (483.0, 37.0, 3.0, 147627.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (483.0, 44.0, 9.0, 139179.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (484.0, 31.0, 17.0, 167370.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (484.0, 22.0, 3.0, 147990.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (484.0, 3.0, 5.0, 128378.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (484.0, 16.0, 13.0, 127491.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (484.0, 4.0, 8.0, 143937.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (485.0, 19.0, 9.0, 116415.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (486.0, 23.0, 3.0, 158328.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (486.0, 12.0, 7.0, 153247.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (486.0, 33.0, 4.0, 146653.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (486.0, 42.0, 14.0, 138606.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (486.0, 42.0, 18.0, 142065.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (487.0, 18.0, 19.0, 127379.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (487.0, 12.0, 19.0, 153140.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (487.0, 43.0, 11.0, 113806.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (487.0, 39.0, 16.0, 165683.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (487.0, 11.0, 1.0, 174631.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (488.0, 31.0, 14.0, 123479.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (488.0, 7.0, 20.0, 151539.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (488.0, 44.0, 13.0, 122942.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (489.0, 45.0, 13.0, 149383.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (489.0, 22.0, 7.0, 109656.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (490.0, 26.0, 3.0, 128850.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (490.0, 34.0, 15.0, 122213.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (490.0, 48.0, 7.0, 148144.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (490.0, 3.0, 3.0, 105862.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (490.0, 47.0, 12.0, 146662.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (491.0, 35.0, 12.0, 130434.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (491.0, 3.0, 9.0, 170198.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (491.0, 9.0, 19.0, 144154.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (492.0, 38.0, 16.0, 156284.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (492.0, 11.0, 13.0, 109795.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (492.0, 35.0, 19.0, 120040.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (492.0, 4.0, 5.0, 121942.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (492.0, 27.0, 11.0, 122763.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (493.0, 13.0, 6.0, 134002.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (493.0, 21.0, 12.0, 148519.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (493.0, 2.0, 16.0, 148949.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (493.0, 34.0, 20.0, 173898.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (493.0, 41.0, 20.0, 174315.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (494.0, 41.0, 20.0, 109306.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (494.0, 42.0, 10.0, 108421.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (495.0, 3.0, 11.0, 152235.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (495.0, 33.0, 20.0, 145221.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (496.0, 5.0, 4.0, 110954.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (496.0, 16.0, 12.0, 116403.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (496.0, 45.0, 17.0, 136952.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (496.0, 6.0, 4.0, 119233.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (497.0, 16.0, 7.0, 132302.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (498.0, 1.0, 17.0, 128683.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (498.0, 10.0, 1.0, 132990.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (499.0, 23.0, 18.0, 139039.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (499.0, 48.0, 12.0, 157536.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (500.0, 34.0, 7.0, 171813.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (501.0, 7.0, 2.0, 132721.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (501.0, 1.0, 6.0, 135713.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (501.0, 27.0, 19.0, 145455.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (501.0, 39.0, 14.0, 141745.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (501.0, 39.0, 2.0, 142883.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (502.0, 19.0, 20.0, 130906.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (502.0, 40.0, 3.0, 138558.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (503.0, 1.0, 8.0, 144557.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (503.0, 37.0, 7.0, 109754.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (504.0, 32.0, 12.0, 119005.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (504.0, 14.0, 9.0, 124139.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (504.0, 19.0, 17.0, 133937.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (504.0, 48.0, 17.0, 109636.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (505.0, 15.0, 17.0, 145127.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (505.0, 41.0, 18.0, 134066.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (505.0, 22.0, 5.0, 123690.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (505.0, 37.0, 17.0, 134389.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (505.0, 33.0, 7.0, 126011.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (506.0, 1.0, 9.0, 151068.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (506.0, 40.0, 8.0, 146384.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (506.0, 48.0, 14.0, 125142.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (506.0, 24.0, 19.0, 140896.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (507.0, 32.0, 3.0, 141979.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (507.0, 15.0, 11.0, 166940.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (507.0, 15.0, 7.0, 108354.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (508.0, 11.0, 5.0, 133881.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (508.0, 38.0, 12.0, 115116.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (508.0, 7.0, 7.0, 137488.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (508.0, 11.0, 18.0, 124926.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (508.0, 35.0, 7.0, 122723.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (509.0, 37.0, 9.0, 174372.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (509.0, 16.0, 10.0, 127892.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (509.0, 29.0, 20.0, 126063.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (509.0, 26.0, 6.0, 125469.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (509.0, 36.0, 8.0, 136447.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (510.0, 32.0, 10.0, 138536.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (511.0, 38.0, 9.0, 124226.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (511.0, 25.0, 5.0, 172266.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (511.0, 11.0, 5.0, 137726.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (511.0, 19.0, 10.0, 131108.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (511.0, 46.0, 5.0, 157138.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (512.0, 2.0, 11.0, 141530.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (512.0, 24.0, 8.0, 153475.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (512.0, 3.0, 11.0, 135247.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (512.0, 35.0, 1.0, 129851.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (513.0, 10.0, 4.0, 149557.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (514.0, 32.0, 13.0, 136751.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (514.0, 12.0, 8.0, 162779.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (514.0, 14.0, 20.0, 162270.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (514.0, 35.0, 10.0, 112712.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (515.0, 34.0, 10.0, 132639.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (515.0, 7.0, 18.0, 114174.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (515.0, 25.0, 16.0, 124806.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (516.0, 1.0, 8.0, 137454.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (516.0, 48.0, 10.0, 124148.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (516.0, 29.0, 13.0, 131523.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (516.0, 35.0, 2.0, 136815.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (516.0, 4.0, 5.0, 122988.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (517.0, 48.0, 9.0, 172116.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (517.0, 6.0, 8.0, 115437.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (517.0, 27.0, 15.0, 127017.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (517.0, 5.0, 5.0, 144237.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (517.0, 42.0, 17.0, 137009.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (518.0, 29.0, 20.0, 150026.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (518.0, 19.0, 20.0, 130999.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (519.0, 28.0, 10.0, 118255.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (519.0, 6.0, 4.0, 148567.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (519.0, 43.0, 9.0, 112197.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (519.0, 46.0, 5.0, 118964.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (520.0, 24.0, 6.0, 107460.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (520.0, 25.0, 20.0, 144232.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (520.0, 38.0, 5.0, 127829.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (521.0, 23.0, 6.0, 154758.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (521.0, 39.0, 2.0, 146031.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (521.0, 40.0, 12.0, 126558.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (521.0, 29.0, 7.0, 143054.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (521.0, 32.0, 19.0, 113099.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (522.0, 23.0, 8.0, 135494.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (522.0, 34.0, 7.0, 119167.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (522.0, 21.0, 12.0, 146636.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (523.0, 36.0, 5.0, 138409.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (524.0, 41.0, 15.0, 108858.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (524.0, 44.0, 13.0, 145465.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (524.0, 31.0, 11.0, 150478.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (524.0, 34.0, 3.0, 112297.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (525.0, 19.0, 14.0, 138566.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (525.0, 16.0, 1.0, 157673.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (526.0, 15.0, 15.0, 155221.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (526.0, 27.0, 15.0, 137201.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (526.0, 41.0, 15.0, 157976.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (526.0, 3.0, 12.0, 151663.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (526.0, 22.0, 11.0, 158795.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (527.0, 40.0, 18.0, 113384.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (527.0, 30.0, 1.0, 124281.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (527.0, 15.0, 11.0, 140342.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (527.0, 11.0, 1.0, 148630.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (528.0, 20.0, 7.0, 139176.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (528.0, 7.0, 11.0, 129798.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (529.0, 23.0, 12.0, 135888.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (529.0, 37.0, 19.0, 132344.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (529.0, 34.0, 14.0, 173848.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (529.0, 21.0, 8.0, 128688.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (530.0, 32.0, 4.0, 168701.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (530.0, 35.0, 14.0, 122417.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (530.0, 37.0, 20.0, 147530.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (530.0, 43.0, 12.0, 117028.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (530.0, 47.0, 10.0, 126954.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (531.0, 10.0, 3.0, 142438.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (531.0, 37.0, 6.0, 123906.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (531.0, 15.0, 5.0, 137168.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (531.0, 14.0, 10.0, 126502.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (531.0, 35.0, 3.0, 147317.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (532.0, 32.0, 10.0, 164459.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (532.0, 37.0, 4.0, 115339.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (532.0, 8.0, 14.0, 156640.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (532.0, 31.0, 19.0, 139007.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (532.0, 3.0, 5.0, 113562.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (533.0, 18.0, 3.0, 169994.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (533.0, 38.0, 14.0, 149154.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (533.0, 18.0, 9.0, 141369.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (533.0, 48.0, 4.0, 143571.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (534.0, 16.0, 14.0, 140228.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (534.0, 21.0, 20.0, 139910.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (534.0, 44.0, 15.0, 165087.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (534.0, 34.0, 5.0, 162758.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (535.0, 20.0, 15.0, 142816.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (535.0, 40.0, 2.0, 149918.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (535.0, 3.0, 2.0, 147239.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (536.0, 38.0, 10.0, 112295.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (537.0, 43.0, 12.0, 129807.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (537.0, 42.0, 9.0, 120093.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (538.0, 42.0, 8.0, 131148.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (538.0, 39.0, 17.0, 132090.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (538.0, 26.0, 7.0, 146989.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (538.0, 5.0, 5.0, 133835.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (539.0, 7.0, 16.0, 147776.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (539.0, 30.0, 13.0, 142524.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (539.0, 31.0, 16.0, 115686.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (539.0, 35.0, 6.0, 110714.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (540.0, 42.0, 8.0, 135801.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (541.0, 3.0, 5.0, 118136.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (541.0, 31.0, 18.0, 173687.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (541.0, 7.0, 18.0, 123762.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (541.0, 40.0, 9.0, 110894.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (541.0, 37.0, 2.0, 145068.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (542.0, 3.0, 12.0, 111716.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (542.0, 18.0, 13.0, 134906.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (543.0, 36.0, 18.0, 151252.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (543.0, 30.0, 14.0, 105999.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (544.0, 46.0, 19.0, 129872.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (544.0, 9.0, 14.0, 142371.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (544.0, 46.0, 13.0, 120432.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (545.0, 16.0, 13.0, 118513.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (546.0, 1.0, 7.0, 134803.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (547.0, 1.0, 3.0, 160815.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (548.0, 9.0, 2.0, 126654.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (548.0, 6.0, 11.0, 112123.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (548.0, 43.0, 15.0, 163369.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (549.0, 18.0, 5.0, 149275.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (549.0, 27.0, 12.0, 133711.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (550.0, 22.0, 7.0, 117305.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (550.0, 36.0, 12.0, 129698.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (551.0, 17.0, 7.0, 124694.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (551.0, 24.0, 12.0, 116629.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (551.0, 41.0, 11.0, 171680.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (551.0, 39.0, 18.0, 116736.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (551.0, 30.0, 1.0, 170120.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (552.0, 8.0, 14.0, 138415.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (552.0, 41.0, 6.0, 174881.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (553.0, 38.0, 17.0, 144035.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (553.0, 20.0, 20.0, 138132.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (554.0, 8.0, 8.0, 145090.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (555.0, 1.0, 14.0, 141420.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (555.0, 19.0, 4.0, 115417.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (556.0, 30.0, 1.0, 145884.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (556.0, 27.0, 6.0, 173883.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (557.0, 43.0, 20.0, 127032.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (557.0, 25.0, 4.0, 126573.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (557.0, 48.0, 13.0, 157741.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (557.0, 23.0, 16.0, 145161.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (558.0, 15.0, 18.0, 113818.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (558.0, 6.0, 16.0, 145085.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (558.0, 45.0, 20.0, 157593.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (558.0, 13.0, 6.0, 149821.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (558.0, 43.0, 15.0, 137467.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (559.0, 37.0, 3.0, 115730.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (560.0, 14.0, 9.0, 157831.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (560.0, 2.0, 14.0, 164634.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (560.0, 28.0, 14.0, 142186.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (560.0, 20.0, 13.0, 107720.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (560.0, 19.0, 8.0, 143943.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (561.0, 14.0, 2.0, 126927.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (561.0, 46.0, 16.0, 116222.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (562.0, 28.0, 6.0, 121146.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (562.0, 36.0, 20.0, 138805.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (562.0, 44.0, 13.0, 134386.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (563.0, 37.0, 9.0, 134391.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (563.0, 20.0, 3.0, 114873.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (564.0, 37.0, 14.0, 136091.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (565.0, 25.0, 9.0, 142408.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (565.0, 36.0, 3.0, 130826.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (565.0, 28.0, 1.0, 166115.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (566.0, 32.0, 15.0, 119769.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (567.0, 42.0, 4.0, 147854.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (568.0, 1.0, 13.0, 113595.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (568.0, 6.0, 13.0, 123320.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (568.0, 44.0, 8.0, 155477.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (569.0, 47.0, 10.0, 142811.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (569.0, 39.0, 2.0, 130456.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (570.0, 11.0, 14.0, 132941.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (571.0, 26.0, 20.0, 144366.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (572.0, 12.0, 8.0, 111858.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (572.0, 31.0, 8.0, 147386.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (572.0, 7.0, 19.0, 151544.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (573.0, 45.0, 5.0, 129528.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (574.0, 46.0, 19.0, 148217.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (574.0, 37.0, 11.0, 127132.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (574.0, 11.0, 17.0, 169535.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (574.0, 37.0, 15.0, 155144.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (575.0, 45.0, 18.0, 133835.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (575.0, 10.0, 5.0, 128407.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (576.0, 16.0, 19.0, 131166.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (576.0, 36.0, 15.0, 148296.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (576.0, 37.0, 19.0, 125007.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (576.0, 25.0, 11.0, 161337.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (576.0, 5.0, 19.0, 145483.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (577.0, 44.0, 10.0, 112556.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (578.0, 39.0, 2.0, 144331.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (578.0, 10.0, 13.0, 137391.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (579.0, 36.0, 15.0, 133009.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (579.0, 34.0, 11.0, 115280.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (579.0, 39.0, 17.0, 160468.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (579.0, 24.0, 18.0, 150991.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (579.0, 10.0, 4.0, 166587.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (580.0, 35.0, 1.0, 146433.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (580.0, 19.0, 4.0, 123606.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (580.0, 19.0, 11.0, 145548.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (580.0, 26.0, 14.0, 147543.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (580.0, 35.0, 9.0, 130006.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (581.0, 21.0, 18.0, 172055.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (581.0, 9.0, 17.0, 125886.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (581.0, 43.0, 11.0, 149633.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (581.0, 39.0, 5.0, 131148.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (581.0, 43.0, 16.0, 125911.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (582.0, 28.0, 13.0, 107507.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (583.0, 43.0, 5.0, 126901.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (583.0, 10.0, 3.0, 164908.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (583.0, 47.0, 2.0, 168421.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (583.0, 25.0, 18.0, 134521.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (584.0, 31.0, 2.0, 147807.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (585.0, 13.0, 11.0, 134045.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (585.0, 25.0, 5.0, 133402.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (585.0, 16.0, 14.0, 126242.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (586.0, 14.0, 1.0, 133835.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (586.0, 10.0, 12.0, 141779.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (587.0, 9.0, 15.0, 137902.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (587.0, 42.0, 9.0, 123792.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (587.0, 24.0, 18.0, 118967.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (587.0, 3.0, 3.0, 136488.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (587.0, 30.0, 12.0, 122447.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (588.0, 22.0, 13.0, 157391.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (588.0, 16.0, 11.0, 162916.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (589.0, 26.0, 2.0, 151519.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (590.0, 6.0, 18.0, 132613.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (591.0, 21.0, 16.0, 173387.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (591.0, 12.0, 16.0, 111540.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (591.0, 42.0, 2.0, 170286.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (591.0, 6.0, 18.0, 134796.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (592.0, 18.0, 5.0, 169973.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (592.0, 22.0, 4.0, 131433.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (592.0, 43.0, 4.0, 145947.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (592.0, 3.0, 13.0, 141610.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (593.0, 23.0, 9.0, 163165.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (593.0, 5.0, 6.0, 116948.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (593.0, 7.0, 20.0, 128310.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (593.0, 44.0, 16.0, 171049.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (593.0, 20.0, 3.0, 149598.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (594.0, 35.0, 18.0, 146214.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (594.0, 10.0, 16.0, 147090.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (594.0, 44.0, 5.0, 129526.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (595.0, 9.0, 10.0, 157990.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (595.0, 16.0, 6.0, 154984.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (595.0, 27.0, 14.0, 161485.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (595.0, 44.0, 15.0, 121662.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (596.0, 41.0, 4.0, 110199.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (596.0, 9.0, 10.0, 124010.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (596.0, 41.0, 19.0, 128030.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (596.0, 17.0, 8.0, 134502.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (597.0, 19.0, 2.0, 142452.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (597.0, 19.0, 18.0, 143180.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (597.0, 22.0, 4.0, 132643.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (597.0, 27.0, 13.0, 123891.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (597.0, 27.0, 5.0, 122781.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (598.0, 22.0, 5.0, 131763.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (598.0, 18.0, 11.0, 124977.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (598.0, 37.0, 15.0, 135981.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (598.0, 16.0, 3.0, 149638.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (599.0, 31.0, 17.0, 106002.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (599.0, 36.0, 3.0, 134005.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (599.0, 12.0, 4.0, 147091.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (599.0, 33.0, 19.0, 127237.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (600.0, 44.0, 13.0, 169612.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (601.0, 41.0, 5.0, 149058.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (601.0, 48.0, 3.0, 140600.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (601.0, 32.0, 10.0, 136515.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (601.0, 44.0, 15.0, 142921.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (601.0, 37.0, 2.0, 169552.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (602.0, 44.0, 15.0, 126858.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (602.0, 14.0, 6.0, 122450.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (602.0, 2.0, 13.0, 109982.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (602.0, 1.0, 4.0, 130388.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (602.0, 46.0, 7.0, 123296.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (603.0, 34.0, 8.0, 148607.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (604.0, 20.0, 15.0, 111051.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (604.0, 37.0, 4.0, 142765.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (605.0, 36.0, 11.0, 138203.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (605.0, 9.0, 13.0, 146625.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (605.0, 36.0, 3.0, 126916.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (606.0, 11.0, 8.0, 147803.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (606.0, 32.0, 17.0, 136315.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (606.0, 35.0, 18.0, 160065.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (606.0, 19.0, 10.0, 148751.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (607.0, 8.0, 20.0, 123994.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (607.0, 7.0, 12.0, 147919.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (607.0, 1.0, 19.0, 140531.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (608.0, 3.0, 11.0, 126268.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (608.0, 26.0, 10.0, 151894.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (608.0, 16.0, 12.0, 133152.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (609.0, 12.0, 5.0, 133277.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (609.0, 39.0, 12.0, 149219.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (609.0, 8.0, 10.0, 137196.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (609.0, 41.0, 9.0, 129779.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (609.0, 44.0, 5.0, 129227.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (610.0, 28.0, 4.0, 147044.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (610.0, 26.0, 19.0, 125609.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (610.0, 14.0, 20.0, 108617.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (610.0, 20.0, 18.0, 138058.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (611.0, 6.0, 9.0, 164352.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (611.0, 23.0, 19.0, 108014.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (611.0, 5.0, 14.0, 145273.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (612.0, 17.0, 17.0, 135673.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (612.0, 30.0, 12.0, 128735.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (612.0, 43.0, 6.0, 164638.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (612.0, 41.0, 19.0, 120269.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (613.0, 40.0, 5.0, 126900.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (613.0, 18.0, 3.0, 155513.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (614.0, 5.0, 6.0, 127075.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (614.0, 7.0, 10.0, 115847.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (615.0, 9.0, 2.0, 124172.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (615.0, 43.0, 5.0, 128825.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (616.0, 23.0, 10.0, 105225.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (616.0, 5.0, 18.0, 164043.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (616.0, 46.0, 9.0, 118371.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (616.0, 21.0, 20.0, 155460.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (616.0, 11.0, 17.0, 157099.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (617.0, 29.0, 4.0, 138253.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (617.0, 7.0, 19.0, 119539.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (617.0, 37.0, 9.0, 135593.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (617.0, 33.0, 10.0, 149702.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (617.0, 20.0, 6.0, 125311.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (618.0, 41.0, 20.0, 137262.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (618.0, 30.0, 16.0, 143282.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (618.0, 28.0, 3.0, 159040.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (619.0, 36.0, 12.0, 115367.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (619.0, 37.0, 2.0, 149187.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (619.0, 46.0, 4.0, 143565.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (620.0, 30.0, 17.0, 116454.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (620.0, 25.0, 18.0, 123943.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (620.0, 28.0, 4.0, 137335.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (621.0, 29.0, 18.0, 115186.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (621.0, 28.0, 2.0, 128656.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (621.0, 42.0, 16.0, 142747.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (621.0, 2.0, 17.0, 143097.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (621.0, 9.0, 18.0, 141824.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (622.0, 37.0, 6.0, 157699.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (622.0, 36.0, 5.0, 121337.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (622.0, 22.0, 16.0, 155383.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (623.0, 14.0, 10.0, 129047.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (623.0, 48.0, 14.0, 136091.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (624.0, 44.0, 9.0, 111131.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (625.0, 11.0, 13.0, 113461.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (625.0, 29.0, 19.0, 128968.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (625.0, 48.0, 13.0, 132507.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (626.0, 5.0, 12.0, 147818.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (626.0, 15.0, 13.0, 130135.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (627.0, 35.0, 15.0, 111560.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (628.0, 32.0, 5.0, 148165.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (628.0, 16.0, 8.0, 129632.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (628.0, 47.0, 19.0, 132414.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (628.0, 38.0, 20.0, 116073.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (629.0, 46.0, 18.0, 129372.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (629.0, 43.0, 1.0, 122762.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (629.0, 24.0, 6.0, 147389.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (630.0, 26.0, 10.0, 138277.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (630.0, 19.0, 6.0, 155260.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (630.0, 10.0, 10.0, 139991.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (631.0, 24.0, 2.0, 126435.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (631.0, 6.0, 9.0, 151247.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (631.0, 6.0, 10.0, 134127.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (632.0, 31.0, 9.0, 113450.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (632.0, 16.0, 19.0, 148274.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (633.0, 32.0, 6.0, 151793.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (634.0, 22.0, 20.0, 140005.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (635.0, 28.0, 15.0, 165374.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (635.0, 28.0, 16.0, 133007.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (635.0, 19.0, 9.0, 140565.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (635.0, 28.0, 9.0, 171522.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (635.0, 22.0, 6.0, 108405.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (636.0, 2.0, 14.0, 147365.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (636.0, 32.0, 17.0, 141317.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (636.0, 44.0, 4.0, 116390.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (637.0, 21.0, 8.0, 135090.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (638.0, 24.0, 20.0, 125813.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (639.0, 8.0, 2.0, 113966.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (639.0, 17.0, 2.0, 106741.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (639.0, 46.0, 17.0, 162889.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (639.0, 39.0, 15.0, 124390.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (640.0, 2.0, 11.0, 124928.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (640.0, 29.0, 15.0, 135370.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (640.0, 9.0, 15.0, 130103.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (640.0, 8.0, 13.0, 156644.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (641.0, 28.0, 19.0, 144074.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (641.0, 33.0, 10.0, 125101.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (641.0, 15.0, 6.0, 106079.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (642.0, 32.0, 19.0, 144747.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (642.0, 25.0, 4.0, 127079.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (643.0, 32.0, 11.0, 147664.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (643.0, 43.0, 1.0, 114672.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (643.0, 41.0, 4.0, 144419.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (643.0, 23.0, 1.0, 110564.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (644.0, 20.0, 5.0, 131029.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (644.0, 36.0, 5.0, 107015.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (644.0, 1.0, 1.0, 138703.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (644.0, 48.0, 1.0, 109509.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (644.0, 36.0, 14.0, 160436.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (645.0, 43.0, 15.0, 142010.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (645.0, 14.0, 20.0, 122713.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (645.0, 6.0, 16.0, 148895.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (646.0, 17.0, 8.0, 166837.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (647.0, 40.0, 7.0, 144305.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (647.0, 2.0, 19.0, 126639.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (647.0, 2.0, 12.0, 124242.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (648.0, 27.0, 12.0, 108051.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (648.0, 36.0, 13.0, 122670.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (648.0, 27.0, 7.0, 118265.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (648.0, 42.0, 11.0, 136206.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (648.0, 45.0, 5.0, 144126.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (649.0, 32.0, 12.0, 126004.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (649.0, 15.0, 5.0, 166662.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (649.0, 15.0, 11.0, 140784.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (650.0, 3.0, 13.0, 129582.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (651.0, 23.0, 2.0, 106444.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (651.0, 21.0, 5.0, 121421.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (651.0, 28.0, 2.0, 140879.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (651.0, 30.0, 6.0, 105007.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (652.0, 25.0, 17.0, 144985.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (652.0, 7.0, 15.0, 143858.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (653.0, 13.0, 10.0, 125901.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (653.0, 11.0, 15.0, 170895.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (653.0, 33.0, 3.0, 145961.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (653.0, 35.0, 3.0, 111790.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (653.0, 6.0, 14.0, 125217.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (654.0, 35.0, 11.0, 128565.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (654.0, 5.0, 5.0, 123758.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (654.0, 32.0, 13.0, 151941.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (654.0, 41.0, 18.0, 141416.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (654.0, 43.0, 17.0, 162687.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (655.0, 40.0, 11.0, 107843.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (656.0, 34.0, 7.0, 120010.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (657.0, 39.0, 3.0, 133549.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (657.0, 33.0, 6.0, 131009.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (657.0, 10.0, 15.0, 164280.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (657.0, 10.0, 20.0, 171274.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (658.0, 10.0, 8.0, 118383.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (658.0, 35.0, 17.0, 136458.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (658.0, 45.0, 9.0, 124207.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (658.0, 31.0, 17.0, 132903.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (659.0, 41.0, 7.0, 164847.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (659.0, 47.0, 9.0, 128745.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (659.0, 12.0, 14.0, 168889.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (659.0, 33.0, 13.0, 162568.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (659.0, 36.0, 12.0, 134351.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (660.0, 13.0, 1.0, 111770.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (660.0, 26.0, 18.0, 134669.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (661.0, 37.0, 20.0, 136212.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (662.0, 39.0, 18.0, 112941.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (662.0, 26.0, 15.0, 122190.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (662.0, 11.0, 7.0, 130721.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (662.0, 16.0, 1.0, 127551.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (663.0, 18.0, 3.0, 129843.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (664.0, 11.0, 8.0, 149600.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (664.0, 15.0, 5.0, 112940.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (665.0, 1.0, 12.0, 126015.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (665.0, 42.0, 11.0, 148969.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (665.0, 5.0, 18.0, 144992.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (666.0, 22.0, 5.0, 155280.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (666.0, 1.0, 10.0, 132496.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (666.0, 12.0, 14.0, 139423.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (666.0, 28.0, 13.0, 157793.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (666.0, 45.0, 4.0, 150338.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (667.0, 40.0, 5.0, 127291.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (667.0, 36.0, 20.0, 128587.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (667.0, 3.0, 5.0, 162297.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (667.0, 35.0, 20.0, 116868.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (667.0, 16.0, 13.0, 133590.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (668.0, 1.0, 16.0, 145575.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (668.0, 32.0, 3.0, 126511.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (668.0, 26.0, 14.0, 105872.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (668.0, 11.0, 4.0, 167698.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (668.0, 22.0, 13.0, 143226.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (669.0, 41.0, 14.0, 144772.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (670.0, 4.0, 1.0, 139097.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (670.0, 17.0, 4.0, 167793.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (671.0, 31.0, 13.0, 108080.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (671.0, 24.0, 5.0, 164310.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (671.0, 4.0, 20.0, 149672.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (671.0, 3.0, 17.0, 132201.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (671.0, 6.0, 20.0, 148901.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (672.0, 7.0, 5.0, 160733.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (672.0, 22.0, 11.0, 157131.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (672.0, 30.0, 2.0, 126707.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (673.0, 18.0, 11.0, 139700.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (673.0, 41.0, 19.0, 114975.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (673.0, 32.0, 3.0, 109015.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (674.0, 25.0, 13.0, 129935.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (674.0, 37.0, 15.0, 161314.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (674.0, 22.0, 1.0, 169520.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (674.0, 1.0, 4.0, 169819.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (675.0, 30.0, 15.0, 126873.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (675.0, 21.0, 17.0, 141802.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (676.0, 9.0, 4.0, 132563.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (677.0, 25.0, 3.0, 173376.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (677.0, 7.0, 2.0, 151428.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (677.0, 44.0, 6.0, 144908.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (678.0, 43.0, 14.0, 136526.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (679.0, 9.0, 14.0, 108388.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (679.0, 34.0, 18.0, 174659.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (680.0, 32.0, 15.0, 148361.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (680.0, 36.0, 19.0, 124449.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (681.0, 21.0, 1.0, 139111.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (681.0, 47.0, 19.0, 172952.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (681.0, 47.0, 6.0, 114351.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (682.0, 7.0, 15.0, 137726.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (682.0, 20.0, 19.0, 148053.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (682.0, 11.0, 7.0, 125143.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (682.0, 38.0, 12.0, 166352.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (682.0, 44.0, 20.0, 122039.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (683.0, 22.0, 16.0, 156577.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (684.0, 43.0, 11.0, 129889.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (684.0, 28.0, 12.0, 149516.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (685.0, 14.0, 17.0, 153277.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (685.0, 32.0, 20.0, 152992.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (685.0, 15.0, 13.0, 114539.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (685.0, 1.0, 17.0, 147914.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (686.0, 10.0, 19.0, 121399.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (687.0, 6.0, 11.0, 166792.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (687.0, 47.0, 13.0, 145193.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (687.0, 8.0, 17.0, 128512.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (687.0, 46.0, 6.0, 112516.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (688.0, 41.0, 4.0, 131177.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (688.0, 31.0, 2.0, 122835.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (688.0, 42.0, 5.0, 121684.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (689.0, 14.0, 2.0, 106260.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (689.0, 3.0, 14.0, 173701.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (689.0, 44.0, 8.0, 152582.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (689.0, 13.0, 1.0, 138417.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (690.0, 14.0, 11.0, 147262.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (690.0, 18.0, 1.0, 130614.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (690.0, 10.0, 2.0, 113847.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (690.0, 26.0, 7.0, 141167.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (690.0, 13.0, 4.0, 128892.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (691.0, 27.0, 6.0, 137964.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (691.0, 6.0, 7.0, 105551.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (691.0, 16.0, 6.0, 117412.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (691.0, 33.0, 4.0, 152105.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (691.0, 25.0, 2.0, 147590.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (692.0, 26.0, 4.0, 135377.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (693.0, 10.0, 15.0, 161240.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (694.0, 10.0, 4.0, 136480.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (694.0, 46.0, 18.0, 144932.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (695.0, 2.0, 17.0, 129493.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (696.0, 25.0, 11.0, 162870.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (697.0, 11.0, 14.0, 170161.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (697.0, 28.0, 12.0, 172914.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (697.0, 41.0, 14.0, 129252.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (698.0, 15.0, 5.0, 148955.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (699.0, 13.0, 8.0, 126750.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (699.0, 9.0, 4.0, 128195.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (699.0, 37.0, 13.0, 143493.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (699.0, 45.0, 11.0, 139527.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (700.0, 30.0, 12.0, 124011.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (701.0, 29.0, 18.0, 140519.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (702.0, 46.0, 8.0, 132423.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (702.0, 34.0, 20.0, 166647.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (702.0, 7.0, 15.0, 113735.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (702.0, 17.0, 10.0, 148811.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (702.0, 6.0, 1.0, 119554.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (703.0, 45.0, 19.0, 168157.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (703.0, 39.0, 5.0, 123083.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (703.0, 6.0, 11.0, 124950.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (704.0, 39.0, 8.0, 158219.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (704.0, 36.0, 12.0, 127044.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (704.0, 15.0, 3.0, 131614.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (704.0, 15.0, 17.0, 159214.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (704.0, 33.0, 15.0, 145636.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (705.0, 39.0, 15.0, 168164.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (705.0, 11.0, 20.0, 163141.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (705.0, 45.0, 19.0, 164160.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (705.0, 8.0, 15.0, 138927.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (705.0, 24.0, 10.0, 144254.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (706.0, 15.0, 13.0, 109929.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (707.0, 39.0, 8.0, 138675.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (707.0, 46.0, 6.0, 110417.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (707.0, 38.0, 6.0, 113090.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (707.0, 6.0, 20.0, 142247.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (707.0, 37.0, 19.0, 122711.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (708.0, 42.0, 4.0, 118512.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (708.0, 45.0, 9.0, 172853.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (708.0, 4.0, 4.0, 114613.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (709.0, 44.0, 3.0, 115963.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (709.0, 18.0, 7.0, 129081.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (709.0, 48.0, 17.0, 127818.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (710.0, 39.0, 5.0, 106915.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (710.0, 45.0, 3.0, 109326.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (710.0, 22.0, 14.0, 130564.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (711.0, 10.0, 15.0, 134429.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (711.0, 25.0, 1.0, 141877.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (711.0, 48.0, 18.0, 145906.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (711.0, 30.0, 19.0, 142736.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (712.0, 13.0, 14.0, 140030.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (712.0, 29.0, 14.0, 171528.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (713.0, 5.0, 15.0, 122637.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (713.0, 38.0, 3.0, 146932.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (714.0, 35.0, 6.0, 143931.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (715.0, 44.0, 9.0, 140867.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (715.0, 37.0, 17.0, 144746.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (715.0, 45.0, 5.0, 139567.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (715.0, 25.0, 8.0, 129942.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (716.0, 17.0, 8.0, 139945.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (716.0, 38.0, 14.0, 143548.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (716.0, 14.0, 6.0, 118751.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (717.0, 20.0, 7.0, 171938.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (717.0, 24.0, 14.0, 115138.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (717.0, 7.0, 15.0, 171737.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (718.0, 19.0, 19.0, 141085.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (719.0, 29.0, 9.0, 142294.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (719.0, 9.0, 18.0, 147381.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (720.0, 38.0, 9.0, 149407.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (720.0, 36.0, 16.0, 155842.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (720.0, 48.0, 11.0, 144161.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (721.0, 19.0, 20.0, 122290.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (721.0, 43.0, 9.0, 118191.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (721.0, 4.0, 13.0, 171672.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (721.0, 26.0, 20.0, 134254.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (722.0, 5.0, 5.0, 141473.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (722.0, 25.0, 4.0, 163167.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (722.0, 9.0, 8.0, 147738.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (722.0, 39.0, 18.0, 152434.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (723.0, 29.0, 18.0, 114128.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (723.0, 38.0, 8.0, 139111.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (723.0, 28.0, 12.0, 139263.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (723.0, 47.0, 12.0, 167114.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (723.0, 32.0, 11.0, 142490.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (724.0, 24.0, 1.0, 145657.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (725.0, 48.0, 10.0, 120525.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (725.0, 36.0, 7.0, 144658.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (725.0, 24.0, 5.0, 133715.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (725.0, 11.0, 18.0, 115594.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (726.0, 22.0, 1.0, 105174.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (726.0, 41.0, 11.0, 153498.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (727.0, 21.0, 1.0, 128130.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (728.0, 17.0, 10.0, 112677.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (728.0, 27.0, 3.0, 142268.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (729.0, 30.0, 3.0, 105807.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (729.0, 33.0, 19.0, 174603.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (729.0, 9.0, 16.0, 138497.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (729.0, 27.0, 9.0, 161960.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (730.0, 21.0, 8.0, 130652.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (731.0, 31.0, 12.0, 147213.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (732.0, 41.0, 15.0, 123271.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (732.0, 6.0, 15.0, 131237.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (733.0, 2.0, 18.0, 174508.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (733.0, 38.0, 3.0, 134222.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (734.0, 9.0, 8.0, 164193.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (735.0, 16.0, 17.0, 124538.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (735.0, 18.0, 12.0, 109580.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (735.0, 34.0, 3.0, 147415.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (735.0, 27.0, 8.0, 143872.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (735.0, 23.0, 16.0, 115257.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (736.0, 37.0, 13.0, 136468.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (736.0, 35.0, 14.0, 136999.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (736.0, 2.0, 2.0, 141563.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (737.0, 16.0, 11.0, 171628.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (737.0, 31.0, 17.0, 154277.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (737.0, 24.0, 9.0, 137164.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (737.0, 4.0, 20.0, 140609.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (738.0, 40.0, 18.0, 156978.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (739.0, 18.0, 3.0, 145645.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (739.0, 41.0, 9.0, 164724.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (739.0, 19.0, 6.0, 126440.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (740.0, 37.0, 19.0, 147336.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (740.0, 42.0, 14.0, 138592.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (740.0, 21.0, 4.0, 107563.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (741.0, 40.0, 8.0, 145534.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (741.0, 34.0, 6.0, 139237.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (741.0, 28.0, 18.0, 143051.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (741.0, 47.0, 16.0, 114229.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (741.0, 47.0, 15.0, 147968.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (742.0, 22.0, 19.0, 137443.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (742.0, 20.0, 8.0, 124445.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (742.0, 25.0, 12.0, 137397.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (742.0, 32.0, 20.0, 133116.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (742.0, 21.0, 15.0, 120310.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (743.0, 45.0, 1.0, 126460.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (743.0, 47.0, 8.0, 113326.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (743.0, 1.0, 12.0, 164910.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (743.0, 4.0, 20.0, 149886.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (743.0, 13.0, 7.0, 115584.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (744.0, 6.0, 2.0, 122198.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (745.0, 22.0, 7.0, 135908.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (746.0, 31.0, 15.0, 161819.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (747.0, 23.0, 14.0, 168379.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (747.0, 38.0, 19.0, 173474.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (748.0, 31.0, 20.0, 136667.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (748.0, 41.0, 20.0, 166057.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (748.0, 6.0, 12.0, 148342.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (748.0, 15.0, 10.0, 125379.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (748.0, 20.0, 18.0, 145767.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (749.0, 22.0, 20.0, 169405.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (749.0, 12.0, 13.0, 124444.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (749.0, 42.0, 13.0, 132362.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (749.0, 12.0, 15.0, 140130.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (749.0, 27.0, 4.0, 141322.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (750.0, 9.0, 19.0, 112154.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (750.0, 25.0, 18.0, 123930.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (750.0, 6.0, 10.0, 125859.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (751.0, 39.0, 14.0, 128350.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (751.0, 23.0, 2.0, 159995.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (751.0, 44.0, 12.0, 169160.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (751.0, 12.0, 18.0, 142414.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (752.0, 7.0, 10.0, 140612.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (752.0, 37.0, 5.0, 138731.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (752.0, 18.0, 2.0, 152772.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (753.0, 9.0, 19.0, 139626.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (753.0, 9.0, 2.0, 130121.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (753.0, 27.0, 9.0, 143082.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (754.0, 48.0, 8.0, 160007.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (754.0, 29.0, 11.0, 111388.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (754.0, 38.0, 6.0, 143582.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (755.0, 19.0, 15.0, 146573.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (755.0, 23.0, 17.0, 133901.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (756.0, 8.0, 10.0, 140063.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (756.0, 8.0, 16.0, 143377.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (756.0, 18.0, 2.0, 119081.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (756.0, 41.0, 7.0, 149150.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (757.0, 32.0, 20.0, 164395.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (757.0, 5.0, 14.0, 145178.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (757.0, 23.0, 16.0, 160437.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (758.0, 27.0, 12.0, 147208.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (758.0, 8.0, 16.0, 110303.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (759.0, 42.0, 19.0, 120348.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (759.0, 17.0, 1.0, 136456.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (759.0, 13.0, 10.0, 149834.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (759.0, 44.0, 13.0, 106693.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (760.0, 25.0, 15.0, 136076.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (760.0, 27.0, 6.0, 144717.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (760.0, 2.0, 4.0, 163811.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (761.0, 36.0, 18.0, 125167.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (761.0, 35.0, 16.0, 145359.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (762.0, 5.0, 20.0, 134034.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (762.0, 35.0, 1.0, 155418.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (762.0, 28.0, 18.0, 122625.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (762.0, 31.0, 8.0, 115659.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (763.0, 35.0, 12.0, 159358.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (763.0, 18.0, 3.0, 155541.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (763.0, 5.0, 4.0, 138220.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (764.0, 37.0, 13.0, 113791.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (764.0, 41.0, 2.0, 137483.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (764.0, 12.0, 3.0, 162396.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (764.0, 12.0, 6.0, 136798.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (764.0, 26.0, 17.0, 161727.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (765.0, 44.0, 18.0, 142578.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (766.0, 27.0, 10.0, 169113.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (766.0, 40.0, 20.0, 116278.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (766.0, 38.0, 15.0, 133146.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (766.0, 1.0, 6.0, 141752.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (766.0, 45.0, 20.0, 123646.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (767.0, 18.0, 10.0, 105799.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (768.0, 13.0, 19.0, 174002.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (768.0, 5.0, 1.0, 120206.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (769.0, 34.0, 8.0, 173068.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (769.0, 19.0, 3.0, 145280.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (769.0, 4.0, 10.0, 135783.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (769.0, 8.0, 6.0, 141806.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (769.0, 19.0, 4.0, 168894.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (770.0, 13.0, 12.0, 122934.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (770.0, 40.0, 20.0, 148440.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (770.0, 31.0, 12.0, 155368.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (770.0, 40.0, 8.0, 107021.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (770.0, 34.0, 12.0, 155000.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (771.0, 20.0, 4.0, 115263.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (771.0, 34.0, 16.0, 174369.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (771.0, 40.0, 1.0, 115244.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (771.0, 28.0, 14.0, 149661.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (771.0, 26.0, 3.0, 132126.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (772.0, 31.0, 8.0, 107361.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (773.0, 24.0, 10.0, 141812.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (773.0, 40.0, 1.0, 118000.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (773.0, 44.0, 5.0, 171285.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (773.0, 10.0, 8.0, 133921.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (773.0, 43.0, 12.0, 169046.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (774.0, 22.0, 20.0, 128485.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (774.0, 28.0, 13.0, 145461.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (775.0, 27.0, 4.0, 126971.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (775.0, 37.0, 4.0, 108564.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (775.0, 11.0, 20.0, 111342.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (775.0, 26.0, 8.0, 148335.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (776.0, 44.0, 8.0, 110366.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (776.0, 9.0, 13.0, 174718.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (776.0, 27.0, 18.0, 174448.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (777.0, 36.0, 4.0, 130486.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (777.0, 36.0, 8.0, 112607.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (777.0, 40.0, 3.0, 121638.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (777.0, 40.0, 9.0, 141312.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (777.0, 43.0, 20.0, 139493.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (778.0, 39.0, 13.0, 127009.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (778.0, 11.0, 11.0, 136058.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (778.0, 5.0, 5.0, 142942.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (778.0, 7.0, 10.0, 143885.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (778.0, 23.0, 2.0, 154798.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (779.0, 19.0, 3.0, 113675.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (779.0, 44.0, 1.0, 110420.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (779.0, 37.0, 5.0, 140322.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (779.0, 10.0, 3.0, 112345.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (780.0, 35.0, 9.0, 152258.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (780.0, 16.0, 7.0, 122045.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (780.0, 9.0, 15.0, 155355.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (781.0, 5.0, 19.0, 146910.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (781.0, 1.0, 4.0, 106638.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (781.0, 15.0, 20.0, 116474.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (781.0, 15.0, 18.0, 130007.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (781.0, 21.0, 7.0, 115642.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (782.0, 23.0, 15.0, 109655.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (782.0, 47.0, 2.0, 167386.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (783.0, 11.0, 11.0, 148942.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (783.0, 41.0, 9.0, 145929.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (783.0, 22.0, 4.0, 128735.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (783.0, 45.0, 10.0, 131374.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (783.0, 28.0, 10.0, 130759.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (784.0, 10.0, 4.0, 130710.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (784.0, 28.0, 7.0, 158484.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (784.0, 31.0, 6.0, 126467.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (784.0, 1.0, 15.0, 148700.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (785.0, 4.0, 12.0, 122771.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (786.0, 39.0, 9.0, 139359.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (786.0, 35.0, 15.0, 136730.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (787.0, 15.0, 18.0, 144938.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (787.0, 17.0, 5.0, 164449.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (788.0, 4.0, 9.0, 105639.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (788.0, 19.0, 11.0, 114847.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (788.0, 40.0, 10.0, 122675.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (788.0, 44.0, 6.0, 149608.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (788.0, 48.0, 9.0, 134418.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (789.0, 29.0, 14.0, 157844.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (790.0, 35.0, 10.0, 125511.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (791.0, 13.0, 5.0, 157554.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (792.0, 48.0, 7.0, 132812.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (792.0, 26.0, 11.0, 133527.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (792.0, 46.0, 8.0, 149004.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (793.0, 5.0, 13.0, 160764.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (793.0, 9.0, 17.0, 134843.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (793.0, 23.0, 14.0, 136497.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (793.0, 30.0, 18.0, 130433.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (794.0, 14.0, 1.0, 164651.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (794.0, 36.0, 14.0, 165020.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (795.0, 25.0, 6.0, 119757.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (795.0, 33.0, 15.0, 111671.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (796.0, 42.0, 14.0, 105199.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (797.0, 17.0, 19.0, 162794.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (797.0, 1.0, 3.0, 147711.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (797.0, 39.0, 6.0, 115892.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (798.0, 40.0, 2.0, 125232.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (799.0, 7.0, 1.0, 132641.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (799.0, 13.0, 3.0, 141493.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (799.0, 32.0, 19.0, 131251.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (799.0, 7.0, 16.0, 130187.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (800.0, 25.0, 12.0, 156660.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (800.0, 1.0, 1.0, 128544.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (800.0, 37.0, 13.0, 125444.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (801.0, 29.0, 14.0, 136098.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (801.0, 19.0, 6.0, 156331.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (801.0, 27.0, 7.0, 174691.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (801.0, 37.0, 2.0, 108604.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (801.0, 21.0, 18.0, 134124.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (802.0, 18.0, 9.0, 117315.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (802.0, 44.0, 8.0, 139887.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (802.0, 17.0, 12.0, 105071.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (802.0, 6.0, 8.0, 174444.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (803.0, 23.0, 1.0, 148647.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (803.0, 25.0, 11.0, 129435.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (803.0, 3.0, 4.0, 127989.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (803.0, 8.0, 16.0, 109998.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (803.0, 24.0, 15.0, 137713.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (804.0, 29.0, 20.0, 145263.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (804.0, 45.0, 4.0, 149717.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (804.0, 22.0, 9.0, 140614.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (804.0, 10.0, 15.0, 129795.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (805.0, 5.0, 12.0, 129401.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (805.0, 28.0, 12.0, 135279.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (805.0, 28.0, 18.0, 110213.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (806.0, 6.0, 20.0, 167178.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (806.0, 24.0, 17.0, 139718.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (806.0, 4.0, 13.0, 130151.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (806.0, 23.0, 6.0, 159610.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (806.0, 45.0, 19.0, 146029.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (807.0, 44.0, 20.0, 167986.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (807.0, 47.0, 17.0, 123248.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (807.0, 32.0, 19.0, 134509.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (807.0, 7.0, 3.0, 147508.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (808.0, 31.0, 11.0, 128237.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (808.0, 30.0, 15.0, 137430.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (809.0, 34.0, 16.0, 136956.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (809.0, 4.0, 14.0, 129691.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (810.0, 35.0, 3.0, 171993.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (810.0, 19.0, 18.0, 118285.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (810.0, 22.0, 10.0, 134491.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (810.0, 14.0, 8.0, 144040.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (811.0, 44.0, 10.0, 168848.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (811.0, 48.0, 4.0, 136918.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (812.0, 4.0, 11.0, 114926.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (813.0, 34.0, 19.0, 167866.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (813.0, 28.0, 7.0, 168303.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (813.0, 26.0, 1.0, 106902.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (814.0, 26.0, 4.0, 152495.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (814.0, 37.0, 12.0, 136659.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (814.0, 21.0, 2.0, 118799.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (814.0, 39.0, 15.0, 153209.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (814.0, 23.0, 6.0, 120436.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (815.0, 12.0, 19.0, 125741.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (816.0, 16.0, 16.0, 143413.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (816.0, 21.0, 3.0, 124982.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (816.0, 28.0, 18.0, 152234.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (816.0, 46.0, 6.0, 118984.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (817.0, 36.0, 9.0, 124381.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (817.0, 12.0, 7.0, 123289.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (818.0, 16.0, 8.0, 144968.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (818.0, 28.0, 19.0, 140177.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (819.0, 12.0, 8.0, 108126.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (819.0, 34.0, 7.0, 109111.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (819.0, 13.0, 10.0, 152186.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (820.0, 41.0, 6.0, 128043.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (820.0, 30.0, 19.0, 113195.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (820.0, 17.0, 1.0, 109471.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (820.0, 10.0, 18.0, 138306.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (820.0, 44.0, 11.0, 146247.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (821.0, 44.0, 19.0, 147777.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (822.0, 22.0, 1.0, 143886.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (822.0, 42.0, 17.0, 171644.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (823.0, 14.0, 5.0, 158779.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (823.0, 9.0, 2.0, 147441.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (823.0, 24.0, 15.0, 143855.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (823.0, 3.0, 4.0, 165253.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (824.0, 34.0, 12.0, 116351.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (824.0, 31.0, 15.0, 132641.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (824.0, 28.0, 20.0, 157352.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (825.0, 46.0, 5.0, 144272.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (825.0, 20.0, 2.0, 105824.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (826.0, 20.0, 17.0, 114186.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (826.0, 13.0, 15.0, 158446.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (827.0, 23.0, 7.0, 146591.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (827.0, 25.0, 20.0, 173276.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (827.0, 31.0, 15.0, 118160.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (827.0, 9.0, 14.0, 105161.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (827.0, 18.0, 1.0, 108356.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (828.0, 36.0, 8.0, 130109.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (829.0, 19.0, 12.0, 136872.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (829.0, 5.0, 15.0, 139184.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (829.0, 19.0, 2.0, 140173.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (829.0, 21.0, 5.0, 153140.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (830.0, 33.0, 1.0, 133246.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (830.0, 43.0, 20.0, 152366.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (830.0, 27.0, 8.0, 112676.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (830.0, 38.0, 14.0, 118493.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (830.0, 18.0, 17.0, 135551.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (831.0, 15.0, 18.0, 134672.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (831.0, 2.0, 14.0, 105607.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (832.0, 3.0, 18.0, 164277.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (832.0, 46.0, 14.0, 119377.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (832.0, 35.0, 7.0, 125629.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (832.0, 15.0, 14.0, 131671.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (833.0, 8.0, 17.0, 129801.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (833.0, 18.0, 11.0, 113184.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (833.0, 17.0, 17.0, 124905.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (834.0, 48.0, 20.0, 114229.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (834.0, 28.0, 2.0, 122235.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (834.0, 36.0, 5.0, 150441.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (834.0, 29.0, 19.0, 148046.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (834.0, 20.0, 5.0, 108387.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (835.0, 21.0, 19.0, 125832.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (836.0, 25.0, 7.0, 120998.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (837.0, 16.0, 6.0, 119868.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (837.0, 30.0, 2.0, 116381.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (837.0, 19.0, 1.0, 128986.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (837.0, 47.0, 4.0, 117325.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (837.0, 13.0, 3.0, 144094.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (838.0, 38.0, 8.0, 161863.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (838.0, 38.0, 10.0, 131720.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (839.0, 28.0, 20.0, 141924.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (839.0, 11.0, 7.0, 112292.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (839.0, 3.0, 7.0, 133285.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (840.0, 14.0, 18.0, 138588.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (841.0, 20.0, 13.0, 157905.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (841.0, 18.0, 1.0, 131166.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (842.0, 26.0, 3.0, 151852.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (842.0, 42.0, 3.0, 124851.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (843.0, 46.0, 19.0, 146204.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (844.0, 29.0, 6.0, 126232.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (845.0, 12.0, 18.0, 164334.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (845.0, 23.0, 12.0, 153222.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (846.0, 4.0, 17.0, 154754.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (846.0, 16.0, 17.0, 128269.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (846.0, 39.0, 19.0, 149070.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (846.0, 42.0, 7.0, 140423.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (846.0, 4.0, 11.0, 125332.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (847.0, 1.0, 3.0, 127011.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (848.0, 17.0, 19.0, 123139.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (848.0, 11.0, 17.0, 127184.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (848.0, 20.0, 4.0, 105336.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (848.0, 14.0, 11.0, 170812.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (848.0, 46.0, 16.0, 161806.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (849.0, 36.0, 2.0, 126987.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (849.0, 18.0, 10.0, 107482.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (849.0, 35.0, 7.0, 174482.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (849.0, 19.0, 11.0, 112996.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (850.0, 44.0, 18.0, 129154.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (850.0, 45.0, 3.0, 173046.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (850.0, 3.0, 2.0, 142078.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (850.0, 22.0, 12.0, 123713.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (851.0, 19.0, 10.0, 140285.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (851.0, 4.0, 19.0, 155394.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (851.0, 11.0, 18.0, 119321.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (852.0, 16.0, 3.0, 167946.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (852.0, 1.0, 9.0, 146795.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (853.0, 20.0, 14.0, 171735.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (853.0, 6.0, 4.0, 129928.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (854.0, 10.0, 6.0, 161855.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (854.0, 37.0, 12.0, 146888.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (854.0, 35.0, 15.0, 139608.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (854.0, 20.0, 5.0, 111679.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (854.0, 12.0, 15.0, 117618.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (855.0, 37.0, 3.0, 112947.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (855.0, 13.0, 11.0, 106717.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (855.0, 12.0, 1.0, 143542.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (855.0, 11.0, 9.0, 140229.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (855.0, 46.0, 13.0, 162728.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (856.0, 1.0, 1.0, 170876.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (856.0, 31.0, 2.0, 130848.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (857.0, 7.0, 18.0, 129335.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (857.0, 22.0, 10.0, 144251.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (857.0, 19.0, 2.0, 159759.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (857.0, 24.0, 1.0, 137768.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (858.0, 25.0, 5.0, 146321.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (858.0, 46.0, 6.0, 126084.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (858.0, 10.0, 3.0, 131119.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (858.0, 22.0, 4.0, 108074.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (858.0, 48.0, 12.0, 134848.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (859.0, 28.0, 12.0, 143693.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (860.0, 26.0, 8.0, 173070.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (860.0, 41.0, 17.0, 135634.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (861.0, 29.0, 10.0, 135334.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (861.0, 33.0, 7.0, 139238.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (861.0, 30.0, 20.0, 116985.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (862.0, 39.0, 18.0, 158596.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (862.0, 7.0, 9.0, 152033.44);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (863.0, 12.0, 20.0, 153430.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (863.0, 44.0, 10.0, 145712.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (863.0, 10.0, 20.0, 138300.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (863.0, 35.0, 10.0, 139552.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (864.0, 36.0, 3.0, 124218.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (864.0, 25.0, 19.0, 120568.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (864.0, 10.0, 9.0, 105109.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (864.0, 40.0, 9.0, 126639.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (864.0, 12.0, 9.0, 173513.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (865.0, 12.0, 15.0, 172175.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (865.0, 16.0, 13.0, 105312.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (865.0, 33.0, 4.0, 132291.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (865.0, 15.0, 1.0, 146503.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (865.0, 28.0, 1.0, 143076.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (866.0, 29.0, 4.0, 127459.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (866.0, 39.0, 13.0, 162762.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (867.0, 27.0, 1.0, 123003.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (867.0, 13.0, 7.0, 129601.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (867.0, 35.0, 2.0, 143417.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (868.0, 48.0, 7.0, 113012.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (868.0, 47.0, 5.0, 115733.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (868.0, 19.0, 13.0, 134559.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (868.0, 39.0, 14.0, 129761.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (868.0, 23.0, 17.0, 142477.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (869.0, 47.0, 1.0, 118151.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (869.0, 34.0, 12.0, 142901.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (869.0, 36.0, 11.0, 132331.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (869.0, 17.0, 18.0, 127595.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (870.0, 27.0, 3.0, 140076.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (870.0, 40.0, 15.0, 126754.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (870.0, 6.0, 9.0, 165351.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (870.0, 16.0, 13.0, 148416.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (871.0, 11.0, 2.0, 158006.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (871.0, 17.0, 12.0, 162202.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (871.0, 47.0, 5.0, 105283.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (871.0, 29.0, 20.0, 164025.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (872.0, 17.0, 20.0, 106275.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (872.0, 21.0, 6.0, 161912.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (872.0, 26.0, 14.0, 114742.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (873.0, 46.0, 10.0, 163838.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (873.0, 30.0, 1.0, 122869.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (873.0, 39.0, 10.0, 124276.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (873.0, 4.0, 14.0, 105351.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (873.0, 4.0, 2.0, 149167.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (874.0, 13.0, 7.0, 151112.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (874.0, 29.0, 5.0, 106658.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (875.0, 4.0, 5.0, 171559.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (875.0, 18.0, 15.0, 127625.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (875.0, 48.0, 19.0, 148817.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (875.0, 27.0, 12.0, 118659.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (875.0, 3.0, 11.0, 153466.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (876.0, 33.0, 14.0, 135147.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (876.0, 22.0, 7.0, 116719.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (876.0, 47.0, 18.0, 155464.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (877.0, 48.0, 7.0, 109502.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (877.0, 5.0, 6.0, 112446.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (877.0, 18.0, 13.0, 165880.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (878.0, 2.0, 8.0, 141654.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (879.0, 29.0, 18.0, 145205.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (879.0, 47.0, 18.0, 174010.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (880.0, 11.0, 6.0, 131722.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (880.0, 6.0, 5.0, 151853.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (880.0, 47.0, 7.0, 142129.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (880.0, 36.0, 10.0, 141921.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (881.0, 27.0, 3.0, 129004.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (881.0, 28.0, 17.0, 106932.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (881.0, 48.0, 8.0, 127627.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (881.0, 43.0, 20.0, 111593.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (882.0, 19.0, 10.0, 115405.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (882.0, 9.0, 3.0, 114354.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (882.0, 18.0, 2.0, 105336.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (882.0, 10.0, 2.0, 106398.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (882.0, 15.0, 7.0, 107853.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (883.0, 47.0, 10.0, 174286.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (883.0, 1.0, 3.0, 163898.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (883.0, 33.0, 11.0, 141962.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (883.0, 46.0, 19.0, 122396.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (884.0, 25.0, 2.0, 137915.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (884.0, 7.0, 4.0, 106231.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (884.0, 39.0, 9.0, 136205.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (884.0, 18.0, 10.0, 135141.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (884.0, 18.0, 10.0, 172435.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (885.0, 5.0, 15.0, 134904.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (885.0, 29.0, 3.0, 140442.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (885.0, 42.0, 20.0, 142816.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (885.0, 45.0, 15.0, 109000.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (886.0, 11.0, 17.0, 163713.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (886.0, 36.0, 13.0, 111102.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (887.0, 33.0, 9.0, 146096.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (887.0, 28.0, 11.0, 126023.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (888.0, 27.0, 11.0, 144774.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (888.0, 35.0, 20.0, 117981.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (888.0, 7.0, 14.0, 133816.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (888.0, 20.0, 12.0, 170323.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (888.0, 21.0, 20.0, 106261.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (889.0, 7.0, 8.0, 170015.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (889.0, 38.0, 19.0, 144115.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (890.0, 16.0, 6.0, 130177.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (890.0, 23.0, 16.0, 143718.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (890.0, 41.0, 14.0, 145288.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (891.0, 37.0, 20.0, 118789.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (891.0, 45.0, 1.0, 153130.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (891.0, 34.0, 8.0, 137265.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (892.0, 37.0, 16.0, 126544.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (892.0, 16.0, 17.0, 147412.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (892.0, 37.0, 19.0, 132344.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (892.0, 38.0, 18.0, 106057.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (892.0, 27.0, 16.0, 126201.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (893.0, 2.0, 1.0, 108938.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (893.0, 42.0, 18.0, 126462.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (893.0, 9.0, 17.0, 154639.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (893.0, 7.0, 9.0, 170168.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (894.0, 17.0, 20.0, 153258.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (894.0, 46.0, 9.0, 163047.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (894.0, 47.0, 12.0, 156810.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (894.0, 43.0, 9.0, 149236.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (895.0, 3.0, 8.0, 122853.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (895.0, 31.0, 3.0, 112184.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (895.0, 38.0, 5.0, 113383.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (895.0, 5.0, 17.0, 118177.4);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (895.0, 27.0, 17.0, 131871.16);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (896.0, 3.0, 1.0, 149487.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (896.0, 14.0, 15.0, 139057.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (897.0, 3.0, 4.0, 163382.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (898.0, 36.0, 5.0, 127228.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (898.0, 6.0, 10.0, 126129.18);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (898.0, 17.0, 10.0, 139938.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (898.0, 38.0, 12.0, 124299.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (898.0, 24.0, 8.0, 152102.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (899.0, 6.0, 14.0, 124188.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (899.0, 46.0, 2.0, 137385.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (899.0, 40.0, 4.0, 134098.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (900.0, 48.0, 8.0, 116220.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (900.0, 7.0, 17.0, 141202.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (900.0, 10.0, 3.0, 133122.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (900.0, 44.0, 8.0, 126736.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (901.0, 46.0, 17.0, 130235.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (901.0, 3.0, 12.0, 134123.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (901.0, 18.0, 11.0, 139776.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (901.0, 17.0, 8.0, 154129.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (902.0, 26.0, 19.0, 108925.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (902.0, 22.0, 17.0, 143273.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (902.0, 13.0, 1.0, 115040.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (902.0, 25.0, 19.0, 154878.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (902.0, 22.0, 5.0, 160472.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (903.0, 2.0, 10.0, 152583.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (904.0, 44.0, 4.0, 149732.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (904.0, 33.0, 1.0, 162115.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (905.0, 40.0, 2.0, 142430.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (905.0, 40.0, 9.0, 132881.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (905.0, 29.0, 6.0, 108796.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (906.0, 5.0, 9.0, 142773.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (907.0, 43.0, 8.0, 149739.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (907.0, 33.0, 6.0, 165575.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (908.0, 41.0, 9.0, 135791.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (908.0, 40.0, 20.0, 127302.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (908.0, 37.0, 3.0, 115502.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (908.0, 24.0, 13.0, 131872.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (909.0, 33.0, 6.0, 127019.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (909.0, 15.0, 10.0, 124189.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (909.0, 43.0, 6.0, 110542.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (909.0, 43.0, 1.0, 126593.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (910.0, 12.0, 11.0, 147872.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (910.0, 41.0, 7.0, 116372.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (911.0, 15.0, 3.0, 140596.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (911.0, 15.0, 5.0, 169088.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (912.0, 14.0, 5.0, 136357.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (912.0, 24.0, 14.0, 138932.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (912.0, 10.0, 14.0, 130026.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (912.0, 42.0, 8.0, 128788.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (912.0, 36.0, 1.0, 135647.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (913.0, 27.0, 18.0, 115771.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (913.0, 29.0, 3.0, 164940.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (914.0, 40.0, 6.0, 125515.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (914.0, 25.0, 5.0, 146482.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (914.0, 9.0, 6.0, 122774.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (915.0, 8.0, 15.0, 154282.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (916.0, 28.0, 18.0, 174735.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (916.0, 15.0, 11.0, 106736.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (917.0, 30.0, 4.0, 150957.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (917.0, 27.0, 20.0, 134928.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (918.0, 8.0, 13.0, 112628.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (918.0, 24.0, 8.0, 167975.01);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (918.0, 25.0, 12.0, 120969.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (918.0, 17.0, 14.0, 119316.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (918.0, 9.0, 12.0, 149985.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (919.0, 4.0, 8.0, 147699.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (919.0, 35.0, 20.0, 146321.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (919.0, 34.0, 20.0, 171503.79);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (919.0, 14.0, 5.0, 171548.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (919.0, 29.0, 7.0, 111836.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (920.0, 32.0, 6.0, 125243.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (921.0, 25.0, 2.0, 113433.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (921.0, 2.0, 19.0, 157808.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (921.0, 40.0, 10.0, 125954.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (922.0, 23.0, 12.0, 111848.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (922.0, 38.0, 8.0, 161442.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (922.0, 12.0, 10.0, 139076.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (923.0, 26.0, 4.0, 120407.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (924.0, 8.0, 19.0, 166521.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (924.0, 22.0, 10.0, 160785.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (924.0, 2.0, 19.0, 137236.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (924.0, 38.0, 17.0, 138528.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (924.0, 30.0, 2.0, 134004.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (925.0, 39.0, 20.0, 149183.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (925.0, 41.0, 1.0, 150517.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (925.0, 39.0, 4.0, 139814.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (925.0, 17.0, 18.0, 149819.73);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (925.0, 2.0, 10.0, 144200.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (926.0, 39.0, 2.0, 162321.36);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (927.0, 10.0, 3.0, 119876.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (927.0, 28.0, 1.0, 116491.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (927.0, 10.0, 10.0, 107626.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (927.0, 48.0, 12.0, 145402.46);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (928.0, 40.0, 18.0, 146912.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (928.0, 45.0, 8.0, 142608.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (928.0, 40.0, 9.0, 142813.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (929.0, 15.0, 4.0, 107520.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (929.0, 25.0, 5.0, 146477.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (929.0, 25.0, 8.0, 128123.22);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (929.0, 13.0, 4.0, 150113.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (929.0, 25.0, 13.0, 149204.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (930.0, 32.0, 13.0, 121517.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (930.0, 40.0, 16.0, 128109.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (930.0, 7.0, 15.0, 133081.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (931.0, 27.0, 4.0, 121145.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (931.0, 37.0, 14.0, 141645.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (931.0, 33.0, 10.0, 162256.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (931.0, 19.0, 8.0, 169263.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (931.0, 9.0, 5.0, 164203.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (932.0, 28.0, 9.0, 108557.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (932.0, 19.0, 13.0, 148508.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (932.0, 23.0, 2.0, 117446.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (932.0, 11.0, 13.0, 161500.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (933.0, 48.0, 14.0, 141574.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (933.0, 8.0, 5.0, 140440.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (933.0, 31.0, 4.0, 125551.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (934.0, 16.0, 4.0, 132388.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (934.0, 27.0, 3.0, 161937.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (934.0, 15.0, 4.0, 166862.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (934.0, 7.0, 9.0, 108659.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (935.0, 48.0, 10.0, 125327.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (936.0, 43.0, 18.0, 124824.52);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (937.0, 6.0, 17.0, 130609.96);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (937.0, 44.0, 3.0, 146116.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (937.0, 6.0, 8.0, 121869.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (937.0, 24.0, 11.0, 139913.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (938.0, 40.0, 2.0, 137612.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (938.0, 24.0, 8.0, 122975.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (938.0, 21.0, 5.0, 105342.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (939.0, 45.0, 20.0, 122889.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (939.0, 17.0, 18.0, 119154.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (940.0, 24.0, 10.0, 161530.08);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (940.0, 25.0, 1.0, 161868.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (940.0, 15.0, 11.0, 117424.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (941.0, 23.0, 15.0, 129301.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (941.0, 12.0, 13.0, 106933.48);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (941.0, 20.0, 9.0, 166443.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (941.0, 44.0, 3.0, 131462.63);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (941.0, 15.0, 1.0, 170010.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (942.0, 14.0, 7.0, 132353.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (942.0, 24.0, 17.0, 156175.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (942.0, 18.0, 10.0, 166064.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (943.0, 31.0, 13.0, 122863.78);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (943.0, 42.0, 7.0, 150354.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (943.0, 6.0, 4.0, 125580.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (943.0, 19.0, 20.0, 142149.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (943.0, 5.0, 1.0, 172828.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (944.0, 33.0, 14.0, 136140.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (944.0, 9.0, 1.0, 143459.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (945.0, 45.0, 14.0, 132406.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (946.0, 11.0, 15.0, 130574.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (946.0, 14.0, 8.0, 152984.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (946.0, 45.0, 17.0, 146570.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (947.0, 15.0, 11.0, 125111.93);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (948.0, 35.0, 6.0, 168478.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (949.0, 37.0, 11.0, 169032.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (949.0, 14.0, 1.0, 173652.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (949.0, 32.0, 16.0, 107150.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (950.0, 6.0, 14.0, 107996.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (950.0, 6.0, 10.0, 124994.77);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (951.0, 5.0, 2.0, 156974.9);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (951.0, 35.0, 17.0, 169673.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (951.0, 31.0, 5.0, 156671.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (951.0, 21.0, 13.0, 161982.51);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (951.0, 18.0, 17.0, 127896.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (952.0, 27.0, 5.0, 113213.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (952.0, 24.0, 12.0, 106329.61);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (952.0, 47.0, 19.0, 127890.27);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (952.0, 11.0, 19.0, 139285.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (952.0, 33.0, 5.0, 127491.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (953.0, 46.0, 1.0, 162151.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (953.0, 39.0, 7.0, 113359.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (953.0, 2.0, 3.0, 136883.81);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (953.0, 6.0, 16.0, 123020.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (953.0, 7.0, 15.0, 124498.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (954.0, 16.0, 17.0, 156707.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (954.0, 37.0, 12.0, 152930.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (954.0, 6.0, 18.0, 149808.34);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (954.0, 40.0, 8.0, 151424.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (955.0, 44.0, 1.0, 131268.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (955.0, 1.0, 6.0, 166957.98);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (955.0, 24.0, 10.0, 135820.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (955.0, 4.0, 11.0, 153906.24);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (956.0, 48.0, 19.0, 152092.26);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (956.0, 46.0, 1.0, 128813.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (956.0, 48.0, 15.0, 148799.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (956.0, 43.0, 1.0, 140138.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (956.0, 4.0, 1.0, 117731.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (957.0, 46.0, 8.0, 133488.92);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (957.0, 34.0, 15.0, 110378.3);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (958.0, 19.0, 7.0, 145003.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (959.0, 13.0, 13.0, 140831.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (959.0, 24.0, 12.0, 156129.55);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (959.0, 1.0, 3.0, 122451.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (959.0, 34.0, 17.0, 157212.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (960.0, 15.0, 6.0, 136577.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (961.0, 40.0, 11.0, 129972.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (961.0, 29.0, 6.0, 141350.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (961.0, 43.0, 6.0, 142583.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (962.0, 37.0, 16.0, 124974.85);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (962.0, 18.0, 17.0, 173537.58);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (962.0, 26.0, 3.0, 135411.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (962.0, 4.0, 4.0, 125124.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (962.0, 44.0, 9.0, 137231.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (963.0, 11.0, 18.0, 128189.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (963.0, 38.0, 10.0, 136726.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (963.0, 24.0, 6.0, 162254.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (963.0, 25.0, 19.0, 141531.19);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (964.0, 38.0, 19.0, 112964.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (965.0, 20.0, 12.0, 150899.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (965.0, 31.0, 7.0, 168013.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (965.0, 2.0, 19.0, 130586.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (965.0, 5.0, 10.0, 122055.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (965.0, 39.0, 4.0, 117825.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (966.0, 28.0, 2.0, 105403.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (966.0, 7.0, 11.0, 143458.21);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (966.0, 15.0, 2.0, 128924.43);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (967.0, 22.0, 12.0, 138345.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (967.0, 31.0, 19.0, 147833.49);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (967.0, 11.0, 15.0, 155297.72);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (967.0, 17.0, 9.0, 159570.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (967.0, 30.0, 14.0, 163963.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (968.0, 20.0, 15.0, 168712.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (968.0, 7.0, 2.0, 157185.75);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (968.0, 31.0, 2.0, 131972.82);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (969.0, 19.0, 4.0, 122892.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (969.0, 48.0, 4.0, 123381.54);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (969.0, 23.0, 14.0, 116309.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (969.0, 13.0, 10.0, 145137.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (970.0, 39.0, 2.0, 147287.17);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (970.0, 41.0, 19.0, 109814.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (971.0, 40.0, 20.0, 127522.2);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (971.0, 1.0, 5.0, 145336.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (971.0, 18.0, 16.0, 136249.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (972.0, 13.0, 17.0, 112398.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (972.0, 25.0, 12.0, 138409.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (972.0, 23.0, 10.0, 106507.89);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (972.0, 37.0, 8.0, 127463.64);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (972.0, 14.0, 18.0, 164956.23);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (973.0, 18.0, 7.0, 145332.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (973.0, 19.0, 4.0, 148576.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (973.0, 24.0, 6.0, 117628.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (974.0, 30.0, 2.0, 114396.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (974.0, 36.0, 3.0, 131035.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (974.0, 45.0, 16.0, 124430.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (975.0, 25.0, 19.0, 123069.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (975.0, 24.0, 19.0, 174982.97);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (976.0, 27.0, 16.0, 133134.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (976.0, 12.0, 19.0, 126827.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (976.0, 36.0, 2.0, 147728.38);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (977.0, 5.0, 13.0, 156828.05);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (977.0, 43.0, 9.0, 135939.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (977.0, 46.0, 1.0, 147309.62);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (978.0, 8.0, 18.0, 110240.87);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (979.0, 23.0, 17.0, 158653.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (979.0, 12.0, 3.0, 131999.25);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (979.0, 43.0, 9.0, 108923.74);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (979.0, 37.0, 20.0, 134971.67);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (979.0, 33.0, 9.0, 159613.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (980.0, 21.0, 4.0, 130778.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (980.0, 42.0, 9.0, 168533.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (980.0, 45.0, 3.0, 153344.45);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (980.0, 48.0, 15.0, 105251.71);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (980.0, 23.0, 12.0, 139675.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (981.0, 11.0, 11.0, 121570.13);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (981.0, 13.0, 12.0, 109523.41);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (982.0, 24.0, 20.0, 112419.94);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (982.0, 34.0, 20.0, 107490.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (982.0, 39.0, 12.0, 136181.42);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (983.0, 13.0, 17.0, 139496.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (983.0, 45.0, 18.0, 147218.09);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (983.0, 3.0, 10.0, 109729.35);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (983.0, 38.0, 6.0, 127691.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (984.0, 4.0, 2.0, 135196.33);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (984.0, 36.0, 3.0, 138018.69);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (985.0, 4.0, 14.0, 122064.83);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (986.0, 46.0, 3.0, 138279.1);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (986.0, 11.0, 5.0, 164968.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (986.0, 31.0, 4.0, 124039.03);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (987.0, 23.0, 11.0, 145819.99);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (987.0, 30.0, 15.0, 160202.11);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (987.0, 2.0, 9.0, 141115.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (987.0, 19.0, 15.0, 123040.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (988.0, 31.0, 4.0, 121647.07);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (988.0, 9.0, 11.0, 141453.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (988.0, 15.0, 8.0, 153056.28);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (988.0, 45.0, 19.0, 167114.04);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (989.0, 24.0, 12.0, 173060.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (989.0, 34.0, 18.0, 123667.84);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (989.0, 15.0, 16.0, 124637.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (989.0, 26.0, 3.0, 114637.91);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (989.0, 24.0, 16.0, 148424.7);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (990.0, 6.0, 11.0, 108792.32);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (990.0, 22.0, 3.0, 134446.53);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (991.0, 14.0, 2.0, 105498.39);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (991.0, 6.0, 18.0, 109508.8);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (992.0, 18.0, 2.0, 138760.06);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (992.0, 41.0, 9.0, 155180.66);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (992.0, 31.0, 17.0, 136020.29);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (992.0, 39.0, 13.0, 119477.56);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (992.0, 3.0, 2.0, 131705.0);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (993.0, 6.0, 13.0, 137109.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (994.0, 15.0, 19.0, 153395.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (994.0, 46.0, 16.0, 119631.15);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (994.0, 21.0, 2.0, 127410.57);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (995.0, 35.0, 15.0, 123347.95);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (995.0, 34.0, 11.0, 118798.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (996.0, 29.0, 4.0, 131397.47);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (996.0, 30.0, 11.0, 140560.31);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (996.0, 17.0, 4.0, 141271.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (996.0, 40.0, 1.0, 132586.14);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (997.0, 24.0, 19.0, 122210.37);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (997.0, 13.0, 18.0, 160827.65);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (997.0, 7.0, 3.0, 112431.59);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (997.0, 4.0, 9.0, 146450.68);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (997.0, 42.0, 14.0, 152717.02);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (998.0, 38.0, 17.0, 145047.76);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (998.0, 19.0, 3.0, 129928.86);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (999.0, 18.0, 17.0, 149533.6);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1000.0, 4.0, 12.0, 117996.5);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1000.0, 48.0, 3.0, 106668.12);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1000.0, 8.0, 10.0, 118203.88);
-INSERT INTO Detalle_Movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES (1000.0, 1.0, 19.0, 139520.31);
+-- movimientos
+INSERT INTO movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino, id_proveedor) VALUES
+  (251, '2025-05-01 20:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (252, '2025-05-02 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (253, '2025-05-02 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (254, '2025-05-03 16:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (255, '2025-05-03 22:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (256, '2025-05-04 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (257, '2025-05-04 14:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (258, '2025-05-04 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (259, '2025-05-05 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (260, '2025-05-05 23:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (261, '2025-05-06 03:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (262, '2025-05-06 08:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (263, '2025-05-06 14:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (264, '2025-05-06 22:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (265, '2025-05-07 16:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (266, '2025-05-07 21:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (267, '2025-05-08 06:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (268, '2025-05-08 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (269, '2025-05-09 02:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (270, '2025-05-09 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (271, '2025-05-10 02:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (272, '2025-05-10 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (273, '2025-05-11 16:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (274, '2025-05-11 23:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (275, '2025-05-12 15:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (276, '2025-05-13 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (277, '2025-05-13 12:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (278, '2025-05-13 20:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (279, '2025-05-14 03:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (280, '2025-05-14 12:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (281, '2025-05-15 02:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (282, '2025-05-15 14:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (283, '2025-05-16 09:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (284, '2025-05-16 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (285, '2025-05-17 07:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (286, '2025-05-17 14:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (287, '2025-05-18 03:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (288, '2025-05-18 12:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (289, '2025-05-19 00:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (290, '2025-05-19 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (291, '2025-05-20 11:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (292, '2025-05-20 19:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (293, '2025-05-21 03:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (294, '2025-05-21 19:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (295, '2025-05-22 03:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (296, '2025-05-22 18:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (297, '2025-05-22 23:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (298, '2025-05-23 12:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (299, '2025-05-24 00:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (300, '2025-05-24 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (301, '2025-05-25 11:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (302, '2025-05-26 02:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (303, '2025-05-26 06:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (304, '2025-05-27 02:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (305, '2025-05-27 14:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (306, '2025-05-28 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (307, '2025-05-28 22:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (308, '2025-05-29 14:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (309, '2025-05-30 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (310, '2025-05-30 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (311, '2025-05-30 23:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (312, '2025-05-31 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (313, '2025-06-01 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (314, '2025-06-01 19:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (315, '2025-06-01 23:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (316, '2025-06-02 12:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (317, '2025-06-03 04:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (318, '2025-06-03 09:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (319, '2025-06-03 13:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (320, '2025-06-04 09:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (321, '2025-06-04 19:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (322, '2025-06-05 00:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (323, '2025-06-05 07:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (324, '2025-06-05 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (325, '2025-06-06 11:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (326, '2025-06-06 20:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (327, '2025-06-07 15:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (328, '2025-06-07 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (329, '2025-06-08 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (330, '2025-06-09 09:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (331, '2025-06-10 01:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (332, '2025-06-10 05:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (333, '2025-06-10 20:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (334, '2025-06-11 11:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (335, '2025-06-12 07:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (336, '2025-06-12 17:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (337, '2025-06-13 11:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (338, '2025-06-14 06:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (339, '2025-06-14 17:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (340, '2025-06-15 13:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (341, '2025-06-15 22:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (342, '2025-06-16 03:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (343, '2025-06-16 16:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (344, '2025-06-17 03:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (345, '2025-06-17 15:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (346, '2025-06-18 01:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (347, '2025-06-18 08:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (348, '2025-06-18 22:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (349, '2025-06-19 18:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (350, '2025-06-20 09:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (351, '2025-06-21 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (352, '2025-06-21 21:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (353, '2025-06-22 01:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (354, '2025-06-22 07:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (355, '2025-06-23 00:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (356, '2025-06-23 20:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (357, '2025-06-24 12:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (358, '2025-06-24 18:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (359, '2025-06-25 03:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (360, '2025-06-25 13:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (361, '2025-06-26 03:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (362, '2025-06-26 18:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (363, '2025-06-27 04:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (364, '2025-06-27 08:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (365, '2025-06-27 16:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (366, '2025-06-28 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (367, '2025-06-28 07:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (368, '2025-06-28 12:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (369, '2025-06-29 04:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (370, '2025-06-29 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (371, '2025-06-30 06:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (372, '2025-06-30 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (373, '2025-07-01 09:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (374, '2025-07-01 18:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (375, '2025-07-02 01:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (376, '2025-07-02 05:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (377, '2025-07-03 00:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (378, '2025-07-03 11:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (379, '2025-07-03 18:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (380, '2025-07-04 13:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (381, '2025-07-05 09:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (382, '2025-07-05 13:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (383, '2025-07-05 18:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (384, '2025-07-06 14:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (385, '2025-07-07 06:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (386, '2025-07-07 21:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (387, '2025-07-08 09:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (388, '2025-07-08 20:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (389, '2025-07-09 02:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (390, '2025-07-09 12:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (391, '2025-07-10 03:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (392, '2025-07-10 23:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (393, '2025-07-11 14:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (394, '2025-07-12 02:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (395, '2025-07-12 11:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (396, '2025-07-13 04:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (397, '2025-07-14 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (398, '2025-07-14 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (399, '2025-07-14 20:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (400, '2025-07-15 10:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (401, '2025-07-15 18:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (402, '2025-07-16 10:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (403, '2025-07-17 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (404, '2025-07-17 07:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (405, '2025-07-17 11:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (406, '2025-07-17 17:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (407, '2025-07-18 07:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (408, '2025-07-19 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (409, '2025-07-19 14:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (410, '2025-07-20 09:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (411, '2025-07-21 01:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (412, '2025-07-21 13:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (413, '2025-07-21 20:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (414, '2025-07-22 00:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (415, '2025-07-22 18:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (416, '2025-07-23 13:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (417, '2025-07-24 05:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (418, '2025-07-24 12:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (419, '2025-07-24 17:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (420, '2025-07-25 12:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (421, '2025-07-25 17:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (422, '2025-07-26 08:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (423, '2025-07-26 23:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (424, '2025-07-27 17:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (425, '2025-07-27 23:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (426, '2025-07-28 04:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (427, '2025-07-29 00:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (428, '2025-07-29 06:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (429, '2025-07-29 17:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (430, '2025-07-30 00:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (431, '2025-07-30 14:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (432, '2025-07-30 19:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (433, '2025-07-31 15:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (434, '2025-08-01 04:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (435, '2025-08-01 11:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (436, '2025-08-02 03:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (437, '2025-08-02 23:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (438, '2025-08-03 07:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (439, '2025-08-04 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (440, '2025-08-04 08:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (441, '2025-08-04 16:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (442, '2025-08-05 11:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (443, '2025-08-05 19:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (444, '2025-08-06 05:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (445, '2025-08-06 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (446, '2025-08-07 00:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (447, '2025-08-07 04:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (448, '2025-08-07 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (449, '2025-08-08 03:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (450, '2025-08-08 23:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (451, '2025-08-09 08:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (452, '2025-08-09 16:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (453, '2025-08-10 00:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (454, '2025-08-10 19:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (455, '2025-08-11 11:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (456, '2025-08-11 22:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (457, '2025-08-12 18:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (458, '2025-08-12 23:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (459, '2025-08-13 12:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (460, '2025-08-14 06:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (461, '2025-08-14 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (462, '2025-08-15 05:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (463, '2025-08-15 21:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (464, '2025-08-16 14:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (465, '2025-08-16 18:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (466, '2025-08-17 04:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (467, '2025-08-17 21:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (468, '2025-08-18 11:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (469, '2025-08-18 19:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (470, '2025-08-19 05:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (471, '2025-08-19 19:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (472, '2025-08-20 06:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (473, '2025-08-20 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (474, '2025-08-20 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (475, '2025-08-20 19:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (476, '2025-08-21 03:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (477, '2025-08-21 16:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (478, '2025-08-22 05:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (479, '2025-08-22 19:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (480, '2025-08-23 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (481, '2025-08-23 09:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (482, '2025-08-23 13:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (483, '2025-08-24 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (484, '2025-08-24 13:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (485, '2025-08-25 08:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (486, '2025-08-26 02:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (487, '2025-08-26 20:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (488, '2025-08-27 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (489, '2025-08-27 19:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (490, '2025-08-28 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (491, '2025-08-28 15:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (492, '2025-08-29 09:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (493, '2025-08-30 01:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (494, '2025-08-30 05:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (495, '2025-08-30 18:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (496, '2025-08-31 14:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (497, '2025-08-31 19:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (498, '2025-09-01 12:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (499, '2025-09-02 01:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (500, '2025-09-02 18:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2);
+
+-- movimientos
+INSERT INTO movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino, id_proveedor) VALUES
+  (501, '2025-09-02 22:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (502, '2025-09-03 17:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (503, '2025-09-04 07:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (504, '2025-09-04 19:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (505, '2025-09-05 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (506, '2025-09-05 09:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (507, '2025-09-06 05:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (508, '2025-09-07 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (509, '2025-09-07 07:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (510, '2025-09-08 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (511, '2025-09-08 18:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (512, '2025-09-09 04:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (513, '2025-09-09 11:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (514, '2025-09-09 16:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (515, '2025-09-10 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (516, '2025-09-10 06:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (517, '2025-09-10 13:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (518, '2025-09-10 19:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (519, '2025-09-11 14:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (520, '2025-09-12 09:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (521, '2025-09-13 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (522, '2025-09-13 19:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (523, '2025-09-14 08:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (524, '2025-09-14 22:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (525, '2025-09-15 06:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (526, '2025-09-15 17:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (527, '2025-09-16 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (528, '2025-09-16 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (529, '2025-09-17 03:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (530, '2025-09-17 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (531, '2025-09-17 21:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (532, '2025-09-18 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (533, '2025-09-19 01:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (534, '2025-09-19 19:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (535, '2025-09-20 06:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (536, '2025-09-21 00:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (537, '2025-09-21 18:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (538, '2025-09-22 05:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (539, '2025-09-22 17:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (540, '2025-09-22 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (541, '2025-09-23 04:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (542, '2025-09-23 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (543, '2025-09-23 23:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (544, '2025-09-24 15:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (545, '2025-09-25 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (546, '2025-09-25 10:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (547, '2025-09-25 21:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (548, '2025-09-26 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (549, '2025-09-26 20:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (550, '2025-09-27 15:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (551, '2025-09-27 23:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (552, '2025-09-28 10:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (553, '2025-09-28 22:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (554, '2025-09-29 11:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (555, '2025-09-30 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (556, '2025-09-30 19:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (557, '2025-10-01 08:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (558, '2025-10-01 19:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (559, '2025-10-01 23:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (560, '2025-10-02 13:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (561, '2025-10-03 04:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (562, '2025-10-03 21:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (563, '2025-10-04 13:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (564, '2025-10-05 08:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (565, '2025-10-05 12:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (566, '2025-10-05 18:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (567, '2025-10-06 02:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (568, '2025-10-06 11:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (569, '2025-10-07 02:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (570, '2025-10-07 22:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (571, '2025-10-08 17:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (572, '2025-10-09 00:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (573, '2025-10-09 13:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (574, '2025-10-09 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (575, '2025-10-09 22:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (576, '2025-10-10 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (577, '2025-10-10 13:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (578, '2025-10-10 20:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (579, '2025-10-11 14:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (580, '2025-10-12 07:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (581, '2025-10-12 21:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (582, '2025-10-13 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (583, '2025-10-14 01:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (584, '2025-10-14 12:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (585, '2025-10-15 06:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (586, '2025-10-16 01:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (587, '2025-10-16 20:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (588, '2025-10-17 03:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (589, '2025-10-17 19:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (590, '2025-10-18 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (591, '2025-10-18 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (592, '2025-10-18 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (593, '2025-10-19 15:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (594, '2025-10-20 08:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (595, '2025-10-20 13:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (596, '2025-10-21 01:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (597, '2025-10-21 14:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (598, '2025-10-22 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (599, '2025-10-22 23:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (600, '2025-10-23 10:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (601, '2025-10-24 04:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (602, '2025-10-24 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (603, '2025-10-24 22:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (604, '2025-10-25 18:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (605, '2025-10-26 08:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (606, '2025-10-27 02:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (607, '2025-10-27 17:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (608, '2025-10-27 22:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (609, '2025-10-28 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (610, '2025-10-29 02:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (611, '2025-10-29 11:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (612, '2025-10-30 07:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (613, '2025-10-30 22:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (614, '2025-10-31 16:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (615, '2025-11-01 07:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (616, '2025-11-01 23:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (617, '2025-11-02 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (618, '2025-11-02 22:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (619, '2025-11-03 13:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (620, '2025-11-03 21:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (621, '2025-11-04 09:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (622, '2025-11-04 17:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (623, '2025-11-05 12:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (624, '2025-11-05 21:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (625, '2025-11-06 14:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (626, '2025-11-06 21:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (627, '2025-11-07 15:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (628, '2025-11-07 20:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (629, '2025-11-08 08:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (630, '2025-11-09 00:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (631, '2025-11-09 08:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (632, '2025-11-09 14:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (633, '2025-11-10 07:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (634, '2025-11-11 03:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (635, '2025-11-11 12:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (636, '2025-11-11 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (637, '2025-11-12 15:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (638, '2025-11-13 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (639, '2025-11-14 02:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (640, '2025-11-14 09:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (641, '2025-11-15 04:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (642, '2025-11-15 21:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (643, '2025-11-16 08:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (644, '2025-11-16 23:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (645, '2025-11-17 16:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (646, '2025-11-18 07:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (647, '2025-11-18 18:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (648, '2025-11-19 01:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (649, '2025-11-19 06:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (650, '2025-11-19 13:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (651, '2025-11-20 08:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (652, '2025-11-21 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (653, '2025-11-21 18:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (654, '2025-11-22 03:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (655, '2025-11-22 08:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (656, '2025-11-23 02:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (657, '2025-11-23 15:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (658, '2025-11-24 11:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (659, '2025-11-24 15:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (660, '2025-11-25 06:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (661, '2025-11-25 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (662, '2025-11-26 13:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (663, '2025-11-27 09:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (664, '2025-11-28 00:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (665, '2025-11-28 13:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (666, '2025-11-29 02:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (667, '2025-11-29 21:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (668, '2025-11-30 15:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (669, '2025-12-01 04:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (670, '2025-12-02 00:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (671, '2025-12-02 14:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (672, '2025-12-02 23:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (673, '2025-12-03 08:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (674, '2025-12-03 22:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (675, '2025-12-04 09:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (676, '2025-12-04 16:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (677, '2025-12-05 00:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (678, '2025-12-05 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (679, '2025-12-06 06:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (680, '2025-12-06 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (681, '2025-12-07 08:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (682, '2025-12-08 03:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (683, '2025-12-08 19:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (684, '2025-12-09 05:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (685, '2025-12-09 16:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (686, '2025-12-10 12:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (687, '2025-12-10 23:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (688, '2025-12-11 11:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (689, '2025-12-11 23:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (690, '2025-12-12 03:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (691, '2025-12-12 16:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (692, '2025-12-13 06:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (693, '2025-12-13 13:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (694, '2025-12-13 19:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (695, '2025-12-14 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (696, '2025-12-14 19:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (697, '2025-12-15 09:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (698, '2025-12-15 17:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (699, '2025-12-16 06:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (700, '2025-12-17 02:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (701, '2025-12-17 20:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (702, '2025-12-18 00:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (703, '2025-12-18 16:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (704, '2025-12-19 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (705, '2025-12-19 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (706, '2025-12-20 08:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (707, '2025-12-20 17:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (708, '2025-12-21 04:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (709, '2025-12-21 10:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (710, '2025-12-22 01:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (711, '2025-12-22 06:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (712, '2025-12-22 23:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (713, '2025-12-23 17:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (714, '2025-12-24 06:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (715, '2025-12-24 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (716, '2025-12-25 05:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (717, '2025-12-25 15:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (718, '2025-12-25 19:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (719, '2025-12-26 12:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (720, '2025-12-27 04:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (721, '2025-12-27 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (722, '2025-12-27 23:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (723, '2025-12-28 19:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (724, '2025-12-29 12:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (725, '2025-12-30 07:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (726, '2025-12-30 20:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (727, '2025-12-31 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (728, '2025-12-31 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (729, '2025-12-31 14:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (730, '2026-01-01 03:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (731, '2026-01-01 23:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (732, '2026-01-02 15:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (733, '2026-01-03 02:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (734, '2026-01-03 06:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (735, '2026-01-03 11:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (736, '2026-01-03 15:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (737, '2026-01-04 00:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (738, '2026-01-04 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (739, '2026-01-04 16:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (740, '2026-01-05 11:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (741, '2026-01-05 19:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (742, '2026-01-05 23:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (743, '2026-01-06 10:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (744, '2026-01-07 04:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (745, '2026-01-07 17:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (746, '2026-01-07 22:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (747, '2026-01-08 17:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (748, '2026-01-09 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (749, '2026-01-09 22:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (750, '2026-01-10 17:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL);
+
+-- movimientos
+INSERT INTO movimientos (id_movimiento, fecha_hora, tipo_movimiento, observaciones, id_empleado, id_sucursal_origen, id_sucursal_destino, id_proveedor) VALUES
+  (751, '2026-01-11 02:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (752, '2026-01-11 22:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (753, '2026-01-12 07:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (754, '2026-01-12 23:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (755, '2026-01-13 03:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (756, '2026-01-13 19:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (757, '2026-01-14 04:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (758, '2026-01-14 08:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (759, '2026-01-14 15:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (760, '2026-01-15 00:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (761, '2026-01-15 09:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (762, '2026-01-15 21:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (763, '2026-01-16 01:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (764, '2026-01-16 17:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (765, '2026-01-17 00:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (766, '2026-01-17 14:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (767, '2026-01-18 01:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (768, '2026-01-18 20:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (769, '2026-01-19 14:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (770, '2026-01-20 00:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (771, '2026-01-20 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (772, '2026-01-20 20:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (773, '2026-01-21 07:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (774, '2026-01-21 17:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (775, '2026-01-22 08:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (776, '2026-01-22 21:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (777, '2026-01-23 10:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (778, '2026-01-24 02:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (779, '2026-01-24 21:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (780, '2026-01-25 16:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (781, '2026-01-26 05:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (782, '2026-01-26 12:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (783, '2026-01-27 03:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (784, '2026-01-27 20:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (785, '2026-01-28 05:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (786, '2026-01-28 20:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (787, '2026-01-29 12:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (788, '2026-01-30 08:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (789, '2026-01-30 17:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (790, '2026-01-31 00:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (791, '2026-01-31 11:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (792, '2026-02-01 06:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (793, '2026-02-01 13:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (794, '2026-02-01 19:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (795, '2026-02-02 03:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (796, '2026-02-02 20:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (797, '2026-02-03 03:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (798, '2026-02-03 17:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (799, '2026-02-04 00:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (800, '2026-02-04 13:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (801, '2026-02-05 05:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (802, '2026-02-05 20:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (803, '2026-02-06 13:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (804, '2026-02-06 22:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (805, '2026-02-07 13:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (806, '2026-02-08 09:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (807, '2026-02-08 16:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (808, '2026-02-09 11:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (809, '2026-02-10 04:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (810, '2026-02-10 15:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (811, '2026-02-11 06:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (812, '2026-02-11 20:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (813, '2026-02-12 03:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (814, '2026-02-12 17:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (815, '2026-02-13 04:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (816, '2026-02-13 12:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (817, '2026-02-14 01:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (818, '2026-02-14 14:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (819, '2026-02-15 04:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (820, '2026-02-15 23:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (821, '2026-02-16 07:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (822, '2026-02-16 14:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (823, '2026-02-17 08:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (824, '2026-02-17 16:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (825, '2026-02-18 12:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (826, '2026-02-19 04:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (827, '2026-02-19 20:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (828, '2026-02-20 16:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (829, '2026-02-21 00:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (830, '2026-02-21 15:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (831, '2026-02-22 05:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (832, '2026-02-22 17:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (833, '2026-02-23 05:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 2),
+  (834, '2026-02-23 16:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (835, '2026-02-24 01:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (836, '2026-02-24 11:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (837, '2026-02-24 15:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (838, '2026-02-25 05:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (839, '2026-02-25 12:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (840, '2026-02-25 19:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (841, '2026-02-26 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (842, '2026-02-27 03:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (843, '2026-02-27 10:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (844, '2026-02-28 05:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (845, '2026-02-28 22:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (846, '2026-03-01 17:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (847, '2026-03-02 00:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (848, '2026-03-02 11:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (849, '2026-03-02 18:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (850, '2026-03-03 09:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (851, '2026-03-03 13:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (852, '2026-03-03 22:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (853, '2026-03-04 11:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (854, '2026-03-04 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (855, '2026-03-05 16:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (856, '2026-03-06 05:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (857, '2026-03-06 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (858, '2026-03-06 15:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (859, '2026-03-07 07:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (860, '2026-03-07 23:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (861, '2026-03-08 07:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (862, '2026-03-08 17:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (863, '2026-03-09 09:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (864, '2026-03-09 17:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (865, '2026-03-10 11:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (866, '2026-03-11 02:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (867, '2026-03-11 19:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (868, '2026-03-12 00:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (869, '2026-03-12 13:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (870, '2026-03-12 19:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (871, '2026-03-13 14:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (872, '2026-03-13 22:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (873, '2026-03-14 08:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (874, '2026-03-15 04:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (875, '2026-03-15 21:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (876, '2026-03-16 07:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (877, '2026-03-17 02:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (878, '2026-03-17 11:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (879, '2026-03-18 00:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (880, '2026-03-18 18:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (881, '2026-03-19 11:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (882, '2026-03-19 15:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (883, '2026-03-19 20:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (884, '2026-03-20 00:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (885, '2026-03-20 04:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (886, '2026-03-20 21:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (887, '2026-03-21 02:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (888, '2026-03-21 22:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (889, '2026-03-22 10:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (890, '2026-03-22 18:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (891, '2026-03-23 02:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (892, '2026-03-23 07:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (893, '2026-03-23 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (894, '2026-03-24 00:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (895, '2026-03-24 06:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (896, '2026-03-24 20:00:00', 'Traslado', 'Traslado entre sucursales', 2, 2, 1, NULL),
+  (897, '2026-03-25 06:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (898, '2026-03-25 17:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (899, '2026-03-26 06:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (900, '2026-03-26 15:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (901, '2026-03-27 00:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (902, '2026-03-27 05:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (903, '2026-03-27 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (904, '2026-03-28 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (905, '2026-03-28 11:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (906, '2026-03-29 01:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (907, '2026-03-29 21:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (908, '2026-03-30 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (909, '2026-03-30 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (910, '2026-03-31 11:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (911, '2026-03-31 17:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (912, '2026-04-01 04:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (913, '2026-04-01 15:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 2),
+  (914, '2026-04-02 09:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (915, '2026-04-02 16:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (916, '2026-04-03 08:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (917, '2026-04-04 02:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (918, '2026-04-04 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (919, '2026-04-05 01:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (920, '2026-04-05 08:00:00', 'Traslado', 'Traslado entre sucursales', 3, 1, 2, NULL),
+  (921, '2026-04-05 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (922, '2026-04-06 16:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (923, '2026-04-06 20:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (924, '2026-04-07 10:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (925, '2026-04-08 05:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (926, '2026-04-08 13:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (927, '2026-04-09 09:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (928, '2026-04-09 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (929, '2026-04-10 01:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (930, '2026-04-10 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (931, '2026-04-11 05:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (932, '2026-04-11 11:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (933, '2026-04-12 00:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (934, '2026-04-12 13:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (935, '2026-04-13 03:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (936, '2026-04-13 23:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (937, '2026-04-14 05:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (938, '2026-04-15 00:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 4),
+  (939, '2026-04-15 19:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (940, '2026-04-16 05:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 4),
+  (941, '2026-04-16 12:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (942, '2026-04-17 04:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (943, '2026-04-17 21:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (944, '2026-04-18 10:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (945, '2026-04-18 17:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (946, '2026-04-19 08:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (947, '2026-04-20 04:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (948, '2026-04-20 18:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (949, '2026-04-21 10:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (950, '2026-04-21 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 1),
+  (951, '2026-04-22 06:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (952, '2026-04-23 00:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (953, '2026-04-23 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (954, '2026-04-24 05:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 4),
+  (955, '2026-04-24 10:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (956, '2026-04-25 01:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (957, '2026-04-25 13:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (958, '2026-04-25 18:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (959, '2026-04-26 08:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (960, '2026-04-26 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (961, '2026-04-27 05:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (962, '2026-04-27 15:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (963, '2026-04-28 07:00:00', 'Salida', 'Venta registrada', 2, 1, NULL, NULL),
+  (964, '2026-04-28 21:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 1),
+  (965, '2026-04-29 02:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (966, '2026-04-29 15:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 4),
+  (967, '2026-04-29 21:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (968, '2026-04-30 08:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 2),
+  (969, '2026-05-01 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (970, '2026-05-01 09:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (971, '2026-05-02 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (972, '2026-05-02 15:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 1),
+  (973, '2026-05-02 22:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (974, '2026-05-03 18:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (975, '2026-05-04 06:00:00', 'Traslado', 'Traslado entre sucursales', 1, 2, 1, NULL),
+  (976, '2026-05-04 18:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (977, '2026-05-05 08:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (978, '2026-05-05 23:00:00', 'Traslado', 'Traslado entre sucursales', 3, 2, 1, NULL),
+  (979, '2026-05-06 05:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (980, '2026-05-06 17:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 4),
+  (981, '2026-05-07 02:00:00', 'Entrada', 'Reposición de mercadería', 3, 2, NULL, 4),
+  (982, '2026-05-07 17:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (983, '2026-05-07 23:00:00', 'Entrada', 'Reposición de mercadería', 1, 1, NULL, 2),
+  (984, '2026-05-08 12:00:00', 'Salida', 'Venta registrada', 1, 1, NULL, NULL),
+  (985, '2026-05-09 04:00:00', 'Salida', 'Venta registrada', 3, 1, NULL, NULL),
+  (986, '2026-05-09 14:00:00', 'Entrada', 'Reposición de mercadería', 1, 2, NULL, 2),
+  (987, '2026-05-10 07:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (988, '2026-05-11 01:00:00', 'Salida', 'Venta registrada', 1, 2, NULL, NULL),
+  (989, '2026-05-11 14:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 2),
+  (990, '2026-05-12 09:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (991, '2026-05-12 17:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (992, '2026-05-13 08:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (993, '2026-05-14 02:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL),
+  (994, '2026-05-14 11:00:00', 'Traslado', 'Traslado entre sucursales', 1, 1, 2, NULL),
+  (995, '2026-05-15 01:00:00', 'Entrada', 'Reposición de mercadería', 2, 1, NULL, 1),
+  (996, '2026-05-15 08:00:00', 'Entrada', 'Reposición de mercadería', 3, 1, NULL, 1),
+  (997, '2026-05-15 18:00:00', 'Traslado', 'Traslado entre sucursales', 2, 1, 2, NULL),
+  (998, '2026-05-16 07:00:00', 'Salida', 'Venta registrada', 3, 2, NULL, NULL),
+  (999, '2026-05-17 00:00:00', 'Entrada', 'Reposición de mercadería', 2, 2, NULL, 1),
+  (1000, '2026-05-17 09:00:00', 'Salida', 'Venta registrada', 2, 2, NULL, NULL);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (1, 1, 45, 88669.97),
+  (1, 2, 33, 90673.38),
+  (1, 3, 29, 98047.07),
+  (1, 4, 42, 88304.08),
+  (1, 5, 38, 87476.74),
+  (1, 6, 27, 90279.57),
+  (1, 7, 41, 96030.28),
+  (1, 8, 42, 89982.56),
+  (1, 9, 45, 97519.87),
+  (1, 10, 38, 90306.61),
+  (1, 11, 43, 91172.86),
+  (1, 12, 25, 98382.11),
+  (1, 25, 30, 33790.32),
+  (1, 26, 35, 31604.93),
+  (1, 27, 31, 35137.51),
+  (1, 28, 35, 30691.49),
+  (1, 29, 37, 30662.93),
+  (1, 30, 36, 33299.38),
+  (1, 31, 26, 33954.61),
+  (1, 32, 42, 30809.1),
+  (1, 33, 37, 30569.76),
+  (1, 34, 34, 34472.9),
+  (1, 35, 44, 34764.35),
+  (1, 36, 36, 33162.23),
+  (2, 13, 27, 102301.93),
+  (2, 14, 32, 115028.7),
+  (2, 15, 27, 116468.06),
+  (2, 16, 28, 108152.21),
+  (2, 17, 39, 112624.48),
+  (2, 18, 36, 104346.45),
+  (2, 19, 36, 105166.37),
+  (2, 20, 33, 113781.86),
+  (2, 21, 45, 102749.54),
+  (2, 22, 45, 104494.93),
+  (2, 23, 32, 104359.54),
+  (2, 24, 37, 106224.09),
+  (3, 37, 45, 50607.66),
+  (3, 38, 32, 50579.99),
+  (3, 39, 26, 47026.57),
+  (3, 40, 26, 51519.36),
+  (3, 41, 37, 47328.38),
+  (3, 42, 31, 52362.46),
+  (3, 43, 43, 52075.67),
+  (3, 44, 35, 46898.49),
+  (3, 45, 40, 48325.93),
+  (3, 46, 45, 48819.04),
+  (3, 47, 33, 46329.12),
+  (3, 48, 42, 49444.02),
+  (4, 1, 43, 93426.51),
+  (4, 2, 43, 92991.01),
+  (4, 3, 32, 101959.89),
+  (4, 4, 29, 94642.89),
+  (4, 5, 27, 98336.73),
+  (4, 6, 28, 89292.62),
+  (4, 7, 30, 98881.19),
+  (4, 8, 38, 95946.14),
+  (4, 9, 37, 92724.29),
+  (4, 10, 39, 94936.72),
+  (4, 11, 42, 99911.7),
+  (4, 12, 25, 97204.25),
+  (4, 25, 28, 33704.89),
+  (4, 26, 42, 34064.56),
+  (4, 27, 45, 31928.91),
+  (4, 28, 34, 32420.78),
+  (4, 29, 39, 30176.88),
+  (4, 30, 33, 35213.82),
+  (4, 31, 30, 32799.94),
+  (4, 32, 28, 34686.7),
+  (4, 33, 34, 34536.68),
+  (4, 34, 41, 33326.65),
+  (4, 35, 29, 32104.35),
+  (4, 36, 30, 32964.77),
+  (5, 13, 41, 117573.64),
+  (5, 14, 44, 107172.73),
+  (5, 15, 25, 103457.69),
+  (5, 16, 36, 116877.63),
+  (5, 17, 34, 105690.42),
+  (5, 18, 32, 116865.17),
+  (5, 19, 27, 102998.94),
+  (5, 20, 40, 115780.41),
+  (5, 21, 42, 114902.1),
+  (5, 22, 29, 113045.64),
+  (5, 23, 42, 104389.72),
+  (5, 24, 41, 116767.58),
+  (6, 37, 38, 52762.03),
+  (6, 38, 42, 51131.07),
+  (6, 39, 31, 50801.0),
+  (6, 40, 37, 53002.16),
+  (6, 41, 45, 48152.68),
+  (6, 42, 41, 48761.59),
+  (6, 43, 32, 46992.64),
+  (6, 44, 35, 45404.07),
+  (6, 45, 42, 47034.89),
+  (6, 46, 32, 45296.09),
+  (6, 47, 45, 45699.22),
+  (6, 48, 27, 52302.28),
+  (7, 40, 8, 53808.04),
+  (7, 45, 17, 49685.09),
+  (7, 39, 6, 46298.48),
+  (7, 44, 11, 49108.93),
+  (8, 37, 11, 53192.09),
+  (9, 19, 9, 112834.39),
+  (9, 15, 18, 124120.01),
+  (10, 6, 2, 139995.73),
+  (11, 11, 4, 150000.0),
+  (12, 19, 5, 175000.0),
+  (12, 28, 4, 52000.0),
+  (13, 36, 10, 30576.16),
+  (14, 12, 1, 150000.0),
+  (15, 46, 5, 52003.65),
+  (15, 48, 11, 52418.51),
+  (16, 40, 7, 52574.86),
+  (16, 41, 9, 50232.89),
+  (16, 43, 17, 55458.22),
+  (17, 5, 5, 150000.0),
+  (18, 16, 3, 175000.0),
+  (19, 20, 5, 175000.0),
+  (19, 40, 1, 78000.0),
+  (19, 42, 5, 78000.0),
+  (20, 9, 14, 91423.22),
+  (20, 10, 10, 91275.54),
+  (21, 6, 4, 150000.0),
+  (22, 6, 13, 101819.02),
+  (22, 36, 13, 30230.4),
+  (22, 27, 6, 37039.97),
+  (23, 28, 1, 49122.35),
+  (23, 9, 1, 148787.1),
+  (24, 46, 17, 54093.63),
+  (24, 39, 11, 45510.67),
+  (24, 40, 16, 55335.4),
+  (24, 47, 17, 55404.51),
+  (25, 25, 1, 51411.75),
+  (26, 1, 8, 95367.79),
+  (26, 34, 9, 36452.49),
+  (27, 2, 2, 144967.08),
+  (27, 8, 3, 138459.09),
+  (27, 17, 4, 165839.62),
+  (28, 25, 5, 52000.0),
+  (29, 34, 2, 49355.16),
+  (30, 29, 11, 32534.61),
+  (30, 10, 16, 93208.76),
+  (30, 34, 7, 31556.6),
+  (31, 36, 2, 49628.33),
+  (31, 1, 3, 143579.86),
+  (31, 20, 4, 170458.78),
+  (31, 19, 4, 172112.3),
+  (32, 6, 3, 140695.69),
+  (32, 16, 2, 163062.96),
+  (32, 44, 1, 73287.82),
+  (33, 46, 4, 74844.91),
+  (33, 45, 2, 72680.85),
+  (34, 37, 12, 46696.06),
+  (34, 45, 12, 52529.95),
+  (34, 40, 13, 51742.34),
+  (34, 38, 17, 54974.37),
+  (35, 48, 4, 73377.36),
+  (35, 31, 2, 51333.83),
+  (36, 24, 9, 107245.09),
+  (37, 25, 7, 35302.73),
+  (37, 35, 6, 33180.24),
+  (38, 22, 12, 101644.45),
+  (38, 13, 10, 108816.01),
+  (38, 24, 11, 122409.47),
+  (38, 19, 18, 111766.02),
+  (39, 19, 10, 117887.4),
+  (40, 35, 5, 52000.0),
+  (40, 2, 5, 150000.0),
+  (40, 26, 1, 52000.0),
+  (41, 4, 3, 150000.0),
+  (42, 25, 3, 51313.23),
+  (42, 18, 4, 161271.37),
+  (42, 27, 1, 51999.62),
+  (43, 37, 8, 47417.02),
+  (44, 46, 8, 50318.17),
+  (45, 11, 3, 139297.18),
+  (46, 26, 2, 48263.91),
+  (46, 46, 3, 77065.83),
+  (46, 13, 1, 172147.18),
+  (46, 5, 1, 142166.45),
+  (47, 1, 1, 143202.28),
+  (47, 27, 3, 50484.03),
+  (47, 32, 4, 50782.4),
+  (48, 40, 4, 74477.98),
+  (48, 35, 3, 49180.79),
+  (48, 31, 2, 51295.84),
+  (49, 18, 7, 113444.97),
+  (49, 13, 10, 121046.89),
+  (49, 20, 10, 108351.63),
+  (49, 24, 14, 118679.0),
+  (50, 16, 4, 175000.0),
+  (51, 29, 2, 49522.31),
+  (51, 2, 2, 141674.47),
+  (51, 6, 3, 143679.13),
+  (51, 19, 3, 166957.05),
+  (52, 17, 2, 165417.67),
+  (52, 15, 2, 163681.57),
+  (52, 8, 4, 141318.0),
+  (53, 15, 2, 175000.0),
+  (53, 24, 3, 175000.0),
+  (54, 35, 18, 35640.33),
+  (54, 5, 6, 105327.11),
+  (54, 33, 14, 32229.99),
+  (55, 28, 11, 33739.91),
+  (55, 4, 14, 100218.36),
+  (55, 3, 5, 90186.27),
+  (56, 21, 12, 123758.36),
+  (56, 19, 9, 122574.08),
+  (57, 14, 2, 164705.05),
+  (58, 1, 12, 101476.79),
+  (58, 26, 12, 32280.37),
+  (59, 23, 8, 124135.82),
+  (60, 18, 1, 161834.93),
+  (60, 10, 3, 145140.53),
+  (61, 45, 4, 74491.62),
+  (61, 26, 1, 51540.0),
+  (61, 18, 3, 169451.99),
+  (62, 38, 3, 78000.0),
+  (62, 2, 5, 150000.0),
+  (62, 44, 1, 78000.0),
+  (63, 12, 4, 149628.66),
+  (63, 38, 4, 73931.28),
+  (63, 28, 3, 49175.6),
+  (64, 19, 1, 167367.56),
+  (64, 43, 3, 73334.97),
+  (64, 26, 1, 51875.97),
+  (64, 36, 4, 51438.03),
+  (65, 46, 17, 45803.6),
+  (65, 44, 9, 51237.48),
+  (65, 47, 9, 50024.23),
+  (66, 16, 3, 175000.0),
+  (66, 46, 5, 78000.0),
+  (66, 11, 1, 150000.0),
+  (67, 30, 1, 52000.0),
+  (68, 43, 8, 50228.11),
+  (68, 44, 7, 49428.76),
+  (68, 47, 14, 50789.99),
+  (69, 22, 3, 171164.71),
+  (69, 33, 4, 51439.48),
+  (69, 18, 4, 168540.13),
+  (69, 1, 3, 141989.28),
+  (70, 16, 2, 175000.0),
+  (70, 37, 4, 78000.0),
+  (70, 25, 1, 52000.0),
+  (71, 25, 2, 52000.0),
+  (71, 43, 4, 78000.0),
+  (72, 7, 1, 150000.0),
+  (72, 29, 5, 52000.0),
+  (73, 38, 17, 55823.7),
+  (73, 44, 10, 52045.99),
+  (74, 25, 4, 52000.0);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (74, 21, 5, 175000.0),
+  (74, 41, 1, 78000.0),
+  (75, 15, 4, 174696.73),
+  (75, 48, 1, 74528.55),
+  (75, 6, 3, 148841.09),
+  (76, 15, 14, 118204.11),
+  (76, 16, 7, 105664.6),
+  (76, 21, 6, 116432.55),
+  (76, 19, 11, 116682.9),
+  (77, 20, 17, 112898.7),
+  (77, 17, 9, 118101.47),
+  (77, 13, 7, 103309.62),
+  (78, 17, 2, 175000.0),
+  (78, 30, 4, 52000.0),
+  (78, 20, 4, 175000.0),
+  (79, 45, 4, 73472.76),
+  (79, 19, 1, 173748.64),
+  (79, 2, 4, 147994.07),
+  (80, 41, 2, 78000.0),
+  (81, 41, 17, 50053.79),
+  (82, 48, 2, 78000.0),
+  (82, 27, 2, 52000.0),
+  (83, 11, 3, 146958.71),
+  (83, 17, 3, 172259.26),
+  (83, 31, 4, 51845.64),
+  (84, 36, 1, 48940.15),
+  (84, 24, 1, 167367.0),
+  (84, 6, 3, 145014.72),
+  (84, 26, 3, 48290.72),
+  (85, 40, 1, 75724.92),
+  (85, 15, 4, 173731.43),
+  (85, 42, 3, 75811.25),
+  (86, 32, 1, 52000.0),
+  (86, 8, 2, 150000.0),
+  (87, 38, 4, 75846.71),
+  (87, 48, 4, 75601.67),
+  (87, 47, 3, 71964.15),
+  (87, 10, 3, 140607.24),
+  (88, 45, 5, 49587.68),
+  (88, 47, 8, 55812.82),
+  (88, 42, 18, 54240.17),
+  (89, 4, 3, 140922.83),
+  (90, 14, 3, 175000.0),
+  (90, 38, 2, 78000.0),
+  (90, 15, 5, 175000.0),
+  (91, 17, 1, 175000.0),
+  (91, 12, 2, 150000.0),
+  (91, 8, 1, 150000.0),
+  (92, 2, 11, 98047.8),
+  (92, 5, 16, 88334.72),
+  (92, 36, 12, 35823.96),
+  (93, 47, 3, 74618.19),
+  (94, 44, 4, 78000.0),
+  (94, 7, 4, 150000.0),
+  (95, 9, 3, 145491.81),
+  (96, 33, 1, 51387.62),
+  (96, 39, 2, 74443.64),
+  (96, 28, 2, 49561.46),
+  (96, 7, 4, 142784.76),
+  (97, 15, 6, 103735.01),
+  (97, 23, 6, 103784.14),
+  (97, 20, 6, 119742.43),
+  (98, 47, 10, 54779.79),
+  (98, 38, 17, 49858.47),
+  (98, 43, 16, 45801.79),
+  (99, 39, 12, 47688.75),
+  (99, 47, 6, 49063.24),
+  (100, 36, 1, 50373.42),
+  (100, 40, 3, 71940.67),
+  (100, 44, 3, 76144.84),
+  (100, 42, 3, 77510.39),
+  (101, 43, 2, 78000.0),
+  (101, 26, 1, 52000.0),
+  (101, 5, 1, 150000.0),
+  (102, 11, 3, 147322.03),
+  (102, 24, 1, 173366.79),
+  (102, 20, 2, 163203.74),
+  (103, 32, 3, 48736.77),
+  (103, 39, 1, 73913.88),
+  (103, 29, 1, 49018.31),
+  (103, 27, 4, 50032.05),
+  (104, 1, 2, 141617.03),
+  (105, 28, 16, 33295.17),
+  (106, 5, 1, 143234.64),
+  (106, 26, 4, 51672.04),
+  (106, 48, 3, 75352.74),
+  (107, 6, 18, 101481.81),
+  (107, 32, 10, 30801.59),
+  (107, 27, 18, 30930.68),
+  (108, 16, 6, 114006.84),
+  (108, 18, 6, 114499.82),
+  (108, 15, 8, 123695.11),
+  (109, 10, 2, 150000.0),
+  (109, 16, 3, 175000.0),
+  (109, 7, 2, 150000.0),
+  (110, 44, 15, 55331.76),
+  (110, 46, 14, 52261.47),
+  (110, 47, 14, 48769.43),
+  (110, 48, 15, 48692.24),
+  (111, 18, 3, 168102.72),
+  (111, 38, 3, 74641.27),
+  (111, 4, 1, 138682.68),
+  (112, 40, 5, 78000.0),
+  (113, 29, 2, 49177.55),
+  (114, 46, 2, 72004.25),
+  (114, 6, 4, 149891.83),
+  (114, 33, 2, 49353.82),
+  (115, 41, 3, 72171.29),
+  (116, 42, 14, 52486.64),
+  (116, 38, 10, 48627.73),
+  (117, 20, 4, 170008.91),
+  (118, 42, 4, 74932.97),
+  (119, 28, 7, 31288.0),
+  (119, 7, 9, 104733.0),
+  (119, 8, 6, 97661.48),
+  (120, 46, 7, 47011.74),
+  (120, 43, 18, 52805.87),
+  (121, 29, 3, 50969.95),
+  (121, 40, 4, 73220.18),
+  (122, 24, 5, 175000.0),
+  (123, 11, 3, 138626.16),
+  (123, 13, 4, 173237.64),
+  (123, 39, 1, 76199.14),
+  (123, 9, 1, 141420.76),
+  (124, 28, 1, 52000.0),
+  (125, 4, 5, 150000.0),
+  (125, 26, 3, 52000.0),
+  (126, 21, 1, 172748.47),
+  (127, 24, 12, 116576.03),
+  (127, 20, 6, 101965.6),
+  (128, 34, 3, 52000.0),
+  (128, 28, 2, 52000.0),
+  (128, 8, 3, 150000.0),
+  (129, 5, 1, 145583.46),
+  (129, 8, 2, 146622.53),
+  (129, 32, 3, 49625.63),
+  (129, 39, 3, 73261.12),
+  (130, 5, 1, 142685.44),
+  (130, 34, 4, 48021.1),
+  (130, 35, 4, 51921.12),
+  (131, 16, 1, 171801.02),
+  (131, 47, 3, 72592.48),
+  (131, 43, 3, 75167.13),
+  (132, 9, 4, 138443.81),
+  (132, 5, 2, 138525.68),
+  (133, 26, 3, 52000.0),
+  (133, 35, 1, 52000.0),
+  (133, 31, 2, 52000.0),
+  (134, 18, 3, 175000.0),
+  (134, 8, 4, 150000.0),
+  (135, 35, 9, 35992.36),
+  (135, 28, 16, 33250.36),
+  (135, 12, 11, 99651.52),
+  (135, 29, 18, 31473.72),
+  (136, 41, 16, 49893.19),
+  (136, 44, 16, 50087.48),
+  (136, 46, 12, 45702.52),
+  (137, 5, 4, 142359.73),
+  (138, 29, 1, 52000.0),
+  (138, 3, 2, 150000.0),
+  (138, 9, 3, 150000.0),
+  (139, 12, 7, 98118.66),
+  (139, 27, 11, 32448.73),
+  (139, 3, 9, 92241.84),
+  (139, 31, 6, 30348.65),
+  (140, 17, 3, 170856.53),
+  (141, 13, 2, 175000.0),
+  (141, 8, 1, 150000.0),
+  (142, 44, 3, 75927.32),
+  (143, 46, 2, 78000.0),
+  (143, 45, 3, 78000.0),
+  (143, 41, 5, 78000.0),
+  (144, 32, 3, 50144.73),
+  (144, 2, 3, 143608.87),
+  (145, 45, 7, 55858.39),
+  (145, 43, 15, 46049.88),
+  (145, 47, 12, 52666.79),
+  (145, 38, 10, 46641.41),
+  (146, 8, 2, 141649.49),
+  (147, 38, 15, 55683.36),
+  (147, 41, 9, 46606.86),
+  (147, 40, 9, 51949.56),
+  (148, 11, 5, 150000.0),
+  (149, 47, 11, 51989.74),
+  (149, 40, 5, 50678.58),
+  (149, 46, 15, 51197.71),
+  (150, 26, 1, 52000.0),
+  (150, 20, 1, 175000.0),
+  (150, 30, 2, 52000.0),
+  (151, 39, 3, 76341.41),
+  (151, 10, 3, 149704.49),
+  (151, 21, 2, 171649.31),
+  (152, 27, 6, 30528.41),
+  (152, 8, 11, 105147.44),
+  (152, 5, 11, 92213.68),
+  (153, 11, 4, 143985.12),
+  (153, 32, 3, 49909.06),
+  (154, 14, 3, 161681.21),
+  (154, 38, 3, 74848.14),
+  (155, 5, 17, 95468.34),
+  (155, 9, 5, 95412.21),
+  (155, 36, 14, 34250.03),
+  (155, 12, 10, 98617.68),
+  (156, 40, 2, 77844.52),
+  (156, 44, 4, 74088.76),
+  (156, 8, 3, 144693.98),
+  (157, 33, 3, 51184.5),
+  (157, 3, 4, 139787.29),
+  (157, 9, 2, 141935.59),
+  (157, 46, 3, 72774.01),
+  (158, 32, 3, 52000.0),
+  (158, 46, 4, 78000.0),
+  (158, 37, 1, 78000.0),
+  (159, 24, 14, 113127.46),
+  (159, 23, 15, 120681.15),
+  (159, 13, 17, 115672.62),
+  (160, 10, 1, 140289.41),
+  (160, 44, 4, 73717.44),
+  (160, 16, 2, 166781.44),
+  (160, 3, 2, 142924.53),
+  (161, 34, 11, 32444.12),
+  (161, 28, 7, 33506.35),
+  (161, 29, 13, 32652.14),
+  (162, 18, 3, 164148.14),
+  (162, 36, 3, 51048.08),
+  (163, 19, 4, 173540.65),
+  (163, 8, 4, 147820.53),
+  (163, 37, 2, 73572.42),
+  (164, 17, 2, 175000.0),
+  (164, 48, 2, 78000.0),
+  (164, 31, 5, 52000.0),
+  (165, 40, 15, 55124.61),
+  (165, 37, 8, 52206.35),
+  (166, 23, 17, 104867.94),
+  (167, 31, 2, 52000.0),
+  (167, 42, 3, 78000.0),
+  (168, 30, 16, 36350.42),
+  (168, 36, 5, 36808.31),
+  (169, 26, 4, 52000.0),
+  (170, 42, 9, 50201.49),
+  (171, 18, 1, 175000.0),
+  (171, 13, 3, 175000.0),
+  (172, 36, 10, 35916.79),
+  (173, 28, 3, 52000.0),
+  (173, 33, 1, 52000.0),
+  (174, 21, 1, 175000.0),
+  (174, 16, 3, 175000.0),
+  (175, 20, 1, 164661.74),
+  (175, 38, 3, 76082.88),
+  (175, 47, 1, 75926.99);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (176, 45, 3, 74053.47),
+  (176, 8, 2, 140629.54),
+  (176, 41, 2, 74743.86),
+  (177, 35, 1, 50026.11),
+  (177, 43, 3, 72247.36),
+  (177, 14, 1, 161864.61),
+  (177, 16, 2, 169017.82),
+  (178, 8, 2, 150000.0),
+  (178, 44, 5, 78000.0),
+  (179, 30, 2, 49975.11),
+  (180, 47, 3, 76854.67),
+  (180, 2, 2, 144939.74),
+  (180, 26, 1, 49602.58),
+  (181, 3, 4, 150000.0),
+  (181, 19, 2, 175000.0),
+  (182, 29, 4, 52000.0),
+  (182, 25, 1, 52000.0),
+  (183, 45, 17, 45488.27),
+  (183, 39, 9, 50296.0),
+  (183, 40, 16, 51185.34),
+  (183, 37, 13, 49381.7),
+  (184, 24, 5, 121332.22),
+  (184, 14, 11, 116565.62),
+  (185, 44, 14, 52578.5),
+  (186, 21, 17, 122661.39),
+  (186, 16, 5, 104933.32),
+  (187, 16, 2, 166789.84),
+  (187, 20, 3, 161853.41),
+  (187, 10, 2, 145511.92),
+  (188, 43, 3, 78000.0),
+  (188, 25, 4, 52000.0),
+  (188, 34, 4, 52000.0),
+  (189, 40, 17, 50296.23),
+  (189, 48, 5, 51381.25),
+  (189, 41, 11, 51325.57),
+  (189, 39, 7, 49481.54),
+  (190, 24, 2, 161721.51),
+  (190, 6, 4, 146084.06),
+  (190, 35, 1, 51474.26),
+  (190, 47, 2, 76781.02),
+  (191, 20, 2, 175000.0),
+  (191, 1, 2, 150000.0),
+  (192, 26, 3, 51066.14),
+  (192, 16, 4, 167527.51),
+  (193, 30, 3, 51643.61),
+  (193, 7, 3, 141755.06),
+  (193, 47, 1, 75270.15),
+  (193, 31, 2, 50923.61),
+  (194, 47, 2, 78000.0),
+  (194, 27, 2, 52000.0),
+  (194, 19, 3, 175000.0),
+  (195, 36, 3, 52000.0),
+  (195, 42, 3, 78000.0),
+  (196, 15, 12, 106009.17),
+  (196, 21, 13, 125762.93),
+  (197, 4, 2, 150000.0),
+  (197, 1, 2, 150000.0),
+  (197, 27, 1, 52000.0),
+  (198, 4, 4, 145911.41),
+  (198, 40, 1, 71801.26),
+  (198, 41, 4, 71833.95),
+  (199, 33, 4, 52000.0),
+  (200, 13, 3, 172413.0),
+  (200, 40, 3, 76720.4),
+  (201, 45, 3, 76028.42),
+  (201, 15, 1, 170152.3),
+  (202, 4, 2, 138992.23),
+  (202, 41, 4, 75784.22),
+  (202, 1, 3, 144790.28),
+  (202, 45, 1, 77343.5),
+  (203, 37, 1, 78000.0),
+  (203, 31, 1, 52000.0),
+  (203, 18, 3, 175000.0),
+  (204, 35, 6, 32338.74),
+  (204, 25, 14, 31910.64),
+  (205, 45, 1, 74884.95),
+  (205, 47, 3, 72095.07),
+  (206, 42, 12, 47731.27),
+  (206, 37, 13, 55517.28),
+  (206, 41, 11, 47268.26),
+  (206, 44, 14, 52454.54),
+  (207, 18, 2, 166320.0),
+  (208, 1, 3, 143336.83),
+  (209, 21, 6, 102143.42),
+  (209, 24, 10, 115078.39),
+  (209, 23, 14, 116152.07),
+  (209, 19, 10, 122661.1),
+  (210, 47, 2, 75329.03),
+  (211, 20, 7, 112149.57),
+  (211, 15, 11, 108843.93),
+  (211, 14, 17, 103384.57),
+  (212, 30, 2, 49107.38),
+  (212, 7, 4, 141986.61),
+  (213, 41, 14, 55584.29),
+  (213, 42, 8, 50470.79),
+  (214, 46, 9, 54156.12),
+  (214, 40, 11, 49225.97),
+  (214, 42, 14, 47421.82),
+  (214, 43, 13, 47204.81),
+  (215, 19, 15, 113732.93),
+  (216, 25, 4, 50262.14),
+  (216, 5, 4, 144523.74),
+  (216, 29, 3, 50758.8),
+  (216, 39, 1, 72442.47),
+  (217, 37, 4, 77792.9),
+  (218, 21, 13, 115722.7),
+  (218, 24, 14, 106915.28),
+  (219, 23, 4, 162463.69),
+  (219, 2, 4, 149046.57),
+  (220, 20, 12, 110033.36),
+  (220, 16, 6, 112235.07),
+  (220, 21, 16, 112584.96),
+  (221, 2, 3, 150000.0),
+  (222, 11, 11, 107127.72),
+  (222, 30, 8, 35967.66),
+  (223, 2, 4, 145106.44),
+  (223, 48, 4, 71787.77),
+  (223, 40, 2, 73044.1),
+  (223, 13, 1, 169082.87),
+  (224, 34, 15, 32441.58),
+  (224, 28, 11, 34610.33),
+  (224, 29, 14, 30991.61),
+  (225, 46, 15, 46702.71),
+  (225, 48, 6, 47845.21),
+  (225, 38, 6, 47238.85),
+  (226, 28, 2, 50148.44),
+  (226, 12, 4, 141466.02),
+  (226, 32, 2, 49148.65),
+  (226, 41, 4, 75625.12),
+  (227, 19, 16, 122077.35),
+  (227, 23, 12, 105597.71),
+  (227, 20, 14, 102256.09),
+  (227, 24, 17, 106902.97),
+  (228, 30, 4, 50126.86),
+  (228, 37, 1, 75333.74),
+  (229, 47, 4, 78000.0),
+  (230, 20, 4, 164679.41),
+  (230, 3, 1, 143268.84),
+  (231, 45, 5, 78000.0),
+  (231, 23, 4, 175000.0),
+  (231, 46, 2, 78000.0),
+  (232, 23, 5, 175000.0),
+  (232, 35, 5, 52000.0),
+  (232, 18, 2, 175000.0),
+  (233, 9, 4, 149025.22),
+  (234, 10, 3, 150000.0),
+  (235, 47, 12, 46064.64),
+  (235, 43, 17, 54850.97),
+  (235, 48, 6, 49639.13),
+  (236, 38, 1, 78000.0),
+  (236, 1, 4, 150000.0),
+  (237, 14, 3, 165728.57),
+  (237, 32, 2, 50195.15),
+  (237, 18, 4, 172036.25),
+  (237, 21, 1, 161643.2),
+  (238, 29, 4, 52000.0),
+  (239, 42, 3, 78000.0),
+  (240, 6, 2, 138621.45),
+  (240, 24, 3, 171163.84),
+  (240, 43, 2, 74438.4),
+  (241, 31, 13, 35110.27),
+  (241, 8, 5, 87169.31),
+  (242, 5, 1, 139238.42),
+  (242, 15, 3, 173333.85),
+  (242, 25, 2, 49432.12),
+  (242, 6, 2, 145698.91),
+  (243, 29, 2, 50452.81),
+  (243, 23, 2, 173878.52),
+  (244, 8, 5, 150000.0),
+  (245, 9, 6, 92211.51),
+  (245, 33, 14, 34528.06),
+  (246, 34, 5, 52000.0),
+  (247, 16, 4, 166402.4),
+  (248, 24, 3, 162847.76),
+  (249, 5, 3, 140588.92),
+  (249, 2, 1, 149384.16),
+  (249, 38, 4, 74921.25),
+  (249, 1, 4, 143082.9),
+  (250, 18, 3, 162106.3),
+  (250, 6, 2, 149691.76),
+  (251, 20, 4, 171219.42),
+  (252, 20, 14, 116416.39),
+  (253, 6, 12, 107013.34),
+  (254, 47, 3, 76796.35),
+  (254, 8, 3, 144286.25),
+  (254, 2, 3, 146547.88),
+  (255, 32, 2, 49369.58),
+  (256, 15, 1, 161616.53),
+  (257, 10, 4, 140694.18),
+  (257, 12, 2, 142995.08),
+  (257, 3, 3, 141255.1),
+  (257, 36, 1, 50217.59),
+  (258, 43, 6, 54816.74),
+  (259, 18, 8, 108644.08),
+  (260, 13, 2, 161089.29),
+  (260, 47, 4, 71909.2),
+  (260, 35, 3, 50485.52),
+  (260, 16, 1, 174313.86),
+  (261, 14, 2, 166877.42),
+  (262, 29, 16, 36679.81),
+  (262, 26, 12, 37254.76),
+  (263, 22, 14, 103025.93),
+  (264, 24, 9, 107223.48),
+  (264, 18, 8, 104834.74),
+  (264, 23, 17, 115825.35),
+  (264, 20, 7, 104088.61),
+  (265, 14, 4, 164710.11),
+  (265, 29, 1, 48216.15),
+  (265, 20, 3, 172569.41),
+  (266, 42, 13, 45774.54),
+  (266, 43, 9, 48081.02),
+  (267, 48, 1, 78000.0),
+  (267, 36, 4, 52000.0),
+  (267, 16, 1, 175000.0),
+  (268, 7, 10, 101411.99),
+  (268, 25, 15, 30771.81),
+  (269, 42, 4, 78000.0),
+  (270, 15, 14, 112112.33),
+  (271, 12, 3, 143352.14),
+  (271, 23, 2, 161485.09),
+  (271, 14, 2, 170061.9),
+  (271, 18, 4, 166767.89),
+  (272, 7, 15, 107875.83),
+  (272, 33, 13, 35946.48),
+  (272, 29, 11, 35852.35),
+  (272, 8, 10, 97073.37),
+  (273, 18, 2, 161410.25),
+  (273, 12, 3, 138703.09),
+  (273, 2, 4, 144353.19),
+  (273, 21, 2, 174635.72),
+  (274, 40, 14, 54483.84),
+  (275, 48, 5, 52921.71),
+  (275, 42, 10, 55587.34),
+  (275, 46, 14, 46791.76),
+  (276, 14, 5, 107199.27),
+  (277, 40, 3, 76233.69),
+  (277, 13, 3, 161833.78),
+  (277, 9, 2, 145039.31),
+  (278, 24, 4, 175000.0),
+  (279, 33, 16, 37212.45),
+  (279, 28, 16, 36636.29),
+  (279, 11, 14, 103526.83),
+  (279, 6, 8, 100976.17),
+  (280, 9, 1, 149385.46),
+  (280, 12, 4, 148209.08),
+  (280, 47, 1, 72896.19),
+  (281, 10, 2, 142161.72),
+  (281, 22, 3, 163350.42),
+  (281, 48, 1, 76887.17),
+  (281, 5, 3, 143359.56);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (282, 17, 1, 161674.06),
+  (282, 7, 4, 146791.01),
+  (282, 47, 2, 77279.6),
+  (283, 31, 2, 48516.65),
+  (284, 14, 10, 105667.58),
+  (285, 32, 5, 33300.03),
+  (285, 28, 15, 31361.18),
+  (285, 35, 11, 31303.72),
+  (286, 45, 5, 78000.0),
+  (286, 36, 3, 52000.0),
+  (287, 15, 11, 103646.89),
+  (287, 13, 18, 117719.5),
+  (287, 18, 14, 113268.05),
+  (287, 23, 6, 102130.52),
+  (288, 20, 4, 167593.22),
+  (289, 24, 3, 163612.16),
+  (289, 25, 1, 48935.31),
+  (290, 4, 1, 150000.0),
+  (290, 10, 1, 150000.0),
+  (290, 45, 3, 78000.0),
+  (291, 21, 12, 108821.88),
+  (291, 23, 11, 123618.04),
+  (291, 20, 16, 102350.85),
+  (291, 16, 14, 123561.15),
+  (292, 7, 5, 95890.87),
+  (292, 5, 15, 96143.26),
+  (293, 6, 4, 150000.0),
+  (294, 45, 4, 72462.12),
+  (295, 7, 1, 147428.95),
+  (296, 37, 2, 73478.58),
+  (296, 39, 2, 75617.85),
+  (296, 31, 4, 48001.34),
+  (296, 3, 3, 146286.17),
+  (297, 22, 3, 175000.0),
+  (298, 7, 3, 150000.0),
+  (298, 15, 4, 175000.0),
+  (298, 9, 3, 150000.0),
+  (299, 29, 4, 50922.33),
+  (299, 14, 3, 172494.24),
+  (300, 39, 7, 47344.98),
+  (300, 45, 18, 47431.94),
+  (300, 46, 5, 47964.43),
+  (300, 37, 12, 45792.11),
+  (301, 33, 1, 48846.46),
+  (301, 26, 4, 50311.22),
+  (301, 41, 2, 77753.65),
+  (301, 8, 4, 145042.56),
+  (302, 48, 1, 78000.0),
+  (302, 45, 3, 78000.0),
+  (303, 40, 8, 52640.43),
+  (303, 47, 9, 52355.33),
+  (304, 32, 8, 31997.4),
+  (304, 1, 17, 106803.1),
+  (305, 17, 4, 175000.0),
+  (305, 14, 3, 175000.0),
+  (306, 45, 14, 48326.83),
+  (306, 47, 15, 46420.5),
+  (306, 46, 6, 48912.22),
+  (307, 40, 17, 47864.1),
+  (307, 39, 5, 54035.29),
+  (307, 45, 17, 54085.52),
+  (308, 10, 11, 102471.37),
+  (308, 9, 14, 101869.45),
+  (308, 26, 14, 36100.59),
+  (308, 25, 10, 35449.28),
+  (309, 11, 2, 141525.41),
+  (309, 43, 4, 72558.37),
+  (309, 36, 3, 50856.78),
+  (310, 24, 11, 120808.22),
+  (310, 17, 10, 110606.22),
+  (311, 31, 2, 49921.99),
+  (312, 7, 11, 107731.02),
+  (312, 11, 12, 90007.71),
+  (313, 33, 12, 32151.28),
+  (313, 2, 17, 103244.39),
+  (313, 1, 14, 103054.16),
+  (314, 26, 1, 47996.94),
+  (314, 28, 2, 50879.54),
+  (314, 31, 1, 51550.75),
+  (314, 25, 2, 47914.53),
+  (315, 20, 4, 168046.71),
+  (315, 9, 3, 140004.24),
+  (315, 7, 1, 141578.43),
+  (316, 28, 3, 51983.94),
+  (316, 44, 4, 74001.73),
+  (316, 9, 2, 139978.6),
+  (317, 36, 14, 33833.73),
+  (317, 1, 6, 94698.42),
+  (318, 46, 5, 52468.71),
+  (319, 14, 16, 105251.61),
+  (319, 21, 16, 118300.63),
+  (319, 17, 5, 108877.35),
+  (319, 20, 15, 103974.01),
+  (320, 27, 1, 49016.06),
+  (320, 7, 1, 143972.87),
+  (321, 46, 3, 78000.0),
+  (321, 27, 2, 52000.0),
+  (322, 22, 1, 173696.32),
+  (322, 16, 4, 163088.02),
+  (322, 1, 1, 147354.31),
+  (322, 43, 1, 76275.04),
+  (323, 20, 18, 105780.19),
+  (323, 13, 5, 122380.09),
+  (323, 14, 10, 121139.1),
+  (324, 5, 15, 100591.17),
+  (325, 47, 3, 78000.0),
+  (325, 6, 3, 150000.0),
+  (326, 18, 4, 170083.85),
+  (326, 25, 2, 48310.32),
+  (326, 45, 1, 77884.99),
+  (326, 31, 2, 48271.45),
+  (327, 40, 2, 74774.42),
+  (327, 2, 4, 139355.25),
+  (327, 44, 4, 74509.89),
+  (328, 47, 13, 50952.29),
+  (328, 42, 16, 51991.17),
+  (329, 39, 5, 52265.91),
+  (329, 45, 7, 50760.8),
+  (329, 46, 12, 54542.43),
+  (329, 37, 18, 47046.21),
+  (330, 21, 8, 114987.14),
+  (331, 14, 6, 125526.43),
+  (331, 20, 16, 117507.64),
+  (331, 23, 6, 111384.27),
+  (331, 18, 5, 115149.71),
+  (332, 20, 2, 175000.0),
+  (332, 33, 4, 52000.0),
+  (332, 36, 3, 52000.0),
+  (333, 36, 5, 52000.0),
+  (333, 40, 4, 78000.0),
+  (334, 37, 10, 54302.33),
+  (334, 42, 17, 48428.46),
+  (335, 5, 6, 92340.08),
+  (335, 35, 8, 31525.32),
+  (335, 36, 18, 33020.29),
+  (335, 26, 12, 36162.75),
+  (336, 41, 1, 76578.19),
+  (337, 32, 1, 50141.42),
+  (337, 1, 4, 148065.79),
+  (338, 7, 3, 144049.32),
+  (338, 25, 4, 49581.65),
+  (339, 29, 2, 52000.0),
+  (339, 9, 4, 150000.0),
+  (340, 46, 2, 73013.55),
+  (340, 48, 3, 76044.45),
+  (340, 36, 2, 51922.36),
+  (341, 22, 9, 122998.19),
+  (341, 24, 11, 121303.47),
+  (341, 19, 13, 104108.53),
+  (341, 21, 11, 105060.5),
+  (342, 19, 3, 163050.0),
+  (342, 44, 1, 76069.31),
+  (343, 22, 18, 118050.39),
+  (344, 45, 4, 74178.34),
+  (344, 43, 3, 77786.8),
+  (344, 4, 1, 138155.58),
+  (345, 15, 3, 175000.0),
+  (345, 41, 5, 78000.0),
+  (346, 12, 2, 146820.95),
+  (347, 9, 3, 138067.74),
+  (347, 11, 4, 146516.27),
+  (347, 38, 2, 72009.23),
+  (348, 32, 3, 48143.18),
+  (348, 37, 3, 75038.47),
+  (348, 36, 2, 50005.72),
+  (349, 6, 3, 141972.8),
+  (349, 23, 3, 164058.23),
+  (349, 15, 4, 174952.84),
+  (349, 14, 1, 162606.11),
+  (350, 40, 3, 78000.0),
+  (350, 16, 4, 175000.0),
+  (350, 3, 1, 150000.0),
+  (351, 34, 3, 49979.53),
+  (352, 42, 6, 55594.47),
+  (352, 45, 7, 55850.19),
+  (353, 44, 1, 73042.82),
+  (353, 28, 4, 50529.69),
+  (354, 3, 1, 140135.91),
+  (354, 6, 3, 144697.01),
+  (354, 5, 2, 148931.84),
+  (355, 21, 1, 168487.68),
+  (355, 2, 1, 147071.53),
+  (355, 25, 1, 50755.67),
+  (355, 44, 1, 73992.05),
+  (356, 39, 4, 74140.02),
+  (356, 6, 1, 143687.85),
+  (356, 19, 2, 162909.34),
+  (357, 37, 7, 46585.73),
+  (357, 45, 5, 51494.09),
+  (357, 47, 11, 51105.7),
+  (358, 14, 2, 163253.36),
+  (358, 27, 2, 50406.24),
+  (358, 42, 3, 72972.6),
+  (359, 19, 1, 164509.63),
+  (360, 7, 1, 148801.42),
+  (360, 19, 3, 167802.06),
+  (361, 21, 1, 165385.01),
+  (361, 28, 2, 50802.75),
+  (361, 11, 4, 141320.16),
+  (362, 30, 4, 50134.95),
+  (362, 29, 2, 50525.49),
+  (362, 23, 1, 172785.1),
+  (362, 20, 2, 173478.16),
+  (363, 47, 1, 78000.0),
+  (364, 3, 3, 144521.63),
+  (364, 36, 4, 50560.26),
+  (365, 39, 13, 46228.85),
+  (365, 44, 10, 50723.67),
+  (365, 45, 15, 47848.58),
+  (366, 48, 10, 45681.38),
+  (366, 44, 17, 50565.05),
+  (367, 45, 11, 50368.84),
+  (367, 42, 12, 54866.55),
+  (368, 48, 2, 74110.36),
+  (368, 17, 4, 166114.15),
+  (368, 38, 1, 74983.98),
+  (369, 32, 1, 49927.64),
+  (369, 31, 2, 49669.98),
+  (369, 39, 2, 72241.03),
+  (370, 23, 8, 111658.04),
+  (371, 14, 4, 161314.24),
+  (371, 38, 1, 72558.0),
+  (371, 11, 2, 139616.69),
+  (371, 42, 1, 77318.58),
+  (372, 32, 16, 35459.65),
+  (372, 31, 18, 32223.55),
+  (372, 33, 6, 31736.8),
+  (372, 1, 14, 107848.29),
+  (373, 10, 5, 150000.0),
+  (373, 38, 5, 78000.0),
+  (373, 12, 3, 150000.0),
+  (374, 15, 4, 166396.47),
+  (375, 10, 4, 148819.3),
+  (375, 39, 1, 77237.18),
+  (375, 7, 1, 139118.28),
+  (375, 12, 2, 148823.82),
+  (376, 45, 4, 73191.99),
+  (377, 28, 2, 48898.79),
+  (378, 17, 1, 169091.82),
+  (378, 13, 1, 168276.67),
+  (378, 1, 4, 145854.55),
+  (378, 46, 3, 74311.19),
+  (379, 17, 3, 169566.33),
+  (379, 35, 4, 50980.68),
+  (379, 28, 4, 50136.76),
+  (380, 17, 4, 171300.95),
+  (380, 20, 1, 171469.4),
+  (380, 37, 4, 76646.6),
+  (380, 23, 2, 162403.9),
+  (381, 45, 1, 78000.0);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (381, 44, 2, 78000.0),
+  (381, 46, 4, 78000.0),
+  (382, 6, 3, 138960.48),
+  (382, 5, 1, 146693.94),
+  (382, 17, 4, 169595.52),
+  (382, 15, 3, 170962.48),
+  (383, 13, 3, 163726.45),
+  (384, 8, 7, 88823.7),
+  (384, 33, 9, 35836.02),
+  (384, 1, 10, 101062.9),
+  (385, 38, 13, 48346.67),
+  (386, 25, 7, 33123.94),
+  (386, 31, 6, 34226.83),
+  (386, 1, 13, 93179.29),
+  (386, 9, 6, 103861.79),
+  (387, 37, 4, 76013.15),
+  (387, 31, 1, 49845.0),
+  (387, 16, 3, 161945.76),
+  (387, 22, 2, 170476.78),
+  (388, 35, 3, 52000.0),
+  (388, 1, 2, 150000.0),
+  (388, 45, 3, 78000.0),
+  (389, 5, 4, 141766.47),
+  (389, 36, 2, 51560.36),
+  (389, 12, 3, 140193.41),
+  (390, 41, 8, 47454.21),
+  (390, 40, 8, 54372.78),
+  (391, 32, 18, 33671.09),
+  (391, 1, 14, 93623.76),
+  (391, 30, 14, 36484.64),
+  (391, 2, 12, 90840.31),
+  (392, 37, 17, 49861.08),
+  (392, 45, 13, 45595.58),
+  (393, 8, 3, 146270.53),
+  (393, 45, 1, 75966.4),
+  (393, 34, 4, 50256.99),
+  (393, 30, 3, 49344.27),
+  (394, 22, 12, 111886.6),
+  (394, 18, 11, 118667.46),
+  (394, 23, 10, 110444.41),
+  (394, 15, 11, 108350.92),
+  (395, 47, 3, 76777.51),
+  (396, 44, 7, 49843.01),
+  (396, 37, 7, 56111.53),
+  (397, 43, 6, 52780.73),
+  (398, 29, 3, 48920.64),
+  (399, 34, 14, 34352.51),
+  (399, 32, 15, 34079.83),
+  (399, 7, 17, 92976.78),
+  (400, 25, 3, 49769.21),
+  (401, 27, 5, 52000.0),
+  (401, 41, 5, 78000.0),
+  (402, 11, 16, 92616.92),
+  (402, 33, 15, 33038.91),
+  (402, 10, 12, 103400.45),
+  (403, 36, 15, 31991.99),
+  (403, 8, 16, 101714.64),
+  (404, 5, 4, 144581.2),
+  (405, 7, 3, 145417.23),
+  (406, 44, 7, 50992.03),
+  (406, 47, 7, 45552.0),
+  (406, 39, 15, 49136.71),
+  (407, 18, 2, 175000.0),
+  (407, 36, 5, 52000.0),
+  (407, 29, 2, 52000.0),
+  (408, 23, 2, 172265.91),
+  (408, 31, 4, 49120.73),
+  (408, 35, 4, 48920.8),
+  (409, 23, 4, 168491.38),
+  (409, 19, 4, 174257.41),
+  (410, 39, 3, 72936.68),
+  (410, 15, 4, 166526.53),
+  (410, 1, 2, 146579.26),
+  (411, 21, 17, 118501.15),
+  (411, 22, 9, 108474.58),
+  (412, 9, 3, 150000.0),
+  (413, 13, 1, 174576.03),
+  (413, 21, 1, 163603.13),
+  (413, 2, 1, 141385.37),
+  (413, 10, 2, 146582.35),
+  (414, 18, 9, 120750.27),
+  (414, 19, 12, 125950.1),
+  (415, 9, 17, 95240.86),
+  (416, 25, 1, 52000.0),
+  (416, 1, 2, 150000.0),
+  (417, 13, 4, 171294.52),
+  (418, 21, 1, 171426.14),
+  (418, 11, 1, 141039.75),
+  (418, 41, 3, 73000.04),
+  (419, 13, 14, 104431.42),
+  (419, 15, 17, 107455.69),
+  (419, 17, 5, 115736.39),
+  (420, 11, 1, 146231.34),
+  (420, 32, 3, 51712.33),
+  (421, 9, 4, 140792.1),
+  (422, 42, 12, 52956.36),
+  (422, 39, 13, 48458.28),
+  (422, 41, 16, 50591.8),
+  (422, 37, 14, 47277.96),
+  (423, 5, 2, 143392.61),
+  (423, 34, 3, 50093.08),
+  (424, 2, 3, 147312.2),
+  (424, 40, 2, 73761.13),
+  (425, 36, 3, 49544.79),
+  (425, 10, 3, 139325.57),
+  (425, 40, 1, 72033.17),
+  (425, 19, 2, 163500.94),
+  (426, 3, 4, 145895.06),
+  (427, 1, 2, 145868.99),
+  (428, 42, 13, 45683.93),
+  (428, 37, 6, 54352.26),
+  (428, 46, 6, 55555.07),
+  (428, 41, 13, 46300.54),
+  (429, 46, 7, 51337.98),
+  (429, 47, 13, 49773.82),
+  (430, 7, 4, 144056.31),
+  (430, 11, 2, 144406.81),
+  (430, 12, 4, 149202.24),
+  (430, 36, 3, 50128.34),
+  (431, 47, 2, 74100.39),
+  (431, 21, 3, 166040.12),
+  (431, 39, 4, 74552.4),
+  (431, 16, 4, 161002.74),
+  (432, 1, 8, 104970.13),
+  (432, 10, 5, 103201.98),
+  (432, 8, 16, 104269.09),
+  (433, 15, 10, 123295.82),
+  (433, 17, 8, 107208.36),
+  (434, 47, 3, 76707.72),
+  (434, 5, 2, 143859.32),
+  (435, 6, 4, 142998.26),
+  (435, 4, 1, 148437.44),
+  (435, 22, 2, 171467.5),
+  (435, 23, 1, 169874.42),
+  (436, 35, 3, 49929.99),
+  (436, 37, 2, 72715.95),
+  (436, 10, 4, 149652.48),
+  (437, 10, 4, 144857.29),
+  (437, 9, 1, 144577.83),
+  (437, 22, 3, 162191.11),
+  (437, 6, 4, 147285.9),
+  (438, 26, 2, 48848.03),
+  (438, 42, 3, 76607.06),
+  (438, 37, 3, 76032.76),
+  (438, 13, 1, 162575.42),
+  (439, 22, 17, 108968.06),
+  (439, 23, 10, 116597.41),
+  (439, 13, 17, 112334.15),
+  (440, 13, 3, 175000.0),
+  (441, 40, 3, 71845.7),
+  (441, 10, 1, 141661.42),
+  (442, 40, 13, 53433.88),
+  (442, 45, 13, 50514.65),
+  (443, 17, 2, 161841.54),
+  (444, 5, 4, 145924.47),
+  (445, 40, 10, 50532.51),
+  (445, 43, 14, 51044.64),
+  (445, 45, 7, 47411.72),
+  (445, 38, 12, 51362.71),
+  (446, 22, 4, 175000.0),
+  (446, 32, 2, 52000.0),
+  (447, 16, 1, 169761.09),
+  (447, 33, 4, 51544.07),
+  (447, 18, 1, 174217.91),
+  (448, 14, 13, 125034.84),
+  (448, 19, 14, 122881.19),
+  (449, 20, 2, 163894.6),
+  (449, 39, 2, 75385.63),
+  (449, 22, 2, 173076.23),
+  (449, 29, 3, 50704.29),
+  (450, 42, 5, 78000.0),
+  (451, 12, 3, 148074.27),
+  (452, 27, 4, 52000.0),
+  (452, 20, 3, 175000.0),
+  (453, 32, 14, 31850.29),
+  (453, 31, 15, 30349.9),
+  (453, 8, 6, 101450.97),
+  (454, 46, 3, 78000.0),
+  (454, 42, 2, 78000.0),
+  (455, 2, 17, 107345.12),
+  (455, 26, 9, 37077.44),
+  (456, 24, 11, 111419.24),
+  (456, 18, 5, 116394.28),
+  (456, 20, 18, 110819.17),
+  (456, 16, 10, 111156.69),
+  (457, 16, 13, 114677.79),
+  (458, 13, 3, 167153.75),
+  (459, 24, 13, 123640.05),
+  (460, 12, 2, 142716.8),
+  (461, 44, 9, 48778.9),
+  (461, 38, 15, 55146.21),
+  (462, 14, 16, 120881.13),
+  (462, 21, 13, 116495.78),
+  (462, 19, 7, 110777.63),
+  (463, 43, 2, 78000.0),
+  (463, 10, 2, 150000.0),
+  (463, 11, 1, 150000.0),
+  (464, 19, 2, 174446.07),
+  (464, 41, 1, 75644.78),
+  (464, 12, 3, 138146.49),
+  (464, 8, 4, 148264.93),
+  (465, 44, 14, 51793.11),
+  (465, 43, 8, 54873.27),
+  (465, 48, 9, 52007.85),
+  (465, 38, 13, 54195.73),
+  (466, 37, 15, 51552.77),
+  (466, 39, 14, 48498.98),
+  (466, 48, 6, 45775.42),
+  (467, 30, 3, 51714.96),
+  (467, 48, 1, 76555.51),
+  (468, 36, 3, 52000.0),
+  (468, 5, 4, 150000.0),
+  (469, 34, 5, 52000.0),
+  (469, 27, 2, 52000.0),
+  (470, 31, 3, 49616.54),
+  (471, 9, 4, 144236.47),
+  (471, 40, 4, 74833.23),
+  (471, 37, 2, 77274.06),
+  (472, 33, 17, 34639.44),
+  (472, 4, 11, 95694.86),
+  (472, 36, 10, 32705.45),
+  (472, 7, 17, 100387.57),
+  (473, 10, 10, 103107.68),
+  (473, 29, 6, 35152.88),
+  (473, 30, 10, 33043.24),
+  (474, 20, 7, 116866.41),
+  (474, 13, 18, 114655.7),
+  (474, 15, 10, 112830.52),
+  (474, 24, 18, 111641.85),
+  (475, 36, 2, 50241.97),
+  (475, 35, 3, 51166.07),
+  (475, 2, 3, 138794.56),
+  (476, 22, 11, 106090.78),
+  (476, 24, 6, 122682.55),
+  (477, 20, 8, 110603.8),
+  (478, 2, 12, 97625.89),
+  (478, 7, 17, 97135.93),
+  (478, 3, 13, 90235.63),
+  (479, 21, 1, 175000.0),
+  (479, 10, 5, 150000.0),
+  (480, 13, 9, 124342.26),
+  (481, 34, 3, 52000.0),
+  (482, 13, 3, 175000.0),
+  (482, 19, 5, 175000.0),
+  (483, 9, 5, 107124.26),
+  (483, 4, 13, 97795.27),
+  (484, 31, 6, 32426.83),
+  (484, 8, 10, 98352.12),
+  (484, 6, 5, 89731.55),
+  (485, 28, 4, 48584.57);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (486, 27, 14, 31119.47),
+  (487, 44, 18, 55021.05),
+  (487, 40, 9, 55208.45),
+  (487, 47, 11, 47242.22),
+  (487, 39, 15, 48847.18),
+  (488, 18, 12, 112800.42),
+  (489, 33, 4, 51241.02),
+  (489, 7, 1, 141910.44),
+  (490, 16, 4, 166373.43),
+  (490, 40, 3, 73059.41),
+  (490, 36, 4, 51102.75),
+  (490, 11, 4, 144806.53),
+  (491, 48, 4, 72473.37),
+  (492, 17, 6, 116157.35),
+  (492, 19, 15, 121444.63),
+  (493, 6, 2, 147804.4),
+  (494, 43, 12, 47376.68),
+  (494, 46, 15, 54821.48),
+  (494, 47, 9, 51467.42),
+  (495, 6, 1, 150000.0),
+  (495, 38, 5, 78000.0),
+  (496, 24, 5, 175000.0),
+  (497, 8, 2, 143180.59),
+  (497, 19, 4, 169753.0),
+  (497, 2, 4, 142872.39),
+  (498, 30, 18, 36890.23),
+  (498, 25, 18, 33197.47),
+  (499, 39, 16, 54902.98),
+  (500, 24, 12, 113980.67),
+  (500, 22, 13, 121591.75),
+  (500, 19, 11, 110205.03),
+  (500, 15, 7, 111906.91),
+  (501, 43, 10, 45605.4),
+  (501, 45, 5, 51444.19),
+  (501, 46, 16, 49264.88),
+  (502, 30, 1, 48860.16),
+  (502, 34, 1, 50685.75),
+  (502, 6, 3, 145356.47),
+  (503, 37, 3, 77754.03),
+  (503, 47, 3, 73564.66),
+  (503, 22, 1, 170730.72),
+  (503, 27, 3, 50864.2),
+  (504, 37, 3, 76807.51),
+  (504, 4, 1, 141441.79),
+  (505, 15, 9, 122517.53),
+  (505, 22, 5, 119665.01),
+  (505, 17, 14, 105778.04),
+  (506, 45, 4, 78000.0),
+  (506, 16, 2, 175000.0),
+  (507, 39, 2, 78000.0),
+  (508, 16, 16, 122124.91),
+  (508, 22, 5, 117235.4),
+  (509, 20, 2, 166317.21),
+  (509, 31, 4, 49814.29),
+  (509, 48, 2, 75069.96),
+  (509, 35, 4, 47889.35),
+  (510, 38, 13, 52200.67),
+  (511, 33, 12, 35788.54),
+  (511, 31, 16, 31920.28),
+  (511, 25, 15, 34445.91),
+  (512, 21, 1, 170419.23),
+  (512, 36, 1, 47889.76),
+  (513, 47, 3, 72964.82),
+  (513, 19, 1, 169671.56),
+  (514, 6, 2, 142511.5),
+  (515, 23, 17, 111961.09),
+  (515, 14, 15, 120362.07),
+  (515, 20, 10, 107804.75),
+  (515, 17, 17, 103312.93),
+  (516, 9, 6, 97326.16),
+  (516, 6, 8, 99816.34),
+  (516, 27, 7, 34859.12),
+  (517, 40, 1, 77454.68),
+  (517, 42, 3, 72404.51),
+  (518, 2, 1, 149194.72),
+  (518, 32, 4, 48948.38),
+  (518, 10, 3, 148855.41),
+  (518, 42, 1, 74975.99),
+  (519, 35, 2, 47853.76),
+  (520, 22, 4, 161772.73),
+  (520, 44, 1, 74039.82),
+  (520, 20, 3, 162126.39),
+  (521, 43, 15, 47325.75),
+  (522, 6, 2, 139679.32),
+  (522, 41, 2, 71918.28),
+  (522, 29, 2, 49875.21),
+  (522, 48, 1, 76706.69),
+  (523, 2, 3, 150000.0),
+  (523, 3, 1, 150000.0),
+  (524, 47, 6, 45642.7),
+  (524, 45, 7, 50578.73),
+  (524, 39, 5, 50385.72),
+  (524, 40, 14, 45740.15),
+  (525, 7, 2, 148024.23),
+  (525, 30, 1, 51242.05),
+  (525, 40, 1, 72472.48),
+  (526, 21, 2, 165502.26),
+  (526, 8, 2, 147170.73),
+  (526, 44, 2, 73853.54),
+  (526, 37, 1, 73469.09),
+  (527, 29, 1, 48394.82),
+  (527, 16, 4, 171887.26),
+  (528, 35, 15, 34482.36),
+  (529, 45, 2, 78000.0),
+  (529, 9, 2, 150000.0),
+  (530, 32, 7, 35381.21),
+  (531, 13, 1, 169664.89),
+  (531, 8, 2, 143570.59),
+  (532, 28, 5, 34854.59),
+  (532, 6, 9, 91401.38),
+  (532, 34, 9, 32593.66),
+  (532, 2, 17, 105691.67),
+  (533, 11, 4, 144178.84),
+  (533, 2, 1, 148740.95),
+  (534, 40, 8, 46310.86),
+  (534, 38, 16, 49745.54),
+  (534, 42, 8, 49340.81),
+  (535, 28, 2, 48739.25),
+  (536, 47, 3, 73021.8),
+  (536, 13, 2, 161449.32),
+  (536, 41, 1, 73510.97),
+  (536, 23, 1, 172923.12),
+  (537, 19, 2, 172053.66),
+  (537, 39, 2, 75367.48),
+  (538, 14, 4, 175000.0),
+  (538, 38, 4, 78000.0),
+  (539, 16, 4, 169112.54),
+  (539, 21, 2, 173792.57),
+  (540, 19, 13, 111160.84),
+  (541, 48, 16, 49680.27),
+  (542, 37, 12, 52545.87),
+  (543, 30, 4, 51050.83),
+  (544, 41, 1, 74161.65),
+  (545, 45, 2, 76675.2),
+  (545, 40, 1, 75631.64),
+  (545, 35, 3, 50900.76),
+  (546, 22, 7, 117380.23),
+  (546, 13, 16, 103141.64),
+  (546, 18, 16, 120452.6),
+  (546, 24, 7, 125540.66),
+  (547, 48, 3, 73960.92),
+  (547, 15, 3, 168049.92),
+  (548, 20, 12, 118890.72),
+  (548, 21, 15, 121721.79),
+  (548, 23, 9, 112573.47),
+  (548, 14, 10, 121097.64),
+  (549, 17, 6, 105536.77),
+  (549, 14, 6, 118578.51),
+  (550, 19, 4, 174574.04),
+  (551, 19, 2, 161881.29),
+  (552, 32, 4, 49745.31),
+  (552, 38, 2, 77365.28),
+  (552, 43, 3, 72831.64),
+  (553, 4, 3, 143471.12),
+  (553, 10, 2, 145423.56),
+  (553, 23, 2, 170965.37),
+  (554, 43, 2, 78000.0),
+  (554, 10, 1, 150000.0),
+  (554, 11, 1, 150000.0),
+  (555, 30, 5, 35005.23),
+  (555, 35, 10, 31237.03),
+  (556, 28, 7, 30191.26),
+  (556, 5, 16, 98469.06),
+  (556, 27, 13, 32571.72),
+  (556, 11, 16, 93206.69),
+  (557, 22, 4, 173602.44),
+  (557, 45, 2, 75990.77),
+  (557, 8, 1, 141696.99),
+  (557, 47, 4, 75613.34),
+  (558, 31, 8, 35847.74),
+  (558, 29, 17, 32183.31),
+  (559, 43, 4, 78000.0),
+  (559, 6, 2, 150000.0),
+  (559, 33, 4, 52000.0),
+  (560, 46, 3, 74169.34),
+  (560, 28, 1, 49024.15),
+  (561, 14, 4, 175000.0),
+  (562, 48, 7, 47509.0),
+  (562, 43, 12, 56033.14),
+  (562, 39, 13, 56014.09),
+  (562, 38, 6, 55430.03),
+  (563, 27, 4, 50794.63),
+  (563, 12, 2, 140391.09),
+  (563, 36, 4, 49044.17),
+  (564, 32, 4, 52000.0),
+  (564, 36, 2, 52000.0),
+  (565, 38, 7, 50611.4),
+  (565, 47, 16, 52281.06),
+  (565, 41, 5, 46543.35),
+  (565, 43, 9, 50624.11),
+  (566, 17, 1, 166224.83),
+  (566, 41, 1, 77034.55),
+  (566, 44, 2, 75389.52),
+  (566, 31, 2, 49169.87),
+  (567, 23, 9, 114475.5),
+  (567, 18, 6, 114089.73),
+  (567, 13, 17, 116886.73),
+  (567, 17, 17, 103815.46),
+  (568, 20, 3, 175000.0),
+  (568, 18, 1, 175000.0),
+  (568, 44, 5, 78000.0),
+  (569, 20, 7, 104009.24),
+  (569, 19, 7, 113832.88),
+  (569, 18, 18, 106116.21),
+  (570, 8, 2, 149080.92),
+  (571, 29, 3, 48556.38),
+  (571, 39, 3, 71939.46),
+  (572, 45, 2, 78000.0),
+  (573, 35, 17, 33685.38),
+  (573, 4, 11, 87892.86),
+  (573, 3, 6, 87688.65),
+  (573, 1, 15, 97783.06),
+  (574, 5, 3, 150000.0),
+  (575, 38, 2, 78000.0),
+  (576, 46, 7, 54578.11),
+  (576, 42, 17, 53195.81),
+  (576, 47, 8, 50753.61),
+  (577, 46, 3, 72831.87),
+  (577, 13, 1, 174630.12),
+  (578, 24, 5, 175000.0),
+  (578, 45, 2, 78000.0),
+  (579, 28, 5, 52000.0),
+  (579, 14, 2, 175000.0),
+  (580, 28, 16, 32258.61),
+  (580, 12, 16, 87852.78),
+  (581, 39, 4, 73169.45),
+  (581, 48, 4, 73573.28),
+  (581, 20, 4, 163642.99),
+  (581, 44, 1, 77343.27),
+  (582, 47, 13, 52431.35),
+  (582, 38, 6, 46541.86),
+  (582, 43, 11, 49614.82),
+  (582, 44, 14, 55915.07),
+  (583, 13, 4, 175000.0),
+  (583, 39, 1, 78000.0),
+  (584, 42, 4, 75920.06),
+  (584, 26, 4, 51948.1),
+  (584, 23, 3, 163063.24),
+  (585, 23, 5, 103940.28),
+  (585, 15, 5, 121842.66),
+  (586, 10, 1, 147122.06),
+  (586, 20, 4, 172098.24),
+  (586, 40, 2, 73591.83),
+  (587, 13, 11, 123063.08),
+  (588, 20, 13, 117655.57),
+  (588, 13, 17, 108924.59),
+  (588, 23, 16, 105521.53),
+  (588, 15, 11, 104794.96),
+  (589, 43, 4, 74729.68),
+  (589, 36, 2, 49947.81);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (589, 44, 4, 73403.56),
+  (589, 35, 4, 50406.47),
+  (590, 39, 18, 49241.2),
+  (591, 19, 15, 107483.61),
+  (591, 18, 8, 117378.03),
+  (591, 13, 14, 103581.07),
+  (592, 2, 18, 95871.93),
+  (592, 27, 13, 36722.26),
+  (592, 34, 9, 30308.53),
+  (593, 21, 1, 170672.1),
+  (593, 37, 2, 73856.44),
+  (593, 7, 3, 139999.53),
+  (593, 32, 3, 49351.47),
+  (594, 35, 2, 49035.4),
+  (595, 40, 1, 76238.49),
+  (595, 48, 1, 75453.24),
+  (596, 28, 3, 52000.0),
+  (596, 14, 1, 175000.0),
+  (597, 13, 3, 169749.49),
+  (597, 27, 4, 50633.69),
+  (597, 26, 2, 51504.53),
+  (598, 18, 4, 174084.9),
+  (598, 41, 1, 75018.96),
+  (598, 35, 3, 49763.94),
+  (598, 40, 2, 72698.95),
+  (599, 26, 18, 32249.68),
+  (599, 9, 7, 92385.38),
+  (600, 8, 17, 104371.81),
+  (601, 42, 2, 78000.0),
+  (601, 3, 2, 150000.0),
+  (602, 23, 16, 113403.13),
+  (602, 13, 5, 102855.52),
+  (603, 12, 18, 102208.92),
+  (603, 34, 7, 31878.38),
+  (603, 3, 14, 102424.09),
+  (603, 25, 6, 33959.85),
+  (604, 39, 1, 78000.0),
+  (605, 28, 2, 48284.35),
+  (605, 14, 2, 174578.93),
+  (606, 32, 5, 52000.0),
+  (607, 44, 3, 74725.38),
+  (607, 16, 3, 172499.12),
+  (607, 18, 1, 170035.57),
+  (607, 10, 1, 148097.68),
+  (608, 41, 1, 75097.84),
+  (608, 45, 2, 77111.72),
+  (608, 24, 4, 161110.13),
+  (609, 7, 15, 93660.87),
+  (609, 6, 17, 103101.56),
+  (609, 27, 11, 35906.23),
+  (610, 22, 2, 170778.75),
+  (610, 46, 1, 73955.58),
+  (610, 28, 3, 49725.57),
+  (610, 7, 1, 147143.71),
+  (611, 23, 10, 115607.33),
+  (611, 17, 6, 105366.65),
+  (612, 29, 2, 48924.43),
+  (612, 31, 3, 51166.04),
+  (612, 48, 2, 72286.65),
+  (613, 15, 5, 175000.0),
+  (613, 2, 2, 150000.0),
+  (613, 36, 1, 52000.0),
+  (614, 4, 4, 145204.71),
+  (614, 26, 2, 48210.49),
+  (615, 44, 8, 53032.12),
+  (615, 47, 8, 55570.89),
+  (615, 48, 18, 53780.77),
+  (615, 38, 9, 53391.16),
+  (616, 14, 2, 175000.0),
+  (616, 19, 4, 175000.0),
+  (616, 47, 2, 78000.0),
+  (617, 22, 8, 110556.12),
+  (617, 20, 15, 117357.27),
+  (618, 23, 16, 116131.3),
+  (618, 16, 6, 103834.35),
+  (618, 19, 5, 102776.76),
+  (618, 22, 8, 113037.84),
+  (619, 41, 13, 45689.08),
+  (619, 43, 7, 48082.38),
+  (619, 42, 13, 50621.81),
+  (619, 39, 10, 54826.63),
+  (620, 10, 1, 149742.2),
+  (620, 17, 4, 173203.51),
+  (620, 8, 3, 146973.88),
+  (620, 21, 4, 164960.96),
+  (621, 36, 13, 36370.09),
+  (621, 28, 15, 34794.83),
+  (621, 5, 12, 88117.67),
+  (622, 15, 6, 125882.44),
+  (622, 20, 12, 102499.4),
+  (622, 19, 10, 125726.06),
+  (623, 38, 6, 47464.77),
+  (623, 42, 9, 47212.75),
+  (624, 14, 5, 175000.0),
+  (624, 38, 5, 78000.0),
+  (624, 1, 2, 150000.0),
+  (625, 22, 1, 164979.94),
+  (626, 21, 2, 161404.24),
+  (627, 39, 3, 77811.37),
+  (627, 43, 4, 73787.47),
+  (627, 1, 2, 140536.4),
+  (628, 36, 4, 48225.01),
+  (629, 6, 2, 150000.0),
+  (629, 2, 2, 150000.0),
+  (630, 8, 4, 147613.21),
+  (630, 20, 3, 173652.28),
+  (631, 20, 11, 113172.77),
+  (631, 24, 14, 116208.35),
+  (632, 41, 3, 77833.22),
+  (632, 28, 2, 50534.06),
+  (632, 6, 2, 149168.01),
+  (632, 3, 1, 141488.44),
+  (633, 8, 9, 98939.25),
+  (633, 29, 13, 30717.16),
+  (633, 26, 5, 33897.66),
+  (634, 42, 6, 53633.62),
+  (634, 41, 5, 46484.18),
+  (634, 46, 15, 50294.64),
+  (635, 42, 17, 52559.24),
+  (635, 46, 14, 54061.55),
+  (635, 44, 10, 55796.58),
+  (636, 47, 13, 45435.63),
+  (636, 38, 11, 46514.13),
+  (636, 43, 7, 52401.35),
+  (637, 47, 5, 78000.0),
+  (637, 32, 5, 52000.0),
+  (637, 20, 3, 175000.0),
+  (638, 4, 16, 107380.93),
+  (638, 1, 18, 87563.12),
+  (639, 38, 17, 50300.61),
+  (639, 41, 12, 49846.92),
+  (640, 32, 2, 48677.57),
+  (640, 31, 4, 48051.84),
+  (640, 2, 1, 139231.96),
+  (640, 29, 4, 51914.67),
+  (641, 33, 4, 48804.73),
+  (641, 38, 1, 75056.65),
+  (641, 47, 4, 75356.76),
+  (641, 40, 1, 73431.38),
+  (642, 29, 1, 48511.15),
+  (642, 45, 2, 74688.06),
+  (642, 28, 4, 48805.55),
+  (643, 43, 3, 78000.0),
+  (643, 30, 4, 52000.0),
+  (643, 9, 4, 150000.0),
+  (644, 45, 4, 72565.56),
+  (644, 48, 2, 72735.4),
+  (644, 6, 4, 139210.84),
+  (645, 37, 10, 54859.49),
+  (646, 3, 4, 150000.0),
+  (646, 5, 1, 150000.0),
+  (646, 22, 5, 175000.0),
+  (647, 18, 9, 123459.78),
+  (647, 13, 18, 118408.32),
+  (647, 21, 13, 116305.09),
+  (648, 7, 1, 147883.32),
+  (649, 24, 3, 170914.29),
+  (649, 11, 4, 146790.62),
+  (650, 8, 4, 149635.64),
+  (650, 13, 1, 164434.42),
+  (651, 18, 3, 171012.8),
+  (652, 34, 2, 48414.06),
+  (652, 27, 4, 49559.78),
+  (653, 2, 1, 146611.51),
+  (653, 29, 1, 48192.68),
+  (653, 10, 3, 142819.81),
+  (654, 43, 2, 77391.67),
+  (655, 47, 3, 71809.31),
+  (655, 48, 3, 77377.3),
+  (655, 21, 2, 170804.13),
+  (656, 45, 2, 77257.28),
+  (656, 23, 1, 161517.58),
+  (656, 42, 3, 74193.56),
+  (656, 26, 2, 50005.15),
+  (657, 34, 2, 47937.43),
+  (657, 22, 3, 164378.76),
+  (657, 41, 3, 76293.42),
+  (658, 23, 6, 102669.46),
+  (658, 21, 15, 124562.9),
+  (658, 18, 12, 108800.05),
+  (659, 38, 5, 78000.0),
+  (659, 37, 5, 78000.0),
+  (659, 46, 2, 78000.0),
+  (660, 46, 2, 72416.62),
+  (660, 25, 2, 51263.03),
+  (661, 14, 7, 113168.2),
+  (661, 24, 12, 103412.78),
+  (661, 13, 15, 114393.26),
+  (661, 19, 14, 115194.73),
+  (662, 29, 4, 51267.06),
+  (662, 45, 2, 74916.1),
+  (662, 32, 4, 50798.39),
+  (662, 47, 2, 77800.52),
+  (663, 24, 7, 124629.7),
+  (664, 8, 3, 150000.0),
+  (665, 18, 12, 102185.46),
+  (665, 17, 7, 104982.43),
+  (665, 23, 14, 111833.05),
+  (666, 37, 6, 54745.06),
+  (666, 38, 11, 50494.45),
+  (666, 45, 9, 51418.14),
+  (666, 42, 10, 53772.33),
+  (667, 29, 3, 48211.55),
+  (667, 43, 4, 74176.35),
+  (667, 10, 4, 142067.97),
+  (667, 47, 1, 77738.42),
+  (668, 31, 15, 35956.04),
+  (669, 40, 1, 77733.51),
+  (669, 35, 2, 50962.32),
+  (670, 2, 2, 140943.44),
+  (670, 18, 4, 162185.07),
+  (671, 26, 18, 34003.12),
+  (671, 6, 11, 92400.73),
+  (671, 1, 6, 107575.51),
+  (672, 10, 15, 90553.01),
+  (672, 26, 14, 37156.98),
+  (673, 18, 7, 111614.16),
+  (674, 4, 2, 150000.0),
+  (675, 8, 4, 144637.45),
+  (675, 18, 1, 167778.4),
+  (675, 4, 4, 145602.5),
+  (675, 21, 1, 164768.24),
+  (676, 20, 4, 167243.75),
+  (676, 37, 2, 76645.18),
+  (677, 35, 4, 52000.0),
+  (678, 19, 1, 175000.0),
+  (678, 42, 1, 78000.0),
+  (678, 11, 4, 150000.0),
+  (679, 41, 3, 72043.82),
+  (679, 14, 1, 165208.94),
+  (679, 38, 4, 76118.2),
+  (680, 47, 17, 52968.67),
+  (680, 42, 9, 47925.54),
+  (680, 41, 10, 48970.6),
+  (681, 42, 1, 78000.0),
+  (682, 36, 4, 50078.63),
+  (682, 45, 1, 75121.17),
+  (682, 46, 4, 75954.81),
+  (682, 32, 3, 51883.68),
+  (683, 38, 12, 49285.65),
+  (684, 34, 8, 30814.96),
+  (684, 35, 14, 34711.72),
+  (684, 12, 17, 102074.0),
+  (685, 13, 18, 117141.68),
+  (685, 16, 6, 122812.95),
+  (686, 5, 2, 146951.68),
+  (686, 38, 2, 73380.06),
+  (687, 45, 5, 78000.0),
+  (688, 44, 3, 78000.0),
+  (688, 42, 4, 78000.0);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (688, 4, 4, 150000.0),
+  (689, 24, 2, 161657.51),
+  (689, 34, 4, 50054.83),
+  (689, 3, 3, 138061.91),
+  (689, 47, 2, 73848.56),
+  (690, 16, 2, 163302.74),
+  (691, 31, 4, 51201.53),
+  (692, 2, 17, 91971.62),
+  (692, 11, 6, 103290.74),
+  (692, 29, 14, 33352.49),
+  (693, 25, 10, 36639.81),
+  (694, 4, 5, 150000.0),
+  (694, 20, 4, 175000.0),
+  (695, 25, 17, 33152.87),
+  (695, 4, 18, 99591.09),
+  (695, 32, 15, 34702.78),
+  (696, 22, 1, 167357.07),
+  (697, 46, 17, 54421.31),
+  (698, 12, 1, 139532.17),
+  (698, 16, 4, 168183.76),
+  (698, 9, 3, 141734.26),
+  (698, 3, 2, 139768.91),
+  (699, 34, 2, 48078.44),
+  (700, 3, 8, 101025.06),
+  (700, 11, 16, 101528.66),
+  (701, 40, 3, 72772.63),
+  (701, 20, 4, 173265.48),
+  (701, 27, 1, 49903.07),
+  (702, 40, 16, 53630.36),
+  (702, 44, 18, 48860.14),
+  (703, 1, 5, 98648.52),
+  (703, 3, 7, 93102.1),
+  (703, 12, 8, 100258.03),
+  (704, 16, 16, 105769.97),
+  (704, 17, 18, 115085.37),
+  (705, 13, 18, 118097.58),
+  (706, 30, 3, 52000.0),
+  (706, 16, 3, 175000.0),
+  (707, 7, 11, 101581.43),
+  (707, 30, 10, 34524.72),
+  (708, 10, 1, 145553.51),
+  (708, 21, 3, 173219.92),
+  (708, 16, 4, 163929.33),
+  (709, 33, 3, 49914.13),
+  (709, 25, 4, 48584.63),
+  (710, 18, 4, 175000.0),
+  (710, 38, 5, 78000.0),
+  (711, 16, 2, 175000.0),
+  (711, 26, 3, 52000.0),
+  (712, 21, 17, 103558.69),
+  (712, 14, 12, 114211.11),
+  (712, 15, 8, 115807.07),
+  (713, 27, 3, 49430.66),
+  (713, 24, 2, 167183.64),
+  (713, 32, 3, 50524.68),
+  (713, 21, 3, 173620.66),
+  (714, 8, 1, 150000.0),
+  (715, 9, 18, 103138.14),
+  (715, 10, 18, 92763.76),
+  (715, 36, 16, 34557.37),
+  (716, 23, 1, 167608.06),
+  (716, 26, 2, 51440.34),
+  (716, 38, 2, 73176.02),
+  (717, 47, 3, 77037.8),
+  (717, 30, 4, 51043.75),
+  (717, 22, 4, 163934.19),
+  (717, 6, 4, 148235.33),
+  (718, 20, 1, 167997.2),
+  (718, 48, 3, 73880.49),
+  (719, 21, 1, 173910.02),
+  (719, 38, 2, 77858.0),
+  (719, 2, 3, 144818.29),
+  (720, 35, 4, 52000.0),
+  (721, 14, 15, 115046.22),
+  (721, 15, 5, 121748.63),
+  (721, 24, 14, 113471.03),
+  (722, 19, 2, 175000.0),
+  (722, 14, 3, 175000.0),
+  (723, 39, 10, 54628.0),
+  (724, 35, 4, 52000.0),
+  (725, 9, 2, 150000.0),
+  (726, 39, 3, 75425.95),
+  (726, 37, 4, 73478.75),
+  (727, 21, 14, 123041.37),
+  (727, 18, 12, 112836.04),
+  (728, 23, 4, 169582.39),
+  (728, 45, 2, 74349.93),
+  (728, 46, 2, 77375.78),
+  (728, 20, 4, 167409.59),
+  (729, 16, 2, 164832.87),
+  (730, 32, 1, 51980.52),
+  (730, 27, 1, 50982.45),
+  (731, 14, 4, 161374.05),
+  (731, 33, 4, 49425.61),
+  (731, 3, 4, 148269.28),
+  (732, 42, 16, 50309.56),
+  (732, 47, 12, 45985.15),
+  (733, 11, 1, 140126.84),
+  (733, 2, 1, 144415.85),
+  (733, 39, 4, 72811.15),
+  (734, 14, 1, 173497.63),
+  (734, 46, 2, 74518.44),
+  (735, 4, 2, 149145.85),
+  (735, 39, 3, 77430.64),
+  (735, 1, 2, 139096.64),
+  (735, 25, 4, 47956.25),
+  (736, 15, 1, 172156.94),
+  (737, 21, 3, 168868.76),
+  (738, 8, 3, 141880.41),
+  (738, 15, 1, 166629.95),
+  (738, 14, 3, 161167.74),
+  (738, 7, 2, 143505.31),
+  (739, 5, 2, 142933.16),
+  (740, 17, 3, 174739.82),
+  (740, 7, 4, 146134.81),
+  (741, 43, 3, 71870.13),
+  (741, 31, 4, 49430.67),
+  (741, 5, 2, 144041.04),
+  (742, 20, 2, 171330.79),
+  (743, 16, 8, 117229.95),
+  (743, 15, 8, 124123.52),
+  (743, 19, 14, 125719.51),
+  (744, 45, 17, 55915.04),
+  (745, 22, 2, 175000.0),
+  (745, 16, 5, 175000.0),
+  (746, 39, 3, 72905.32),
+  (746, 25, 1, 48108.81),
+  (747, 5, 7, 99445.24),
+  (747, 3, 18, 103699.89),
+  (748, 41, 11, 47166.68),
+  (748, 39, 8, 48549.86),
+  (748, 40, 14, 50135.12),
+  (748, 46, 15, 47439.3),
+  (749, 31, 4, 49942.02),
+  (749, 29, 4, 51002.95),
+  (750, 20, 2, 168739.93),
+  (751, 19, 4, 162007.16),
+  (751, 25, 2, 50813.83),
+  (751, 36, 2, 48483.65),
+  (751, 39, 2, 71786.09),
+  (752, 26, 4, 49120.49),
+  (752, 48, 1, 74310.83),
+  (752, 24, 1, 174894.61),
+  (752, 25, 1, 49440.88),
+  (753, 23, 4, 175000.0),
+  (753, 33, 3, 52000.0),
+  (753, 46, 1, 78000.0),
+  (754, 18, 15, 118810.69),
+  (755, 17, 2, 161172.72),
+  (755, 16, 1, 170021.56),
+  (756, 34, 2, 51484.19),
+  (757, 38, 1, 72441.87),
+  (757, 20, 3, 172399.19),
+  (757, 47, 3, 76432.08),
+  (757, 27, 4, 50747.88),
+  (758, 29, 16, 33297.31),
+  (758, 26, 7, 32887.46),
+  (758, 33, 16, 31137.94),
+  (758, 10, 12, 90821.67),
+  (759, 13, 1, 175000.0),
+  (760, 29, 5, 52000.0),
+  (760, 41, 1, 78000.0),
+  (761, 3, 14, 91930.38),
+  (761, 11, 12, 101128.9),
+  (761, 1, 6, 87199.64),
+  (762, 7, 2, 144268.01),
+  (763, 32, 4, 49240.05),
+  (763, 31, 3, 51997.69),
+  (763, 22, 2, 174173.87),
+  (764, 14, 18, 118608.55),
+  (764, 13, 16, 121967.82),
+  (764, 20, 7, 102129.17),
+  (765, 24, 4, 168208.8),
+  (765, 29, 2, 47853.02),
+  (766, 48, 3, 75990.28),
+  (767, 23, 4, 174147.19),
+  (768, 46, 1, 72557.85),
+  (768, 10, 1, 141616.18),
+  (769, 43, 2, 78000.0),
+  (769, 35, 2, 52000.0),
+  (770, 28, 1, 48506.58),
+  (771, 23, 15, 119272.65),
+  (771, 14, 6, 120990.74),
+  (771, 15, 10, 122862.54),
+  (771, 21, 14, 120275.27),
+  (772, 48, 5, 78000.0),
+  (772, 47, 4, 78000.0),
+  (772, 25, 2, 52000.0),
+  (773, 11, 16, 99436.21),
+  (774, 25, 1, 49132.92),
+  (774, 37, 2, 77046.02),
+  (774, 48, 4, 73754.57),
+  (775, 7, 1, 144459.52),
+  (775, 26, 4, 49154.25),
+  (776, 39, 2, 76421.65),
+  (776, 19, 1, 169384.32),
+  (777, 37, 2, 78000.0),
+  (777, 31, 4, 52000.0),
+  (777, 41, 3, 78000.0),
+  (778, 48, 16, 53274.12),
+  (778, 40, 18, 53714.34),
+  (779, 11, 4, 150000.0),
+  (779, 2, 3, 150000.0),
+  (779, 36, 4, 52000.0),
+  (780, 19, 4, 162362.47),
+  (780, 45, 3, 76454.14),
+  (780, 13, 1, 172897.34),
+  (781, 35, 8, 31748.03),
+  (781, 28, 16, 31584.37),
+  (781, 10, 15, 87191.78),
+  (781, 5, 16, 104978.97),
+  (782, 44, 1, 78000.0),
+  (782, 11, 1, 150000.0),
+  (783, 33, 3, 52000.0),
+  (784, 3, 2, 142759.74),
+  (784, 8, 3, 146255.81),
+  (785, 43, 4, 78000.0),
+  (785, 6, 3, 150000.0),
+  (785, 30, 4, 52000.0),
+  (786, 33, 5, 34432.27),
+  (786, 34, 14, 33650.75),
+  (786, 29, 16, 35586.22),
+  (786, 8, 17, 99450.46),
+  (787, 37, 3, 72156.23),
+  (787, 9, 2, 142863.97),
+  (787, 7, 1, 142725.56),
+  (788, 14, 1, 163529.3),
+  (789, 8, 2, 145831.69),
+  (789, 3, 1, 144749.95),
+  (789, 9, 1, 139015.32),
+  (790, 28, 1, 52000.0),
+  (791, 19, 4, 175000.0),
+  (791, 43, 2, 78000.0),
+  (791, 35, 5, 52000.0),
+  (792, 39, 5, 78000.0),
+  (792, 35, 2, 52000.0),
+  (793, 7, 13, 91536.84),
+  (793, 5, 10, 92825.31),
+  (793, 32, 16, 34690.44),
+  (794, 26, 1, 51770.12),
+  (794, 30, 4, 51751.23),
+  (795, 41, 2, 76218.14),
+  (795, 45, 2, 74378.84),
+  (795, 42, 2, 73734.09),
+  (796, 5, 3, 150000.0),
+  (797, 22, 1, 166079.47),
+  (798, 18, 1, 175000.0),
+  (799, 8, 2, 144317.71),
+  (800, 36, 1, 51569.73),
+  (800, 18, 2, 165451.95);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (800, 39, 4, 72887.4),
+  (801, 34, 7, 32917.67),
+  (801, 5, 16, 92614.77),
+  (802, 12, 3, 141309.88),
+  (802, 29, 4, 50005.67),
+  (802, 23, 2, 165272.62),
+  (802, 30, 1, 51781.41),
+  (803, 47, 2, 77655.97),
+  (804, 1, 2, 143755.87),
+  (804, 28, 1, 49526.76),
+  (804, 44, 2, 77443.93),
+  (804, 33, 1, 50810.91),
+  (805, 39, 4, 77779.4),
+  (806, 2, 11, 90580.16),
+  (806, 26, 6, 32620.34),
+  (806, 28, 15, 31978.29),
+  (807, 14, 4, 164044.48),
+  (807, 1, 3, 149149.31),
+  (807, 48, 1, 77596.99),
+  (808, 17, 5, 110068.18),
+  (808, 18, 16, 106060.86),
+  (808, 14, 10, 101717.16),
+  (809, 43, 12, 45315.46),
+  (809, 38, 17, 52410.44),
+  (810, 28, 3, 48292.17),
+  (810, 12, 4, 145875.36),
+  (810, 35, 4, 48513.23),
+  (811, 8, 3, 138483.08),
+  (811, 13, 4, 166894.78),
+  (812, 43, 4, 75192.77),
+  (812, 18, 2, 165548.43),
+  (812, 8, 4, 144022.3),
+  (812, 27, 4, 48386.7),
+  (813, 47, 8, 45808.28),
+  (814, 31, 4, 48870.63),
+  (814, 19, 2, 171209.48),
+  (814, 32, 2, 48877.78),
+  (814, 6, 1, 148370.0),
+  (815, 45, 2, 72937.29),
+  (816, 7, 5, 99945.81),
+  (816, 5, 6, 105151.35),
+  (816, 26, 11, 33125.12),
+  (817, 21, 11, 117274.89),
+  (818, 46, 3, 77345.46),
+  (818, 27, 2, 48010.1),
+  (818, 16, 1, 170246.03),
+  (819, 28, 2, 48889.41),
+  (820, 34, 13, 35768.98),
+  (821, 48, 3, 73246.69),
+  (821, 38, 3, 73070.61),
+  (821, 34, 4, 48202.88),
+  (822, 3, 2, 140315.13),
+  (823, 22, 4, 175000.0),
+  (823, 20, 2, 175000.0),
+  (823, 47, 5, 78000.0),
+  (824, 45, 12, 52118.12),
+  (824, 42, 6, 55186.47),
+  (824, 47, 6, 50512.4),
+  (825, 19, 1, 172121.47),
+  (825, 3, 2, 146888.58),
+  (826, 11, 4, 147008.73),
+  (827, 12, 2, 144862.78),
+  (827, 1, 1, 148549.86),
+  (828, 20, 3, 168730.11),
+  (828, 15, 2, 164135.01),
+  (828, 19, 2, 165085.81),
+  (829, 7, 6, 87029.4),
+  (829, 30, 10, 34765.93),
+  (830, 17, 4, 175000.0),
+  (830, 47, 5, 78000.0),
+  (830, 9, 3, 150000.0),
+  (831, 15, 3, 175000.0),
+  (831, 47, 2, 78000.0),
+  (832, 47, 4, 77660.9),
+  (833, 22, 17, 122526.42),
+  (833, 23, 11, 105313.22),
+  (834, 20, 7, 112755.06),
+  (835, 42, 1, 73695.4),
+  (835, 19, 2, 172444.99),
+  (836, 33, 13, 31159.48),
+  (836, 25, 17, 36042.19),
+  (836, 4, 14, 89094.33),
+  (836, 36, 11, 30310.81),
+  (837, 5, 5, 103640.41),
+  (837, 33, 5, 37131.46),
+  (837, 32, 6, 34108.45),
+  (838, 39, 7, 47902.39),
+  (838, 41, 13, 52797.09),
+  (838, 42, 15, 51176.25),
+  (838, 44, 5, 54248.18),
+  (839, 10, 2, 143125.63),
+  (839, 1, 2, 142239.72),
+  (839, 15, 3, 164162.38),
+  (839, 2, 4, 146241.2),
+  (840, 7, 3, 150000.0),
+  (841, 13, 14, 105202.02),
+  (842, 23, 9, 116806.58),
+  (842, 24, 9, 110035.45),
+  (843, 46, 2, 76613.37),
+  (843, 5, 2, 141843.07),
+  (843, 1, 4, 143360.34),
+  (844, 10, 2, 140182.47),
+  (844, 6, 4, 142231.31),
+  (844, 21, 4, 166933.65),
+  (845, 16, 5, 175000.0),
+  (845, 25, 4, 52000.0),
+  (845, 27, 5, 52000.0),
+  (846, 45, 8, 49189.87),
+  (846, 46, 8, 56093.45),
+  (846, 40, 5, 49197.39),
+  (846, 38, 12, 55697.16),
+  (847, 19, 2, 172693.53),
+  (847, 30, 4, 48848.79),
+  (848, 43, 16, 55776.85),
+  (848, 37, 10, 45830.59),
+  (849, 2, 2, 150000.0),
+  (850, 5, 7, 102710.25),
+  (850, 6, 16, 106924.08),
+  (850, 28, 12, 33155.88),
+  (850, 36, 10, 33392.13),
+  (851, 46, 17, 47135.5),
+  (852, 30, 3, 52000.0),
+  (852, 36, 5, 52000.0),
+  (852, 46, 5, 78000.0),
+  (853, 6, 4, 150000.0),
+  (853, 34, 2, 52000.0),
+  (854, 24, 14, 122121.97),
+  (854, 21, 18, 118464.45),
+  (855, 11, 4, 140336.77),
+  (855, 4, 1, 139252.8),
+  (855, 24, 3, 169444.66),
+  (855, 42, 3, 71935.02),
+  (856, 10, 8, 98585.52),
+  (857, 46, 17, 50523.17),
+  (858, 23, 3, 175000.0),
+  (859, 9, 1, 141975.82),
+  (859, 45, 1, 74893.59),
+  (859, 44, 2, 71907.8),
+  (860, 19, 2, 175000.0),
+  (861, 46, 2, 78000.0),
+  (862, 44, 9, 49174.65),
+  (862, 39, 18, 55506.34),
+  (862, 42, 5, 54966.22),
+  (863, 5, 4, 150000.0),
+  (863, 10, 1, 150000.0),
+  (863, 37, 1, 78000.0),
+  (864, 32, 1, 52000.0),
+  (865, 5, 3, 150000.0),
+  (866, 41, 15, 55331.84),
+  (866, 44, 6, 55850.75),
+  (866, 48, 12, 45672.35),
+  (866, 47, 18, 48369.95),
+  (867, 24, 4, 168083.19),
+  (867, 6, 3, 148528.9),
+  (867, 44, 1, 75632.63),
+  (868, 10, 1, 150000.0),
+  (869, 15, 4, 173238.22),
+  (870, 7, 1, 149009.52),
+  (870, 6, 4, 147218.6),
+  (870, 12, 2, 142818.25),
+  (870, 47, 1, 73739.86),
+  (871, 18, 4, 161535.95),
+  (872, 37, 4, 72149.38),
+  (872, 3, 3, 147474.71),
+  (872, 39, 4, 73091.75),
+  (873, 41, 2, 72192.18),
+  (873, 12, 4, 138980.51),
+  (873, 6, 4, 148455.47),
+  (874, 4, 1, 150000.0),
+  (875, 20, 16, 112201.21),
+  (875, 24, 16, 115472.76),
+  (875, 21, 18, 101743.32),
+  (875, 15, 17, 123397.59),
+  (876, 21, 3, 161198.61),
+  (876, 43, 4, 77587.03),
+  (877, 17, 4, 174206.53),
+  (877, 34, 2, 50478.66),
+  (877, 47, 1, 71987.67),
+  (877, 1, 2, 143042.11),
+  (878, 12, 18, 94639.68),
+  (879, 45, 4, 78000.0),
+  (880, 34, 4, 49622.08),
+  (880, 22, 2, 168738.55),
+  (880, 8, 2, 144513.15),
+  (880, 12, 4, 141420.34),
+  (881, 6, 1, 139075.66),
+  (882, 41, 4, 74900.98),
+  (883, 14, 10, 125206.59),
+  (883, 16, 12, 111616.9),
+  (883, 20, 18, 117299.06),
+  (883, 24, 17, 119658.25),
+  (884, 43, 4, 75961.4),
+  (884, 17, 1, 173602.62),
+  (884, 20, 4, 161457.44),
+  (885, 48, 3, 78000.0),
+  (885, 39, 2, 78000.0),
+  (885, 21, 5, 175000.0),
+  (886, 40, 4, 78000.0),
+  (887, 47, 4, 78000.0),
+  (887, 12, 3, 150000.0),
+  (888, 45, 15, 51540.12),
+  (888, 38, 11, 54445.9),
+  (889, 26, 5, 34738.35),
+  (890, 37, 4, 71917.81),
+  (891, 12, 2, 141563.07),
+  (891, 16, 2, 171168.38),
+  (891, 42, 4, 76567.24),
+  (892, 2, 1, 150000.0),
+  (892, 41, 1, 78000.0),
+  (892, 38, 4, 78000.0),
+  (893, 3, 12, 104737.1),
+  (894, 27, 1, 49863.91),
+  (895, 41, 2, 73624.23),
+  (895, 29, 2, 50584.21),
+  (895, 11, 1, 139406.49),
+  (896, 35, 5, 52000.0),
+  (896, 1, 3, 150000.0),
+  (896, 11, 1, 150000.0),
+  (897, 40, 6, 55052.41),
+  (897, 42, 5, 48816.73),
+  (898, 18, 2, 174345.21),
+  (898, 31, 3, 50785.63),
+  (899, 33, 2, 52000.0),
+  (899, 26, 3, 52000.0),
+  (900, 18, 5, 175000.0),
+  (900, 26, 5, 52000.0),
+  (900, 7, 3, 150000.0),
+  (901, 28, 3, 50431.31),
+  (901, 39, 4, 74438.91),
+  (901, 48, 3, 74093.51),
+  (901, 18, 1, 167291.65),
+  (902, 26, 2, 51205.61),
+  (902, 2, 4, 147490.76),
+  (902, 8, 3, 140943.82),
+  (903, 13, 10, 118363.16),
+  (904, 15, 4, 164970.6),
+  (904, 36, 2, 50033.41),
+  (904, 5, 1, 144731.5),
+  (905, 21, 4, 167981.11),
+  (905, 13, 3, 166897.32),
+  (905, 4, 1, 143433.42),
+  (906, 2, 1, 148939.72),
+  (906, 42, 3, 72577.8),
+  (906, 37, 4, 71990.93),
+  (907, 31, 1, 51292.18),
+  (908, 14, 14, 102653.28),
+  (908, 21, 9, 118563.2),
+  (908, 18, 12, 113586.75),
+  (908, 20, 15, 125195.24),
+  (909, 1, 7, 89207.85);
+
+-- detalle_movimientos
+INSERT INTO detalle_movimientos (id_movimiento, id_variante, cantidad, precio_unitario) VALUES
+  (910, 30, 18, 30542.13),
+  (910, 1, 17, 87904.6),
+  (910, 35, 5, 37055.21),
+  (911, 18, 4, 162678.62),
+  (911, 45, 3, 77138.22),
+  (911, 11, 4, 145642.84),
+  (911, 9, 1, 144261.16),
+  (912, 21, 2, 162285.19),
+  (912, 47, 3, 76199.02),
+  (912, 31, 3, 50163.42),
+  (913, 16, 5, 117927.22),
+  (914, 14, 3, 171646.83),
+  (914, 38, 3, 76181.12),
+  (914, 34, 2, 51366.88),
+  (915, 29, 5, 52000.0),
+  (915, 40, 2, 78000.0),
+  (916, 31, 7, 33515.75),
+  (916, 33, 6, 35583.79),
+  (916, 4, 8, 87348.35),
+  (917, 42, 6, 49110.34),
+  (917, 41, 8, 46884.77),
+  (917, 38, 13, 49944.86),
+  (917, 45, 10, 45820.48),
+  (918, 16, 7, 116054.2),
+  (918, 17, 13, 116382.48),
+  (918, 24, 13, 112122.35),
+  (918, 19, 15, 102721.85),
+  (919, 8, 6, 92784.65),
+  (919, 3, 14, 101689.76),
+  (919, 30, 11, 33013.09),
+  (920, 18, 2, 175000.0),
+  (920, 32, 2, 52000.0),
+  (920, 14, 3, 175000.0),
+  (921, 36, 7, 32454.02),
+  (921, 10, 6, 90499.55),
+  (921, 35, 10, 36711.05),
+  (921, 8, 7, 107207.1),
+  (922, 15, 15, 120126.39),
+  (923, 16, 1, 168941.73),
+  (923, 31, 3, 51315.09),
+  (923, 8, 2, 147059.91),
+  (923, 3, 1, 139199.91),
+  (924, 43, 3, 74622.6),
+  (924, 32, 3, 49092.72),
+  (924, 17, 3, 173479.21),
+  (925, 10, 4, 148275.19),
+  (926, 42, 11, 52214.97),
+  (926, 40, 9, 54818.41),
+  (926, 38, 15, 51190.49),
+  (926, 47, 12, 56021.66),
+  (927, 22, 5, 175000.0),
+  (927, 26, 4, 52000.0),
+  (928, 46, 17, 50208.9),
+  (928, 38, 17, 53892.36),
+  (928, 43, 9, 46443.28),
+  (929, 45, 14, 51334.9),
+  (929, 41, 7, 48555.81),
+  (930, 10, 6, 88117.06),
+  (930, 31, 9, 30197.06),
+  (931, 21, 7, 124865.29),
+  (931, 23, 16, 108131.39),
+  (931, 24, 16, 106319.82),
+  (932, 23, 11, 111852.8),
+  (932, 24, 6, 123379.32),
+  (933, 38, 2, 73320.13),
+  (933, 9, 4, 144651.41),
+  (933, 44, 3, 73663.18),
+  (934, 15, 13, 112326.58),
+  (935, 27, 1, 51823.17),
+  (935, 30, 4, 48207.86),
+  (935, 2, 2, 145382.5),
+  (935, 36, 3, 51112.39),
+  (936, 4, 4, 146040.95),
+  (936, 26, 4, 51199.12),
+  (936, 9, 4, 148070.38),
+  (937, 7, 1, 150000.0),
+  (937, 22, 3, 175000.0),
+  (937, 39, 5, 78000.0),
+  (938, 48, 8, 50877.6),
+  (939, 10, 3, 150000.0),
+  (939, 20, 1, 175000.0),
+  (939, 41, 4, 78000.0),
+  (940, 45, 6, 47939.49),
+  (941, 26, 1, 52000.0),
+  (941, 4, 3, 150000.0),
+  (942, 17, 4, 175000.0),
+  (942, 40, 5, 78000.0),
+  (942, 44, 1, 78000.0),
+  (943, 6, 16, 101692.2),
+  (943, 29, 8, 33626.43),
+  (944, 42, 11, 52858.37),
+  (944, 47, 6, 50306.48),
+  (944, 41, 18, 49879.18),
+  (944, 43, 5, 48334.97),
+  (945, 42, 4, 72026.02),
+  (946, 18, 2, 175000.0),
+  (946, 1, 3, 150000.0),
+  (947, 25, 2, 52000.0),
+  (947, 33, 2, 52000.0),
+  (947, 5, 3, 150000.0),
+  (948, 18, 3, 175000.0),
+  (949, 39, 3, 72567.59),
+  (949, 43, 3, 75434.44),
+  (949, 12, 3, 145013.92),
+  (949, 37, 4, 72181.64),
+  (950, 34, 17, 36046.28),
+  (950, 28, 16, 35952.0),
+  (950, 11, 6, 105895.68),
+  (950, 8, 7, 102291.43),
+  (951, 13, 18, 119873.41),
+  (952, 12, 3, 139291.93),
+  (953, 36, 4, 52000.0),
+  (953, 13, 4, 175000.0),
+  (953, 17, 3, 175000.0),
+  (954, 38, 5, 52109.94),
+  (954, 46, 15, 46290.57),
+  (955, 37, 2, 76017.93),
+  (955, 35, 4, 48630.97),
+  (955, 5, 2, 144844.44),
+  (955, 22, 4, 168011.9),
+  (956, 5, 3, 139210.96),
+  (956, 37, 4, 73198.78),
+  (956, 6, 3, 138270.51),
+  (956, 9, 3, 149067.28),
+  (957, 19, 2, 172944.73),
+  (957, 5, 3, 142790.64),
+  (958, 42, 3, 74389.57),
+  (958, 2, 2, 142014.49),
+  (958, 3, 1, 139671.46),
+  (959, 23, 1, 174298.71),
+  (960, 2, 12, 97659.69),
+  (961, 2, 5, 103245.88),
+  (962, 36, 4, 48056.9),
+  (963, 8, 1, 148765.76),
+  (963, 29, 3, 49303.44),
+  (964, 8, 11, 102696.99),
+  (965, 2, 7, 96209.67),
+  (966, 41, 14, 49584.18),
+  (966, 39, 15, 46576.35),
+  (967, 32, 3, 52000.0),
+  (968, 23, 9, 109312.04),
+  (968, 16, 13, 113834.41),
+  (968, 21, 5, 109992.57),
+  (969, 10, 13, 91426.16),
+  (969, 36, 10, 35437.35),
+  (970, 8, 3, 141335.61),
+  (970, 2, 4, 141604.95),
+  (970, 32, 1, 48088.44),
+  (970, 3, 4, 143944.29),
+  (971, 6, 5, 100868.45),
+  (971, 34, 5, 34102.48),
+  (971, 26, 10, 36982.99),
+  (971, 30, 14, 35652.6),
+  (972, 36, 18, 33272.56),
+  (972, 32, 16, 36919.96),
+  (972, 26, 17, 30575.82),
+  (973, 35, 4, 52000.0),
+  (973, 30, 5, 52000.0),
+  (974, 48, 2, 78000.0),
+  (974, 16, 1, 175000.0),
+  (975, 19, 4, 175000.0),
+  (975, 22, 1, 175000.0),
+  (975, 37, 5, 78000.0),
+  (976, 8, 3, 144821.29),
+  (977, 29, 1, 49780.39),
+  (978, 27, 1, 52000.0),
+  (979, 29, 2, 48913.31),
+  (980, 39, 15, 45781.41),
+  (980, 46, 6, 52388.24),
+  (981, 37, 9, 45416.01),
+  (981, 41, 18, 54603.79),
+  (982, 29, 12, 30983.97),
+  (983, 14, 7, 102105.02),
+  (983, 23, 14, 120810.03),
+  (983, 19, 10, 125389.92),
+  (983, 17, 15, 110680.53),
+  (984, 10, 1, 145308.46),
+  (984, 38, 3, 74947.37),
+  (984, 2, 3, 149279.28),
+  (985, 42, 4, 75123.16),
+  (985, 6, 1, 148171.14),
+  (985, 5, 1, 145285.22),
+  (985, 15, 4, 165437.15),
+  (986, 20, 16, 125323.72),
+  (986, 18, 16, 107405.64),
+  (987, 24, 4, 169473.06),
+  (988, 35, 4, 50644.28),
+  (988, 16, 2, 169477.64),
+  (989, 21, 15, 123095.31),
+  (989, 15, 8, 123546.88),
+  (989, 22, 12, 101880.05),
+  (989, 20, 6, 111756.33),
+  (990, 2, 2, 150000.0),
+  (990, 45, 1, 78000.0),
+  (991, 45, 3, 72502.74),
+  (991, 36, 3, 50300.55),
+  (991, 16, 1, 174917.88),
+  (991, 46, 1, 72220.22),
+  (992, 19, 2, 171131.9),
+  (992, 31, 1, 48473.39),
+  (992, 45, 1, 75463.77),
+  (992, 9, 3, 146086.89),
+  (993, 7, 4, 142093.41),
+  (993, 15, 4, 164993.6),
+  (993, 20, 4, 165460.1),
+  (994, 47, 5, 78000.0),
+  (994, 14, 3, 175000.0),
+  (994, 28, 5, 52000.0),
+  (995, 9, 8, 105592.33),
+  (995, 28, 9, 36997.41),
+  (995, 27, 9, 37358.5),
+  (996, 30, 17, 31389.25),
+  (996, 29, 14, 36730.5),
+  (997, 24, 2, 175000.0),
+  (998, 30, 1, 50819.6),
+  (998, 19, 1, 167221.67),
+  (999, 36, 10, 36010.51),
+  (999, 34, 16, 35935.37),
+  (999, 4, 16, 88561.36),
+  (1000, 46, 3, 77327.78);
+
+-- inventario
+INSERT INTO inventario (id_sucursal, id_variante, cantidad_disponible) VALUES
+  (1, 1, 153),
+  (1, 2, 59),
+  (1, 3, 83),
+  (1, 4, 79),
+  (1, 5, 120),
+  (1, 6, 29),
+  (1, 7, 75),
+  (1, 8, 68),
+  (1, 9, 95),
+  (1, 10, 63),
+  (1, 11, 100),
+  (1, 12, 32),
+  (1, 13, 117),
+  (1, 14, 116),
+  (1, 15, 105),
+  (1, 16, 77),
+  (1, 17, 131),
+  (1, 18, 119),
+  (1, 19, 150),
+  (1, 20, 140),
+  (1, 21, 162),
+  (1, 22, 92),
+  (1, 23, 203),
+  (1, 24, 136),
+  (1, 25, 102),
+  (1, 26, 68),
+  (1, 27, 43),
+  (1, 28, 108),
+  (1, 29, 112),
+  (1, 30, 113),
+  (1, 31, 45),
+  (1, 32, 110),
+  (1, 33, 135),
+  (1, 34, 66),
+  (1, 35, 88),
+  (1, 36, 99),
+  (1, 37, 117),
+  (1, 38, 202),
+  (1, 39, 138),
+  (1, 40, 150),
+  (1, 41, 98),
+  (1, 42, 111),
+  (1, 43, 155),
+  (1, 44, 150),
+  (1, 45, 185),
+  (1, 46, 187),
+  (1, 47, 164),
+  (1, 48, 89),
+  (2, 1, 75),
+  (2, 2, 98),
+  (2, 3, 51),
+  (2, 4, 81),
+  (2, 5, 68),
+  (2, 6, 78),
+  (2, 7, 94),
+  (2, 8, 84),
+  (2, 9, 36),
+  (2, 10, 109),
+  (2, 11, 52),
+  (2, 12, 54),
+  (2, 13, 240),
+  (2, 14, 148),
+  (2, 15, 155),
+  (2, 16, 72),
+  (2, 17, 54),
+  (2, 18, 127),
+  (2, 19, 120),
+  (2, 20, 204),
+  (2, 21, 205),
+  (2, 22, 114),
+  (2, 23, 174),
+  (2, 24, 244),
+  (2, 25, 54),
+  (2, 26, 130),
+  (2, 27, 98),
+  (2, 28, 118),
+  (2, 29, 98),
+  (2, 30, 62),
+  (2, 31, 56),
+  (2, 32, 42),
+  (2, 33, 78),
+  (2, 34, 129),
+  (2, 35, 64),
+  (2, 36, 116),
+  (2, 37, 115),
+  (2, 38, 171),
+  (2, 39, 109),
+  (2, 40, 148),
+  (2, 41, 207),
+  (2, 42, 247),
+  (2, 43, 135),
+  (2, 44, 121),
+  (2, 45, 119),
+  (2, 46, 199),
+  (2, 47, 177),
+  (2, 48, 67);
+
+-- Sincronizar secuencias
+SELECT setval(pg_get_serial_sequence('marcas','id_marca'), COALESCE((SELECT MAX(id_marca) FROM marcas),1), true) WHERE pg_get_serial_sequence('marcas','id_marca') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('categorias','id_categoria'), COALESCE((SELECT MAX(id_categoria) FROM categorias),1), true) WHERE pg_get_serial_sequence('categorias','id_categoria') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('talles','id_talle'), COALESCE((SELECT MAX(id_talle) FROM talles),1), true) WHERE pg_get_serial_sequence('talles','id_talle') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('colores','id_color'), COALESCE((SELECT MAX(id_color) FROM colores),1), true) WHERE pg_get_serial_sequence('colores','id_color') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('sucursales','id_sucursal'), COALESCE((SELECT MAX(id_sucursal) FROM sucursales),1), true) WHERE pg_get_serial_sequence('sucursales','id_sucursal') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('proveedores','id_proveedor'), COALESCE((SELECT MAX(id_proveedor) FROM proveedores),1), true) WHERE pg_get_serial_sequence('proveedores','id_proveedor') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('empleados','id_empleado'), COALESCE((SELECT MAX(id_empleado) FROM empleados),1), true) WHERE pg_get_serial_sequence('empleados','id_empleado') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('productos','id_producto'), COALESCE((SELECT MAX(id_producto) FROM productos),1), true) WHERE pg_get_serial_sequence('productos','id_producto') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('producto_variante','id_variante'), COALESCE((SELECT MAX(id_variante) FROM producto_variante),1), true) WHERE pg_get_serial_sequence('producto_variante','id_variante') IS NOT NULL;
+SELECT setval(pg_get_serial_sequence('movimientos','id_movimiento'), COALESCE((SELECT MAX(id_movimiento) FROM movimientos),1), true) WHERE pg_get_serial_sequence('movimientos','id_movimiento') IS NOT NULL;
+COMMIT;
+
+-- Verificacion
+SELECT 'productos' AS tabla, COUNT(*) AS cantidad FROM productos
+UNION ALL SELECT 'variantes', COUNT(*) FROM producto_variante
+UNION ALL SELECT 'movimientos', COUNT(*) FROM movimientos
+UNION ALL SELECT 'detalles', COUNT(*) FROM detalle_movimientos
+UNION ALL SELECT 'inventario', COUNT(*) FROM inventario;
