@@ -128,7 +128,7 @@ ON public.Producto_Variante(id_talle);
 
 -- 3. Índice para acelerar el JOIN con la tabla de Colores
 CREATE INDEX idx_producto_variante_id_color 
-ON public.Public.Producto_Variante(id_color);
+ON public.Producto_Variante(id_color);
 
 ------------------------------------------------------------------------------
 
