@@ -36,5 +36,6 @@ La última capa del proyecto traslada la inteligencia del negocio directamente a
 ## Equipo de Desarrollo
 *   **Juan Agustin Gallo** (MU: 01731)
 *   **Escalante Judith Griselda** (MU: 01862)
+*   **Yapura Fuenzalida Victor** (MU: 01913)
 *   **Bravo Nicolass** (MU: 01805)
 *   **Maximo Joaquin** (MU: 01884)
