@@ -51,7 +51,7 @@ ALTER TABLE Inventario
 ALTER TABLE Movimientos 
     ADD CONSTRAINT fk_movimiento_origen FOREIGN KEY (id_sucursal_origen) REFERENCES Sucursales(id_sucursal) ON DELETE RESTRICT ON UPDATE CASCADE,
     ADD CONSTRAINT fk_movimiento_destino FOREIGN KEY (id_sucursal_destino) REFERENCES Sucursales(id_sucursal) ON DELETE RESTRICT ON UPDATE CASCADE,
-    ADD CONSTRAINT fk_movimiento_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado) ON DELETE RESTRICT ON UPDATE CASCADE;
+    ADD CONSTRAINT fk_movimiento_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado) ON DELETE RESTRICT ON UPDATE CASCADE,
 	ADD CONSTRAINT fk_movimiento_proveedor FOREIGN KEY (id_proveedor) REFERENCES Proveedores(id_proveedor) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- Relaciones de Detalle de Movimientos

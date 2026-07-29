@@ -80,7 +80,7 @@ CREATE TABLE Movimientos (
     observaciones TEXT,
     id_sucursal_origen INT,
     id_sucursal_destino INT,
-    id_empleado INT NOT NULL
+    id_empleado INT NOT NULL,
 	id_proveedor INT
 );
 
