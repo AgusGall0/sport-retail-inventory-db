@@ -39,3 +39,4 @@ La última capa del proyecto traslada la inteligencia del negocio directamente a
 *   **Yapura Fuenzalida Victor** (MU: 01913)
 *   **Bravo Nicolass** (MU: 01805)
 *   **Maximo Joaquin** (MU: 01884)
+*   **Quintero Facundo Joel (MU: 01847)
