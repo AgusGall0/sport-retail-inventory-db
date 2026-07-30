@@ -92,44 +92,49 @@ DECLARE
     v_suc_origen INT;
     v_stock_actual INT;
 BEGIN
-    -- Capturamos de forma autónoma los metadatos del movimiento padre
+    -- Obtenemos el tipo de movimiento y la sucursal de origen
     SELECT tipo_movimiento, id_sucursal_origen
     INTO v_tipo_movimiento, v_suc_origen
     FROM Movimientos
     WHERE id_movimiento = NEW.id_movimiento;
 
-    -- El control de consistencia estricto solo aplica a operaciones que restan stock (Salidas y Traslados)
+    -- La validación se aplica solamente a operaciones que restan stock
     IF v_tipo_movimiento IN ('Salida', 'Traslado') THEN
-        
-        -- Buscamos cuántas unidades quedan en la sucursal que emite la mercadería
-        SELECT cantidad_disponible INTO v_stock_actual
-        FROM Inventario
-        WHERE id_sucursal = v_suc_origen AND id_variante = NEW.id_variante;
 
-        -- Si la prenda nunca se registró en esa sucursal, su stock real es cero
-        IF v_stock_actual IS NULL THEN
+        -- Se consulta y bloquea la fila correspondiente del inventario
+        SELECT cantidad_disponible
+        INTO v_stock_actual
+        FROM Inventario
+        WHERE id_sucursal = v_suc_origen
+        AND id_variante = NEW.id_variante
+        FOR UPDATE;
+
+        -- Si la variante no existe en el inventario, se considera stock cero
+        IF NOT FOUND THEN
             v_stock_actual := 0;
         END IF;
 
-        -- TELEMETRÍA DE DEPURACIÓN (Ver comportamiento tras bambalinas)
-        RAISE NOTICE 'ESCUDO DE TRANSACCIÓN: Evaluando % para Variante % en Sucursal %', v_tipo_movimiento, NEW.id_variante, v_suc_origen;
-        RAISE NOTICE 'BALANCE DETECTADO: Stock Disponible en disco: % unidades | Cantidad Solicitada: % unidades', v_stock_actual, NEW.cantidad;
+        RAISE NOTICE
+        'CONTROL DE CONCURRENCIA: Variante %, Sucursal %, Stock %, Solicitado %',
+        NEW.id_variante,
+        v_suc_origen,
+        v_stock_actual,
+        NEW.cantidad;
 
-        -- CONTROL CRÍTICO: ¿Hay stock suficiente para cubrir la operación?
+        -- Validación del stock disponible
         IF v_stock_actual < NEW.cantidad THEN
-            -- AVISO DE DEPURACIÓN: Dejar registro del bloqueo en la consola antes de explotar
-            RAISE NOTICE 'TRANSACCIÓN ABORTADA: Quiebre de stock detectado. Ejecutando ROLLBACK forzado.';
-            
-            -- Lanzamos la excepción de ingeniería para romper la atomicidad y congelar la base de datos
-            RAISE EXCEPTION 'ERROR DE INTEGRIDAD LOGÍSTICA (UNCA): Stock insuficiente. Variante %, Sucursal %. Disponible: %, Solicitado: %', 
-                            NEW.id_variante, v_suc_origen, v_stock_actual, NEW.cantidad;
-        ELSE
-            -- AVISO DE DEPURACIÓN: Dar luz verde si pasa el filtro
-            RAISE NOTICE 'TRANSACCIÓN APROBADA: Stock verificado con éxito. Permitiendo inserción.';
+            RAISE EXCEPTION
+            'STOCK INSUFICIENTE. Variante: %, Sucursal: %, Disponible: %, Solicitado: %',
+            NEW.id_variante,
+            v_suc_origen,
+            v_stock_actual,
+            NEW.cantidad;
         END IF;
+
+        RAISE NOTICE
+        'STOCK BLOQUEADO Y VALIDADO CORRECTAMENTE PARA LA TRANSACCIÓN.';
     END IF;
 
-    -- Si pasó todas las pruebas, retorna el registro limpio para que se inserte físicamente
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
