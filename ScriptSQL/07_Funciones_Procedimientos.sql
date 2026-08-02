@@ -267,12 +267,12 @@ DECLARE
 BEGIN
     -- 1. Validación de Negocio: El origen y el destino no pueden ser la misma sucursal
     IF p_id_sucursal_origen = p_id_sucursal_destino THEN
-        RAISE EXCEPTION '🚨 ERROR LOGÍSTICO (UNCA): La sucursal de origen y la de destino no pueden ser idénticas (ID: %)', p_id_sucursal_origen;
+        RAISE EXCEPTION '❌ ERROR LOGÍSTICO: La sucursal de origen y la de destino no pueden ser idénticas (ID: %)', p_id_sucursal_origen;
     END IF;
 
     -- 2. Validación: Asegurar que se indique un destino válido
     IF p_id_sucursal_destino IS NULL THEN
-        RAISE EXCEPTION '🚨 ERROR LOGÍSTICO (UNCA): Todo traslado requiere obligatoriamente una sucursal de destino.';
+        RAISE EXCEPTION '❌ ERROR LOGÍSTICO: Todo traslado requiere obligatoriamente una sucursal de destino.';
     END IF;
 
     -- 3. Insertamos la cabecera del movimiento especificando origen y destino
@@ -320,7 +320,7 @@ BEGIN
     WHERE id_marca = p_id_marca;
 
     IF v_nombre_marca IS NULL THEN
-        RAISE EXCEPTION '🚨 ERROR DE GESTIÓN (UNCA): La marca con ID % no se encuentra registrada en el sistema.', p_id_marca;
+        RAISE EXCEPTION '❌ ERROR DE GESTIÓN: La marca con ID % no se encuentra registrada en el sistema.', p_id_marca;
     END IF;
 
     -- 2. Actualización Masiva: Aplicar el porcentaje de ajuste sobre el precio actual de los productos de la marca

@@ -1,3 +1,4 @@
+
 -- ==============================================================================
 -- OBJETIVOS: 
 --          ● Análisis mediante el planificador de PostgreSQL. 
