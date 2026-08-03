@@ -1,9 +1,3 @@
-
-
-#Enlace al docs 
-https://docs.google.com/document/d/1K4unwIwHwI8RXNYgObpo2TEBqA3vqclmPD6TWJiCMDw/edit?usp=sharing
-
-
 # Proyecto Integrador BD - Arquitectura y Gestión de Datos Masivos para Stock Deportivo
 
 ## Descripción General del Proyecto
@@ -39,4 +33,4 @@ La última capa del proyecto traslada la inteligencia del negocio directamente a
 *   **Yapura Fuenzalida Victor** (MU: 01913)
 *   **Bravo Nicolass** (MU: 01805)
 *   **Maximo Joaquin** (MU: 01884)
-*   **Quintero Facundo Joel (MU: 01847)
+*   **Quintero Facundo Joel** (MU: 01847)
