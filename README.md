@@ -121,9 +121,23 @@ python generador_datos.py
 
 ## Rendimiento
 
-Con el volumen cargado, las consultas de reportes se analizaron con `EXPLAIN ANALYZE` para identificar los recorridos secuenciales más costosos, y se crearon once índices sobre las columnas que más pesaban: las claves foráneas de `Movimientos`, `Detalle_Movimientos` y `Producto_Variante`, la cantidad disponible en `Inventario`, y un índice compuesto por tipo y fecha de movimiento.
+Evaluar con veinte filas no dice nada, así que las consultas de `04_Consultas_Reportes.sql` se midieron sobre el dataset de `Datos/Carga_Masiva.sql` (1.000 movimientos, 3.047 detalles, 48 variantes, 362 salidas) en dos escenarios: la base recién cargada sin `05_Indices.sql`, y la misma base con los once índices aplicados. Cada consulta se ejecutó tres veces con `EXPLAIN ANALYZE` y se tomó el mejor tiempo de ejecución, para descartar el efecto de caché fría. Se hizo `ANALYZE` antes de cada escenario.
 
-Las mediciones de antes y después están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/).
+Entorno: PostgreSQL 16.15 en Docker, levantado con `CARGA=masiva ./setup.sh`, medido el 4 de septiembre de 2026.
+
+| # | Consulta | Sin índices (ms) | Con índices (ms) | Mejora | Índice nuevo que usó el planificador |
+|---|---|---|---|---|---|
+| 1 | Recaudación por marca, salidas del último trimestre | 1.089 | 0.586 | +46 % | `idx_movimientos_tipo_fecha` |
+| 2 | Variantes sin salidas en el año | 1.158 | 0.466 | +60 % | `idx_detalle_movimientos_id_mov` |
+| 3 | Tickets y recaudación por empleado en Sucursal NOA | 0.779 | 0.652 | +16 % | `idx_detalle_movimientos_id_mov` |
+| 4 | Variantes con stock bajo | 0.096 | 0.098 | -2 % | ninguno, sigue con Seq Scan |
+| 5 | Ventas por marca y sucursal | 1.063 | 1.053 | +1 % | ninguno, sigue con Seq Scan |
+
+Con este volumen las consultas ya corren en torno al milisegundo, así que la mejora se ve más en el plan que en el reloj. Las dos que más ganan son la 1, donde el índice compuesto por tipo y fecha reemplaza el recorrido secuencial de `Movimientos` por un Bitmap Index Scan, y la 2, donde el índice sobre la clave foránea de `Detalle_Movimientos` permite resolver el join de la subconsulta con un Index Scan.
+
+En la 5 el planificador sigue eligiendo Seq Scan aun con los índices disponibles: el filtro por tipo `Salida` sin acotar fecha abarca más de un tercio de `Movimientos`, y para esa selectividad recorrer la tabla es más barato que ir al índice. La 4 no cambia porque en este dataset `Inventario` está vacío (`Carga_Masiva.sql` no genera inventario), así que la consulta devuelve cero filas en ambos escenarios.
+
+Los índices se justifican por la forma de los planes más que por los milisegundos: a medida que crezcan `Movimientos` y `Detalle_Movimientos`, el costo de los recorridos secuenciales escala linealmente y el de los accesos por índice no. Las capturas de las mediciones originales están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/).
 
 ---
 
