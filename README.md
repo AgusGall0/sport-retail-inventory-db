@@ -1,36 +1,155 @@
-# Proyecto Integrador BD - Arquitectura y Gestión de Datos Masivos para Stock Deportivo
+# Proyecto Integrador BD — Gestión de stock para retail deportivo
 
-## Descripción General del Proyecto
+Base de datos relacional en **PostgreSQL** para una cadena de indumentaria deportiva con múltiples sucursales. Cubre el ciclo completo del inventario: ingreso de mercadería desde proveedores, traslados entre sucursales y venta al público, con control de stock por variante (producto + talle + color).
 
-El presente repositorio documenta el diseño, desarrollo e implementación integral de un sistema de bases de datos relacionales basado en **PostgreSQL**. Este proyecto fue concebido para resolver la compleja logística y administración de inventario de una cadena comercial dedicada a la venta de indumentaria deportiva.
-
-Más allá del modelado inicial de datos, el objetivo de este desarrollo es simular y gestionar un ecosistema productivo real. El sistema está preparado para soportar el ciclo de vida completo de la información comercial: desde el ingreso de mercadería a través de proveedores, hasta la distribución, traslado y venta final en múltiples sucursales físicas. 
-
-Para lograr esto, la arquitectura del proyecto evolucionó a través de cinco etapas fundamentales de la ingeniería de datos, garantizando no solo el almacenamiento, sino el rendimiento, la seguridad y la consistencia transaccional.
-
-## Alcance y Fases del Desarrollo
-
-### 1. Arquitectura Base y Calidad de la Información
-El cimiento del sistema es un modelo relacional estrictamente normalizado hasta la **Tercera Forma Normal (3FN)**. Para abordar el desafío particular del rubro textil, se implementó un diseño granular que separa el "producto conceptual" del "artículo físico" . Esto permite administrar el stock con precisión milimétrica, considerando combinaciones únicas de productos, talles y colores. La integridad de la información está blindada en el motor de la base de datos mediante restricciones de dominio y políticas de integridad referencial, asegurando que el historial logístico y contable sea inmutable frente a errores humanos.
-
-### 2. Escalabilidad y Simulación de Entornos Productivos
-Un sistema de datos no puede evaluarse únicamente en vacío. Por ello, el proyecto incluye estrategias de carga masiva de datos diseñadas para poblar las tablas transaccionales con un volumen significativo de registros. Esta etapa simula el paso del tiempo y la operatoria diaria de la empresa, permitiendo evaluar cómo se comporta la estructura cuando el volumen de información crece exponencialmente, tal como ocurre en los ambientes empresariales reales.
-
-### 3. Ingeniería de Rendimiento (Tuning y Optimización)
-Para transformar los datos en información útil para la toma de decisiones, se desarrolló un módulo de consultas avanzadas orientadas a la generación de reportes complejos. Ante el desafío del gran volumen de datos introducido en la etapa anterior, se aplicaron técnicas de *tuning* y optimización. Esto incluye la creación estratégica de índices y el análisis profundo del planificador de tareas de PostgreSQL (utilizando herramientas como `EXPLAIN ANALYZE`), logrando reducir drásticamente los tiempos de respuesta del servidor.
-
-### 4. Capa de Seguridad y Control de Acceso (RBAC)
-Entendiendo que la información comercial es un activo crítico, el sistema incorpora un robusto esquema de seguridad basado en roles (Role-Based Access Control). Se definieron perfiles de acceso estructurados (Administración, Operatoria y Consulta) bajo el principio de mínimo privilegio. Además, se implementó un sistema de vistas diseñado para simplificar las consultas de los usuarios finales y, fundamentalmente, para enmascarar u ocultar la información sensible según el nivel de autorización de quien consulta.
-
-### 5. Lógica de Negocio y Concurrencia Transaccional
-La última capa del proyecto traslada la inteligencia del negocio directamente al servidor de base de datos a través de la programabilidad con **PL/pgSQL**. Se desarrollaron procedimientos y funciones almacenadas para automatizar operaciones críticas. Finalmente, el sistema fue sometido a escenarios de concurrencia, implementando un estricto manejo de transacciones (con sentencias `COMMIT` y `ROLLBACK`) para prevenir colisiones, bloqueos o corrupción de datos cuando múltiples usuarios operan y modifican el inventario de manera simultánea.
+Proyecto integrador de la cátedra de Base de Datos — Ingeniería en Informática, Facultad de Tecnología y Cs. Aplicadas, U.N.Ca.
 
 ---
 
-## Equipo de Desarrollo
-*   **Juan Agustin Gallo** (MU: 01731)
-*   **Escalante Judith Griselda** (MU: 01862)
-*   **Yapura Fuenzalida Victor** (MU: 01913)
-*   **Bravo Nicolass** (MU: 01805)
-*   **Maximo Joaquin** (MU: 01884)
-*   **Quintero Facundo Joel** (MU: 01847)
+## Modelo de datos
+
+Doce tablas normalizadas hasta 3FN:
+
+| Grupo | Tablas |
+|---|---|
+| Catálogos | `Categorias`, `Marcas`, `Talles`, `Colores` |
+| Organización | `Proveedores`, `Sucursales`, `Empleados` |
+| Producto | `Productos`, `Producto_Variante` |
+| Operación | `Inventario`, `Movimientos`, `Detalle_Movimientos` |
+
+La decisión central del diseño es la separación entre **producto** y **variante**. En indumentaria, una misma remera existe en varias combinaciones de talle y color, y cada combinación tiene su propio stock. `Productos` guarda lo conceptual (nombre, descripción, marca, categoría, precio) y `Producto_Variante` cada artículo físico concreto. `Inventario` se lleva a nivel de variante y sucursal, lo que permite saber exactamente qué hay disponible y dónde.
+
+Los movimientos (entrada, traslado, venta) se registran con cabecera y detalle, de modo que el historial logístico queda completo y auditable.
+
+Los diagramas y el diseño técnico están en [`Documentacion/`](Documentacion/).
+
+---
+
+## Estructura del repositorio
+
+```
+ScriptSQL/       Scripts numerados, se ejecutan en orden
+Datos/           Generadores en Python y datos masivos
+Pruebas/         Casos de prueba y evidencias de rendimiento
+Documentacion/   Modelo conceptual, diagrama relacional, diseño técnico
+Videos Defensa/  Enlace al video de defensa
+```
+
+### Scripts SQL
+
+| Archivo | Contenido |
+|---|---|
+| `01_Creacion_Estructura.sql` | Creación de las doce tablas |
+| `02_Restricciones.sql` | Claves foráneas, dominios, integridad referencial |
+| `03_Carga_Datos.sql` | Carga inicial de catálogos y datos de prueba |
+| `04_Consultas_Reportes.sql` | Consultas de negocio y reportes |
+| `05_Indices.sql` | Índices de optimización |
+| `06_Seguridad_Roles.sql` | Roles, permisos y vistas |
+| `07_Funciones_Procedimientos.sql` | Funciones, procedimientos y triggers en PL/pgSQL |
+| `08_Concurrencia.sql` | Manejo de transacciones y concurrencia |
+
+---
+
+## Cómo ejecutarlo
+
+**Requisitos:** PostgreSQL 14 o superior. Para regenerar los datos masivos, Python 3 con `pandas` y `numpy`.
+
+```bash
+createdb proyecto_bd
+
+psql -d proyecto_bd -f ScriptSQL/01_Creacion_Estructura.sql
+psql -d proyecto_bd -f ScriptSQL/02_Restricciones.sql
+psql -d proyecto_bd -f ScriptSQL/03_Carga_Datos.sql
+psql -d proyecto_bd -f Datos/Carga_Masiva.sql
+psql -d proyecto_bd -f ScriptSQL/05_Indices.sql
+psql -d proyecto_bd -f ScriptSQL/06_Seguridad_Roles.sql
+psql -d proyecto_bd -f ScriptSQL/07_Funciones_Procedimientos.sql
+```
+
+El orden importa: las restricciones dependen de las tablas, la carga masiva de los catálogos, y los índices conviene crearlos después de cargar los datos.
+
+Una vez cargado, `04_Consultas_Reportes.sql` y `08_Concurrencia.sql` contienen consultas y escenarios para ejecutar de forma interactiva.
+
+---
+
+## Generación de datos masivos
+
+Evaluar el rendimiento con veinte filas no dice nada, así que los datos de prueba se generan por programa en lugar de escribirse a mano.
+
+**`Datos/generar_masivos.py`** produce un catálogo de 1.000 productos con nombres, descripciones y precios plausibles, y lo exporta a `productos_masivos.csv`.
+
+**`Datos/generador_datos.py`** arma el resto del universo de datos con pandas y numpy, respetando las dependencias entre tablas: primero los catálogos, después sucursales y empleados, después las variantes cruzando productos con talles y colores, y por último los movimientos con sus detalles. La salida es `Carga_Masiva.sql`, un script de más de 4.000 líneas listo para ejecutar.
+
+El punto de hacerlo así es que las claves foráneas cierren: cada movimiento apunta a un empleado y una sucursal que existen, cada detalle a una variante real. Generar los datos a mano con ese nivel de consistencia es inviable.
+
+```bash
+cd Datos
+python generar_masivos.py
+python generador_datos.py
+```
+
+---
+
+## Rendimiento
+
+Con el volumen cargado, las consultas de reportes se analizaron con `EXPLAIN ANALYZE` para identificar los recorridos secuenciales más costosos, y se crearon once índices sobre las columnas que más pesaban: las claves foráneas de `Movimientos`, `Detalle_Movimientos` y `Producto_Variante`, la cantidad disponible en `Inventario`, y un índice compuesto por tipo y fecha de movimiento.
+
+Las mediciones de antes y después están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/).
+
+---
+
+## Seguridad
+
+Tres roles bajo el principio de mínimo privilegio:
+
+| Rol | Permisos |
+|---|---|
+| `rol_administrador` | Acceso completo a estructura y datos |
+| `rol_operativo` | Operaciones del día a día: altas de movimientos, consultas de stock |
+| `rol_consulta` | Solo lectura, a través de vistas |
+
+Dos vistas complementan el esquema: `vista_stock_simplificado`, que expone el inventario sin datos sensibles, y `vista_auditoria_movimientos`, para seguimiento del historial.
+
+---
+
+## Lógica de negocio
+
+La lógica crítica vive en la base de datos, no en la aplicación, para que se cumpla sin importar quién escriba.
+
+**Procedimientos:**
+
+- `sp_registrar_entrada_mercaderia` — ingreso desde proveedor
+- `sp_registrar_traslado_sucursales` — movimiento entre sucursales
+- `sp_registrar_venta_caja` — venta al público
+- `sp_actualizar_precios_por_marca` — actualización masiva de precios
+
+**Funciones y triggers:**
+
+- `fn_actualizar_inventario_por_movimiento` / `trg_actualizar_stock_automatico` — el stock se ajusta solo al registrar un movimiento
+- `fn_validar_stock_disponible` / `trg_validar_stock_antes_insertar` — impide vender o trasladar más de lo que hay
+- `fn_autocompletar_precio_unitario` / `trg_autocompletar_precio_detalle` — toma el precio vigente del producto al armar el detalle
+
+---
+
+## Concurrencia
+
+`08_Concurrencia.sql` y `Pruebas/Casos_Prueba/Prueba_Transacciones.sql` plantean escenarios con sesiones simultáneas operando sobre el mismo inventario, con `COMMIT` y `ROLLBACK` explícitos, para verificar que dos ventas concurrentes de la última unidad no dejen el stock en negativo.
+
+---
+
+## Defensa
+
+[Video de defensa del proyecto](https://drive.google.com/drive/folders/1edLRO5p9XRerZa9qQGLjj95CrNs00Ym1?usp=sharing)
+
+---
+
+## Equipo
+
+| Integrante | MU |
+|---|---|
+| Gallo, Juan Agustín | 01731 |
+| Escalante, Judith Griselda | 01862 |
+| Yapura Fuenzalida, Víctor | 01913 |
+| Bravo, Nicolás | 01805 |
+| Máximo, Joaquín | 01884 |
+| Quintero, Facundo Joel | 01847 |
