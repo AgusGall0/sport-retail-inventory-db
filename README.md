@@ -28,11 +28,13 @@ Los diagramas y el diseño técnico están en [`Documentacion/`](Documentacion/)
 ## Estructura del repositorio
 
 ```
-ScriptSQL/       Scripts numerados, se ejecutan en orden
-Datos/           Generadores en Python y datos masivos
-Pruebas/         Casos de prueba y evidencias de rendimiento
-Documentacion/   Modelo conceptual, diagrama relacional, diseño técnico
-Videos Defensa/  Enlace al video de defensa
+docker-compose.yml  PostgreSQL 16 en contenedor
+setup.sh            Levanta el contenedor y ejecuta los scripts en orden
+ScriptSQL/          Scripts numerados, se ejecutan en orden
+Datos/              Generadores en Python y datos masivos
+Pruebas/            Casos de prueba y evidencias de rendimiento
+Documentacion/      Modelo conceptual, diagrama relacional, diseño técnico
+Videos Defensa/     Enlace al video de defensa
 ```
 
 ### Scripts SQL
@@ -52,6 +54,34 @@ Videos Defensa/  Enlace al video de defensa
 
 ## Cómo ejecutarlo
 
+### Con Docker (recomendado)
+
+**Requisitos:** Docker con el plugin Compose. No hace falta tener PostgreSQL instalado.
+
+```bash
+./setup.sh
+```
+
+`docker-compose.yml` levanta un contenedor `postgres:16` con la base `proyecto_bd` (usuario y contraseña `postgres`, puerto `5432`) y monta `ScriptSQL/` y `Datos/` en `/proyecto` dentro del contenedor. `setup.sh` espera a que la base esté sana y ejecuta con el `psql` del contenedor, en orden, la creación de estructura, las restricciones, la carga de datos, los índices, los roles y las funciones. Cada script corre con `ON_ERROR_STOP` y el proceso aborta ante el primer error, indicando qué script falló.
+
+Por defecto carga los datos de prueba de `03_Carga_Datos.sql`. Para usar el dataset generado con pandas:
+
+```bash
+CARGA=masiva ./setup.sh
+```
+
+Los dos scripts de datos son alternativos, no complementarios: ambos insertan los catálogos con los mismos ids, así que se ejecuta uno u otro. `03_Carga_Datos.sql` deja además el inventario cargado; `Carga_Masiva.sql` no genera inventario.
+
+Comandos útiles:
+
+```bash
+docker compose exec db psql -U postgres -d proyecto_bd   # abrir una consola psql
+docker compose down -v && ./setup.sh                    # empezar de cero
+DB_PORT=5433 ./setup.sh                                 # si el 5432 está ocupado
+```
+
+### Sin Docker
+
 **Requisitos:** PostgreSQL 14 o superior. Para regenerar los datos masivos, Python 3 con `pandas` y `numpy`.
 
 ```bash
@@ -59,14 +89,13 @@ createdb proyecto_bd
 
 psql -d proyecto_bd -f ScriptSQL/01_Creacion_Estructura.sql
 psql -d proyecto_bd -f ScriptSQL/02_Restricciones.sql
-psql -d proyecto_bd -f ScriptSQL/03_Carga_Datos.sql
-psql -d proyecto_bd -f Datos/Carga_Masiva.sql
+psql -d proyecto_bd -f ScriptSQL/03_Carga_Datos.sql      # o Datos/Carga_Masiva.sql
 psql -d proyecto_bd -f ScriptSQL/05_Indices.sql
 psql -d proyecto_bd -f ScriptSQL/06_Seguridad_Roles.sql
 psql -d proyecto_bd -f ScriptSQL/07_Funciones_Procedimientos.sql
 ```
 
-El orden importa: las restricciones dependen de las tablas, la carga masiva de los catálogos, y los índices conviene crearlos después de cargar los datos.
+El orden importa: las restricciones dependen de las tablas, la carga de datos de los catálogos, y los índices conviene crearlos después de cargar los datos.
 
 Una vez cargado, `04_Consultas_Reportes.sql` y `08_Concurrencia.sql` contienen consultas y escenarios para ejecutar de forma interactiva.
 

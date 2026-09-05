@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16
+    container_name: proyecto_bd
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: proyecto_bd
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Los scripts se montan de solo lectura para ejecutarlos con el psql del contenedor
+      - ./ScriptSQL:/proyecto/ScriptSQL:ro
+      - ./Datos:/proyecto/Datos:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d proyecto_bd"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  pgdata:
