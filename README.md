@@ -10,6 +10,98 @@ Proyecto integrador de la cátedra de Base de Datos — Ingeniería en Informát
 
 Doce tablas normalizadas hasta 3FN:
 
+```mermaid
+erDiagram
+    Categorias ||--o{ Productos : clasifica
+    Marcas ||--o{ Productos : fabrica
+    Productos ||--o{ Producto_Variante : "se declina en"
+    Talles ||--o{ Producto_Variante : dimensiona
+    Colores ||--o{ Producto_Variante : dimensiona
+    Sucursales ||--o{ Inventario : almacena
+    Producto_Variante ||--o{ Inventario : "tiene stock en"
+    Empleados ||--o{ Movimientos : registra
+    Sucursales |o--o{ Movimientos : "es origen de"
+    Sucursales |o--o{ Movimientos : "es destino de"
+    Proveedores |o--o{ Movimientos : abastece
+    Movimientos ||--o{ Detalle_Movimientos : "se detalla en"
+    Producto_Variante ||--o{ Detalle_Movimientos : "aparece en"
+
+    Categorias {
+        serial id_categoria PK
+        varchar nombre UK
+        text descripcion
+    }
+    Marcas {
+        serial id_marca PK
+        varchar nombre UK
+    }
+    Talles {
+        serial id_talle PK
+        varchar nomenclatura UK
+    }
+    Colores {
+        serial id_color PK
+        varchar nombre_color UK
+    }
+    Proveedores {
+        serial id_proveedor PK
+        varchar razon_social
+        varchar cuit UK
+        varchar telefono
+        varchar email
+    }
+    Sucursales {
+        serial id_sucursal PK
+        varchar nombre
+        varchar direccion
+        varchar ciudad
+    }
+    Empleados {
+        serial id_empleado PK
+        varchar documento UK
+        varchar nombre
+        varchar apellido
+        varchar perfil_acceso "CHECK Administrador|Operativo|Consulta"
+    }
+    Productos {
+        serial id_producto PK
+        varchar nombre
+        text descripcion
+        decimal precio_venta_actual "CHECK mayor a 0"
+        int id_marca FK
+        int id_categoria FK
+    }
+    Producto_Variante {
+        serial id_variante PK
+        varchar codigo_barras UK
+        int id_producto FK
+        int id_talle FK
+        int id_color FK
+    }
+    Inventario {
+        int id_sucursal PK, FK
+        int id_variante PK, FK
+        int cantidad_disponible "CHECK mayor o igual a 0"
+    }
+    Movimientos {
+        serial id_movimiento PK
+        timestamp fecha_hora
+        varchar tipo_movimiento "CHECK Entrada|Salida|Traslado"
+        text observaciones
+        int id_sucursal_origen FK "nullable"
+        int id_sucursal_destino FK "nullable"
+        int id_empleado FK
+        int id_proveedor FK "nullable"
+    }
+    Detalle_Movimientos {
+        serial id_detalle PK
+        int cantidad "CHECK mayor a 0"
+        decimal precio_unitario "CHECK mayor o igual a 0"
+        int id_movimiento FK
+        int id_variante FK
+    }
+```
+
 | Grupo | Tablas |
 |---|---|
 | Catálogos | `Categorias`, `Marcas`, `Talles`, `Colores` |
