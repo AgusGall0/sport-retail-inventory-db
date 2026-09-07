@@ -304,3 +304,12 @@ Trabajo grupal de seis integrantes de la cátedra de Base de Datos.
 | Bravo, Nicolás |
 | Máximo, Joaquín |
 | Quintero, Facundo Joel |
+
+
+
+
+---
+
+Parte del trabajo posterior a la entrega (CI, automatización del benchmark,
+documentación) se hizo con asistencia de Claude Code, bajo revisión y
+decisiones de diseño propias.
