@@ -126,7 +126,7 @@ ScriptSQL/          Scripts numerados, se ejecutan en orden
 Datos/              Generadores en Python y datos masivos
 Pruebas/            Casos de prueba y evidencias de rendimiento
 Documentacion/      Modelo conceptual, diagrama relacional, diseño técnico
-Videos Defensa/     Enlace al video de defensa
+Videos_Defensa/     Enlace al video de defensa
 ```
 
 ### Scripts SQL
