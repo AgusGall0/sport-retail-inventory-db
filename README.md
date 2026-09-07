@@ -298,11 +298,11 @@ Del resto del equipo: la carga de datos de prueba (`03_Carga_Datos.sql`) y la co
 
 ## Equipo
 
-| Integrante | MU |
-|---|---|
-| Gallo, Juan Agustín | 01731 |
-| Escalante, Judith Griselda | 01862 |
-| Yapura Fuenzalida, Víctor | 01913 |
-| Bravo, Nicolás | 01805 |
-| Máximo, Joaquín | 01884 |
-| Quintero, Facundo Joel | 01847 |
+| Integrante |
+|---|
+| Gallo, Juan Agustín |
+| Escalante, Judith Griselda |
+| Yapura Fuenzalida, Víctor |
+| Bravo, Nicolás |
+| Máximo, Joaquín |
+| Quintero, Facundo Joel |
