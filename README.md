@@ -10,6 +10,98 @@ Proyecto integrador de la cátedra de Base de Datos — Ingeniería en Informát
 
 Doce tablas normalizadas hasta 3FN:
 
+```mermaid
+erDiagram
+    Categorias ||--o{ Productos : clasifica
+    Marcas ||--o{ Productos : fabrica
+    Productos ||--o{ Producto_Variante : "se declina en"
+    Talles ||--o{ Producto_Variante : dimensiona
+    Colores ||--o{ Producto_Variante : dimensiona
+    Sucursales ||--o{ Inventario : almacena
+    Producto_Variante ||--o{ Inventario : "tiene stock en"
+    Empleados ||--o{ Movimientos : registra
+    Sucursales |o--o{ Movimientos : "es origen de"
+    Sucursales |o--o{ Movimientos : "es destino de"
+    Proveedores |o--o{ Movimientos : abastece
+    Movimientos ||--o{ Detalle_Movimientos : "se detalla en"
+    Producto_Variante ||--o{ Detalle_Movimientos : "aparece en"
+
+    Categorias {
+        serial id_categoria PK
+        varchar nombre UK
+        text descripcion
+    }
+    Marcas {
+        serial id_marca PK
+        varchar nombre UK
+    }
+    Talles {
+        serial id_talle PK
+        varchar nomenclatura UK
+    }
+    Colores {
+        serial id_color PK
+        varchar nombre_color UK
+    }
+    Proveedores {
+        serial id_proveedor PK
+        varchar razon_social
+        varchar cuit UK
+        varchar telefono
+        varchar email
+    }
+    Sucursales {
+        serial id_sucursal PK
+        varchar nombre
+        varchar direccion
+        varchar ciudad
+    }
+    Empleados {
+        serial id_empleado PK
+        varchar documento UK
+        varchar nombre
+        varchar apellido
+        varchar perfil_acceso "CHECK Administrador|Operativo|Consulta"
+    }
+    Productos {
+        serial id_producto PK
+        varchar nombre
+        text descripcion
+        decimal precio_venta_actual "CHECK mayor a 0"
+        int id_marca FK
+        int id_categoria FK
+    }
+    Producto_Variante {
+        serial id_variante PK
+        varchar codigo_barras UK
+        int id_producto FK
+        int id_talle FK
+        int id_color FK
+    }
+    Inventario {
+        int id_sucursal PK, FK
+        int id_variante PK, FK
+        int cantidad_disponible "CHECK mayor o igual a 0"
+    }
+    Movimientos {
+        serial id_movimiento PK
+        timestamp fecha_hora
+        varchar tipo_movimiento "CHECK Entrada|Salida|Traslado"
+        text observaciones
+        int id_sucursal_origen FK "nullable"
+        int id_sucursal_destino FK "nullable"
+        int id_empleado FK
+        int id_proveedor FK "nullable"
+    }
+    Detalle_Movimientos {
+        serial id_detalle PK
+        int cantidad "CHECK mayor a 0"
+        decimal precio_unitario "CHECK mayor o igual a 0"
+        int id_movimiento FK
+        int id_variante FK
+    }
+```
+
 | Grupo | Tablas |
 |---|---|
 | Catálogos | `Categorias`, `Marcas`, `Talles`, `Colores` |
@@ -34,7 +126,7 @@ ScriptSQL/          Scripts numerados, se ejecutan en orden
 Datos/              Generadores en Python y datos masivos
 Pruebas/            Casos de prueba y evidencias de rendimiento
 Documentacion/      Modelo conceptual, diagrama relacional, diseño técnico
-Videos Defensa/     Enlace al video de defensa
+Videos_Defensa/     Enlace al video de defensa
 ```
 
 ### Scripts SQL
@@ -180,19 +272,31 @@ La lógica crítica vive en la base de datos, no en la aplicación, para que se 
 
 ---
 
-## Defensa
+## Mi rol en el proyecto
 
-[Video de defensa del proyecto](https://drive.google.com/drive/folders/1edLRO5p9XRerZa9qQGLjj95CrNs00Ym1?usp=sharing)
+Trabajo grupal de seis integrantes. Lo que sigue es lo que escribí yo, verificable con `git log` y `git blame`.
+
+**Diseño del esquema.** El modelo de datos completo: `01_Creacion_Estructura.sql` y `02_Restricciones.sql` — las doce tablas, la separación producto/variante, las claves primarias y foráneas con sus políticas `ON DELETE`/`ON UPDATE`, y las restricciones `UNIQUE` y `CHECK`. También el modelo conceptual y el diagrama relacional de `Documentacion/`.
+
+**Roles y permisos.** `06_Seguridad_Roles.sql`: los tres roles bajo mínimo privilegio y las dos vistas.
+
+**Generación de datos masivos.** `Datos/generar_masivos.py` y `Datos/generador_datos.py`, los dos scripts en Python que producen `Carga_Masiva.sql` respetando las dependencias entre tablas.
+
+**Reproducibilidad.** `docker-compose.yml` y `setup.sh`, para que el proyecto se levante con un comando en lugar de seis `psql` manuales.
+
+**Documentación.** El README en su forma actual, incluida la medición comparativa de consultas con y sin índices sobre el dataset masivo.
+
+Del resto del equipo: la carga de datos de prueba (`03_Carga_Datos.sql`) y la concurrencia (`08_Concurrencia.sql`), de Quintero; las consultas y reportes (`04_Consultas_Reportes.sql`), las funciones y triggers en PL/pgSQL (`07_Funciones_Procedimientos.sql`) y las pruebas de transacciones, de Escalante; los índices (`05_Indices.sql`) y las mediciones de la Etapa III, de Yapura.
 
 ---
 
 ## Equipo
 
-| Integrante | MU |
-|---|---|
-| Gallo, Juan Agustín | 01731 |
-| Escalante, Judith Griselda | 01862 |
-| Yapura Fuenzalida, Víctor | 01913 |
-| Bravo, Nicolás | 01805 |
-| Máximo, Joaquín | 01884 |
-| Quintero, Facundo Joel | 01847 |
+| Integrante |
+|---|
+| Gallo, Juan Agustín |
+| Escalante, Judith Griselda |
+| Yapura Fuenzalida, Víctor |
+| Bravo, Nicolás |
+| Máximo, Joaquín |
+| Quintero, Facundo Joel |
