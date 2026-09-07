@@ -287,16 +287,3 @@ Trabajo grupal de seis integrantes. Lo que sigue es lo que escribí yo, verifica
 **Documentación.** El README en su forma actual, incluida la medición comparativa de consultas con y sin índices sobre el dataset masivo.
 
 Del resto del equipo: la carga de datos de prueba (`03_Carga_Datos.sql`) y la concurrencia (`08_Concurrencia.sql`), de Quintero; las consultas y reportes (`04_Consultas_Reportes.sql`), las funciones y triggers en PL/pgSQL (`07_Funciones_Procedimientos.sql`) y las pruebas de transacciones, de Escalante; los índices (`05_Indices.sql`) y las mediciones de la Etapa III, de Yapura.
-
----
-
-## Equipo
-
-| Integrante |
-|---|
-| Gallo, Juan Agustín |
-| Escalante, Judith Griselda |
-| Yapura Fuenzalida, Víctor |
-| Bravo, Nicolás |
-| Máximo, Joaquín |
-| Quintero, Facundo Joel |
