@@ -272,12 +272,6 @@ La lógica crítica vive en la base de datos, no en la aplicación, para que se 
 
 ---
 
-## Defensa
-
-[Video de defensa del proyecto](https://drive.google.com/drive/folders/1edLRO5p9XRerZa9qQGLjj95CrNs00Ym1?usp=sharing)
-
----
-
 ## Mi rol en el proyecto
 
 Trabajo grupal de seis integrantes. Lo que sigue es lo que escribí yo, verificable con `git log` y `git blame`.
