@@ -1,0 +1,93 @@
+Consulta 3 — Tickets y recaudación por empleado en Sucursal NOA
+Escenario: sin índices (05_Indices.sql no aplicado)
+PostgreSQL: 16.15 (Debian 16.15-1.pgdg13+2)
+Dataset: Datos/Carga_Masiva.sql — 1002 movimientos, 3101 detalles, 48 variantes, 365 salidas, 96 filas de inventario
+Repeticiones: 3 — tiempos de ejecución: 0.816 / 0.926 / 0.816 ms — mejor: 0.816 ms
+Filas devueltas: 2
+Índices del proyecto usados por el planificador: ninguno
+
+--- SQL ---
+
+
+
+
+
+
+
+
+SELECT 
+    emp.nombre,
+    emp.apellido,
+    suc.nombre AS sucursal,
+    COUNT(DISTINCT mov.id_movimiento) AS cantidad_tickets_emitidos,
+    SUM(dm.cantidad * dm.precio_unitario) AS total_plata_ingresada
+FROM Movimientos mov
+INNER JOIN Empleados emp ON mov.id_empleado = emp.id_empleado
+INNER JOIN Sucursales suc ON mov.id_sucursal_origen = suc.id_sucursal
+INNER JOIN Detalle_Movimientos dm ON mov.id_movimiento = dm.id_movimiento
+
+
+WHERE mov.tipo_movimiento = 'Salida'
+  AND suc.nombre = 'Sucursal NOA'
+  AND EXTRACT(YEAR FROM mov.fecha_hora) = 2025
+
+
+GROUP BY 
+    emp.id_empleado, 
+    emp.nombre, 
+    emp.apellido, 
+    suc.nombre
+
+
+ORDER BY 
+    cantidad_tickets_emitidos DESC, 
+    total_plata_ingresada DESC;
+
+--- EXPLAIN (ANALYZE, BUFFERS) de la mejor de las 3 corridas ---
+                                                                         QUERY PLAN                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=94.04..94.05 rows=2 width=69) (actual time=0.757..0.758 rows=2 loops=1)
+   Sort Key: (count(DISTINCT mov.id_movimiento)) DESC, (sum(((dm.cantidad)::numeric * dm.precio_unitario))) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=46
+   ->  GroupAggregate  (cost=93.96..94.03 rows=2 width=69) (actual time=0.705..0.741 rows=2 loops=1)
+         Group Key: emp.id_empleado
+         Buffers: shared hit=40
+         ->  Sort  (cost=93.96..93.97 rows=3 width=45) (actual time=0.673..0.683 rows=357 loops=1)
+               Sort Key: emp.id_empleado, mov.id_movimiento
+               Sort Method: quicksort  Memory: 52kB
+               Buffers: shared hit=40
+               ->  Nested Loop  (cost=29.56..93.94 rows=3 width=45) (actual time=0.137..0.549 rows=357 loops=1)
+                     Join Filter: (emp.id_empleado = mov.id_empleado)
+                     Rows Removed by Join Filter: 202
+                     Buffers: shared hit=37
+                     ->  Nested Loop  (cost=29.56..92.84 rows=3 width=33) (actual time=0.131..0.487 rows=357 loops=1)
+                           Join Filter: (suc.id_sucursal = mov.id_sucursal_origen)
+                           Rows Removed by Join Filter: 341
+                           Buffers: shared hit=36
+                           ->  Seq Scan on sucursales suc  (cost=0.00..1.02 rows=1 width=17) (actual time=0.003..0.003 rows=1 loops=1)
+                                 Filter: ((nombre)::text = 'Sucursal NOA'::text)
+                                 Rows Removed by Filter: 1
+                                 Buffers: shared hit=1
+                           ->  Hash Join  (cost=29.56..91.74 rows=6 width=24) (actual time=0.128..0.451 rows=698 loops=1)
+                                 Hash Cond: (dm.id_movimiento = mov.id_movimiento)
+                                 Buffers: shared hit=35
+                                 ->  Seq Scan on detalle_movimientos dm  (cost=0.00..54.01 rows=3101 width=16) (actual time=0.002..0.152 rows=3101 loops=1)
+                                       Buffers: shared hit=23
+                                 ->  Hash  (cost=29.54..29.54 rows=2 width=12) (actual time=0.108..0.108 rows=228 loops=1)
+                                       Buckets: 1024  Batches: 1  Memory Usage: 18kB
+                                       Buffers: shared hit=12
+                                       ->  Seq Scan on movimientos mov  (cost=0.00..29.54 rows=2 width=12) (actual time=0.008..0.086 rows=228 loops=1)
+                                             Filter: (((tipo_movimiento)::text = 'Salida'::text) AND (EXTRACT(year FROM fecha_hora) = '2025'::numeric))
+                                             Rows Removed by Filter: 774
+                                             Buffers: shared hit=12
+                     ->  Materialize  (cost=0.00..1.03 rows=2 width=16) (actual time=0.000..0.000 rows=2 loops=357)
+                           Buffers: shared hit=1
+                           ->  Seq Scan on empleados emp  (cost=0.00..1.02 rows=2 width=16) (actual time=0.001..0.001 rows=2 loops=1)
+                                 Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=252
+ Planning Time: 0.515 ms
+ Execution Time: 0.816 ms
+(43 rows)
+
