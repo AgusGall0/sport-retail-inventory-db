@@ -213,23 +213,31 @@ python generador_datos.py
 
 ## Rendimiento
 
-Evaluar con veinte filas no dice nada, así que las consultas de `04_Consultas_Reportes.sql` se midieron sobre el dataset de `Datos/Carga_Masiva.sql` (1.000 movimientos, 3.047 detalles, 48 variantes, 362 salidas) en dos escenarios: la base recién cargada sin `05_Indices.sql`, y la misma base con los once índices aplicados. Cada consulta se ejecutó tres veces con `EXPLAIN ANALYZE` y se tomó el mejor tiempo de ejecución, para descartar el efecto de caché fría. Se hizo `ANALYZE` antes de cada escenario.
+Evaluar con veinte filas no dice nada, así que las consultas de `04_Consultas_Reportes.sql` se midieron sobre el dataset de `Datos/Carga_Masiva.sql` (1.002 movimientos, 3.101 detalles, 48 variantes, 365 salidas, 96 filas de inventario) en dos escenarios: la base recién cargada sin `05_Indices.sql`, y la misma base con los once índices aplicados. Se hizo `ANALYZE` antes de cada escenario.
 
-Entorno: PostgreSQL 16.15 en Docker, levantado con `CARGA=masiva ./setup.sh`, medido el 4 de septiembre de 2026.
+La medición está automatizada en [`Pruebas/benchmark.sh`](Pruebas/benchmark.sh): levanta la base desde cero, extrae las consultas de `04` y los `CREATE INDEX` de `05` de los propios scripts, mide cada una con `EXPLAIN (ANALYZE, BUFFERS)` y deja los planes completos en `Pruebas/Evidencias_Rendimiento/`. Se tomó el mejor tiempo de quince corridas por consulta: a este volumen todo termina en menos de un milisegundo y con tres repeticiones el ruido de medición era del mismo orden que la diferencia a medir. Dos corridas seguidas de quince repeticiones dan los mismos números dentro del 2 %.
 
-| # | Consulta | Sin índices (ms) | Con índices (ms) | Mejora | Índice nuevo que usó el planificador |
-|---|---|---|---|---|---|
-| 1 | Recaudación por marca, salidas del último trimestre | 1.089 | 0.586 | +46 % | `idx_movimientos_tipo_fecha` |
-| 2 | Variantes sin salidas en el año | 1.158 | 0.466 | +60 % | `idx_detalle_movimientos_id_mov` |
-| 3 | Tickets y recaudación por empleado en Sucursal NOA | 0.779 | 0.652 | +16 % | `idx_detalle_movimientos_id_mov` |
-| 4 | Variantes con stock bajo | 0.096 | 0.098 | -2 % | ninguno, sigue con Seq Scan |
-| 5 | Ventas por marca y sucursal | 1.063 | 1.053 | +1 % | ninguno, sigue con Seq Scan |
+Entorno: PostgreSQL 16.15 en Docker, medido el 8 de septiembre de 2026 con `REPETICIONES=15 Pruebas/benchmark.sh`.
 
-Con este volumen las consultas ya corren en torno al milisegundo, así que la mejora se ve más en el plan que en el reloj. Las dos que más ganan son la 1, donde el índice compuesto por tipo y fecha reemplaza el recorrido secuencial de `Movimientos` por un Bitmap Index Scan, y la 2, donde el índice sobre la clave foránea de `Detalle_Movimientos` permite resolver el join de la subconsulta con un Index Scan.
+| # | Consulta | Filas | Sin índices (ms) | Con índices (ms) | Mejora | Índice nuevo que usó el planificador |
+|---|---|---|---|---|---|---|
+| 1 | Recaudación por marca, salidas del último trimestre | 2 | 0.584 | 0.571 | +2 % | `idx_movimientos_tipo_fecha` |
+| 2 | Variantes sin salidas en el año | 0 | 0.612 | 0.474 | +23 % | `idx_detalle_movimientos_id_mov` |
+| 3 | Tickets y recaudación por empleado en Sucursal NOA | 2 | 0.808 | 0.631 | +22 % | `idx_detalle_movimientos_id_mov` |
+| 4 | Variantes con stock bajo | 15 | 0.194 | 0.216 | -11 % | ninguno, sigue con Seq Scan |
+| 5 | Ventas por marca y sucursal | 4 | 1.119 | 1.123 | -0 % | ninguno, sigue con Seq Scan |
 
-En la 5 el planificador sigue eligiendo Seq Scan aun con los índices disponibles: el filtro por tipo `Salida` sin acotar fecha abarca más de un tercio de `Movimientos`, y para esa selectividad recorrer la tabla es más barato que ir al índice. La 4 no cambia porque en este dataset `Inventario` está vacío (`Carga_Masiva.sql` no genera inventario), así que la consulta devuelve cero filas en ambos escenarios.
+Las dos que ganan son la 2 y la 3, y por el mismo motivo: `idx_detalle_movimientos_id_mov` deja entrar a `Detalle_Movimientos` por la clave foránea en lugar de recorrer sus 3.101 filas. En la 3 se ve directamente en el plan, donde el Seq Scan completo se reemplaza por un Index Scan de 116 iteraciones de tres filas cada una.
 
-Los índices se justifican por la forma de los planes más que por los milisegundos: a medida que crezcan `Movimientos` y `Detalle_Movimientos`, el costo de los recorridos secuenciales escala linealmente y el de los accesos por índice no. Las capturas de las mediciones originales están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/).
+La 1 es el caso interesante. El índice sí se usa —un Bitmap Index Scan sobre `idx_movimientos_tipo_fecha` reemplaza el recorrido secuencial de `Movimientos` y el costo estimado del plan baja de 104 a 90— pero el reloj casi no se mueve. El cuello de botella está en otro lado: la consulta sigue recorriendo `Detalle_Movimientos` entera, y eso es lo que domina el tiempo. Acelerar la parte que ya era barata no cambia el total.
+
+La 4 ahora devuelve 15 filas, pero se sigue resolviendo con Seq Scan y `idx_inventario_cantidad_disponible` no se usa nunca: `Inventario` tiene 96 filas y ocupa una sola página en disco, así que leer la tabla completa cuesta menos que pasar por el índice. El plan es idéntico en los dos escenarios, y los 0,02 ms de diferencia son piso de medición, no una regresión.
+
+En la 5 el planificador sigue eligiendo Seq Scan aun con los índices disponibles: el filtro por tipo `Salida` sin acotar fecha abarca 365 de los 1.002 movimientos, más de un tercio de la tabla, y para esa selectividad recorrerla es más barato que ir al índice.
+
+La 2 devuelve cero filas, y es un resultado correcto, no una falla: con 48 variantes y 1.113 renglones de detalle asociados a salidas, no queda ninguna variante sin vender en el año. Como medición sigue valiendo, porque la subconsulta procesa 415 filas y es ahí donde el índice hace la diferencia, pero como reporte de negocio necesitaría un catálogo bastante más grande para decir algo.
+
+Los índices se justifican por la forma de los planes más que por los milisegundos: a medida que crezcan `Movimientos` y `Detalle_Movimientos`, el costo de los recorridos secuenciales escala linealmente y el de los accesos por índice no. Los planes completos de las diez mediciones están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/), y las capturas de la medición original de la Etapa III en [`Capturas_Etapa_III/`](Pruebas/Evidencias_Rendimiento/Capturas_Etapa_III/).
 
 ---
 
