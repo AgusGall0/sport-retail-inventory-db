@@ -1,0 +1,98 @@
+Consulta 2 — Variantes sin salidas en el año
+Escenario: sin índices (05_Indices.sql no aplicado)
+PostgreSQL: 16.15 (Debian 16.15-1.pgdg13+2)
+Dataset: Datos/Carga_Masiva.sql — 1002 movimientos, 3101 detalles, 48 variantes, 365 salidas, 96 filas de inventario
+Repeticiones: 3 — tiempos de ejecución: 0.840 / 0.668 / 0.616 ms — mejor: 0.616 ms
+Filas devueltas: 0
+Índices del proyecto usados por el planificador: ninguno
+
+--- SQL ---
+
+
+
+
+
+
+SELECT 
+    mrc.nombre AS marca,
+    prod.nombre AS producto,
+    tal.nomenclatura AS talle,
+    col.nombre_color AS color
+FROM Producto_Variante pv
+INNER JOIN Productos prod ON pv.id_producto = prod.id_producto
+INNER JOIN Marcas mrc ON prod.id_marca = mrc.id_marca
+INNER JOIN Talles tal ON pv.id_talle = tal.id_talle
+INNER JOIN Colores col ON pv.id_color = col.id_color
+
+
+WHERE pv.id_variante NOT IN (
+    
+
+SELECT dm.id_variante 
+FROM Detalle_Movimientos dm
+INNER JOIN Movimientos mov ON dm.id_movimiento = mov.id_movimiento
+WHERE mov.tipo_movimiento = 'Salida'
+AND EXTRACT(YEAR FROM mov.fecha_hora) = EXTRACT(YEAR FROM CURRENT_DATE)
+      
+)
+ORDER BY mrc.nombre, prod.nombre;
+
+--- EXPLAIN (ANALYZE, BUFFERS) de la mejor de las 3 corridas ---
+                                                                                   QUERY PLAN                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=104.23..104.29 rows=24 width=25) (actual time=0.540..0.542 rows=0 loops=1)
+   Sort Key: mrc.nombre, prod.nombre
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=42
+   ->  Hash Join  (cost=100.08..103.68 rows=24 width=25) (actual time=0.523..0.524 rows=0 loops=1)
+         Hash Cond: (pv.id_color = col.id_color)
+         Buffers: shared hit=39
+         ->  Hash Join  (cost=98.99..102.46 rows=24 width=24) (actual time=0.509..0.510 rows=0 loops=1)
+               Hash Cond: (pv.id_talle = tal.id_talle)
+               Buffers: shared hit=38
+               ->  Hash Join  (cost=97.86..101.21 rows=24 width=26) (actual time=0.495..0.497 rows=0 loops=1)
+                     Hash Cond: (prod.id_marca = mrc.id_marca)
+                     Buffers: shared hit=37
+                     ->  Nested Loop  (cost=96.77..99.99 rows=24 width=23) (actual time=0.479..0.480 rows=0 loops=1)
+                           Join Filter: (prod.id_producto = pv.id_producto)
+                           Buffers: shared hit=36
+                           ->  Seq Scan on producto_variante pv  (cost=96.77..98.37 rows=24 width=12) (actual time=0.479..0.480 rows=0 loops=1)
+                                 Filter: (NOT (hashed SubPlan 1))
+                                 Rows Removed by Filter: 48
+                                 Buffers: shared hit=36
+                                 SubPlan 1
+                                   ->  Hash Join  (cost=34.57..96.75 rows=6 width=4) (actual time=0.138..0.427 rows=415 loops=1)
+                                         Hash Cond: (dm.id_movimiento = mov.id_movimiento)
+                                         Buffers: shared hit=35
+                                         ->  Seq Scan on detalle_movimientos dm  (cost=0.00..54.01 rows=3101 width=8) (actual time=0.003..0.148 rows=3101 loops=1)
+                                               Buffers: shared hit=23
+                                         ->  Hash  (cost=34.55..34.55 rows=2 width=4) (actual time=0.108..0.108 rows=137 loops=1)
+                                               Buckets: 1024  Batches: 1  Memory Usage: 13kB
+                                               Buffers: shared hit=12
+                                               ->  Seq Scan on movimientos mov  (cost=0.00..34.55 rows=2 width=4) (actual time=0.010..0.096 rows=137 loops=1)
+                                                     Filter: (((tipo_movimiento)::text = 'Salida'::text) AND (EXTRACT(year FROM fecha_hora) = EXTRACT(year FROM CURRENT_DATE)))
+                                                     Rows Removed by Filter: 865
+                                                     Buffers: shared hit=12
+                           ->  Materialize  (cost=0.00..1.03 rows=2 width=19) (never executed)
+                                 ->  Seq Scan on productos prod  (cost=0.00..1.02 rows=2 width=19) (never executed)
+                     ->  Hash  (cost=1.04..1.04 rows=4 width=11) (actual time=0.004..0.004 rows=4 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           Buffers: shared hit=1
+                           ->  Seq Scan on marcas mrc  (cost=0.00..1.04 rows=4 width=11) (actual time=0.002..0.002 rows=4 loops=1)
+                                 Buffers: shared hit=1
+               ->  Hash  (cost=1.06..1.06 rows=6 width=6) (actual time=0.003..0.003 rows=6 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     Buffers: shared hit=1
+                     ->  Seq Scan on talles tal  (cost=0.00..1.06 rows=6 width=6) (actual time=0.001..0.001 rows=6 loops=1)
+                           Buffers: shared hit=1
+         ->  Hash  (cost=1.04..1.04 rows=4 width=9) (actual time=0.006..0.006 rows=4 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               Buffers: shared hit=1
+               ->  Seq Scan on colores col  (cost=0.00..1.04 rows=4 width=9) (actual time=0.002..0.003 rows=4 loops=1)
+                     Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=403
+ Planning Time: 0.814 ms
+ Execution Time: 0.616 ms
+(54 rows)
+

@@ -1,0 +1,98 @@
+Consulta 1 — Recaudación por marca, salidas del último trimestre
+Escenario: con los 11 índices de 05_Indices.sql aplicados
+PostgreSQL: 16.15 (Debian 16.15-1.pgdg13+2)
+Dataset: Datos/Carga_Masiva.sql — 1002 movimientos, 3101 detalles, 48 variantes, 365 salidas, 96 filas de inventario
+Repeticiones: 3 — tiempos de ejecución: 0.597 / 0.618 / 0.622 ms — mejor: 0.597 ms
+Filas devueltas: 2
+Índices del proyecto usados por el planificador: idx_movimientos_tipo_fecha
+
+--- SQL ---
+
+
+
+
+
+SELECT 
+    mrc.nombre AS marca_deportiva,
+    SUM(dm.cantidad) AS total_prendas_vendidas,
+    SUM(dm.cantidad * dm.precio_unitario) AS recaudacion_total
+FROM Movimientos mov
+
+
+INNER JOIN Detalle_Movimientos dm ON mov.id_movimiento = dm.id_movimiento
+
+
+INNER JOIN Producto_Variante pv ON dm.id_variante = pv.id_variante
+
+
+INNER JOIN Productos prod ON pv.id_producto = prod.id_producto
+
+
+INNER JOIN Marcas mrc ON prod.id_marca = mrc.id_marca
+
+
+WHERE mov.tipo_movimiento = 'Salida' 
+  AND mov.fecha_hora >= CURRENT_DATE - INTERVAL '3 months'
+
+
+GROUP BY mrc.id_marca, mrc.nombre
+
+
+ORDER BY recaudacion_total DESC;
+
+--- EXPLAIN (ANALYZE, BUFFERS) de la mejor de las 3 corridas ---
+                                                                                  QUERY PLAN                                                                                   
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=90.17..90.18 rows=4 width=51) (actual time=0.510..0.512 rows=2 loops=1)
+   Sort Key: (sum(((dm.cantidad)::numeric * dm.precio_unitario))) DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=41 read=2
+   ->  HashAggregate  (cost=90.08..90.13 rows=4 width=51) (actual time=0.494..0.496 rows=2 loops=1)
+         Group Key: mrc.id_marca
+         Batches: 1  Memory Usage: 24kB
+         Buffers: shared hit=38 read=2
+         ->  Hash Join  (cost=22.89..87.91 rows=173 width=23) (actual time=0.159..0.463 rows=141 loops=1)
+               Hash Cond: (prod.id_marca = mrc.id_marca)
+               Buffers: shared hit=38 read=2
+               ->  Hash Join  (cost=21.80..85.89 rows=173 width=16) (actual time=0.143..0.433 rows=141 loops=1)
+                     Hash Cond: (pv.id_producto = prod.id_producto)
+                     Buffers: shared hit=37 read=2
+                     ->  Hash Join  (cost=20.75..83.44 rows=173 width=16) (actual time=0.120..0.396 rows=141 loops=1)
+                           Hash Cond: (dm.id_variante = pv.id_variante)
+                           Buffers: shared hit=36 read=2
+                           ->  Hash Join  (cost=18.67..80.86 rows=173 width=16) (actual time=0.099..0.361 rows=141 loops=1)
+                                 Hash Cond: (dm.id_movimiento = mov.id_movimiento)
+                                 Buffers: shared hit=35 read=2
+                                 ->  Seq Scan on detalle_movimientos dm  (cost=0.00..54.01 rows=3101 width=20) (actual time=0.005..0.145 rows=3101 loops=1)
+                                       Buffers: shared hit=23
+                                 ->  Hash  (cost=17.97..17.97 rows=56 width=4) (actual time=0.052..0.052 rows=44 loops=1)
+                                       Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                       Buffers: shared hit=12 read=2
+                                       ->  Bitmap Heap Scan on movimientos mov  (cost=4.85..17.97 rows=56 width=4) (actual time=0.036..0.048 rows=44 loops=1)
+                                             Recheck Cond: (((tipo_movimiento)::text = 'Salida'::text) AND (fecha_hora >= (CURRENT_DATE - '3 mons'::interval)))
+                                             Heap Blocks: exact=12
+                                             Buffers: shared hit=12 read=2
+                                             ->  Bitmap Index Scan on idx_movimientos_tipo_fecha  (cost=0.00..4.84 rows=56 width=0) (actual time=0.032..0.032 rows=44 loops=1)
+                                                   Index Cond: (((tipo_movimiento)::text = 'Salida'::text) AND (fecha_hora >= (CURRENT_DATE - '3 mons'::interval)))
+                                                   Buffers: shared read=2
+                           ->  Hash  (cost=1.48..1.48 rows=48 width=8) (actual time=0.008..0.008 rows=48 loops=1)
+                                 Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                 Buffers: shared hit=1
+                                 ->  Seq Scan on producto_variante pv  (cost=0.00..1.48 rows=48 width=8) (actual time=0.002..0.004 rows=48 loops=1)
+                                       Buffers: shared hit=1
+                     ->  Hash  (cost=1.02..1.02 rows=2 width=8) (actual time=0.011..0.011 rows=2 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           Buffers: shared hit=1
+                           ->  Seq Scan on productos prod  (cost=0.00..1.02 rows=2 width=8) (actual time=0.001..0.001 rows=2 loops=1)
+                                 Buffers: shared hit=1
+               ->  Hash  (cost=1.04..1.04 rows=4 width=11) (actual time=0.007..0.007 rows=4 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     Buffers: shared hit=1
+                     ->  Seq Scan on marcas mrc  (cost=0.00..1.04 rows=4 width=11) (actual time=0.002..0.002 rows=4 loops=1)
+                           Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=413 read=14
+ Planning Time: 0.965 ms
+ Execution Time: 0.597 ms
+(51 rows)
+
