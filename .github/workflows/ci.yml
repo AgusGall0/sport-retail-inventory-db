@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  base-de-datos:
+    name: Carga y verificación de la base
+    runs-on: ubuntu-latest
+
+    # Se usa un service de PostgreSQL en lugar del docker-compose.yml del repo:
+    # el runner ya expone el contenedor en localhost y espera al healthcheck,
+    # asi que compose solo agregaria una capa de indireccion.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: proyecto_bd
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d proyecto_bd"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: proyecto_bd
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar el cliente de PostgreSQL
+        run: |
+          if ! command -v psql > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends postgresql-client
+          fi
+          psql --version
+
+      # El orden importa: las restricciones dependen de las tablas, la carga de
+      # datos de los catalogos, los indices conviene crearlos con los datos ya
+      # cargados, y 08_Concurrencia.sql llama a los procedimientos que define 07.
+      - name: Ejecutar los ocho scripts SQL en orden
+        run: |
+          set -euo pipefail
+          for script in \
+            ScriptSQL/01_Creacion_Estructura.sql \
+            ScriptSQL/02_Restricciones.sql \
+            ScriptSQL/03_Carga_Datos.sql \
+            ScriptSQL/04_Consultas_Reportes.sql \
+            ScriptSQL/05_Indices.sql \
+            ScriptSQL/06_Seguridad_Roles.sql \
+            ScriptSQL/07_Funciones_Procedimientos.sql \
+            ScriptSQL/08_Concurrencia.sql
+          do
+            echo "::group::$script"
+            psql -q -v ON_ERROR_STOP=1 -f "$script"
+            echo "::endgroup::"
+          done
+
+      - name: Verificar la integridad de la base
+        run: psql -v ON_ERROR_STOP=1 -f Pruebas/verificaciones_ci.sql
+
+      # 04 ya se ejecuto arriba, pero ahi la base recien salia de 03. Se vuelve a
+      # correr al final, contra el estado que dejaron los indices, los roles, los
+      # triggers y las transacciones de 08.
+      - name: Reejecutar las consultas de reportes sobre el estado final
+        run: psql -q -v ON_ERROR_STOP=1 -f ScriptSQL/04_Consultas_Reportes.sql
+
+  generador-de-datos:
+    name: Generador de datos masivos
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Las versiones van fijas a proposito: un release de pandas no tiene por
+      # que poner el build en rojo sin que nadie haya tocado el repositorio.
+      - name: Instalar dependencias
+        run: pip install 'pandas==2.2.3' 'numpy==2.1.3'
+
+      - name: Correr los generadores
+        working-directory: Datos
+        run: |
+          set -euo pipefail
+          python generar_masivos.py
+          python generador_datos.py
+
+      # Que el script no reviente no alcanza: se verifica que lo que produjo
+      # tenga las tablas que tiene que tener.
+      - name: Verificar el SQL generado
+        working-directory: Datos
+        run: |
+          set -euo pipefail
+          for tabla in Marcas Categorias Talles Colores Sucursales Proveedores \
+                       Empleados Productos Producto_Variante Movimientos \
+                       Detalle_Movimientos Inventario
+          do
+            n=$(grep -c "INSERT INTO $tabla " Carga_Masiva.sql || true)
+            echo "  $tabla: $n INSERT"
+            if [ "$n" -eq 0 ]; then
+              echo "!! Carga_Masiva.sql no tiene ningun INSERT para $tabla" >&2
+              exit 1
+            fi
+          done
+          if ! grep -q 'setval' Carga_Masiva.sql; then
+            echo "!! Carga_Masiva.sql no sincroniza las secuencias" >&2
+            exit 1
+          fi
+          test -s productos_masivos.csv
