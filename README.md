@@ -238,7 +238,7 @@ En la 5 el planificador sigue eligiendo Seq Scan aun con los índices disponible
 
 La 2 devuelve cero filas, y es un resultado correcto, no una falla: con 48 variantes y 1.113 renglones de detalle asociados a salidas, no queda ninguna variante sin vender en el año. Como medición sigue valiendo, porque la subconsulta procesa 415 filas y es ahí donde el índice hace la diferencia, pero como reporte de negocio necesitaría un catálogo bastante más grande para decir algo.
 
-Los índices se justifican por la forma de los planes más que por los milisegundos: a medida que crezcan `Movimientos` y `Detalle_Movimientos`, el costo de los recorridos secuenciales escala linealmente y el de los accesos por índice no. Los planes completos de las diez mediciones están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/), y las capturas de la medición original de la Etapa III en [`Capturas_Etapa_III/`](Pruebas/Evidencias_Rendimiento/Capturas_Etapa_III/).
+Los índices se justifican por la forma de los planes más que por los milisegundos: a medida que crezcan `Movimientos` y `Detalle_Movimientos`, el costo de los recorridos secuenciales escala linealmente y el de los accesos por índice no. Los planes completos de las diez mediciones están en [`Pruebas/Evidencias_Rendimiento/`](Pruebas/Evidencias_Rendimiento/), y el informe original de la Etapa III en [`Etapa_III/`](Pruebas/Evidencias_Rendimiento/Etapa_III/).
 
 ---
 
