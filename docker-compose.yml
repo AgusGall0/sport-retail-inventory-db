@@ -13,6 +13,7 @@ services:
       # Los scripts se montan de solo lectura para ejecutarlos con el psql del contenedor
       - ./ScriptSQL:/proyecto/ScriptSQL:ro
       - ./Datos:/proyecto/Datos:ro
+      - ./Pruebas:/proyecto/Pruebas:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d proyecto_bd"]
       interval: 3s

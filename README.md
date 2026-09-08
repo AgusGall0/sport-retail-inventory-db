@@ -1,4 +1,5 @@
 # Proyecto Integrador BD — Gestión de stock para retail deportivo
+[![CI](https://github.com/AgusGall0/sport-retail-inventory-db/actions/workflows/ci.yml/badge.svg)](https://github.com/AgusGall0/sport-retail-inventory-db/actions/workflows/ci.yml)
 
 Base de datos relacional en **PostgreSQL** para una cadena de indumentaria deportiva con múltiples sucursales. Cubre el ciclo completo del inventario: ingreso de mercadería desde proveedores, traslados entre sucursales y venta al público, con control de stock por variante (producto + talle + color).
 
