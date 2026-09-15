@@ -159,7 +159,7 @@ medir() {
 
   # Indices propios del proyecto que el planificador realmente eligio.
   local usados
-  usados="$(grep -oE 'idx_[a-z_]+' "$mejor_plan" | sort -u | paste -sd ', ' - || true)"
+  usados="$(grep -oE 'idx_[a-z_]+' "$mejor_plan" | sort -u | paste -sd ',' - | sed 's/,/, /g' || true)"
   [ -z "$usados" ] && usados="ninguno"
 
   {
