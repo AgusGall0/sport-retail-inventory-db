@@ -4,10 +4,11 @@
 #
 # Uso:
 #   ./setup.sh                 carga los datos de prueba de 03_Carga_Datos.sql
-#   CARGA=masiva ./setup.sh    carga en su lugar Datos/Carga_Masiva.sql
+#   CARGA=masiva ./setup.sh    carga en su lugar Datos/Carga_Masiva.sql, que
+#                              necesita los CSVs de Datos/generado/ (ver abajo)
 #
 # 03_Carga_Datos.sql y Carga_Masiva.sql son datasets alternativos (ambos
-# insertan los catálogos con los mismos ids), por eso se ejecuta uno u otro.
+# cargan las mismas tablas con ids explícitos desde 1), por eso se ejecuta uno u otro.
 set -euo pipefail
 
 cd "$(dirname "$0")"
@@ -22,6 +23,14 @@ case "$CARGA" in
   *) echo "!! CARGA debe ser 'base' o 'masiva' (recibido: '$CARGA')" >&2; exit 2 ;;
 esac
 
+# Los CSVs del dataset masivo no se versionan. Se chequea antes de levantar nada
+# para no dejar la base a medio cargar.
+if [ "$CARGA" = masiva ] && [ ! -s Datos/generado/inventario.csv ]; then
+  echo "!! Faltan los CSVs de Datos/generado/. Generarlos con:" >&2
+  echo "   cd Datos && python generar_masivos.py && python generador_datos.py" >&2
+  exit 1
+fi
+
 SCRIPTS=(
   ScriptSQL/01_Creacion_Estructura.sql
   ScriptSQL/02_Restricciones.sql
@@ -34,9 +43,11 @@ SCRIPTS=(
 echo ">> Levantando PostgreSQL 16 (docker compose up -d --wait)"
 docker compose up -d --wait
 
+# psql corre parado en /proyecto/Datos porque los \copy de Carga_Masiva.sql usan
+# rutas relativas. Para los demas scripts da igual: se pasan con ruta absoluta.
 for script in "${SCRIPTS[@]}"; do
   echo ">> Ejecutando $script"
-  if ! docker compose exec -T db \
+  if ! docker compose exec -T -w /proyecto/Datos db \
       psql -q -v ON_ERROR_STOP=1 -U "$DB_USER" -d "$DB_NAME" -f "/proyecto/$script"; then
     echo "!! Falló $script. Se aborta la carga." >&2
     echo "   Para empezar de cero: docker compose down -v && ./setup.sh" >&2
