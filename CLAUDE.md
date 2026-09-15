@@ -169,6 +169,11 @@ discrepancias de inventario y cero stock negativo.
 - `Empleados` no tiene relación directa con `Sucursales`: un empleado solo se
   asocia a una sucursal a través de los movimientos que registró. Es una decisión
   discutible y está identificada como tal.
+- Los triggers de `07_Funciones_Procedimientos.sql` emiten varios `RAISE NOTICE`
+  por cada renglón de detalle. Es discutible: sirven para seguir en pgAdmin qué
+  hace el trigger en una venta suelta, pero reproducir el dataset masivo a
+  través de los triggers generaría millones de avisos y sería mucho más lento.
+  La carga masiva no pasa por ellos porque corre antes de `07`.
 
 ## Nota
 
