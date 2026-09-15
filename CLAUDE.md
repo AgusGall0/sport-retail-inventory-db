@@ -179,6 +179,14 @@ discrepancias de inventario y cero stock negativo.
   esa celda tiene menos stock y `trg_validar_stock_antes_insertar` rechaza la
   segunda venta, así que el script falla. Eso significa que la concurrencia
   solo se prueba contra `03_Carga_Datos.sql`, en el job de la carga base del CI.
+- Las consultas 2 y 3 de `04_Consultas_Reportes.sql` filtran el año con
+  `EXTRACT(YEAR FROM fecha_hora)`, una expresión sin estadísticas: sobre el
+  dataset masivo el planificador estima 777 filas por worker contra 51.613 y
+  73.250 reales, y el índice sobre `fecha_hora` no se puede usar. Se resolvería
+  con un índice sobre la expresión o reescribiendo el filtro como rango de
+  fechas (`fecha_hora >= '2025-01-01' AND fecha_hora < '2026-01-01'`). Queda
+  fuera de alcance de v1.0.0; está documentado en el análisis de Rendimiento
+  del README.
 
 ## Nota
 
