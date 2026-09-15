@@ -166,7 +166,6 @@ discrepancias de inventario y cero stock negativo.
 
 - Las matrículas de los integrantes siguen dentro de dos PDFs versionados y en el
   historial de git. Está documentado y decidido: no se reescribe el historial.
-- `generar_masivos.py` no fija semilla de RNG (`generador_datos.py` sí, con 42).
 - `Empleados` no tiene relación directa con `Sucursales`: un empleado solo se
   asocia a una sucursal a través de los movimientos que registró. Es una decisión
   discutible y está identificada como tal.

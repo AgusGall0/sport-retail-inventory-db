@@ -121,4 +121,4 @@ jobs:
             echo "!! Carga_Masiva.sql no sincroniza las secuencias" >&2
             exit 1
           fi
-          test -s productos_masivos.csv
+          test -s generado/productos_masivos.csv
