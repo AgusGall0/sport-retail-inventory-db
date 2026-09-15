@@ -174,6 +174,11 @@ discrepancias de inventario y cero stock negativo.
   hace el trigger en una venta suelta, pero reproducir el dataset masivo a
   través de los triggers generaría millones de avisos y sería mucho más lento.
   La carga masiva no pasa por ellos porque corre antes de `07`.
+- `08_Concurrencia.sql` asume las cantidades del dataset chico: registra dos
+  ventas de 7 unidades de la variante 1 en la sucursal 1. En el dataset masivo
+  esa celda tiene menos stock y `trg_validar_stock_antes_insertar` rechaza la
+  segunda venta, así que el script falla. Eso significa que la concurrencia
+  solo se prueba contra `03_Carga_Datos.sql`, en el job de la carga base del CI.
 
 ## Nota
 
