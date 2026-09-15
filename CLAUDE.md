@@ -80,6 +80,13 @@ desde cero en segundos. Esa propiedad es lo que hace posible el benchmark y el C
 **El benchmark usa quince repeticiones** por consulta. Con tres, el ruido era del
 tamaño de la señal.
 
+**No se versionan los datos generados.** El generador es la fuente de verdad y
+con semilla fija su salida es determinista, así que versionar el archivo derivado
+no aporta nada y traería un blob de cientos de MB al repo. Los CSVs se generan en
+`Datos/generado/` (ignorado por git) y `Carga_Masiva.sql` es un script chico que
+los carga con `COPY`. El camino por defecto (`./setup.sh` sin `CARGA=masiva`)
+sigue siendo puro SQL y no requiere Python.
+
 ## Convenciones
 
 **Idioma:** todo en español. Nombres de tablas, columnas, funciones, comentarios,
