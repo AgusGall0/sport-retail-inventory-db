@@ -81,7 +81,52 @@ BEGIN
     RAISE NOTICE 'OK  No hay stock negativo en Inventario';
 END $$;
 
--- 4. Los indices de 05_Indices.sql tienen que estar creados -----------------
+-- 4. Inventario tiene que ser el neto de todos los movimientos --------------
+-- Se recalcula el stock desde el historial con la misma semantica que
+-- fn_actualizar_inventario_por_movimiento (Entrada suma en origen, Salida resta
+-- en origen, Traslado resta en origen y suma en destino) y se compara celda por
+-- celda. El FULL OUTER JOIN detecta tambien celdas que estan de un lado solo.
+DO $$
+DECLARE
+    discrepancias INT;
+    detalle TEXT;
+BEGIN
+    CREATE TEMP TABLE neto_recalculado ON COMMIT DROP AS
+    WITH deltas AS (
+        SELECT m.id_sucursal_origen AS id_sucursal, d.id_variante,
+               CASE WHEN m.tipo_movimiento = 'Entrada' THEN d.cantidad ELSE -d.cantidad END AS delta
+        FROM Detalle_Movimientos d
+        JOIN Movimientos m ON m.id_movimiento = d.id_movimiento
+        UNION ALL
+        SELECT m.id_sucursal_destino, d.id_variante, d.cantidad
+        FROM Detalle_Movimientos d
+        JOIN Movimientos m ON m.id_movimiento = d.id_movimiento
+        WHERE m.tipo_movimiento = 'Traslado'
+    )
+    SELECT COALESCE(i.id_sucursal, n.id_sucursal) AS id_sucursal,
+           COALESCE(i.id_variante, n.id_variante) AS id_variante,
+           i.cantidad_disponible AS en_inventario,
+           n.cantidad AS recalculado
+    FROM Inventario i
+    FULL OUTER JOIN (SELECT id_sucursal, id_variante, SUM(delta) AS cantidad
+                     FROM deltas GROUP BY id_sucursal, id_variante) n
+      ON n.id_sucursal = i.id_sucursal AND n.id_variante = i.id_variante
+    WHERE COALESCE(i.cantidad_disponible, 0) <> COALESCE(n.cantidad, 0);
+
+    SELECT count(*) INTO discrepancias FROM neto_recalculado;
+    IF discrepancias > 0 THEN
+        SELECT string_agg(format('(sucursal %s, variante %s) inventario %s, recalculado %s',
+                                 id_sucursal, id_variante, en_inventario, recalculado), '; ')
+        INTO detalle
+        FROM (SELECT * FROM neto_recalculado LIMIT 5) AS m;
+        RAISE EXCEPTION 'Hay % celdas donde Inventario no coincide con el neto de movimientos. Primeras: %',
+            discrepancias, detalle;
+    END IF;
+    DROP TABLE neto_recalculado;
+    RAISE NOTICE 'OK  Inventario coincide con el neto de los movimientos';
+END $$;
+
+-- 5. Los indices de 05_Indices.sql tienen que estar creados -----------------
 DO $$
 DECLARE
     creados INT;
@@ -96,7 +141,7 @@ BEGIN
     RAISE NOTICE 'OK  Los % indices de 05_Indices.sql estan creados', creados;
 END $$;
 
--- 5. Roles y vistas de 06_Seguridad_Roles.sql -------------------------------
+-- 6. Roles y vistas de 06_Seguridad_Roles.sql -------------------------------
 DO $$
 DECLARE
     faltantes TEXT[];
@@ -117,7 +162,7 @@ BEGIN
     RAISE NOTICE 'OK  Roles y vistas de 06_Seguridad_Roles.sql presentes';
 END $$;
 
--- 6. Funciones, procedimientos y triggers de 07 -----------------------------
+-- 7. Funciones, procedimientos y triggers de 07 -----------------------------
 DO $$
 DECLARE
     faltantes TEXT[];
