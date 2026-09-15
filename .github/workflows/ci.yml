@@ -78,8 +78,33 @@ jobs:
         run: psql -q -v ON_ERROR_STOP=1 -f ScriptSQL/04_Consultas_Reportes.sql
 
   generador-de-datos:
-    name: Generador de datos masivos
+    name: Dataset masivo generado
     runs-on: ubuntu-latest
+    # Generar dos veces y cargar 1,6 millones de renglones tarda unos minutos.
+    # El limite es para que un cuelgue falle rapido, no las 6 horas por defecto.
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: proyecto_bd
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d proyecto_bd"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: proyecto_bd
 
     steps:
       - uses: actions/checkout@v4
@@ -91,34 +116,56 @@ jobs:
       # Las versiones van fijas a proposito: un release de pandas no tiene por
       # que poner el build en rojo sin que nadie haya tocado el repositorio.
       - name: Instalar dependencias
-        run: pip install 'pandas==2.2.3' 'numpy==2.1.3'
+        run: |
+          pip install 'pandas==2.2.3' 'numpy==2.1.3'
+          if ! command -v psql > /dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends postgresql-client
+          fi
+          psql --version
 
-      - name: Correr los generadores
+      # Los CSVs no se versionan porque el generador es determinista. Eso se
+      # prueba aca: dos corridas completas tienen que dar los mismos archivos.
+      - name: Generar el dataset dos veces y comparar
         working-directory: Datos
         run: |
           set -euo pipefail
-          python generar_masivos.py
-          python generador_datos.py
-
-      # Que el script no reviente no alcanza: se verifica que lo que produjo
-      # tenga las tablas que tiene que tener.
-      - name: Verificar el SQL generado
-        working-directory: Datos
-        run: |
-          set -euo pipefail
-          for tabla in Marcas Categorias Talles Colores Sucursales Proveedores \
-                       Empleados Productos Producto_Variante Movimientos \
-                       Detalle_Movimientos Inventario
-          do
-            n=$(grep -c "INSERT INTO $tabla " Carga_Masiva.sql || true)
-            echo "  $tabla: $n INSERT"
-            if [ "$n" -eq 0 ]; then
-              echo "!! Carga_Masiva.sql no tiene ningun INSERT para $tabla" >&2
-              exit 1
-            fi
+          for corrida in 1 2; do
+            rm -rf generado
+            python generar_masivos.py
+            python generador_datos.py
+            (cd generado && sha256sum *.csv) > "$RUNNER_TEMP/sha_$corrida.txt"
           done
-          if ! grep -q 'setval' Carga_Masiva.sql; then
-            echo "!! Carga_Masiva.sql no sincroniza las secuencias" >&2
+          cat "$RUNNER_TEMP/sha_1.txt"
+          if ! diff "$RUNNER_TEMP/sha_1.txt" "$RUNNER_TEMP/sha_2.txt"; then
+            echo "!! Dos corridas del generador produjeron CSVs distintos" >&2
             exit 1
           fi
-          test -s productos_masivos.csv
+
+      # Mismo orden que setup.sh con CARGA=masiva. 08_Concurrencia.sql queda
+      # afuera: es un guion para dos sesiones interactivas, y ya se ejecuta en el
+      # job de la carga base.
+      - name: Cargar el dataset masivo
+        working-directory: Datos
+        run: |
+          set -euo pipefail
+          for script in \
+            ../ScriptSQL/01_Creacion_Estructura.sql \
+            ../ScriptSQL/02_Restricciones.sql \
+            Carga_Masiva.sql \
+            ../ScriptSQL/05_Indices.sql \
+            ../ScriptSQL/06_Seguridad_Roles.sql \
+            ../ScriptSQL/07_Funciones_Procedimientos.sql
+          do
+            echo "::group::$script"
+            psql -q -v ON_ERROR_STOP=1 -f "$script"
+            echo "::endgroup::"
+          done
+
+      # Incluye cero stock negativo y cero discrepancias entre Inventario y el
+      # neto de los movimientos, que es lo que garantiza la apertura del generador.
+      - name: Verificar la integridad del dataset masivo
+        run: psql -v ON_ERROR_STOP=1 -f Pruebas/verificaciones_ci.sql
+
+      - name: Ejecutar las consultas de reportes sobre el dataset masivo
+        run: psql -q -v ON_ERROR_STOP=1 -f ScriptSQL/04_Consultas_Reportes.sql > /dev/null

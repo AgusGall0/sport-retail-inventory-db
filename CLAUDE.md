@@ -15,16 +15,19 @@ como pieza de portfolio profesional. Eso define la vara: el repo tiene que poder
 levantarse con un comando, correr verde en CI, y que cada decisión de diseño esté
 justificada en el README.
 
-## Estado y alcance
+## Estado
 
-El proyecto está funcionalmente completo. Queda **una sola tanda de trabajo
-pendiente** (ver "Trabajo pendiente" abajo) y después se cierra con un tag
-`v1.0.0`.
+El proyecto está completo y cerrado en `v1.0.0`. No hay trabajo pendiente. La
+última tanda escaló el dataset masivo a volumen realista, re-midió el benchmark
+con esos datos y agregó al CI la carga y verificación del dataset masivo.
 
-**No propongas trabajo fuera de ese alcance.** En particular, quedan
-explícitamente afuera: particionamiento de tablas, vistas materializadas,
-migraciones versionadas, API o frontend, despliegue en la nube, y soporte para
-otros motores de base de datos. Son ideas válidas pero no entran en esta versión.
+## Alcance
+
+**No propongas trabajo nuevo.** En particular, quedan explícitamente afuera:
+particionamiento de tablas, vistas materializadas, migraciones versionadas, API o
+frontend, despliegue en la nube, soporte para otros motores de base de datos, y
+todo lo que figura en "Cosas conocidas que no se arreglan". Son ideas válidas
+pero no entran en `v1.0.0`.
 
 Si detectás algo que te parece importante y está fuera de alcance, mencionalo en
 una línea al final de tu respuesta y seguí. No lo implementes.
@@ -84,8 +87,40 @@ tamaño de la señal.
 con semilla fija su salida es determinista, así que versionar el archivo derivado
 no aporta nada y traería un blob de cientos de MB al repo. Los CSVs se generan en
 `Datos/generado/` (ignorado por git) y `Carga_Masiva.sql` es un script chico que
-los carga con `COPY`. El camino por defecto (`./setup.sh` sin `CARGA=masiva`)
+los carga con `\copy`. El camino por defecto (`./setup.sh` sin `CARGA=masiva`)
 sigue siendo puro SQL y no requiere Python.
+
+**Escala del dataset masivo.** 500.008 movimientos (500.000 del historial más una
+apertura por sucursal), 1.649.014 renglones de detalle, 18.632 variantes de 1.000
+productos, 8 sucursales y 40 empleados (cinco por sucursal, asignados solo dentro
+del generador). Es la escala a la que `Inventario` ocupa 806 páginas y los índices
+tienen algo que medir: con el dataset anterior (1.002 movimientos, 48 variantes)
+el benchmark daba casi puros resultados nulos. Los parámetros son constantes al
+principio de `generador_datos.py`; si cambian, hay que re-correr el benchmark y
+actualizar el README.
+
+**Talles según la categoría.** Ropa de S a XXL, zapatillas de 39 a 44 y medias
+talle único, cruzados con cuatro colores. El esquema no lo restringe porque no hay
+una tabla de talles válidos por categoría: lo resuelve el generador por convención
+con `TALLES_POR_CATEGORIA`. Es una limitación del modelo, no del generador, y así
+está documentada en el README.
+
+**Popularidad Zipf-Mandelbrot.** Cada producto recibe un puesto al azar y pesa
+1 / (puesto + 20); dentro del producto, además, pesan el talle y el color. Así se
+venden los productos en un retail real: los cien más vendidos suman el 45 % de las
+unidades y queda una cola larga que casi no se vende. Con Zipf puro, sin el
+desplazamiento, un solo producto se llevaba el 13 % de las ventas, y eso no es
+creíble. Con popularidad uniforme la consulta 2 devuelve cero filas. El argumento
+tiene un límite: un control con popularidad uniforme dio los mismos diez planes,
+así que en este benchmark el sesgo cambia los resultados y no las decisiones del
+planificador. No afirmes lo contrario sin medirlo.
+
+**Fecha fija de fin del historial.** Los movimientos van del 2025-01-01 al
+2026-09-14 (`FECHA_FIN_HISTORIAL`), no hasta `datetime.now()`: con la fecha actual
+dos corridas daban fechas distintas y el generador no era determinista. La
+contracara es que las consultas 1 y 2 usan `CURRENT_DATE`, así que sus filas y
+tiempos dependen del día en que se ejecutan. Los números del README corresponden a
+la medición del 14 de septiembre de 2026.
 
 ## Convenciones
 
@@ -134,42 +169,31 @@ igual para que refleje la realidad.
 **No borres** los archivos de planes en `Pruebas/Evidencias_Rendimiento/` sin
 regenerarlos.
 
-## Trabajo pendiente
-
-Una sola tanda, y después `v1.0.0`.
-
-**Escalar el dataset a volumen realista.** Hoy `generador_datos.py` tiene dos
-productos hardcodeados y nunca lee `productos_masivos.csv`, así que el dataset
-tiene 48 variantes y 1.002 movimientos. Con ese volumen `Inventario` ocupa una
-sola página en disco y los índices no muestran ninguna mejora: el benchmark
-documenta casi puros resultados nulos.
-
-Objetivo: conectar los dos generadores y llevar el dataset a una escala parecida a
-la de una cadena real.
-
-- 1.000 productos desde el CSV, cruzados con talles y colores
-- del orden de 500.000 movimientos y 1.500.000 renglones de detalle
-- 8 sucursales y unos 40 empleados (con dos empleados no tiene sentido agrupar
-  por empleado en la consulta 3)
-- precios plausibles por categoría en pesos argentinos: remeras entre 15.000 y
-  40.000, zapatillas entre 80.000 y 250.000, y así según categoría. Hoy salen
-  cifras de 138.000 por unidad promedio, que no son creíbles.
-
-Con ese volumen probablemente convenga emitir `COPY` en vez de `INSERT` multifila,
-y revisar que el CI no se pase de tiempo.
-
-Después de regenerar hay que re-correr `benchmark.sh`, actualizar la tabla y el
-análisis del README con los números reales, y verificar que sigan dando cero
-discrepancias de inventario y cero stock negativo.
-
 ## Cosas conocidas que no se arreglan
 
 - Las matrículas de los integrantes siguen dentro de dos PDFs versionados y en el
   historial de git. Está documentado y decidido: no se reescribe el historial.
-- `generar_masivos.py` no fija semilla de RNG (`generador_datos.py` sí, con 42).
 - `Empleados` no tiene relación directa con `Sucursales`: un empleado solo se
   asocia a una sucursal a través de los movimientos que registró. Es una decisión
   discutible y está identificada como tal.
+- Los triggers de `07_Funciones_Procedimientos.sql` emiten varios `RAISE NOTICE`
+  por cada renglón de detalle. Es discutible: sirven para seguir en pgAdmin qué
+  hace el trigger en una venta suelta, pero reproducir el dataset masivo a
+  través de los triggers generaría millones de avisos y sería mucho más lento.
+  La carga masiva no pasa por ellos porque corre antes de `07`.
+- `08_Concurrencia.sql` asume las cantidades del dataset chico: registra dos
+  ventas de 7 unidades de la variante 1 en la sucursal 1. En el dataset masivo
+  esa celda tiene menos stock y `trg_validar_stock_antes_insertar` rechaza la
+  segunda venta, así que el script falla. Eso significa que la concurrencia
+  solo se prueba contra `03_Carga_Datos.sql`, en el job de la carga base del CI.
+- Las consultas 2 y 3 de `04_Consultas_Reportes.sql` filtran el año con
+  `EXTRACT(YEAR FROM fecha_hora)`, una expresión sin estadísticas: sobre el
+  dataset masivo el planificador estima 777 filas por worker contra 51.613 y
+  73.250 reales, y el índice sobre `fecha_hora` no se puede usar. Se resolvería
+  con un índice sobre la expresión o reescribiendo el filtro como rango de
+  fechas (`fecha_hora >= '2025-01-01' AND fecha_hora < '2026-01-01'`). Queda
+  fuera de alcance de v1.0.0; está documentado en el análisis de Rendimiento
+  del README.
 
 ## Nota
 

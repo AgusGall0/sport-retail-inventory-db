@@ -9,16 +9,23 @@
 # ATENCION: levanta la base desde cero. Hace "docker compose down -v", asi que
 # BORRA el volumen de datos y todo lo que hubiera cargado.
 #
-# Sobre la idempotencia: cada corrida parte del mismo volumen vacio y carga el
-# mismo Carga_Masiva.sql, asi que los planes, las filas devueltas y los indices
-# elegidos por el planificador son identicos entre corridas. Los milisegundos
-# no: son una medicion. Por eso de cada consulta se toma la corrida mas rapida.
+# Necesita los CSVs del dataset masivo en Datos/generado/, que no se versionan:
 #
-# Con este volumen las consultas tardan menos de un milisegundo y el ruido de
-# medicion es del mismo orden que la diferencia que se quiere medir: con tres
-# repeticiones se vieron oscilaciones de 0,58 a 1,17 ms para la misma consulta
-# con el mismo plan. Subir las repeticiones ajusta el minimo y estabiliza la
-# comparacion, a costa de que la corrida tarde mas:
+#   cd Datos && python generar_masivos.py && python generador_datos.py
+#
+# Sobre la idempotencia: cada corrida parte del mismo volumen vacio y carga los
+# mismos CSVs (el generador tiene semilla y fechas fijas), asi que los planes,
+# las filas devueltas y los indices elegidos por el planificador son identicos
+# entre corridas del mismo dia. Las consultas 1 y 2 filtran con CURRENT_DATE,
+# asi que sus filas dependen de la fecha en que se mide. Los milisegundos
+# tampoco se repiten: son una medicion. Por eso de cada consulta se toma la
+# corrida mas rapida.
+#
+# Con el dataset chico original (48 variantes) las consultas tardaban menos de
+# un milisegundo y con tres repeticiones se vieron oscilaciones de 0,58 a
+# 1,17 ms para la misma consulta con el mismo plan. Subir las repeticiones
+# ajusta el minimo y estabiliza la comparacion, a costa de que la corrida tarde
+# mas. Los numeros del README se midieron con:
 #
 #   REPETICIONES=15 Pruebas/benchmark.sh
 #
@@ -51,15 +58,23 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 # Envoltorio del psql del contenedor. -X ignora el .psqlrc del usuario, para
-# que una configuracion personal no cambie el formato de la salida.
+# que una configuracion personal no cambie el formato de la salida. Corre
+# parado en /proyecto/Datos porque los \copy de Carga_Masiva.sql usan rutas
+# relativas.
 psql_db() {
-  docker compose exec -T db \
+  docker compose exec -T -w /proyecto/Datos db \
     psql -X -q -v ON_ERROR_STOP=1 -U "$DB_USER" -d "$DB_NAME" "$@"
 }
 
 # ---------------------------------------------------------------------------
 # 1. Base desde cero
 # ---------------------------------------------------------------------------
+if [ ! -s Datos/generado/inventario.csv ]; then
+  echo "!! Faltan los CSVs de Datos/generado/. Generarlos con:" >&2
+  echo "   cd Datos && python generar_masivos.py && python generador_datos.py" >&2
+  exit 1
+fi
+
 echo ">> Levantando PostgreSQL desde cero (se borra el volumen)"
 docker compose down -v >/dev/null 2>&1 || true
 docker compose up -d --wait >/dev/null
@@ -144,7 +159,7 @@ medir() {
 
   # Indices propios del proyecto que el planificador realmente eligio.
   local usados
-  usados="$(grep -oE 'idx_[a-z_]+' "$mejor_plan" | sort -u | paste -sd ', ' - || true)"
+  usados="$(grep -oE 'idx_[a-z_]+' "$mejor_plan" | sort -u | paste -sd ',' - | sed 's/,/, /g' || true)"
   [ -z "$usados" ] && usados="ninguno"
 
   {
