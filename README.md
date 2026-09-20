@@ -159,6 +159,8 @@ Documentacion/      Modelo conceptual, diagrama relacional, diseño técnico
 
 `docker-compose.yml` levanta un contenedor `postgres:16` con la base `proyecto_bd` (usuario y contraseña `postgres`, puerto `5432`) y monta `ScriptSQL/` y `Datos/` en `/proyecto` dentro del contenedor. `setup.sh` espera a que la base esté sana y ejecuta con el `psql` del contenedor, en orden, la creación de estructura, las restricciones, la carga de datos, los índices, los roles y las funciones. Cada script corre con `ON_ERROR_STOP` y el proceso aborta ante el primer error, indicando qué script falló.
 
+Correrlo dos veces seguidas funciona siempre: si detecta restos de una corrida anterior —tablas en el esquema `public`, o los roles de `06_Seguridad_Roles.sql`, que se crean en el cluster y sobreviven a borrar la base— recrea `proyecto_bd` desde cero antes de empezar. `./setup.sh --reset` fuerza esa recreación aunque no haya restos.
+
 Por defecto carga los datos de prueba de `03_Carga_Datos.sql`. Para usar el dataset masivo, primero hay que generarlo (ver [Generación de datos masivos](#generación-de-datos-masivos)) y después:
 
 ```bash
@@ -171,7 +173,8 @@ Comandos útiles:
 
 ```bash
 docker compose exec db psql -U postgres -d proyecto_bd   # abrir una consola psql
-docker compose down -v && ./setup.sh                    # empezar de cero
+./setup.sh --reset                                      # recrear la base desde cero
+docker compose down -v && ./setup.sh                    # además, borrar el volumen
 DB_PORT=5433 ./setup.sh                                 # si el 5432 está ocupado
 ```
 
