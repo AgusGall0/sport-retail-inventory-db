@@ -2,7 +2,7 @@ Consulta 4 — Variantes con stock bajo
 Escenario: sin índices (05_Indices.sql no aplicado)
 PostgreSQL: 16.15 (Debian 16.15-1.pgdg13+2)
 Dataset: Datos/Carga_Masiva.sql — 500008 movimientos, 1649014 detalles, 18632 variantes, 374589 salidas, 149056 filas de inventario
-Repeticiones: 15 — tiempos de ejecución: 167.379 / 163.541 / 163.639 / 160.935 / 164.022 / 162.192 / 162.968 / 164.267 / 163.237 / 162.132 / 165.158 / 165.431 / 167.116 / 166.849 / 161.268 ms — mejor: 160.935 ms
+Repeticiones: 15 — tiempos de ejecución: 160.197 / 155.540 / 157.459 / 156.950 / 153.395 / 156.243 / 156.482 / 155.139 / 161.851 / 158.857 / 160.291 / 157.909 / 154.363 / 156.160 / 155.959 ms — mejor: 153.395 ms
 Filas devueltas: 147323
 Índices del proyecto usados por el planificador: ninguno
 
@@ -38,26 +38,26 @@ ORDER BY
 --- EXPLAIN (ANALYZE, BUFFERS) de la mejor de las 15 corridas ---
                                                                          QUERY PLAN                                                                          
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
- Sort  (cost=23132.38..23500.54 rows=147262 width=47) (actual time=133.848..156.024 rows=147323 loops=1)
+ Sort  (cost=23134.59..23502.80 rows=147282 width=47) (actual time=128.545..148.954 rows=147323 loops=1)
    Sort Key: suc.nombre, inv.cantidad_disponible
    Sort Method: external merge  Disk: 8624kB
    Buffers: shared hit=974, temp read=1078 written=1081
-   ->  Hash Join  (cost=604.26..5958.89 rows=147262 width=47) (actual time=3.127..89.924 rows=147323 loops=1)
+   ->  Hash Join  (cost=604.26..5959.24 rows=147282 width=47) (actual time=3.089..85.651 rows=147323 loops=1)
          Hash Cond: (pv.id_color = col.id_color)
          Buffers: shared hit=968
-         ->  Hash Join  (cost=603.17..5161.66 rows=147262 width=46) (actual time=3.112..75.175 rows=147323 loops=1)
+         ->  Hash Join  (cost=603.17..5161.91 rows=147282 width=46) (actual time=3.073..71.076 rows=147323 loops=1)
                Hash Cond: (pv.id_talle = tal.id_talle)
                Buffers: shared hit=967
-               ->  Hash Join  (cost=601.90..4637.30 rows=147262 width=47) (actual time=3.093..60.214 rows=147323 loops=1)
+               ->  Hash Join  (cost=601.90..4637.48 rows=147282 width=47) (actual time=3.051..56.102 rows=147323 loops=1)
                      Hash Cond: (pv.id_producto = prod.id_producto)
                      Buffers: shared hit=966
-                     ->  Hash Join  (cost=557.40..4204.60 rows=147262 width=33) (actual time=2.906..45.050 rows=147323 loops=1)
+                     ->  Hash Join  (cost=557.40..4204.73 rows=147282 width=33) (actual time=2.861..41.876 rows=147323 loops=1)
                            Hash Cond: (inv.id_variante = pv.id_variante)
                            Buffers: shared hit=944
-                           ->  Hash Join  (cost=1.18..3261.73 rows=147262 width=25) (actual time=0.024..23.960 rows=147323 loops=1)
+                           ->  Hash Join  (cost=1.18..3261.81 rows=147282 width=25) (actual time=0.028..22.387 rows=147323 loops=1)
                                  Hash Cond: (inv.id_sucursal = suc.id_sucursal)
                                  Buffers: shared hit=807
-                                 ->  Seq Scan on inventario inv  (cost=0.00..2669.20 rows=147262 width=12) (actual time=0.006..9.872 rows=147323 loops=1)
+                                 ->  Seq Scan on inventario inv  (cost=0.00..2669.20 rows=147282 width=12) (actual time=0.006..8.777 rows=147323 loops=1)
                                        Filter: (cantidad_disponible < 35)
                                        Rows Removed by Filter: 1733
                                        Buffers: shared hit=806
@@ -66,29 +66,29 @@ ORDER BY
                                        Buffers: shared hit=1
                                        ->  Seq Scan on sucursales suc  (cost=0.00..1.08 rows=8 width=21) (actual time=0.001..0.002 rows=8 loops=1)
                                              Buffers: shared hit=1
-                           ->  Hash  (cost=323.32..323.32 rows=18632 width=16) (actual time=2.787..2.788 rows=18632 loops=1)
+                           ->  Hash  (cost=323.32..323.32 rows=18632 width=16) (actual time=2.735..2.736 rows=18632 loops=1)
                                  Buckets: 32768  Batches: 1  Memory Usage: 1130kB
                                  Buffers: shared hit=137
-                                 ->  Seq Scan on producto_variante pv  (cost=0.00..323.32 rows=18632 width=16) (actual time=0.002..1.133 rows=18632 loops=1)
+                                 ->  Seq Scan on producto_variante pv  (cost=0.00..323.32 rows=18632 width=16) (actual time=0.002..1.121 rows=18632 loops=1)
                                        Buffers: shared hit=137
-                     ->  Hash  (cost=32.00..32.00 rows=1000 width=22) (actual time=0.175..0.176 rows=1000 loops=1)
+                     ->  Hash  (cost=32.00..32.00 rows=1000 width=22) (actual time=0.177..0.178 rows=1000 loops=1)
                            Buckets: 1024  Batches: 1  Memory Usage: 63kB
                            Buffers: shared hit=22
-                           ->  Seq Scan on productos prod  (cost=0.00..32.00 rows=1000 width=22) (actual time=0.002..0.088 rows=1000 loops=1)
+                           ->  Seq Scan on productos prod  (cost=0.00..32.00 rows=1000 width=22) (actual time=0.002..0.086 rows=1000 loops=1)
                                  Buffers: shared hit=22
                ->  Hash  (cost=1.12..1.12 rows=12 width=7) (actual time=0.005..0.006 rows=12 loops=1)
                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
                      Buffers: shared hit=1
                      ->  Seq Scan on talles tal  (cost=0.00..1.12 rows=12 width=7) (actual time=0.001..0.002 rows=12 loops=1)
                            Buffers: shared hit=1
-         ->  Hash  (cost=1.04..1.04 rows=4 width=9) (actual time=0.006..0.007 rows=4 loops=1)
+         ->  Hash  (cost=1.04..1.04 rows=4 width=9) (actual time=0.007..0.007 rows=4 loops=1)
                Buckets: 1024  Batches: 1  Memory Usage: 9kB
                Buffers: shared hit=1
                ->  Seq Scan on colores col  (cost=0.00..1.04 rows=4 width=9) (actual time=0.003..0.004 rows=4 loops=1)
                      Buffers: shared hit=1
  Planning:
    Buffers: shared hit=291
- Planning Time: 0.795 ms
- Execution Time: 160.935 ms
+ Planning Time: 0.852 ms
+ Execution Time: 153.395 ms
 (52 rows)
 

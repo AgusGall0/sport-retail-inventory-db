@@ -2,7 +2,7 @@ Consulta 3 — Tickets y recaudación por empleado en Sucursal NOA
 Escenario: sin índices (05_Indices.sql no aplicado)
 PostgreSQL: 16.15 (Debian 16.15-1.pgdg13+2)
 Dataset: Datos/Carga_Masiva.sql — 500008 movimientos, 1649014 detalles, 18632 variantes, 374589 salidas, 149056 filas de inventario
-Repeticiones: 15 — tiempos de ejecución: 155.470 / 157.798 / 157.995 / 154.277 / 155.387 / 155.409 / 153.460 / 155.583 / 155.073 / 155.271 / 153.148 / 154.824 / 151.269 / 151.192 / 146.876 ms — mejor: 146.876 ms
+Repeticiones: 15 — tiempos de ejecución: 153.641 / 148.829 / 153.317 / 148.680 / 147.951 / 150.155 / 149.862 / 151.207 / 142.700 / 150.186 / 150.330 / 149.783 / 141.726 / 146.762 / 144.075 ms — mejor: 141.726 ms
 Filas devueltas: 5
 Índices del proyecto usados por el planificador: ninguno
 
@@ -46,57 +46,57 @@ ORDER BY
 --- EXPLAIN (ANALYZE, BUFFERS) de la mejor de las 15 corridas ---
                                                                                     QUERY PLAN                                                                                     
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Sort  (cost=29659.72..29659.82 rows=40 width=75) (actual time=140.519..146.535 rows=5 loops=1)
+ Sort  (cost=29660.44..29660.54 rows=40 width=75) (actual time=137.376..141.533 rows=5 loops=1)
    Sort Key: (count(DISTINCT mov.id_movimiento)) DESC, (sum(((dm.cantidad)::numeric * dm.precio_unitario))) DESC
    Sort Method: quicksort  Memory: 25kB
-   Buffers: shared hit=16226 read=142 written=56
-   ->  GroupAggregate  (cost=29549.31..29658.66 rows=40 width=75) (actual time=126.677..146.520 rows=5 loops=1)
+   Buffers: shared hit=16169 read=199 written=70
+   ->  GroupAggregate  (cost=29549.47..29659.38 rows=40 width=75) (actual time=124.038..141.517 rows=5 loops=1)
          Group Key: emp.id_empleado
-         Buffers: shared hit=16220 read=142 written=56
-         ->  Merge Join  (cost=29549.31..29648.56 rows=768 width=50) (actual time=123.059..138.072 rows=54855 loops=1)
+         Buffers: shared hit=16163 read=199 written=70
+         ->  Merge Join  (cost=29549.47..29649.23 rows=772 width=50) (actual time=120.647..133.495 rows=54855 loops=1)
                Merge Cond: (mov.id_empleado = emp.id_empleado)
-               Buffers: shared hit=16220 read=142 written=56
-               ->  Gather Merge  (cost=29546.85..29636.30 rows=768 width=36) (actual time=123.029..133.427 rows=54855 loops=1)
+               Buffers: shared hit=16163 read=199 written=70
+               ->  Gather Merge  (cost=29547.00..29636.91 rows=772 width=36) (actual time=120.620..129.073 rows=54855 loops=1)
                      Workers Planned: 2
                      Workers Launched: 2
-                     Buffers: shared hit=16219 read=142 written=56
-                     ->  Sort  (cost=28546.83..28547.63 rows=320 width=36) (actual time=120.546..121.216 rows=18285 loops=3)
+                     Buffers: shared hit=16162 read=199 written=70
+                     ->  Sort  (cost=28546.98..28547.78 rows=322 width=36) (actual time=118.098..118.771 rows=18285 loops=3)
                            Sort Key: mov.id_empleado, mov.id_movimiento
-                           Sort Method: quicksort  Memory: 1931kB
-                           Buffers: shared hit=16219 read=142 written=56
-                           Worker 0:  Sort Method: quicksort  Memory: 1905kB
-                           Worker 1:  Sort Method: quicksort  Memory: 1898kB
-                           ->  Hash Join  (cost=8600.72..28533.51 rows=320 width=36) (actual time=37.305..115.529 rows=18285 loops=3)
+                           Sort Method: quicksort  Memory: 1924kB
+                           Buffers: shared hit=16162 read=199 written=70
+                           Worker 0:  Sort Method: quicksort  Memory: 1919kB
+                           Worker 1:  Sort Method: quicksort  Memory: 1891kB
+                           ->  Hash Join  (cost=8600.74..28533.57 rows=322 width=36) (actual time=38.155..113.088 rows=18285 loops=3)
                                  Hash Cond: (mov.id_sucursal_origen = suc.id_sucursal)
-                                 Buffers: shared hit=16147 read=142 written=56
-                                 ->  Parallel Hash Join  (cost=8599.60..28522.12 rows=2561 width=23) (actual time=37.243..108.765 rows=146377 loops=3)
+                                 Buffers: shared hit=16090 read=199 written=70
+                                 ->  Parallel Hash Join  (cost=8599.63..28522.14 rows=2568 width=23) (actual time=38.090..106.500 rows=146377 loops=3)
                                        Hash Cond: (dm.id_movimiento = mov.id_movimiento)
-                                       Buffers: shared hit=16050 read=142 written=56
-                                       ->  Parallel Seq Scan on detalle_movimientos dm  (cost=0.00..18118.89 rows=687089 width=15) (actual time=0.008..22.655 rows=549671 loops=3)
-                                             Buffers: shared hit=11108 read=140 written=56
-                                       ->  Parallel Hash  (cost=8589.89..8589.89 rows=777 width=12) (actual time=32.661..32.662 rows=73250 loops=3)
+                                       Buffers: shared hit=15993 read=199 written=70
+                                       ->  Parallel Seq Scan on detalle_movimientos dm  (cost=0.00..18118.89 rows=687089 width=15) (actual time=0.005..21.441 rows=549671 loops=3)
+                                             Buffers: shared hit=11150 read=98 written=33
+                                       ->  Parallel Hash  (cost=8589.89..8589.89 rows=779 width=12) (actual time=33.590..33.591 rows=73250 loops=3)
                                              Buckets: 262144 (originally 2048)  Batches: 1 (originally 1)  Memory Usage: 14448kB
-                                             Buffers: shared hit=4942 read=2
-                                             ->  Parallel Seq Scan on movimientos mov  (cost=0.00..8589.89 rows=777 width=12) (actual time=0.007..19.595 rows=73250 loops=3)
+                                             Buffers: shared hit=4843 read=101 written=37
+                                             ->  Parallel Seq Scan on movimientos mov  (cost=0.00..8589.89 rows=779 width=12) (actual time=0.008..20.859 rows=73250 loops=3)
                                                    Filter: (((tipo_movimiento)::text = 'Salida'::text) AND (EXTRACT(year FROM fecha_hora) = '2025'::numeric))
                                                    Rows Removed by Filter: 93420
-                                                   Buffers: shared hit=4942 read=2
-                                 ->  Hash  (cost=1.10..1.10 rows=1 width=21) (actual time=0.014..0.015 rows=1 loops=3)
+                                                   Buffers: shared hit=4843 read=101 written=37
+                                 ->  Hash  (cost=1.10..1.10 rows=1 width=21) (actual time=0.016..0.016 rows=1 loops=3)
                                        Buckets: 1024  Batches: 1  Memory Usage: 9kB
                                        Buffers: shared hit=3
                                        ->  Seq Scan on sucursales suc  (cost=0.00..1.10 rows=1 width=21) (actual time=0.011..0.012 rows=1 loops=3)
                                              Filter: ((nombre)::text = 'Sucursal NOA'::text)
                                              Rows Removed by Filter: 7
                                              Buffers: shared hit=3
-               ->  Sort  (cost=2.46..2.56 rows=40 width=18) (actual time=0.025..0.026 rows=10 loops=1)
+               ->  Sort  (cost=2.46..2.56 rows=40 width=18) (actual time=0.022..0.023 rows=10 loops=1)
                      Sort Key: emp.id_empleado
                      Sort Method: quicksort  Memory: 26kB
                      Buffers: shared hit=1
-                     ->  Seq Scan on empleados emp  (cost=0.00..1.40 rows=40 width=18) (actual time=0.012..0.014 rows=40 loops=1)
+                     ->  Seq Scan on empleados emp  (cost=0.00..1.40 rows=40 width=18) (actual time=0.009..0.011 rows=40 loops=1)
                            Buffers: shared hit=1
  Planning:
    Buffers: shared hit=246
- Planning Time: 0.577 ms
- Execution Time: 146.876 ms
+ Planning Time: 0.594 ms
+ Execution Time: 141.726 ms
 (52 rows)
 
